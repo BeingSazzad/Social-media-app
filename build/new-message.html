@@ -1,0 +1,55 @@
+<!-- new-message -->
+<section class="screen" id="scr-new-message" data-topbar="back" data-nav="hide" data-title="New Message">
+  <div style="position:sticky;top:0;background:var(--bg);padding:14px 16px 8px;z-index:5">
+    <div class="input-group">
+      <input class="input" placeholder="Search people">
+      <span class="input-icon" style="pointer-events:none"><i class="fa-solid fa-magnifying-glass"></i></span>
+    </div>
+  </div>
+
+  <div class="pad" style="padding-top:4px;padding-bottom:6px">
+    <div class="card" style="overflow:hidden">
+      <div class="list-row" style="cursor:pointer" onclick="App.toast('New group chat')">
+        <div style="width:42px;height:42px;border-radius:12px;background:var(--brand-50,#FFF3EA);display:flex;align-items:center;justify-content:center;flex:none"><i class="fa-solid fa-user-group" style="color:var(--brand)"></i></div>
+        <div style="flex:1"><div class="h3">New Group Chat</div><div class="t-sm">Start a conversation with multiple friends</div></div>
+        <i class="fa-solid fa-chevron-right chev"></i>
+      </div>
+    </div>
+  </div>
+
+  <div class="pad" style="padding-top:2px">
+    <span class="section-title">Suggested</span>
+    <div class="card" style="overflow:hidden;margin-top:10px">
+      <div class="list-row" style="cursor:pointer" onclick="App.go('scr-chat')">
+        <div style="position:relative;flex:none"><img class="ava" src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=120&q=80" style="width:46px;height:46px"><span style="position:absolute;bottom:0;right:0;width:11px;height:11px;background:var(--ok);border-radius:50%;border:2px solid #fff"></span></div>
+        <div style="flex:1;min-width:0"><div class="h3">Nusrat Jahan</div><div class="t-sm">@nusrat_j · Online</div></div>
+        <i class="fa-regular fa-comment" style="color:var(--brand)"></i>
+      </div>
+      <div class="divider"></div>
+      <div class="list-row" style="cursor:pointer" onclick="App.go('scr-chat')">
+        <div style="position:relative;flex:none"><img class="ava" src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=120&q=80" style="width:46px;height:46px"><span style="position:absolute;bottom:0;right:0;width:11px;height:11px;background:var(--ok);border-radius:50%;border:2px solid #fff"></span></div>
+        <div style="flex:1;min-width:0"><div class="h3">Rakib Hasan</div><div class="t-sm">@rakib · Online</div></div>
+        <i class="fa-regular fa-comment" style="color:var(--brand)"></i>
+      </div>
+      <div class="divider"></div>
+      <div class="list-row" style="cursor:pointer" onclick="App.go('scr-chat')">
+        <div style="flex:none"><img class="ava" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=120&q=80" style="width:46px;height:46px"></div>
+        <div style="flex:1;min-width:0"><div class="h3">Tanvir Ahmed</div><div class="t-sm">@tanvir · Active 2h ago</div></div>
+        <i class="fa-regular fa-comment" style="color:var(--brand)"></i>
+      </div>
+      <div class="divider"></div>
+      <div class="list-row" style="cursor:pointer" onclick="App.go('scr-chat')">
+        <div style="flex:none"><img class="ava" src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=120&q=80" style="width:46px;height:46px"></div>
+        <div style="flex:1;min-width:0"><div class="h3">Mitu Rahman</div><div class="t-sm">@mitu · Active 5h ago</div></div>
+        <i class="fa-regular fa-comment" style="color:var(--brand)"></i>
+      </div>
+      <div class="divider"></div>
+      <div class="list-row" style="cursor:pointer" onclick="App.go('scr-chat')">
+        <div style="flex:none"><img class="ava" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=120&q=80" style="width:46px;height:46px"></div>
+        <div style="flex:1;min-width:0"><div class="h3">Sadia Islam</div><div class="t-sm">@sadia · Active yesterday</div></div>
+        <i class="fa-regular fa-comment" style="color:var(--brand)"></i>
+      </div>
+    </div>
+  </div>
+  <div style="height:24px"></div>
+</section>

@@ -1,0 +1,153 @@
+<!-- friends -->
+<section class="screen" id="scr-friends" data-topbar="back" data-nav="hide" data-title="Friends">
+  <div style="position:sticky;top:0;background:var(--bg);padding:14px 16px 6px;z-index:5">
+    <div class="input-group">
+      <input class="input" placeholder="Search friends" onkeyup="filterFriends(this.value)">
+      <span class="input-icon" style="pointer-events:none"><i class="fa-solid fa-magnifying-glass"></i></span>
+    </div>
+  </div>
+
+  <div class="chip-row pad" style="padding-top:4px;padding-bottom:8px">
+    <span class="chip active" onclick="friendsTab(this,'all')">All · 248</span>
+    <span class="chip" onclick="friendsTab(this,'online')">Online · 12</span>
+    <span class="chip" onclick="friendsTab(this,'requests')">Requests · 3</span>
+  </div>
+
+  <!-- ALL FRIENDS -->
+  <div class="fr-pane pad" id="fr-all" style="padding-top:2px">
+    <div class="stack" id="friendList">
+      <div class="card card-p frow" data-n="nusrat jahan" style="display:flex;align-items:center;gap:11px">
+        <div style="position:relative;flex:none" onclick="App.go('scr-user-profile')">
+          <img class="ava" src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=120&q=80" style="width:46px;height:46px">
+          <span style="position:absolute;bottom:0;right:0;width:11px;height:11px;background:var(--ok);border-radius:50%;border:2px solid #fff"></span>
+        </div>
+        <div style="flex:1;min-width:0" onclick="App.go('scr-user-profile')">
+          <div style="font-weight:700;font-size:14px">Nusrat Jahan</div><div class="t-sm">8 mutual friends</div>
+        </div>
+        <button class="icon-btn" style="background:var(--brand-50,#FFF3EA);color:var(--brand);width:38px;height:38px;flex:none" onclick="App.go('scr-chat')"><i class="fa-regular fa-comment"></i></button>
+        <button class="btn-sm btn-ghost" data-on="1" style="flex:none" onclick="friendToggle(this,'Nusrat')"><i class="fa-solid fa-user-check" style="font-size:12px"></i> Friends</button>
+      </div>
+
+      <div class="card card-p frow" data-n="rakib hasan" style="display:flex;align-items:center;gap:11px">
+        <div style="position:relative;flex:none" onclick="App.go('scr-user-profile')">
+          <img class="ava" src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=120&q=80" style="width:46px;height:46px">
+          <span style="position:absolute;bottom:0;right:0;width:11px;height:11px;background:var(--ok);border-radius:50%;border:2px solid #fff"></span>
+        </div>
+        <div style="flex:1;min-width:0" onclick="App.go('scr-user-profile')">
+          <div style="font-weight:700;font-size:14px">Rakib Hasan <i class="fa-solid fa-circle-check verified" style="font-size:11px"></i></div><div class="t-sm">23 mutual friends</div>
+        </div>
+        <button class="icon-btn" style="background:var(--brand-50,#FFF3EA);color:var(--brand);width:38px;height:38px;flex:none" onclick="App.go('scr-chat')"><i class="fa-regular fa-comment"></i></button>
+        <button class="btn-sm btn-ghost" data-on="1" style="flex:none" onclick="friendToggle(this,'Rakib')"><i class="fa-solid fa-user-check" style="font-size:12px"></i> Friends</button>
+      </div>
+
+      <div class="card card-p frow" data-n="tanvir ahmed" style="display:flex;align-items:center;gap:11px">
+        <div style="flex:none" onclick="App.go('scr-user-profile')">
+          <img class="ava" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=120&q=80" style="width:46px;height:46px">
+        </div>
+        <div style="flex:1;min-width:0" onclick="App.go('scr-user-profile')">
+          <div style="font-weight:700;font-size:14px">Tanvir Ahmed</div><div class="t-sm">4 mutual friends</div>
+        </div>
+        <button class="icon-btn" style="background:var(--brand-50,#FFF3EA);color:var(--brand);width:38px;height:38px;flex:none" onclick="App.go('scr-chat')"><i class="fa-regular fa-comment"></i></button>
+        <button class="btn-sm btn-ghost" data-on="1" style="flex:none" onclick="friendToggle(this,'Tanvir')"><i class="fa-solid fa-user-check" style="font-size:12px"></i> Friends</button>
+      </div>
+
+      <div class="card card-p frow" data-n="mitu rahman" style="display:flex;align-items:center;gap:11px">
+        <div style="position:relative;flex:none" onclick="App.go('scr-user-profile')">
+          <img class="ava" src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=120&q=80" style="width:46px;height:46px">
+          <span style="position:absolute;bottom:0;right:0;width:11px;height:11px;background:var(--ok);border-radius:50%;border:2px solid #fff"></span>
+        </div>
+        <div style="flex:1;min-width:0" onclick="App.go('scr-user-profile')">
+          <div style="font-weight:700;font-size:14px">Mitu Rahman</div><div class="t-sm">12 mutual friends</div>
+        </div>
+        <button class="icon-btn" style="background:var(--brand-50,#FFF3EA);color:var(--brand);width:38px;height:38px;flex:none" onclick="App.go('scr-chat')"><i class="fa-regular fa-comment"></i></button>
+        <button class="btn-sm btn-ghost" data-on="1" style="flex:none" onclick="friendToggle(this,'Mitu')"><i class="fa-solid fa-user-check" style="font-size:12px"></i> Friends</button>
+      </div>
+
+      <div class="card card-p frow" data-n="sadia islam" style="display:flex;align-items:center;gap:11px">
+        <div style="flex:none" onclick="App.go('scr-user-profile')">
+          <img class="ava" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=120&q=80" style="width:46px;height:46px">
+        </div>
+        <div style="flex:1;min-width:0" onclick="App.go('scr-user-profile')">
+          <div style="font-weight:700;font-size:14px">Sadia Islam</div><div class="t-sm">2 mutual friends</div>
+        </div>
+        <button class="icon-btn" style="background:var(--brand-50,#FFF3EA);color:var(--brand);width:38px;height:38px;flex:none" onclick="App.go('scr-chat')"><i class="fa-regular fa-comment"></i></button>
+        <button class="btn-sm btn-ghost" data-on="1" style="flex:none" onclick="friendToggle(this,'Sadia')"><i class="fa-solid fa-user-check" style="font-size:12px"></i> Friends</button>
+      </div>
+
+      <div class="card card-p frow" data-n="arif hossain" style="display:flex;align-items:center;gap:11px">
+        <div style="flex:none" onclick="App.go('scr-user-profile')">
+          <img class="ava" src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=120&q=80" style="width:46px;height:46px">
+        </div>
+        <div style="flex:1;min-width:0" onclick="App.go('scr-user-profile')">
+          <div style="font-weight:700;font-size:14px">Arif Hossain</div><div class="t-sm">5 mutual friends</div>
+        </div>
+        <button class="icon-btn" style="background:var(--brand-50,#FFF3EA);color:var(--brand);width:38px;height:38px;flex:none" onclick="App.go('scr-chat')"><i class="fa-regular fa-comment"></i></button>
+        <button class="btn-sm btn-ghost" data-on="1" style="flex:none" onclick="friendToggle(this,'Arif')"><i class="fa-solid fa-user-check" style="font-size:12px"></i> Friends</button>
+      </div>
+    </div>
+    <div id="frEmpty" class="empty" style="display:none"><i class="fa-regular fa-face-frown"></i><div class="h3" style="color:var(--ink-2)">No friends found</div></div>
+  </div>
+
+  <!-- ONLINE -->
+  <div class="fr-pane pad" id="fr-online" style="display:none;padding-top:2px">
+    <span class="section-title">Active now</span>
+    <div class="stack" style="margin-top:10px">
+      <div class="card card-p" style="display:flex;align-items:center;gap:11px">
+        <div style="position:relative;flex:none" onclick="App.go('scr-user-profile')">
+          <img class="ava" src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=120&q=80" style="width:46px;height:46px">
+          <span style="position:absolute;bottom:0;right:0;width:11px;height:11px;background:var(--ok);border-radius:50%;border:2px solid #fff"></span>
+        </div>
+        <div style="flex:1;min-width:0"><div style="font-weight:700;font-size:14px">Nusrat Jahan</div><div class="t-sm" style="color:var(--ok)">Online now</div></div>
+        <button class="btn-sm btn-primary" style="flex:none" onclick="App.go('scr-chat')"><i class="fa-regular fa-comment" style="font-size:12px"></i> Chat</button>
+      </div>
+      <div class="card card-p" style="display:flex;align-items:center;gap:11px">
+        <div style="position:relative;flex:none" onclick="App.go('scr-user-profile')">
+          <img class="ava" src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=120&q=80" style="width:46px;height:46px">
+          <span style="position:absolute;bottom:0;right:0;width:11px;height:11px;background:var(--ok);border-radius:50%;border:2px solid #fff"></span>
+        </div>
+        <div style="flex:1;min-width:0"><div style="font-weight:700;font-size:14px">Rakib Hasan</div><div class="t-sm" style="color:var(--ok)">Online now</div></div>
+        <button class="btn-sm btn-primary" style="flex:none" onclick="App.go('scr-chat')"><i class="fa-regular fa-comment" style="font-size:12px"></i> Chat</button>
+      </div>
+      <div class="card card-p" style="display:flex;align-items:center;gap:11px">
+        <div style="position:relative;flex:none" onclick="App.go('scr-user-profile')">
+          <img class="ava" src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=120&q=80" style="width:46px;height:46px">
+          <span style="position:absolute;bottom:0;right:0;width:11px;height:11px;background:var(--ok);border-radius:50%;border:2px solid #fff"></span>
+        </div>
+        <div style="flex:1;min-width:0"><div style="font-weight:700;font-size:14px">Mitu Rahman</div><div class="t-sm" style="color:var(--ok)">Online now</div></div>
+        <button class="btn-sm btn-primary" style="flex:none" onclick="App.go('scr-chat')"><i class="fa-regular fa-comment" style="font-size:12px"></i> Chat</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- REQUESTS -->
+  <div class="fr-pane pad" id="fr-requests" style="display:none;padding-top:2px">
+    <span class="section-title">Friend requests · 3</span>
+    <div class="stack" style="margin-top:10px">
+      <div class="card card-p req-row" style="display:flex;align-items:center;gap:11px">
+        <img class="ava" src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=120&q=80" style="width:46px;height:46px;flex:none" onclick="App.go('scr-user-profile')">
+        <div style="flex:1;min-width:0"><div style="font-weight:700;font-size:14px">Imran Khan</div><div class="t-sm">7 mutual friends</div></div>
+        <div style="display:flex;gap:6px;flex:none">
+          <button class="btn-sm btn-primary" onclick="acceptReq(this,'Imran')">Confirm</button>
+          <button class="btn-sm btn-ghost" onclick="declineReq(this,'Imran')">Delete</button>
+        </div>
+      </div>
+      <div class="card card-p req-row" style="display:flex;align-items:center;gap:11px">
+        <img class="ava" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=120&q=80" style="width:46px;height:46px;flex:none" onclick="App.go('scr-user-profile')">
+        <div style="flex:1;min-width:0"><div style="font-weight:700;font-size:14px">Farah Diba</div><div class="t-sm">3 mutual friends</div></div>
+        <div style="display:flex;gap:6px;flex:none">
+          <button class="btn-sm btn-primary" onclick="acceptReq(this,'Farah')">Confirm</button>
+          <button class="btn-sm btn-ghost" onclick="declineReq(this,'Farah')">Delete</button>
+        </div>
+      </div>
+      <div class="card card-p req-row" style="display:flex;align-items:center;gap:11px">
+        <img class="ava" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=120&q=80" style="width:46px;height:46px;flex:none" onclick="App.go('scr-user-profile')">
+        <div style="flex:1;min-width:0"><div style="font-weight:700;font-size:14px">Shakib Al</div><div class="t-sm">1 mutual friend</div></div>
+        <div style="display:flex;gap:6px;flex:none">
+          <button class="btn-sm btn-primary" onclick="acceptReq(this,'Shakib')">Confirm</button>
+          <button class="btn-sm btn-ghost" onclick="declineReq(this,'Shakib')">Delete</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div style="height:24px"></div>
+</section>

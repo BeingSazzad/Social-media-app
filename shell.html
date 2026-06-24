@@ -489,7 +489,7 @@
         </div>
         <!-- Stats bar -->
         <div class="card card-p" style="margin:-26px 16px 0;position:relative;display:flex;justify-content:space-around;text-align:center">
-          <div onclick="App.go('scr-discover')" style="cursor:pointer"><div class="h2">248</div><div class="t-sm">Friends</div></div>
+          <div onclick="App.go('scr-friends')" style="cursor:pointer"><div class="h2">248</div><div class="t-sm">Friends</div></div>
           <div class="divider" style="width:1px;height:auto"></div>
           <div><div class="h2">1.2k</div><div class="t-sm">Reactions</div></div>
           <div class="divider" style="width:1px;height:auto"></div>
@@ -657,6 +657,21 @@
     function likeBtn(b){ const i=b.querySelector('i');
       if(i.classList.contains('fa-regular')){ i.className='fa-solid fa-heart'; b.style.color='#EF4444'; App.toast('You reacted ❤️'); }
       else{ i.className='fa-regular fa-heart'; b.style.color=''; } }
+
+    /* friends list: tab filter + unfriend/accept */
+    function friendsTab(btn,which){
+      document.querySelectorAll('#scr-friends .chip').forEach(c=>c.classList.remove('active'));
+      btn.classList.add('active');
+      document.querySelectorAll('#scr-friends .fr-pane').forEach(p=>{ p.style.display = p.id==='fr-'+which ? '' : 'none'; });
+    }
+    function friendToggle(btn,name){
+      if(btn.dataset.on!=='0'){ btn.dataset.on='0'; btn.className='btn-sm btn-primary'; btn.innerHTML='<i class="fa-solid fa-user-plus" style="font-size:12px"></i> Add'; App.toast('Unfriended '+name); }
+      else{ btn.dataset.on='1'; btn.className='btn-sm btn-ghost'; btn.innerHTML='<i class="fa-solid fa-user-check" style="font-size:12px"></i> Friends'; App.toast(name+' added back'); } }
+    function acceptReq(btn,name){ const r=btn.closest('.req-row'); if(r){ r.innerHTML='<div style="padding:8px 2px;color:var(--ok);font-weight:600;font-size:13px"><i class="fa-solid fa-check"></i> You and '+name+' are now friends</div>'; } App.toast('Accepted '+name); }
+    function declineReq(btn,name){ const r=btn.closest('.req-row'); if(r) r.remove(); App.toast('Request removed'); }
+    function filterFriends(q){ q=(q||'').toLowerCase().trim(); let shown=0;
+      document.querySelectorAll('#friendList .frow').forEach(r=>{ const m=(r.dataset.n||'').includes(q); r.style.display=m?'':'none'; if(m) shown++; });
+      const e=document.getElementById('frEmpty'); if(e) e.style.display=shown?'none':''; }
 
     /* onboarding slides */
     const ONB=[

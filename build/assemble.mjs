@@ -9,8 +9,8 @@ const BUILD = join(ROOT, 'build');
 
 // order in which screen modules are injected
 const SCREEN_MODULES = [
-  'home-extra', 'discover', 'notifications', 'profile', 'messages',
-  'marketplace', 'wallet', 'egifts-verify', 'ads', 'groups',
+  'home-extra', 'discover', 'notifications', 'profile', 'friends', 'messages',
+  'new-message', 'marketplace', 'wallet', 'egifts-verify', 'ads', 'groups',
   'polls-events', 'blogs-videos',
 ];
 
