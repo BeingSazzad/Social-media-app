@@ -1,0 +1,295 @@
+<!-- wallet module -->
+
+<section class="screen" id="scr-wallet"
+         data-topbar="back" data-nav="hide" data-title="Wallet">
+  <div class="pad stack">
+
+    <!-- Balance card (amber gradient) -->
+    <div class="grad-brand" style="border-radius:18px;padding:20px;color:#fff;box-shadow:0 12px 26px -12px rgba(255,106,1,.6)">
+      <div style="font-size:13px;font-weight:600;opacity:.92">Current Balance</div>
+      <div style="font-size:33px;font-weight:750;letter-spacing:-.02em;margin:6px 0 4px">₦3,200.00 <span style="font-size:15px;font-weight:600;opacity:.85">NGN</span></div>
+      <div style="display:flex;align-items:center;gap:6px;font-size:12px;opacity:.9;margin-bottom:16px"><i class="fa-solid fa-shield-halved"></i> Secured wallet</div>
+      <div style="display:flex;gap:10px">
+        <button class="btn" onclick="App.go('scr-fund-wallet')" style="flex:1;height:46px;background:#fff;color:var(--brand-2);font-weight:700;font-size:14px;border:none;border-radius:14px;cursor:pointer"><i class="fa-solid fa-plus"></i> Fund Wallet</button>
+        <button class="btn" onclick="App.go('scr-cashout')" style="flex:1;height:46px;background:transparent;color:#fff;font-weight:700;font-size:14px;border:1.5px solid rgba(255,255,255,.85);border-radius:14px;cursor:pointer"><i class="fa-solid fa-arrow-up-from-bracket"></i> Cashout</button>
+      </div>
+    </div>
+
+    <!-- UserPoint card (navy) -->
+    <div class="navy" onclick="App.go('scr-userpoints')" style="border-radius:18px;padding:18px;cursor:pointer">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start">
+        <div>
+          <div style="font-size:13px;font-weight:600;opacity:.85"><i class="fa-solid fa-star" style="color:#FBBF24"></i> UserPoint Balance</div>
+          <div style="font-size:28px;font-weight:750;margin-top:4px">750 <span style="font-size:14px;font-weight:600;opacity:.8">pts</span></div>
+        </div>
+        <i class="fa-solid fa-chevron-right" style="opacity:.6;font-size:13px;margin-top:6px"></i>
+      </div>
+      <div class="bar" style="background:rgba(255,255,255,.16);margin:14px 0 8px"><i style="width:75%"></i></div>
+      <div style="display:flex;justify-content:space-between;font-size:12px">
+        <span style="opacity:.85">750 / 1,000 pts to auto-convert</span>
+        <span style="font-weight:700;color:#FBBF24">Converts to ₦75</span>
+      </div>
+    </div>
+
+    <!-- Quick actions -->
+    <div style="display:flex;justify-content:space-between;padding:10px 4px 6px">
+      <button onclick="App.go('scr-fund-wallet')" style="background:none;border:none;display:flex;flex-direction:column;align-items:center;gap:7px;cursor:pointer;flex:1">
+        <span style="width:54px;height:54px;border-radius:50%;background:var(--brand-50,#FFF3EA);display:flex;align-items:center;justify-content:center"><i class="fa-solid fa-plus" style="color:var(--brand);font-size:18px"></i></span>
+        <span style="font-size:11px;font-weight:600;color:var(--ink-2)">Fund</span>
+      </button>
+      <button onclick="App.go('scr-cashout')" style="background:none;border:none;display:flex;flex-direction:column;align-items:center;gap:7px;cursor:pointer;flex:1">
+        <span style="width:54px;height:54px;border-radius:50%;background:var(--brand-50,#FFF3EA);display:flex;align-items:center;justify-content:center"><i class="fa-solid fa-arrow-up-from-bracket" style="color:var(--brand);font-size:18px"></i></span>
+        <span style="font-size:11px;font-weight:600;color:var(--ink-2)">Cashout</span>
+      </button>
+      <button onclick="App.go('scr-send-gift')" style="background:none;border:none;display:flex;flex-direction:column;align-items:center;gap:7px;cursor:pointer;flex:1">
+        <span style="width:54px;height:54px;border-radius:50%;background:var(--brand-50,#FFF3EA);display:flex;align-items:center;justify-content:center"><i class="fa-solid fa-gift" style="color:var(--brand);font-size:18px"></i></span>
+        <span style="font-size:11px;font-weight:600;color:var(--ink-2)">Send Gift</span>
+      </button>
+      <button onclick="App.go('scr-verify')" style="background:none;border:none;display:flex;flex-direction:column;align-items:center;gap:7px;cursor:pointer;flex:1">
+        <span style="width:54px;height:54px;border-radius:50%;background:var(--brand-50,#FFF3EA);display:flex;align-items:center;justify-content:center"><i class="fa-solid fa-circle-check" style="color:var(--brand);font-size:18px"></i></span>
+        <span style="font-size:11px;font-weight:600;color:var(--ink-2)">Get Verified</span>
+      </button>
+    </div>
+
+    <!-- History -->
+    <div style="display:flex;justify-content:space-between;align-items:center;margin:6px 0 4px">
+      <span class="section-title">History</span>
+      <button onclick="App.toast('Showing all transactions')" style="background:none;border:none;color:var(--brand);font-weight:700;font-size:12px;cursor:pointer">See all</button>
+    </div>
+
+    <div class="card">
+      <!-- Top-Up -->
+      <div class="list-row">
+        <span style="width:42px;height:42px;border-radius:12px;background:#DCFCE7;display:flex;align-items:center;justify-content:center;flex:none"><i class="fa-solid fa-arrow-down" style="color:#16A34A"></i></span>
+        <div style="flex:1;min-width:0">
+          <div style="display:flex;align-items:center;gap:8px"><span class="h3" style="font-size:14px">Wallet Top-Up</span><span class="badge badge-ok">Credit</span></div>
+          <div class="t-sm">24 Jun 2026 · Paystack</div>
+        </div>
+        <div style="font-weight:700;font-size:14px;color:#16A34A">+₦5,000</div>
+      </div>
+      <div class="divider"></div>
+      <!-- Purchase -->
+      <div class="list-row">
+        <span style="width:42px;height:42px;border-radius:12px;background:#FEE2E2;display:flex;align-items:center;justify-content:center;flex:none"><i class="fa-solid fa-bag-shopping" style="color:#DC2626"></i></span>
+        <div style="flex:1;min-width:0">
+          <div style="display:flex;align-items:center;gap:8px"><span class="h3" style="font-size:14px">Purchase</span><span class="badge badge-gray" style="background:#FEE2E2;color:#DC2626">Debit</span></div>
+          <div class="t-sm">23 Jun 2026 · Ankara Fabric Set</div>
+        </div>
+        <div style="font-weight:700;font-size:14px;color:#DC2626">-₦4,500</div>
+      </div>
+      <div class="divider"></div>
+      <!-- eGift -->
+      <div class="list-row">
+        <span style="width:42px;height:42px;border-radius:12px;background:#FEE2E2;display:flex;align-items:center;justify-content:center;flex:none"><i class="fa-solid fa-gift" style="color:#DC2626"></i></span>
+        <div style="flex:1;min-width:0">
+          <div style="display:flex;align-items:center;gap:8px"><span class="h3" style="font-size:14px">eGift to Tasnim Rahman</span><span class="badge badge-gray" style="background:#FEE2E2;color:#DC2626">Debit</span></div>
+          <div class="t-sm">22 Jun 2026 · Birthday gift</div>
+        </div>
+        <div style="font-weight:700;font-size:14px;color:#DC2626">-₦1,000</div>
+      </div>
+      <div class="divider"></div>
+      <!-- Cashout -->
+      <div class="list-row">
+        <span style="width:42px;height:42px;border-radius:12px;background:#FEE2E2;display:flex;align-items:center;justify-content:center;flex:none"><i class="fa-solid fa-arrow-up-from-bracket" style="color:#DC2626"></i></span>
+        <div style="flex:1;min-width:0">
+          <div style="display:flex;align-items:center;gap:8px"><span class="h3" style="font-size:14px">Cashout</span><span class="badge badge-gray" style="background:#FEE2E2;color:#DC2626">Debit</span></div>
+          <div class="t-sm">20 Jun 2026 · GTBank ••4821</div>
+        </div>
+        <div style="font-weight:700;font-size:14px;color:#DC2626">-₦10,000</div>
+      </div>
+      <div class="divider"></div>
+      <!-- UserPoint Conversion -->
+      <div class="list-row">
+        <span style="width:42px;height:42px;border-radius:12px;background:#DCFCE7;display:flex;align-items:center;justify-content:center;flex:none"><i class="fa-solid fa-star" style="color:#16A34A"></i></span>
+        <div style="flex:1;min-width:0">
+          <div style="display:flex;align-items:center;gap:8px"><span class="h3" style="font-size:14px">UserPoint Conversion</span><span class="badge badge-ok">Credit</span></div>
+          <div class="t-sm">18 Jun 2026 · 1,000 pts → cash</div>
+        </div>
+        <div style="font-weight:700;font-size:14px;color:#16A34A">+₦100</div>
+      </div>
+      <div class="divider"></div>
+      <!-- Ad Payment -->
+      <div class="list-row">
+        <span style="width:42px;height:42px;border-radius:12px;background:#FEE2E2;display:flex;align-items:center;justify-content:center;flex:none"><i class="fa-solid fa-bullhorn" style="color:#DC2626"></i></span>
+        <div style="flex:1;min-width:0">
+          <div style="display:flex;align-items:center;gap:8px"><span class="h3" style="font-size:14px">Ad Payment</span><span class="badge badge-gray" style="background:#FEE2E2;color:#DC2626">Debit</span></div>
+          <div class="t-sm">15 Jun 2026 · Boosted post · 7 days</div>
+        </div>
+        <div style="font-weight:700;font-size:14px;color:#DC2626">-₦2,500</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<section class="screen" id="scr-fund-wallet"
+         data-topbar="back" data-nav="hide" data-title="Add Money">
+  <div class="pad stack">
+
+    <div class="t-sm" style="text-align:center;margin-top:4px">Enter the amount you want to add to your wallet</div>
+
+    <!-- Amount input with ₦ prefix -->
+    <div style="display:flex;align-items:center;justify-content:center;gap:8px;background:#fff;border:1.5px solid var(--line);border-radius:18px;padding:22px 16px;margin-top:4px">
+      <span style="font-size:32px;font-weight:700;color:var(--ink-3)">₦</span>
+      <input type="number" inputmode="numeric" placeholder="0" value="1000" style="border:none;outline:none;font-size:34px;font-weight:750;width:60%;color:var(--ink);letter-spacing:-.02em;background:transparent">
+    </div>
+
+    <!-- Quick amount chips -->
+    <div class="chip-row" style="margin-top:2px">
+      <span class="chip" onclick="App.toast('Set to ₦500')">₦500</span>
+      <span class="chip active" onclick="App.toast('Set to ₦1,000')">₦1,000</span>
+      <span class="chip" onclick="App.toast('Set to ₦2,000')">₦2,000</span>
+      <span class="chip" onclick="App.toast('Set to ₦5,000')">₦5,000</span>
+    </div>
+
+    <!-- Payment method -->
+    <div class="section-title" style="margin:10px 0 2px">Payment Method</div>
+
+    <label style="display:flex;align-items:center;gap:13px;background:#fff;border:2px solid var(--brand);border-radius:16px;padding:14px;cursor:pointer;box-shadow:0 4px 14px -10px rgba(255,106,1,.5)" onclick="App.toast('Paystack selected')">
+      <span style="width:44px;height:44px;border-radius:12px;background:#011B33;display:flex;align-items:center;justify-content:center;flex:none"><i class="fa-solid fa-bolt" style="color:#00C3F7;font-size:18px"></i></span>
+      <div style="flex:1">
+        <div class="h3">Paystack</div>
+        <div class="t-sm">Card, bank transfer & USSD</div>
+      </div>
+      <i class="fa-solid fa-circle-check" style="color:var(--brand);font-size:20px"></i>
+    </label>
+
+    <label style="display:flex;align-items:center;gap:13px;background:#fff;border:2px solid var(--line);border-radius:16px;padding:14px;cursor:pointer" onclick="App.toast('Flutterwave selected')">
+      <span style="width:44px;height:44px;border-radius:12px;background:#FEF3C7;display:flex;align-items:center;justify-content:center;flex:none"><i class="fa-solid fa-feather" style="color:#F5A623;font-size:18px"></i></span>
+      <div style="flex:1">
+        <div class="h3">Flutterwave</div>
+        <div class="t-sm">Card, bank & mobile money</div>
+      </div>
+      <i class="fa-regular fa-circle" style="color:var(--ink-3);font-size:20px"></i>
+    </label>
+
+    <button class="btn btn-primary" style="margin-top:14px;width:100%" onclick="App.toast('Wallet funded successfully ₦1,000')">Proceed to Payment</button>
+    <div class="t-sm" style="text-align:center;margin-top:-2px"><i class="fa-solid fa-lock"></i> Secured by 256-bit encryption</div>
+
+  </div>
+</section>
+
+
+<section class="screen" id="scr-cashout"
+         data-topbar="back" data-nav="hide" data-title="Cashout">
+  <div class="pad">
+
+    <div class="card card-p" style="display:flex;gap:10px;align-items:flex-start;background:var(--brand-50,#FFF3EA);border-color:transparent;margin-bottom:16px">
+      <i class="fa-solid fa-circle-info" style="color:var(--brand-2);margin-top:2px"></i>
+      <div class="t-sm" style="color:var(--ink-2)">Withdrawals are processed within 1–3 business days to your selected source.</div>
+    </div>
+
+    <div class="field">
+      <label class="label">Full Name</label>
+      <input class="input" type="text" placeholder="e.g. Sohag Mia" value="Abdul Karim Hossain">
+    </div>
+
+    <div class="field">
+      <label class="label">Email Address</label>
+      <input class="input" type="email" placeholder="you@email.com" value="binarybards27@gmail.com">
+    </div>
+
+    <div class="field">
+      <label class="label">Withdrawal Source</label>
+      <select class="input">
+        <option>-- Select --</option>
+        <option>GTBank ••4821</option>
+        <option>Access Bank ••0192</option>
+        <option>Opay Wallet</option>
+        <option>Add new bank account</option>
+      </select>
+    </div>
+
+    <div class="field">
+      <label class="label">Total Balance</label>
+      <input class="input" type="text" value="₦3,200" readonly style="background:var(--bg-2);color:var(--ink-2);font-weight:700">
+    </div>
+
+    <div class="field">
+      <label class="label">Amount to Withdraw</label>
+      <input class="input" type="number" inputmode="numeric" placeholder="₦0.00">
+    </div>
+
+    <div class="field">
+      <label class="label">Note <span style="color:var(--ink-3);font-weight:500">(optional)</span></label>
+      <textarea class="input" placeholder="Add a note for this withdrawal…"></textarea>
+    </div>
+
+    <button class="btn btn-success" style="width:100%;margin-top:6px" onclick="App.toast('Cashout request submitted. Processing in 1-3 business days')">Submit Request</button>
+
+  </div>
+</section>
+
+
+<section class="screen" id="scr-userpoints"
+         data-topbar="back" data-nav="hide" data-title="UserPoints">
+  <div class="pad stack">
+
+    <!-- Points hero -->
+    <div class="navy" style="border-radius:18px;padding:24px 20px;text-align:center">
+      <div style="font-size:13px;font-weight:600;opacity:.85"><i class="fa-solid fa-star" style="color:#FBBF24"></i> Your UserPoints</div>
+      <div style="font-size:46px;font-weight:750;letter-spacing:-.02em;margin:6px 0 14px">750</div>
+      <div class="bar" style="background:rgba(255,255,255,.16);margin-bottom:8px"><i style="width:75%"></i></div>
+      <div style="display:flex;justify-content:space-between;font-size:12px;opacity:.9">
+        <span>0</span>
+        <span style="font-weight:700;color:#FBBF24">250 pts to go</span>
+        <span>1,000</span>
+      </div>
+    </div>
+
+    <!-- Conversion info card -->
+    <div class="card card-p" style="display:flex;align-items:center;gap:13px">
+      <span style="width:46px;height:46px;border-radius:12px;background:var(--brand-50,#FFF3EA);display:flex;align-items:center;justify-content:center;flex:none"><i class="fa-solid fa-arrows-rotate" style="color:var(--brand);font-size:18px"></i></span>
+      <div style="flex:1">
+        <div class="h3">1,000 pts = ₦100</div>
+        <div class="t-sm">Points convert automatically to wallet cash</div>
+      </div>
+      <span class="badge badge-brand">1:0.1</span>
+    </div>
+
+    <!-- Earning Activity -->
+    <div class="section-title" style="margin:8px 0 2px">Earning Activity</div>
+
+    <div class="card">
+      <div class="list-row">
+        <span style="width:40px;height:40px;border-radius:50%;background:#FEF3C7;display:flex;align-items:center;justify-content:center;flex:none"><i class="fa-solid fa-heart" style="color:#D97706"></i></span>
+        <div style="flex:1;min-width:0"><div class="h3" style="font-size:14px">Post reached 1k likes</div><div class="t-sm">23 Jun 2026</div></div>
+        <div style="font-weight:700;font-size:14px;color:#16A34A">+200 pts</div>
+      </div>
+      <div class="divider"></div>
+      <div class="list-row">
+        <span style="width:40px;height:40px;border-radius:50%;background:#DBEAFE;display:flex;align-items:center;justify-content:center;flex:none"><i class="fa-solid fa-user-plus" style="color:#2563EB"></i></span>
+        <div style="flex:1;min-width:0"><div class="h3" style="font-size:14px">Referred Nafisa Akter</div><div class="t-sm">21 Jun 2026</div></div>
+        <div style="font-weight:700;font-size:14px;color:#16A34A">+150 pts</div>
+      </div>
+      <div class="divider"></div>
+      <div class="list-row">
+        <span style="width:40px;height:40px;border-radius:50%;background:#DCFCE7;display:flex;align-items:center;justify-content:center;flex:none"><i class="fa-solid fa-calendar-check" style="color:#16A34A"></i></span>
+        <div style="flex:1;min-width:0"><div class="h3" style="font-size:14px">7-day login streak</div><div class="t-sm">20 Jun 2026</div></div>
+        <div style="font-weight:700;font-size:14px;color:#16A34A">+100 pts</div>
+      </div>
+      <div class="divider"></div>
+      <div class="list-row">
+        <span style="width:40px;height:40px;border-radius:50%;background:#EDE9FE;display:flex;align-items:center;justify-content:center;flex:none"><i class="fa-solid fa-comment" style="color:#7C3AED"></i></span>
+        <div style="flex:1;min-width:0"><div class="h3" style="font-size:14px">Daily engagement bonus</div><div class="t-sm">19 Jun 2026</div></div>
+        <div style="font-weight:700;font-size:14px;color:#16A34A">+50 pts</div>
+      </div>
+      <div class="divider"></div>
+      <div class="list-row">
+        <span style="width:40px;height:40px;border-radius:50%;background:#FFEDD5;display:flex;align-items:center;justify-content:center;flex:none"><i class="fa-solid fa-share-nodes" style="color:#EA580C"></i></span>
+        <div style="flex:1;min-width:0"><div class="h3" style="font-size:14px">Shared a marketplace item</div><div class="t-sm">18 Jun 2026</div></div>
+        <div style="font-weight:700;font-size:14px;color:#16A34A">+250 pts</div>
+      </div>
+    </div>
+
+    <!-- Auto-convert note -->
+    <div class="card card-p" style="display:flex;align-items:center;gap:10px;background:var(--brand-50,#FFF3EA);border-color:transparent">
+      <i class="fa-solid fa-circle-info" style="color:var(--brand-2)"></i>
+      <div class="t-sm" style="color:var(--ink-2)">Auto-converts at 1,000 pts. Your next ₦25 is on the way!</div>
+    </div>
+
+    <button class="btn btn-outline" style="width:100%" onclick="App.go('scr-wallet')">Back to Wallet</button>
+
+  </div>
+</section>

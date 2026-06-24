@@ -1,0 +1,201 @@
+<!-- module: notifications -->
+<section class="screen" id="scr-notifications"
+         data-topbar="app" data-nav="show" data-tab="notifications" data-title="Notifications">
+
+  <!-- Filter pills -->
+  <div class="chip-row pad" style="padding-top:12px;padding-bottom:6px">
+    <span class="chip active" onclick="App.toast('Showing all activity')">All</span>
+    <span class="chip" onclick="App.toast('Filtered: Likes')">Likes</span>
+    <span class="chip" onclick="App.toast('Filtered: Comments')">Comments</span>
+    <span class="chip" onclick="App.toast('Filtered: Mentions')">Mentions</span>
+    <span class="chip" onclick="App.toast('Filtered: Requests')">Requests</span>
+    <span class="chip" onclick="App.toast('Filtered: System')">System</span>
+  </div>
+
+  <!-- NEW SECTION -->
+  <div class="pad" style="padding-top:6px;padding-bottom:0;display:flex;align-items:center;justify-content:space-between">
+    <span class="section-title">New</span>
+    <button onclick="App.toast('All caught up — marked as read')" style="background:none;border:none;color:var(--brand);font-weight:700;font-size:12px;cursor:pointer">Mark all read</button>
+  </div>
+
+  <div style="margin-top:8px;background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line)">
+
+    <!-- like (unread) -->
+    <div class="list-row" style="background:#FFF3EA;cursor:pointer;align-items:flex-start" onclick="App.go('scr-post-detail')">
+      <div style="position:relative;flex:none">
+        <img class="ava" src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=120&q=80" style="width:44px;height:44px">
+        <span style="position:absolute;right:-2px;bottom:-2px;width:19px;height:19px;border-radius:50%;background:#EF4444;display:flex;align-items:center;justify-content:center;border:2px solid #fff"><i class="fa-solid fa-heart" style="color:#fff;font-size:9px"></i></span>
+      </div>
+      <div style="flex:1;min-width:0;line-height:1.45">
+        <div style="font-size:13.5px"><b>Rakib Hasan</b> and <b>14 others</b> reacted to your post.</div>
+        <div class="t-sm" style="margin-top:3px">2m ago</div>
+      </div>
+      <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?w=160&q=80" style="width:42px;height:42px;border-radius:10px;object-fit:cover;flex:none;align-self:center">
+    </div>
+
+    <!-- comment with quoted preview (unread) -->
+    <div class="list-row" style="background:#FFF3EA;cursor:pointer;align-items:flex-start" onclick="App.go('scr-post-detail')">
+      <div style="position:relative;flex:none">
+        <img class="ava" src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=120&q=80" style="width:44px;height:44px">
+        <span style="position:absolute;right:-2px;bottom:-2px;width:19px;height:19px;border-radius:50%;background:var(--info,#06B6D4);display:flex;align-items:center;justify-content:center;border:2px solid #fff"><i class="fa-solid fa-comment" style="color:#fff;font-size:9px"></i></span>
+      </div>
+      <div style="flex:1;min-width:0;line-height:1.45">
+        <div style="font-size:13.5px"><b>Nusrat Jahan</b> commented on your post.</div>
+        <div style="margin-top:5px;background:var(--bg);border-left:3px solid var(--brand);border-radius:0 8px 8px 0;padding:7px 10px;font-size:12.5px;color:var(--ink-2)">"This is absolutely gorgeous — the warmth in this palette is unreal 😍"</div>
+        <div class="t-sm" style="margin-top:5px">12m ago</div>
+      </div>
+    </div>
+
+    <!-- reply (unread) -->
+    <div class="list-row" style="background:#FFF3EA;cursor:pointer;align-items:flex-start" onclick="App.go('scr-post-detail')">
+      <img class="ava" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=120&q=80" style="width:44px;height:44px;flex:none">
+      <div style="flex:1;min-width:0;line-height:1.45">
+        <div style="font-size:13.5px"><b>Tanvir Ahmed</b> replied to your comment: <span style="color:var(--ink-2)">"Totally agree, sharing this with the team!"</span></div>
+        <div class="t-sm" style="margin-top:3px">28m ago</div>
+      </div>
+    </div>
+
+    <!-- @mention (unread) -->
+    <div class="list-row" style="background:#FFF3EA;cursor:pointer;align-items:flex-start" onclick="App.go('scr-post-detail')">
+      <img class="ava" src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=120&q=80" style="width:44px;height:44px;flex:none">
+      <div style="flex:1;min-width:0;line-height:1.45">
+        <div style="font-size:13.5px"><b>Chioma Okafor</b> mentioned you: <span class="text-brand" style="color:var(--brand);font-weight:700">@you</span> you have to see this design 👀</div>
+        <div class="t-sm" style="margin-top:3px">41m ago</div>
+      </div>
+    </div>
+
+    <!-- friend request with inline buttons (unread) -->
+    <div class="list-row" style="background:#FFF3EA;align-items:flex-start">
+      <img class="ava" src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=120&q=80" style="width:44px;height:44px;flex:none;cursor:pointer" onclick="App.go('scr-user-profile')">
+      <div style="flex:1;min-width:0;line-height:1.45">
+        <div style="font-size:13.5px"><b>Arif Hossain</b> sent you a friend request.</div>
+        <div class="t-sm" style="margin-top:2px">7 mutual friends · 1h ago</div>
+        <div style="display:flex;gap:8px;margin-top:8px">
+          <button class="btn-sm" style="background:var(--brand-grad);color:#fff;border:none;border-radius:10px;padding:7px 16px;font-weight:700;font-size:12.5px;cursor:pointer" onclick="this.parentElement.innerHTML='<span class=&quot;t-sm&quot; style=&quot;color:var(--ok);font-weight:700&quot;><i class=&quot;fa-solid fa-check&quot;></i> Friends</span>';App.toast('You are now friends with Arif')">Confirm</button>
+          <button class="btn-sm btn-soft" style="border:1px solid var(--line);background:#fff;border-radius:10px;padding:7px 16px;font-weight:700;font-size:12.5px;cursor:pointer;color:var(--ink-2)" onclick="this.parentElement.parentElement.parentElement.style.opacity=.4;App.toast('Request declined')">Decline</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- friend accepted (unread) -->
+    <div class="list-row" style="background:#FFF3EA;cursor:pointer;align-items:flex-start" onclick="App.go('scr-user-profile')">
+      <div style="position:relative;flex:none">
+        <img class="ava" src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=120&q=80" style="width:44px;height:44px">
+        <span style="position:absolute;right:-2px;bottom:-2px;width:19px;height:19px;border-radius:50%;background:var(--ok,#16A34A);display:flex;align-items:center;justify-content:center;border:2px solid #fff"><i class="fa-solid fa-user-check" style="color:#fff;font-size:8px"></i></span>
+      </div>
+      <div style="flex:1;min-width:0;line-height:1.45">
+        <div style="font-size:13.5px"><b>Sadia Islam</b> accepted your friend request. Say hi 👋</div>
+        <div class="t-sm" style="margin-top:3px">1h ago</div>
+      </div>
+      <button class="btn-sm btn-soft" style="border:1px solid var(--line);background:#fff;border-radius:10px;padding:6px 14px;font-weight:700;font-size:12px;cursor:pointer;color:var(--brand);flex:none" onclick="event.stopPropagation();App.go('scr-chat')">Message</button>
+    </div>
+
+  </div>
+
+  <!-- EARLIER SECTION -->
+  <div class="pad" style="padding-top:16px;padding-bottom:0">
+    <span class="section-title">Earlier</span>
+  </div>
+
+  <div style="margin-top:8px;background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line)">
+
+    <!-- eGift received -->
+    <div class="list-row" style="cursor:pointer;align-items:flex-start" onclick="App.go('scr-egifts')">
+      <span style="flex:none;width:44px;height:44px;border-radius:50%;background:#FCE7F3;display:flex;align-items:center;justify-content:center;font-size:22px">🎁</span>
+      <div style="flex:1;min-width:0;line-height:1.45">
+        <div style="font-size:13.5px"><b>Fatima Bello</b> sent you an eGift — a <b>Birthday Surprise Box</b>.</div>
+        <div class="t-sm" style="margin-top:3px">3h ago · Tap to open</div>
+      </div>
+      <i class="fa-solid fa-chevron-right" style="color:var(--ink-3);flex:none;align-self:center"></i>
+    </div>
+
+    <!-- wallet credit (green) -->
+    <div class="list-row" style="cursor:pointer;align-items:flex-start" onclick="App.go('scr-wallet')">
+      <span style="flex:none;width:44px;height:44px;border-radius:50%;background:#DCFCE7;display:flex;align-items:center;justify-content:center;font-size:20px">💰</span>
+      <div style="flex:1;min-width:0;line-height:1.45">
+        <div style="font-size:13.5px">Wallet credited. <b style="color:var(--ok,#16A34A)">+₦25,000</b> received from <b>Ibrahim Musa</b>.</div>
+        <div class="t-sm" style="margin-top:3px">5h ago</div>
+      </div>
+      <span class="badge badge-ok" style="flex:none;align-self:center">+₦25,000</span>
+    </div>
+
+    <!-- wallet debit -->
+    <div class="list-row" style="cursor:pointer;align-items:flex-start" onclick="App.go('scr-wallet')">
+      <span style="flex:none;width:44px;height:44px;border-radius:50%;background:#FEE2E2;display:flex;align-items:center;justify-content:center;font-size:20px">💳</span>
+      <div style="flex:1;min-width:0;line-height:1.45">
+        <div style="font-size:13.5px">Payment of <b style="color:var(--danger,#DC2626)">₦8,500</b> for <b>Ankara Two-Piece Set</b> was successful.</div>
+        <div class="t-sm" style="margin-top:3px">8h ago · Marketplace</div>
+      </div>
+      <span class="badge" style="background:#FEE2E2;color:#DC2626;flex:none;align-self:center">−₦8,500</span>
+    </div>
+
+    <!-- userpoint conversion -->
+    <div class="list-row" style="cursor:pointer;align-items:flex-start" onclick="App.go('scr-userpoints')">
+      <span style="flex:none;width:44px;height:44px;border-radius:50%;background:var(--brand-50,#FFF3EA);display:flex;align-items:center;justify-content:center;font-size:20px">⭐</span>
+      <div style="flex:1;min-width:0;line-height:1.45">
+        <div style="font-size:13.5px">You converted <b>1,200 UserPoints</b> into <b style="color:var(--brand)">₦1,200</b> wallet credit.</div>
+        <div class="t-sm" style="margin-top:3px">10h ago</div>
+      </div>
+      <i class="fa-solid fa-chevron-right" style="color:var(--ink-3);flex:none;align-self:center"></i>
+    </div>
+
+    <!-- verification approved (blue check) -->
+    <div class="list-row" style="cursor:pointer;align-items:flex-start" onclick="App.go('scr-verify')">
+      <span style="flex:none;width:44px;height:44px;border-radius:50%;background:#DBEAFE;display:flex;align-items:center;justify-content:center"><i class="fa-solid fa-circle-check" style="color:#2563EB;font-size:22px"></i></span>
+      <div style="flex:1;min-width:0;line-height:1.45">
+        <div style="font-size:13.5px">Your account is now <b style="color:#2563EB">verified</b> <i class="fa-solid fa-circle-check verified" style="font-size:12px"></i>. Welcome to the blue badge club!</div>
+        <div class="t-sm" style="margin-top:3px">Yesterday</div>
+      </div>
+    </div>
+
+    <!-- group invite -->
+    <div class="list-row" style="align-items:flex-start">
+      <span style="flex:none;width:44px;height:44px;border-radius:50%;background:#EDE9FE;display:flex;align-items:center;justify-content:center"><i class="fa-solid fa-user-group" style="color:#7C3AED;font-size:18px"></i></span>
+      <div style="flex:1;min-width:0;line-height:1.45">
+        <div style="font-size:13.5px"><b>Aisha Lawal</b> invited you to join <b style="cursor:pointer" onclick="App.go('scr-group-page')">Lagos Creatives Hub</b>.</div>
+        <div class="t-sm" style="margin-top:2px">8.4k members · Yesterday</div>
+        <div style="display:flex;gap:8px;margin-top:8px">
+          <button class="btn-sm" style="background:var(--brand-grad);color:#fff;border:none;border-radius:10px;padding:7px 16px;font-weight:700;font-size:12.5px;cursor:pointer" onclick="App.go('scr-group-page')">View group</button>
+          <button class="btn-sm btn-soft" style="border:1px solid var(--line);background:#fff;border-radius:10px;padding:7px 16px;font-weight:700;font-size:12.5px;cursor:pointer;color:var(--ink-2)" onclick="this.closest('.list-row').style.opacity=.4;App.toast('Invite dismissed')">Ignore</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- event invite -->
+    <div class="list-row" style="cursor:pointer;align-items:flex-start" onclick="App.go('scr-event-detail')">
+      <span style="flex:none;width:44px;height:44px;border-radius:50%;background:#CFFAFE;display:flex;align-items:center;justify-content:center"><i class="fa-solid fa-calendar-day" style="color:#0891B2;font-size:18px"></i></span>
+      <div style="flex:1;min-width:0;line-height:1.45">
+        <div style="font-size:13.5px"><b>Emeka Nwosu</b> invited you to <b>Design Meetup Lagos 2026</b>.</div>
+        <div class="t-sm" style="margin-top:3px">Sat, 28 Jun · 4:00 PM · 2 days ago</div>
+      </div>
+      <img src="https://images.unsplash.com/photo-1505373877841-8d25f7d46678?w=160&q=80" style="width:42px;height:42px;border-radius:10px;object-fit:cover;flex:none;align-self:center">
+    </div>
+
+    <!-- birthday -->
+    <div class="list-row" style="cursor:pointer;align-items:flex-start" onclick="App.go('scr-send-gift')">
+      <span style="flex:none;width:44px;height:44px;border-radius:50%;background:#FEF3C7;display:flex;align-items:center;justify-content:center;font-size:22px">🎂</span>
+      <div style="flex:1;min-width:0;line-height:1.45">
+        <div style="font-size:13.5px">It's <b>Habiba Sani's</b> birthday today. Send a wish or an eGift!</div>
+        <div class="t-sm" style="margin-top:3px">2 days ago</div>
+      </div>
+      <button class="btn-sm btn-soft" style="border:1px solid var(--line);background:#fff;border-radius:10px;padding:6px 14px;font-weight:700;font-size:12px;cursor:pointer;color:var(--brand);flex:none;align-self:center" onclick="event.stopPropagation();App.go('scr-send-gift')">Gift</button>
+    </div>
+
+    <!-- system alert (info style 📢) -->
+    <div class="list-row" style="cursor:pointer;align-items:flex-start" onclick="App.toast('Opening security settings')">
+      <span style="flex:none;width:44px;height:44px;border-radius:50%;background:#CFF4FC;display:flex;align-items:center;justify-content:center;font-size:20px">📢</span>
+      <div style="flex:1;min-width:0;line-height:1.45">
+        <div style="font-size:13.5px"><b style="color:#0891B2">EVINIE</b> · A new device signed in from Lagos. If this wasn't you, secure your account.</div>
+        <div class="t-sm" style="margin-top:3px">3 days ago · System</div>
+      </div>
+      <i class="fa-solid fa-chevron-right chev" style="flex:none;align-self:center"></i>
+    </div>
+
+  </div>
+
+  <div style="text-align:center;padding:18px">
+    <button class="btn-sm btn-soft" style="border:1px solid var(--line);background:#fff;border-radius:12px;padding:9px 22px;font-weight:700;font-size:13px;cursor:pointer;color:var(--ink-2)" onclick="App.toast('No older notifications')">View older activity</button>
+  </div>
+
+  <div style="height:20px"></div>
+</section>

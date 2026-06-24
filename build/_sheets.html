@@ -1,0 +1,153 @@
+<!-- _sheets -->
+
+<!-- ============ CREATE ============ -->
+<div class="sheet" id="sheet-create">
+  <div class="sheet-grip"></div>
+  <div class="pad">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px">
+      <div class="h2" style="font-weight:800;font-size:18px">Create</div>
+      <button class="icon-btn" onclick="App.closeSheet()"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+
+      <div onclick="App.closeSheet();App.go('scr-composer')" style="display:flex;align-items:center;gap:12px;padding:14px;background:var(--surface);border:1px solid var(--line);border-radius:16px;cursor:pointer">
+        <div style="width:42px;height:42px;border-radius:12px;background:rgba(255,106,1,.12);display:flex;align-items:center;justify-content:center"><i class="fa-solid fa-pen-nib" style="color:var(--brand)"></i></div>
+        <div style="font-weight:700;font-size:14px">Post</div>
+      </div>
+
+      <div onclick="App.closeSheet();App.go('scr-add-story')" style="display:flex;align-items:center;gap:12px;padding:14px;background:var(--surface);border:1px solid var(--line);border-radius:16px;cursor:pointer">
+        <div style="width:42px;height:42px;border-radius:12px;background:rgba(255,106,1,.12);display:flex;align-items:center;justify-content:center"><i class="fa-solid fa-circle-plus" style="color:var(--brand)"></i></div>
+        <div style="font-weight:700;font-size:14px">Story</div>
+      </div>
+
+      <div onclick="App.closeSheet();App.go('scr-poll-composer')" style="display:flex;align-items:center;gap:12px;padding:14px;background:var(--surface);border:1px solid var(--line);border-radius:16px;cursor:pointer">
+        <div style="width:42px;height:42px;border-radius:12px;background:rgba(255,106,1,.12);display:flex;align-items:center;justify-content:center"><i class="fa-solid fa-square-poll-vertical" style="color:var(--brand)"></i></div>
+        <div style="font-weight:700;font-size:14px">Poll</div>
+      </div>
+
+      <div onclick="App.closeSheet();App.go('scr-create-group')" style="display:flex;align-items:center;gap:12px;padding:14px;background:var(--surface);border:1px solid var(--line);border-radius:16px;cursor:pointer">
+        <div style="width:42px;height:42px;border-radius:12px;background:rgba(255,106,1,.12);display:flex;align-items:center;justify-content:center"><i class="fa-solid fa-users-rectangle" style="color:var(--brand)"></i></div>
+        <div style="font-weight:700;font-size:14px">Group</div>
+      </div>
+
+      <div onclick="App.closeSheet();App.go('scr-add-event')" style="display:flex;align-items:center;gap:12px;padding:14px;background:var(--surface);border:1px solid var(--line);border-radius:16px;cursor:pointer">
+        <div style="width:42px;height:42px;border-radius:12px;background:rgba(255,106,1,.12);display:flex;align-items:center;justify-content:center"><i class="fa-solid fa-calendar-day" style="color:var(--brand)"></i></div>
+        <div style="font-weight:700;font-size:14px">Event</div>
+      </div>
+
+      <div onclick="App.closeSheet();App.go('scr-add-product')" style="display:flex;align-items:center;gap:12px;padding:14px;background:var(--surface);border:1px solid var(--line);border-radius:16px;cursor:pointer">
+        <div style="width:42px;height:42px;border-radius:12px;background:rgba(255,106,1,.12);display:flex;align-items:center;justify-content:center"><i class="fa-solid fa-tag" style="color:var(--brand)"></i></div>
+        <div style="font-weight:700;font-size:14px">Product</div>
+      </div>
+
+      <div onclick="App.closeSheet();App.toast('Page builder coming soon')" style="display:flex;align-items:center;gap:12px;padding:14px;background:var(--surface);border:1px solid var(--line);border-radius:16px;cursor:pointer">
+        <div style="width:42px;height:42px;border-radius:12px;background:rgba(255,106,1,.12);display:flex;align-items:center;justify-content:center"><i class="fa-solid fa-flag" style="color:var(--brand)"></i></div>
+        <div style="font-weight:700;font-size:14px">Page</div>
+      </div>
+
+      <div onclick="App.closeSheet();App.go('scr-create-ad')" style="display:flex;align-items:center;gap:12px;padding:14px;background:var(--surface);border:1px solid var(--line);border-radius:16px;cursor:pointer">
+        <div style="width:42px;height:42px;border-radius:12px;background:rgba(255,106,1,.12);display:flex;align-items:center;justify-content:center"><i class="fa-solid fa-rectangle-ad" style="color:var(--brand)"></i></div>
+        <div style="font-weight:700;font-size:14px">Ad</div>
+      </div>
+
+      <div onclick="App.closeSheet();App.go('scr-add-blog')" style="display:flex;align-items:center;gap:12px;padding:14px;background:var(--surface);border:1px solid var(--line);border-radius:16px;cursor:pointer">
+        <div style="width:42px;height:42px;border-radius:12px;background:rgba(255,106,1,.12);display:flex;align-items:center;justify-content:center"><i class="fa-solid fa-feather-pointed" style="color:var(--brand)"></i></div>
+        <div style="font-weight:700;font-size:14px">Blog</div>
+      </div>
+
+      <div onclick="App.closeSheet();App.go('scr-add-video')" style="display:flex;align-items:center;gap:12px;padding:14px;background:var(--surface);border:1px solid var(--line);border-radius:16px;cursor:pointer">
+        <div style="width:42px;height:42px;border-radius:12px;background:rgba(255,106,1,.12);display:flex;align-items:center;justify-content:center"><i class="fa-solid fa-clapperboard" style="color:var(--brand)"></i></div>
+        <div style="font-weight:700;font-size:14px">Video</div>
+      </div>
+
+      <div onclick="App.closeSheet();App.toast('Invite link copied')" style="display:flex;align-items:center;gap:12px;padding:14px;background:var(--surface);border:1px solid var(--line);border-radius:16px;cursor:pointer;grid-column:1 / -1">
+        <div style="width:42px;height:42px;border-radius:12px;background:rgba(255,106,1,.12);display:flex;align-items:center;justify-content:center"><i class="fa-solid fa-user-plus" style="color:var(--brand)"></i></div>
+        <div style="font-weight:700;font-size:14px">Invite Friends</div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ============ POST OPTIONS ============ -->
+<div class="sheet" id="sheet-post-options">
+  <div class="sheet-grip"></div>
+  <div class="pad">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
+      <div class="h2" style="font-weight:800;font-size:18px">Post options</div>
+      <button class="icon-btn" onclick="App.closeSheet()"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+
+    <div class="card">
+      <div class="list-row" onclick="App.closeSheet();App.toast('Editing post')">
+        <i class="fa-solid fa-pen" style="color:var(--ink-2);width:20px;text-align:center"></i>
+        <div style="flex:1"><div class="h3">Edit Post</div></div>
+      </div>
+      <div class="divider"></div>
+      <div class="list-row" onclick="App.closeSheet();App.toast('Post deleted')">
+        <i class="fa-solid fa-trash-can" style="color:var(--danger);width:20px;text-align:center"></i>
+        <div style="flex:1"><div class="h3" style="color:var(--danger)">Delete Post</div></div>
+      </div>
+      <div class="divider"></div>
+      <div class="list-row" onclick="App.closeSheet();App.toast('Report submitted')">
+        <i class="fa-solid fa-flag" style="color:var(--ink-2);width:20px;text-align:center"></i>
+        <div style="flex:1"><div class="h3">Report Post</div></div>
+      </div>
+      <div class="divider"></div>
+      <div class="list-row" onclick="App.closeSheet();App.toast('Post hidden')">
+        <i class="fa-solid fa-eye-slash" style="color:var(--ink-2);width:20px;text-align:center"></i>
+        <div style="flex:1"><div class="h3">Hide Post</div></div>
+      </div>
+      <div class="divider"></div>
+      <div class="list-row" onclick="App.closeSheet();App.toast('Link copied')">
+        <i class="fa-solid fa-link" style="color:var(--ink-2);width:20px;text-align:center"></i>
+        <div style="flex:1"><div class="h3">Copy Link</div></div>
+      </div>
+      <div class="divider"></div>
+      <div class="list-row" onclick="App.closeSheet();App.go('scr-boost-post')">
+        <i class="fa-solid fa-rocket" style="color:var(--brand);width:20px;text-align:center"></i>
+        <div style="flex:1"><div class="h3">Boost Post</div><div class="t-sm">Reach more people</div></div>
+        <i class="fa-solid fa-chevron-right chev"></i>
+      </div>
+      <div class="divider"></div>
+      <div class="list-row" onclick="App.closeSheet();App.toast('Share sheet opened')">
+        <i class="fa-solid fa-share-nodes" style="color:var(--ink-2);width:20px;text-align:center"></i>
+        <div style="flex:1"><div class="h3">Share to...</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ PRIVACY ============ -->
+<div class="sheet" id="sheet-privacy">
+  <div class="sheet-grip"></div>
+  <div class="pad">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px">
+      <div class="h2" style="font-weight:800;font-size:18px">Who can see this?</div>
+      <button class="icon-btn" onclick="App.closeSheet()"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+
+    <div class="stack">
+      <label style="display:flex;align-items:center;gap:13px;padding:14px;background:var(--surface);border:2px solid var(--brand);border-radius:16px;cursor:pointer">
+        <span style="font-size:20px">🌐</span>
+        <div style="flex:1"><div class="h3">Public</div><div class="t-sm">Anyone on EVINIE</div></div>
+        <input type="radio" name="privacy" checked style="accent-color:var(--brand);width:20px;height:20px">
+      </label>
+
+      <label style="display:flex;align-items:center;gap:13px;padding:14px;background:var(--surface);border:1px solid var(--line);border-radius:16px;cursor:pointer">
+        <span style="font-size:20px">👥</span>
+        <div style="flex:1"><div class="h3">Friends</div><div class="t-sm">Your friends only</div></div>
+        <input type="radio" name="privacy" style="accent-color:var(--brand);width:20px;height:20px">
+      </label>
+
+      <label style="display:flex;align-items:center;gap:13px;padding:14px;background:var(--surface);border:1px solid var(--line);border-radius:16px;cursor:pointer">
+        <span style="font-size:20px">🔒</span>
+        <div style="flex:1"><div class="h3">Only Me</div><div class="t-sm">Private to you</div></div>
+        <input type="radio" name="privacy" style="accent-color:var(--brand);width:20px;height:20px">
+      </label>
+    </div>
+
+    <button class="btn btn-primary" style="margin-top:18px" onclick="App.closeSheet()">Done</button>
+  </div>
+</div>

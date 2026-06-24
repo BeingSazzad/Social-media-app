@@ -1,0 +1,259 @@
+<!-- eGifts & Verification module -->
+
+<section class="screen" id="scr-send-gift"
+         data-topbar="back" data-nav="hide" data-title="Send a Gift">
+  <div class="pad stack">
+
+    <!-- Recipient header line -->
+    <div class="card card-p" style="display:flex;align-items:center;gap:12px">
+      <img class="ava" src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&q=80" style="width:48px;height:48px">
+      <div style="flex:1;min-width:0">
+        <div class="section-title" style="margin-bottom:2px">Sending to</div>
+        <div class="h3" style="font-size:16px">Nusrat Jahan
+          <i class="fa-solid fa-circle-check verified" style="font-size:13px"></i>
+        </div>
+        <div class="t-sm">@nusrat_j · Lagos</div>
+      </div>
+      <button class="btn-sm btn-soft" onclick="App.go('scr-user-profile')">Profile</button>
+    </div>
+
+    <!-- Catalog grid -->
+    <div class="section-title">Choose a gift</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+
+      <button onclick="App.toast('Rose selected · ₦50')" style="background:var(--surface);border:1.5px solid var(--line);border-radius:16px;padding:18px 12px;display:flex;flex-direction:column;align-items:center;gap:6px;cursor:pointer">
+        <span style="font-size:34px;line-height:1">🌹</span>
+        <span style="font-weight:700;font-size:14px;color:var(--ink)">Rose</span>
+        <span class="t-sm" style="font-weight:700">₦50</span>
+      </button>
+
+      <button onclick="App.toast('Star selected · ₦100')" style="background:var(--surface);border:1.5px solid var(--line);border-radius:16px;padding:18px 12px;display:flex;flex-direction:column;align-items:center;gap:6px;cursor:pointer">
+        <span style="font-size:34px;line-height:1">⭐</span>
+        <span style="font-weight:700;font-size:14px;color:var(--ink)">Star</span>
+        <span class="t-sm" style="font-weight:700">₦100</span>
+      </button>
+
+      <button onclick="App.toast('Diamond selected · ₦250')" style="background:var(--surface);border:1.5px solid var(--line);border-radius:16px;padding:18px 12px;display:flex;flex-direction:column;align-items:center;gap:6px;cursor:pointer">
+        <span style="font-size:34px;line-height:1">💎</span>
+        <span style="font-weight:700;font-size:14px;color:var(--ink)">Diamond</span>
+        <span class="t-sm" style="font-weight:700">₦250</span>
+      </button>
+
+      <button onclick="App.toast('Trophy selected · ₦500')" style="background:var(--surface);border:2px solid var(--brand);border-radius:16px;padding:18px 12px;display:flex;flex-direction:column;align-items:center;gap:6px;cursor:pointer;position:relative;box-shadow:0 4px 16px rgba(255,106,1,.18)">
+        <i class="fa-solid fa-circle-check" style="position:absolute;top:8px;right:9px;color:var(--brand);font-size:15px"></i>
+        <span style="font-size:34px;line-height:1">🏆</span>
+        <span style="font-weight:700;font-size:14px;color:var(--ink)">Trophy</span>
+        <span class="t-sm" style="font-weight:700;color:var(--brand)">₦500</span>
+      </button>
+
+      <button onclick="App.toast('Crown selected · ₦1,000')" style="background:var(--surface);border:1.5px solid var(--line);border-radius:16px;padding:18px 12px;display:flex;flex-direction:column;align-items:center;gap:6px;cursor:pointer">
+        <span style="font-size:34px;line-height:1">👑</span>
+        <span style="font-weight:700;font-size:14px;color:var(--ink)">Crown</span>
+        <span class="t-sm" style="font-weight:700">₦1,000</span>
+      </button>
+
+      <button onclick="App.toast('Rocket selected · ₦2,000')" style="background:var(--surface);border:1.5px solid var(--line);border-radius:16px;padding:18px 12px;display:flex;flex-direction:column;align-items:center;gap:6px;cursor:pointer">
+        <span style="font-size:34px;line-height:1">🚀</span>
+        <span style="font-weight:700;font-size:14px;color:var(--ink)">Rocket</span>
+        <span class="t-sm" style="font-weight:700">₦2,000</span>
+      </button>
+
+    </div>
+
+    <!-- Fee breakdown for selected gift (Trophy) -->
+    <div class="card card-p stack" style="gap:10px">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:2px">
+        <span style="font-size:20px">🏆</span>
+        <span class="h3" style="font-size:15px">Trophy · breakdown</span>
+      </div>
+      <div class="divider"></div>
+      <div style="display:flex;justify-content:space-between;font-size:14px">
+        <span class="t-sm" style="font-size:14px">Gift Value</span>
+        <span style="font-weight:600">₦500</span>
+      </div>
+      <div style="display:flex;justify-content:space-between;font-size:14px">
+        <span class="t-sm" style="font-size:14px">Transaction Fee (20%)</span>
+        <span style="font-weight:600;color:var(--danger)">₦100</span>
+      </div>
+      <div class="divider"></div>
+      <div style="display:flex;justify-content:space-between;align-items:center">
+        <span style="font-weight:700;font-size:15px">You Pay</span>
+        <span style="font-weight:700;font-size:18px;color:var(--brand)">₦600</span>
+      </div>
+      <div style="display:flex;justify-content:space-between;font-size:13px">
+        <span class="t-sm">Recipient receives</span>
+        <span style="font-weight:700;color:var(--ok)">₦400</span>
+      </div>
+    </div>
+
+    <!-- Payment source segmented toggle -->
+    <div class="section-title">Pay with</div>
+    <div class="seg">
+      <button class="active" onclick="App.toast('Paying from Wallet')">Wallet · ₦3,200</button>
+      <button onclick="App.toast('Paying with UserPoints')">UserPoints · 750</button>
+    </div>
+
+    <div style="height:8px"></div>
+
+  </div>
+
+  <!-- Thumb-first primary CTA -->
+  <div class="pad" style="position:sticky;bottom:0;background:linear-gradient(to top,var(--bg) 88%,transparent);padding-top:14px">
+    <button class="btn btn-primary" onclick="App.toast('Nusrat received ₦400!')">Send Gift 🎁</button>
+  </div>
+</section>
+
+
+<section class="screen" id="scr-egifts"
+         data-topbar="back" data-nav="hide" data-title="eGifts">
+  <div class="pad stack">
+
+    <!-- 3-tab segmented -->
+    <div class="seg">
+      <button onclick="App.toast('Gift lists')">Lists</button>
+      <button onclick="App.toast('Gifts you sent')">Sent</button>
+      <button class="active" onclick="App.toast('Gifts received')">Received</button>
+    </div>
+
+    <!-- Summary strip -->
+    <div class="navy" style="border-radius:16px;padding:16px;display:flex;align-items:center;justify-content:space-between">
+      <div>
+        <div style="font-size:12px;opacity:.7;text-transform:uppercase;letter-spacing:.05em">Received this month</div>
+        <div style="font-weight:700;font-size:22px;margin-top:2px">₦1,150</div>
+      </div>
+      <span style="font-size:30px">🎁</span>
+    </div>
+
+    <!-- Received list -->
+    <div class="section-title">Received</div>
+
+    <div class="card">
+      <div class="list-row">
+        <span style="font-size:24px;width:32px;text-align:center">👑</span>
+        <div style="flex:1;min-width:0">
+          <div class="h3">Tanvir Ahmed</div>
+          <div class="t-sm">Crown · 24 Jun 2026</div>
+        </div>
+        <div style="text-align:right">
+          <div style="font-weight:700;color:var(--ok)">+₦800</div>
+          <div class="t-sm">received</div>
+        </div>
+      </div>
+      <div class="divider"></div>
+      <div class="list-row">
+        <span style="font-size:24px;width:32px;text-align:center">💎</span>
+        <div style="flex:1;min-width:0">
+          <div class="h3">Aisha Bello</div>
+          <div class="t-sm">Diamond · 22 Jun 2026</div>
+        </div>
+        <div style="text-align:right">
+          <div style="font-weight:700;color:var(--ok)">+₦200</div>
+          <div class="t-sm">received</div>
+        </div>
+      </div>
+      <div class="divider"></div>
+      <div class="list-row">
+        <span style="font-size:24px;width:32px;text-align:center">🏆</span>
+        <div style="flex:1;min-width:0">
+          <div class="h3">Sadia Islam</div>
+          <div class="t-sm">Trophy · 19 Jun 2026</div>
+        </div>
+        <div style="text-align:right">
+          <div style="font-weight:700;color:var(--ok)">+₦400</div>
+          <div class="t-sm">received</div>
+        </div>
+      </div>
+      <div class="divider"></div>
+      <div class="list-row">
+        <span style="font-size:24px;width:32px;text-align:center">⭐</span>
+        <div style="flex:1;min-width:0">
+          <div class="h3">Chidi Okafor</div>
+          <div class="t-sm">Star · 15 Jun 2026</div>
+        </div>
+        <div style="text-align:right">
+          <div style="font-weight:700;color:var(--ok)">+₦80</div>
+          <div class="t-sm">received</div>
+        </div>
+      </div>
+    </div>
+
+    <button class="btn btn-outline" onclick="App.go('scr-send-gift')">Send a Gift 🎁</button>
+
+    <div style="height:4px"></div>
+
+  </div>
+</section>
+
+
+<section class="screen" id="scr-verify"
+         data-topbar="back" data-nav="hide" data-title="Get Verified">
+  <div class="pad stack">
+
+    <!-- Hero -->
+    <div class="card card-p" style="text-align:center;padding:28px 18px">
+      <div style="width:84px;height:84px;border-radius:50%;background:rgba(56,140,255,.12);display:flex;align-items:center;justify-content:center;margin:0 auto 14px">
+        <i class="fa-solid fa-circle-check" style="font-size:48px;color:#388CFF"></i>
+      </div>
+      <div style="font-weight:700;font-size:20px">Get Verified</div>
+      <p class="t-sm" style="margin-top:6px;max-width:260px;margin-left:auto;margin-right:auto;line-height:1.5">Stand out with a blue check and build trust with your audience on EVINIE.</p>
+    </div>
+
+    <!-- What you get -->
+    <div class="card card-p stack" style="gap:12px">
+      <div class="section-title">What you get</div>
+      <div style="display:flex;align-items:center;gap:12px">
+        <i class="fa-solid fa-circle-check" style="color:#388CFF;font-size:18px;width:22px;text-align:center"></i>
+        <span style="font-size:14px">Blue verified badge on your profile &amp; posts</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:12px">
+        <i class="fa-solid fa-headset" style="color:var(--brand);font-size:18px;width:22px;text-align:center"></i>
+        <span style="font-size:14px">Priority support, replies within hours</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:12px">
+        <i class="fa-solid fa-shield-halved" style="color:var(--ok);font-size:18px;width:22px;text-align:center"></i>
+        <span style="font-size:14px">Increased trust &amp; profile credibility</span>
+      </div>
+    </div>
+
+    <!-- Requirements checklist -->
+    <div class="card card-p stack" style="gap:12px">
+      <div class="section-title">Requirements</div>
+      <div style="display:flex;align-items:center;gap:12px">
+        <i class="fa-solid fa-square-check" style="color:var(--ok);font-size:18px;width:22px;text-align:center"></i>
+        <span style="font-size:14px">Complete profile with photo &amp; bio</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:12px">
+        <i class="fa-solid fa-square-check" style="color:var(--ok);font-size:18px;width:22px;text-align:center"></i>
+        <span style="font-size:14px">Account active for 30+ days</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:12px">
+        <i class="fa-regular fa-square" style="color:var(--ink-3);font-size:18px;width:22px;text-align:center"></i>
+        <span style="font-size:14px">Valid government ID for review</span>
+      </div>
+    </div>
+
+    <!-- Verification Fee card -->
+    <div class="card card-p stack" style="gap:10px">
+      <div style="display:flex;justify-content:space-between;align-items:center">
+        <span class="h3" style="font-size:15px">Verification Fee</span>
+        <span style="font-weight:700;font-size:22px;color:var(--brand)">₦2,500</span>
+      </div>
+      <div class="divider"></div>
+      <div style="display:flex;justify-content:space-between;align-items:center">
+        <span class="t-sm" style="font-size:14px">Your wallet balance</span>
+        <span style="font-weight:700;font-size:14px">₦3,200</span>
+      </div>
+      <button class="btn-sm btn-soft" style="align-self:flex-start" onclick="App.go('scr-fund-wallet')">Top up wallet</button>
+    </div>
+
+    <p class="t-sm" style="text-align:center;line-height:1.5">After payment your request is <b>pending</b>. We'll mark it <b style="color:var(--ok)">approved</b> or <b style="color:var(--danger)">rejected</b> within 24–48 hours. Fee is refunded if rejected.</p>
+
+    <div style="height:12px"></div>
+
+  </div>
+
+  <!-- Primary CTA -->
+  <div class="pad" style="position:sticky;bottom:0;background:linear-gradient(to top,var(--bg) 88%,transparent);padding-top:14px">
+    <button class="btn btn-primary" onclick="App.toast('Verification requested. Review in 24-48 hours')">Pay &amp; Request Verification</button>
+  </div>
+</section>

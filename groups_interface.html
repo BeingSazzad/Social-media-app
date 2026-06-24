@@ -1,0 +1,2012 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>evinie - Premium Groups Dashboard & Workspace UX Prototype</title>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- FontAwesome for matching social app icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Google Fonts: Inter & Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <style>
+    body {
+      font-family: 'Inter', 'Plus Jakarta Sans', sans-serif;
+      background-color: #0f172a;
+    }
+    .custom-scrollbar::-webkit-scrollbar {
+      width: 4px;
+      height: 4px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 4px;
+    }
+    /* Native feel transitions */
+    .slide-page {
+      transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .fade-overlay {
+      transition: opacity 0.25s ease-out;
+    }
+  </style>
+</head>
+<body class="text-slate-900 antialiased min-h-screen flex flex-col lg:flex-row items-center justify-center p-2 sm:p-4 md:p-8 gap-6">
+
+  <!-- Interactive Spec Control Panel (Left Side) -->
+  <div class="w-full lg:w-[380px] bg-slate-900 border border-slate-800 rounded-3xl p-5 text-slate-300 shadow-2xl flex flex-col justify-between self-stretch">
+    <div>
+      <div class="flex items-center gap-3 mb-4">
+        <div class="bg-[#FF5E2B]/10 p-2 rounded-2xl text-[#FF5E2B]">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+        </div>
+        <div>
+          <h2 class="text-lg font-extrabold text-white tracking-tight">evinie Workspace UX</h2>
+          <p class="text-xs text-slate-400">High-Fidelity Group Details Concept</p>
+        </div>
+      </div>
+
+      <div class="space-y-4">
+        <div class="p-4 bg-slate-800/40 rounded-xl border border-slate-700/60 text-xs leading-relaxed space-y-2">
+          <p class="font-semibold text-white">✨ 10-Year UX Architectural Spec:</p>
+          <p>আমরা অতিরিক্ত ভিজ্যুয়াল নয়েজ বাদ দিয়ে একটি আল্ট্রা-ক্লিন লেআউট বানিয়েছি। যেকোনো গ্রুপ কার্ডের <strong class="text-[#FF5E2B]">"Visit"</strong> বাটনে ক্লিক করলেই গ্রুপ ওয়ার্কস্পেস পেজটি ওপেন হবে।</p>
+          <p>গ্রুপ পেজের ভেতরে প্রতিটি ট্যাবের জন্য (Discussion, About, Members, Polls, Moderators, Videos, Events) সমৃদ্ধ ও ডাইনামিক মক কনটেন্ট যুক্ত করা হয়েছে যা সর্টিং হায়ারার্কি মেনে চলে।</p>
+          <div class="bg-slate-950 p-2.5 rounded-lg font-mono text-[10px] text-[#FF5E2B] space-y-1 mt-2">
+            <div>• Admins shown first on top</div>
+            <div>• Friends listed next with status</div>
+            <div>• Full interactive post/poll creation</div>
+          </div>
+        </div>
+
+        <div class="space-y-2">
+          <h4 class="text-[11px] font-bold uppercase tracking-wider text-slate-500">Interactive Controls</h4>
+          <button onclick="triggerCreateModal()" class="w-full bg-[#FF5E2B] hover:bg-[#e04f20] text-white py-2.5 px-4 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-2">
+            <i class="fa-solid fa-plus"></i> Simulate "Create New Group"
+          </button>
+          <button onclick="toggleDeviceMock()" id="viewModeBtn" class="w-full bg-slate-800 hover:bg-slate-700 text-slate-300 py-2.5 px-4 rounded-xl text-xs font-semibold transition-all border border-slate-700">
+            Switch View: Full Width Canvas
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="mt-4 pt-4 border-t border-slate-800/80 text-center">
+      <p class="text-[10px] text-slate-500">Interactive Prototype — Designed with premium care for evinie</p>
+    </div>
+  </div>
+
+  <!-- Device Shell Container -->
+  <div id="deviceShell" class="relative bg-white w-full max-w-[412px] h-[860px] rounded-[48px] shadow-[0_0_0_12px_#1e293b,0_20px_50px_-12px_rgba(0,0,0,0.85)] overflow-hidden transition-all duration-300 flex flex-col border-[6px] border-slate-800">
+    
+    <!-- iPhone status bar area -->
+    <div class="bg-white px-8 pt-3 pb-2 flex justify-between items-center text-[12px] font-semibold text-slate-900 shrink-0 z-30 select-none">
+      <span class="tracking-tight">09:41</span>
+      <!-- Dynamic Ear Piece / Notch -->
+      <div class="absolute left-1/2 -translate-x-1/2 top-3 w-[110px] h-[24px] bg-black rounded-full flex items-center justify-center">
+        <span class="w-12 h-1 bg-neutral-900 rounded-full"></span>
+      </div>
+      <div class="flex items-center gap-1.5">
+        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12 3c-1.2 0-2.4.2-3.6.7L19.3 14.6c.5-1.2.7-2.4.7-3.6 0-4.4-3.6-8-8-8z" opacity="0.3"/>
+          <path d="M2 11c0 5.5 4.5 10 10 10 1.2 0 2.4-.2 3.6-.7L4.7 9.4c-.5 1.2-.7 2.4-.7 3.6z"/>
+        </svg>
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+        </svg>
+        <div class="w-5 h-2.5 border border-slate-900 rounded-[4px] p-[1px] flex items-center">
+          <div class="h-full w-4 bg-slate-900 rounded-[2px]"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MAIN HOME PAGE (Groups Dashboard List) -->
+    <div id="mainDashboardView" class="flex-1 flex flex-col overflow-hidden">
+      <!-- Header navigation bar mirroring evinie styling (Home-1.jpg) -->
+      <div class="bg-white border-b border-slate-100 px-5 py-3.5 flex items-center justify-between shrink-0 z-20">
+        <div class="flex items-center gap-3">
+          <button class="p-2 bg-slate-50 hover:bg-slate-100 rounded-full text-slate-800 transition-all flex items-center justify-center">
+            <svg class="w-4 h-4 stroke-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"></path>
+            </svg>
+          </button>
+          <h1 class="text-lg font-bold tracking-tight text-slate-900">Groups</h1>
+        </div>
+        
+        <!-- Right Quick Actions -->
+        <div class="flex items-center gap-2">
+          <button onclick="toggleSearch()" class="p-2 hover:bg-slate-50 rounded-full text-slate-600 transition-all">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+            </svg>
+          </button>
+          <button onclick="triggerCreateModal()" class="p-2 bg-[#FFF0EB] hover:bg-[#FFE2D6] rounded-full text-[#FF5E2B] transition-all flex items-center justify-center">
+            <svg class="w-5 h-5 stroke-[2.5]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Search Input Tray -->
+      <div id="searchTray" class="bg-slate-50 px-5 py-0 border-b border-slate-100 transition-all duration-300 overflow-hidden max-h-0 shrink-0">
+        <div class="relative flex items-center my-2">
+          <input type="text" id="groupSearchInput" onkeyup="filterGroups()" placeholder="Search your groups..." class="w-full bg-white border border-slate-200 py-2 pl-9 pr-4 rounded-xl text-xs focus:outline-none focus:border-[#FF5E2B] transition-all">
+          <svg class="w-3.5 h-3.5 text-slate-400 absolute left-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+          </svg>
+        </div>
+      </div>
+
+      <!-- Segmented Tab Controller with Orange Sliding Pill -->
+      <div class="bg-white border-b border-slate-100 px-5 py-2 shrink-0 z-10 flex">
+        <div class="flex w-full bg-slate-100 p-1 rounded-2xl relative">
+          <!-- Active Slide indicator background -->
+          <div id="tabIndicator" class="absolute top-1 bottom-1 left-1 w-[31%] bg-white rounded-xl shadow-sm transition-all duration-300"></div>
+          
+          <button onclick="switchTab('joined', this)" class="relative z-10 w-1/3 text-center py-2.5 text-xs font-bold text-slate-900 transition-all">
+            Joined
+          </button>
+          <button onclick="switchTab('my-groups', this)" class="relative z-10 w-1/3 text-center py-2.5 text-xs font-bold text-slate-500 transition-all">
+            My Groups
+          </button>
+          <button onclick="switchTab('explore', this)" class="relative z-10 w-1/3 text-center py-2.5 text-xs font-bold text-slate-500 transition-all flex justify-center items-center gap-1">
+            Explore
+            <span class="w-1.5 h-1.5 bg-[#FF5E2B] rounded-full"></span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Main Content Scroll Area for Dashboard -->
+      <div class="flex-1 overflow-y-auto bg-slate-50 custom-scrollbar pb-16">
+        
+        <!-- TAB STATE: JOINED (Ultra-Clean Minimal Cards) -->
+        <div id="tabContentJoined" class="p-4 space-y-2.5 tab-section">
+          <div class="flex items-center justify-between mb-1 pl-1">
+            <h2 class="text-[10px] font-extrabold text-slate-400 uppercase tracking-widest">Joined Communities</h2>
+            <span class="text-[10px] font-semibold text-slate-400">4 Channels</span>
+          </div>
+
+          <!-- Argentina Fans BD Card -->
+          <div class="bg-white rounded-2xl p-3 shadow-sm border border-slate-100/80 group-card hover:border-slate-200 transition-all" data-name="Argentina Fans BD">
+            <div class="flex items-center justify-between gap-3">
+              <div class="flex items-center gap-3 min-w-0">
+                <img src="https://images.unsplash.com/photo-1543351611-58f69d7c1781?w=150&auto=format&fit=crop&q=80" class="w-11 h-11 rounded-xl object-cover shrink-0">
+                <div class="min-w-0">
+                  <h3 class="font-bold text-slate-900 text-xs truncate">Argentina Fans BD 🇦🇷</h3>
+                  <p class="text-[10px] text-slate-400 mt-0.5">85,120 Members</p>
+                </div>
+              </div>
+              <button onclick="enterGroup('Argentina Fans BD')" class="text-xs font-bold text-[#FF5E2B] bg-[#FFF0EB] hover:bg-[#FFE2D6] px-4 py-2 rounded-xl transition-all shrink-0">
+                Visit
+              </button>
+            </div>
+          </div>
+
+          <!-- Tech BD Card -->
+          <div class="bg-white rounded-2xl p-3 shadow-sm border border-slate-100/80 group-card hover:border-slate-200 transition-all" data-name="Tech BD">
+            <div class="flex items-center justify-between gap-3">
+              <div class="flex items-center gap-3 min-w-0">
+                <img src="https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?w=150&auto=format&fit=crop&q=80" class="w-11 h-11 rounded-xl object-cover shrink-0">
+                <div class="min-w-0">
+                  <h3 class="font-bold text-slate-900 text-xs truncate">Tech BD</h3>
+                  <p class="text-[10px] text-slate-400 mt-0.5">24,520 Members</p>
+                </div>
+              </div>
+              <button onclick="enterGroup('Tech BD')" class="text-xs font-bold text-[#FF5E2B] bg-[#FFF0EB] hover:bg-[#FFE2D6] px-4 py-2 rounded-xl transition-all shrink-0">
+                Visit
+              </button>
+            </div>
+          </div>
+
+          <!-- Dev Hub Card -->
+          <div class="bg-white rounded-2xl p-3 shadow-sm border border-slate-100/80 group-card hover:border-slate-200 transition-all" data-name="Dev Hub">
+            <div class="flex items-center justify-between gap-3">
+              <div class="flex items-center gap-3 min-w-0">
+                <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=150&auto=format&fit=crop&q=80" class="w-11 h-11 rounded-xl object-cover shrink-0">
+                <div class="min-w-0">
+                  <h3 class="font-bold text-slate-900 text-xs truncate">Dev Hub</h3>
+                  <p class="text-[10px] text-slate-400 mt-0.5">12,300 Members</p>
+                </div>
+              </div>
+              <button onclick="enterGroup('Dev Hub')" class="text-xs font-bold text-[#FF5E2B] bg-[#FFF0EB] hover:bg-[#FFE2D6] px-4 py-2 rounded-xl transition-all shrink-0">
+                Visit
+              </button>
+            </div>
+          </div>
+
+          <!-- Gamer Spot Card -->
+          <div class="bg-white rounded-2xl p-3 shadow-sm border border-slate-100/80 group-card hover:border-slate-200 transition-all" data-name="Gamer Spot">
+            <div class="flex items-center justify-between gap-3">
+              <div class="flex items-center gap-3 min-w-0">
+                <img src="https://images.unsplash.com/photo-1511512578047-dfb367046420?w=150&auto=format&fit=crop&q=80" class="w-11 h-11 rounded-xl object-cover shrink-0">
+                <div class="min-w-0">
+                  <h3 class="font-bold text-slate-900 text-xs truncate">Gamer Spot</h3>
+                  <p class="text-[10px] text-slate-400 mt-0.5">18,200 Members</p>
+                </div>
+              </div>
+              <button onclick="enterGroup('Gamer Spot')" class="text-xs font-bold text-[#FF5E2B] bg-[#FFF0EB] hover:bg-[#FFE2D6] px-4 py-2 rounded-xl transition-all shrink-0">
+                Visit
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- TAB STATE: MY GROUPS -->
+        <div id="tabContentMyGroups" class="p-4 space-y-4 tab-section hidden">
+          <div class="grid grid-cols-2 gap-2.5 mb-2">
+            <div class="bg-[#FFF0EB] rounded-2xl p-3.5 border border-[#FF5E2B]/10">
+              <span class="text-[9px] uppercase font-bold text-[#FF5E2B] tracking-wider">Total Members</span>
+              <div class="text-base font-black text-slate-900 mt-0.5">17.1k</div>
+              <span class="text-[9px] text-emerald-600 font-semibold flex items-center gap-0.5 mt-0.5">
+                +12% this week
+              </span>
+            </div>
+            <div class="bg-slate-100 rounded-2xl p-3.5 border border-slate-200/50">
+              <span class="text-[9px] uppercase font-bold text-slate-500 tracking-wider">Mod Actions</span>
+              <div class="text-base font-black text-slate-900 mt-0.5">3 Pending</div>
+              <span class="text-[9px] text-amber-600 font-semibold flex items-center gap-0.5 mt-0.5">
+                Action required
+              </span>
+            </div>
+          </div>
+
+          <div class="flex items-center justify-between mb-1 pl-1">
+            <h2 class="text-[10px] font-extrabold text-slate-400 uppercase tracking-widest">Created By You</h2>
+            <button onclick="triggerCreateModal()" class="text-xs font-bold text-[#FF5E2B] hover:underline flex items-center gap-1">
+              + Create New
+            </button>
+          </div>
+
+          <!-- My Groups List -->
+          <div id="myGroupsList" class="space-y-2.5">
+            <div class="bg-white rounded-2xl p-3 shadow-sm border border-slate-100 flex items-center justify-between group-card hover:border-slate-200" data-name="Dhaka Tech Hub">
+              <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-indigo-100 rounded-xl flex items-center justify-center font-bold text-indigo-600 text-xs">
+                  DH
+                </div>
+                <div>
+                  <h3 class="font-bold text-slate-900 text-xs">Dhaka Tech Hub</h3>
+                  <span class="text-[9px] text-slate-400">12,800 Members • Owner</span>
+                </div>
+              </div>
+              <button onclick="enterGroup('Dhaka Tech Hub')" class="text-xs font-semibold text-slate-700 bg-slate-100 hover:bg-slate-200 px-3 py-1.5 rounded-lg transition-all shrink-0">
+                Visit
+              </button>
+            </div>
+
+            <div class="bg-white rounded-2xl p-3 shadow-sm border border-slate-100 flex items-center justify-between group-card hover:border-slate-200" data-name="UI/UX Bangladesh">
+              <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-[#FFF0EB] rounded-xl flex items-center justify-center font-bold text-[#FF5E2B] text-xs">
+                  UI
+                </div>
+                <div>
+                  <h3 class="font-bold text-slate-900 text-xs">UI/UX Bangladesh</h3>
+                  <span class="text-[9px] text-slate-400">4,300 Members • Creator</span>
+                </div>
+              </div>
+              <button onclick="enterGroup('UI/UX Bangladesh')" class="text-xs font-semibold text-slate-700 bg-slate-100 hover:bg-slate-200 px-3 py-1.5 rounded-lg transition-all shrink-0">
+                Visit
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- TAB STATE: EXPLORE -->
+        <div id="tabContentExplore" class="p-4 space-y-4 tab-section hidden">
+          <div class="flex gap-1.5 overflow-x-auto pb-1.5 custom-scrollbar">
+            <span class="bg-[#FF5E2B] text-white text-[10px] font-bold px-3.5 py-1.5 rounded-full cursor-pointer shrink-0">For You</span>
+            <span class="bg-white hover:bg-slate-100 text-slate-700 border border-slate-200 text-[10px] font-semibold px-3.5 py-1.5 rounded-full cursor-pointer shrink-0">Tech & Design</span>
+            <span class="bg-white hover:bg-slate-100 text-slate-700 border border-slate-200 text-[10px] font-semibold px-3.5 py-1.5 rounded-full cursor-pointer shrink-0">Sports</span>
+            <span class="bg-white hover:bg-slate-100 text-slate-700 border border-slate-200 text-[10px] font-semibold px-3.5 py-1.5 rounded-full cursor-pointer shrink-0">Creative Arts</span>
+          </div>
+
+          <div class="space-y-2.5">
+            <h2 class="text-[10px] font-extrabold text-slate-400 uppercase tracking-widest pl-1">Recommended Channels</h2>
+            
+            <div class="bg-white rounded-2xl p-3 shadow-sm border border-slate-100 flex items-center justify-between group-card hover:border-slate-200" data-name="WebAssembly Developers">
+              <div class="flex items-center gap-3 min-w-0">
+                <div class="w-10 h-10 bg-emerald-100 rounded-xl flex items-center justify-center font-extrabold text-emerald-700 text-xs shrink-0">
+                  W3
+                </div>
+                <div class="min-w-0">
+                  <h3 class="font-bold text-slate-900 text-xs truncate">WebAssembly Developers</h3>
+                  <p class="text-[9px] text-slate-400 mt-0.5">4,500 Members</p>
+                </div>
+              </div>
+              <button onclick="toggleJoinBtn(this)" class="shrink-0 text-xs font-bold bg-[#FFF0EB] hover:bg-[#FFE2D6] text-[#FF5E2B] px-3.5 py-2 rounded-xl transition-all">
+                Join
+              </button>
+            </div>
+
+            <div class="bg-white rounded-2xl p-3 shadow-sm border border-slate-100 flex items-center justify-between group-card hover:border-slate-200" data-name="Generative AI Bangladesh">
+              <div class="flex items-center gap-3 min-w-0">
+                <div class="w-10 h-10 bg-blue-100 rounded-xl flex items-center justify-center font-extrabold text-blue-700 text-xs shrink-0">
+                  AI
+                </div>
+                <div class="min-w-0">
+                  <h3 class="font-bold text-slate-900 text-xs truncate">Generative AI Bangladesh</h3>
+                  <p class="text-[9px] text-slate-400 mt-0.5">8,200 Members</p>
+                </div>
+              </div>
+              <button onclick="toggleJoinBtn(this)" class="shrink-0 text-xs font-bold bg-[#FFF0EB] hover:bg-[#FFE2D6] text-[#FF5E2B] px-3.5 py-2 rounded-xl transition-all">
+                Join
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bottom Global Action Navigation Bar -->
+      <div class="absolute bottom-0 left-0 right-0 bg-white/90 backdrop-blur-md border-t border-slate-100 py-3.5 px-8 flex justify-between items-center shrink-0 z-30">
+        <button class="text-slate-400 hover:text-[#FF5E2B] transition-all flex flex-col items-center gap-1">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
+        </button>
+        <button class="text-[#FF5E2B] transition-all flex flex-col items-center gap-1 relative">
+          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+          <span class="w-1.5 h-1.5 bg-[#FF5E2B] rounded-full absolute -bottom-1.5"></span>
+        </button>
+        <button class="text-slate-400 hover:text-[#FF5E2B] transition-all flex flex-col items-center gap-1">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path></svg>
+        </button>
+        <button class="text-slate-400 hover:text-[#FF5E2B] transition-all flex flex-col items-center gap-1">
+          <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=150&auto=format&fit=crop&q=80" class="w-5.5 h-5.5 rounded-full object-cover">
+        </button>
+      </div>
+    </div>
+
+    <!-- HIGH-FIDELITY INTERACTIVE SUB-PAGE: Group Details Workspace View -->
+    <div id="groupDetailsView" class="absolute inset-0 bg-slate-50 z-40 slide-page translate-x-full flex flex-col">
+      <!-- Workspace Navigation Header -->
+      <div class="bg-white border-b border-slate-100 px-4 py-3 flex items-center gap-3 shrink-0 z-10">
+        <button onclick="exitGroup()" class="p-2 bg-slate-50 hover:bg-slate-100 rounded-full text-slate-800 transition-all flex items-center justify-center">
+          <svg class="w-4 h-4 stroke-[2.5]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"></path>
+          </svg>
+        </button>
+        <div class="flex-1 min-w-0">
+          <h2 id="gdHeaderName" class="font-bold text-slate-900 text-sm truncate">Group Title</h2>
+          <p id="gdHeaderCount" class="text-[10px] text-slate-400">0 Members</p>
+        </div>
+        <button class="p-2 hover:bg-slate-50 rounded-full text-slate-600 transition-all">
+          <svg class="w-4.5 h-4.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h.01M12 12h.01M19 12h.01M6 12a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0z"></path></svg>
+        </button>
+      </div>
+
+      <!-- Workspace Content Area (Scrollable) -->
+      <div class="flex-1 overflow-y-auto custom-scrollbar pb-16">
+        
+        <!-- Premium Cover Banner with Overlay -->
+        <div class="relative h-28 bg-slate-200">
+          <img id="gdCoverImg" src="" class="w-full h-full object-cover">
+          <div class="absolute inset-0 bg-gradient-to-t from-slate-950/65 to-transparent"></div>
+          
+          <!-- Overlapping Group Logo -->
+          <div class="absolute -bottom-5 left-4 z-10 flex items-end gap-3.5">
+            <img id="gdAvatar" src="" class="w-14 h-14 rounded-2xl border-4 border-white shadow-md object-cover bg-white">
+            <div class="mb-5">
+              <span class="bg-[#FF5E2B] text-white text-[8px] font-extrabold uppercase tracking-widest px-2.5 py-1 rounded-full">Official</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Group Title Info Block -->
+        <div class="bg-white pt-7 px-4 pb-4 border-b border-slate-100 shadow-sm space-y-3">
+          <div>
+            <h1 id="gdDetailsTitle" class="text-base font-extrabold text-slate-900 tracking-tight">Group Title</h1>
+            <p id="gdDescription" class="text-[11px] text-slate-500 leading-relaxed mt-1"></p>
+          </div>
+
+          <!-- Dynamic Actions Row -->
+          <div class="flex items-center gap-2">
+            <button onclick="toggleWorkspaceJoin(this)" id="wsJoinBtn" class="flex-1 bg-emerald-500 hover:bg-emerald-600 text-white py-2.5 px-3 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-1.5 shadow-sm">
+              <i class="fa-solid fa-circle-check"></i>
+              <span>Joined</span>
+            </button>
+            <button onclick="openInviteModal()" class="bg-slate-100 hover:bg-slate-200 text-slate-800 py-2.5 px-4 rounded-xl text-xs font-bold transition-all">
+              Invite
+            </button>
+            <button class="p-2.5 bg-slate-100 hover:bg-slate-200 text-slate-800 rounded-xl transition-all">
+              <i class="fa-regular fa-share-from-square text-xs"></i>
+            </button>
+          </div>
+
+          <!-- Quick statistics & members pile -->
+          <div class="flex items-center justify-between pt-1 text-[10px] text-slate-400">
+            <div class="flex items-center gap-1">
+              <i class="fa-solid fa-earth-americas text-[9px]"></i>
+              <span>Public Space</span>
+            </div>
+            <!-- Member pile avatars -->
+            <div class="flex -space-x-2">
+              <img class="w-5 h-5 rounded-full border border-white" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=80&fit=crop&q=80">
+              <img class="w-5 h-5 rounded-full border border-white" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=80&fit=crop&q=80">
+              <img class="w-5 h-5 rounded-full border border-white" src="https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?w=80&fit=crop&q=80">
+              <span class="w-5 h-5 rounded-full border border-white bg-slate-100 text-[8px] font-bold text-slate-500 flex items-center justify-center">+99</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Inner Group Sub-Tab Bar (Horizontal Scrollable for Minimal UI) -->
+        <div class="bg-white border-b border-slate-100 px-4 py-1 flex gap-4 text-xs font-bold text-slate-400 sticky top-0 z-20 shadow-sm overflow-x-auto custom-scrollbar whitespace-nowrap">
+          <button onclick="switchWorkspaceSubTab('feed', this)" class="text-[#FF5E2B] border-b-2 border-[#FF5E2B] py-2 shrink-0">Discussion</button>
+          <button onclick="switchWorkspaceSubTab('about', this)" class="hover:text-slate-700 py-2 shrink-0">About</button>
+          <button onclick="switchWorkspaceSubTab('members', this)" class="hover:text-slate-700 py-2 shrink-0">Members</button>
+          <button onclick="switchWorkspaceSubTab('polls', this)" class="hover:text-slate-700 py-2 shrink-0">Active Polls</button>
+          <button onclick="switchWorkspaceSubTab('moderators', this)" class="hover:text-slate-700 py-2 shrink-0">Moderators</button>
+          <button onclick="switchWorkspaceSubTab('videos', this)" class="hover:text-slate-700 py-2 shrink-0">Videos</button>
+          <button onclick="switchWorkspaceSubTab('events', this)" class="hover:text-slate-700 py-2 shrink-0">Events</button>
+        </div>
+
+        <!-- Write Post Box (Triggers Create.jpg Flow) -->
+        <div id="quickWriteBox" class="p-4">
+          <div onclick="openCreatePostModal()" class="bg-white rounded-2xl p-3 shadow-sm border border-slate-100 flex items-center gap-3 cursor-pointer hover:border-slate-200 transition-all">
+            <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=150&auto=format&fit=crop&q=80" class="w-8 h-8 rounded-full object-cover">
+            <div class="flex-1 bg-slate-50 border border-slate-100 py-2 px-4 rounded-full text-[11px] text-slate-400 font-medium">
+              Share updates, media, or launch a poll...
+            </div>
+            <div class="text-[#FF5E2B] p-1.5 hover:bg-orange-50 rounded-full transition-all">
+              <i class="fa-regular fa-image text-xs"></i>
+            </div>
+          </div>
+        </div>
+
+        <!-- WORKSPACE SUB-TAB PANELS -->
+        <div class="px-4 pb-4">
+          
+          <!-- SUB-TAB CONTENT: FEED -->
+          <div id="wsSubTabFeed" class="workspace-tab-section space-y-4">
+            <!-- Populated dynamically via javascript -->
+          </div>
+
+          <!-- SUB-TAB CONTENT: ABOUT -->
+          <div id="wsSubTabAbout" class="workspace-tab-section space-y-4 hidden">
+            <div class="bg-white rounded-2xl p-4 shadow-sm border border-slate-100 space-y-3">
+              <h3 class="text-xs font-bold text-slate-900 uppercase tracking-wide">Community Guidelines</h3>
+              <div id="aboutContentArea" class="space-y-2">
+                <!-- Populated dynamically -->
+              </div>
+            </div>
+          </div>
+
+          <!-- SUB-TAB CONTENT: MEMBERS -->
+          <div id="wsSubTabMembers" class="workspace-tab-section hidden">
+            <div class="bg-white rounded-2xl p-4 shadow-sm border border-slate-100 space-y-3">
+              <div class="flex justify-between items-center">
+                <h3 class="text-xs font-bold text-slate-900 uppercase">Members Directory</h3>
+                <span class="text-[9px] text-slate-400 font-semibold" id="membersTotalText">0 Members</span>
+              </div>
+              <div id="membersContainer" class="grid grid-cols-1 gap-2">
+                <!-- Populated dynamically -->
+              </div>
+            </div>
+          </div>
+
+          <!-- SUB-TAB CONTENT: POLLS -->
+          <div id="wsSubTabPolls" class="workspace-tab-section space-y-4 hidden">
+            <div id="pollsTabContainer" class="space-y-4">
+              <!-- Dynamic Polls Booth -->
+            </div>
+          </div>
+
+          <!-- SUB-TAB CONTENT: MODERATORS -->
+          <div id="wsSubTabModerators" class="workspace-tab-section hidden">
+            <div class="bg-white rounded-2xl p-4 shadow-sm border border-slate-100 space-y-3">
+              <h3 class="text-xs font-bold text-slate-900 uppercase">Admins & Moderator Squad</h3>
+              <div id="moderatorsContainer" class="space-y-2.5">
+                <!-- Populated dynamically -->
+              </div>
+            </div>
+          </div>
+
+          <!-- SUB-TAB CONTENT: VIDEOS -->
+          <div id="wsSubTabVideos" class="workspace-tab-section hidden">
+            <div id="videosContainer" class="grid grid-cols-2 gap-3">
+              <!-- Populated dynamically -->
+            </div>
+          </div>
+
+          <!-- SUB-TAB CONTENT: EVENTS -->
+          <div id="wsSubTabEvents" class="workspace-tab-section space-y-3 hidden">
+            <div id="eventsContainer" class="space-y-3">
+              <!-- Populated dynamically -->
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- INTERACTIVE SUB-PAGE: Post Creator Modal (Replicating Create.jpg) -->
+    <div id="createPostModal" class="absolute inset-0 bg-white z-50 slide-page translate-y-full flex flex-col">
+      <div class="bg-white border-b border-slate-100 px-4 py-3.5 flex items-center justify-between shrink-0">
+        <div class="flex items-center gap-3">
+          <button onclick="closeCreatePostModal()" class="p-2 bg-slate-50 hover:bg-slate-100 rounded-full text-slate-800 transition-all flex items-center justify-center">
+            <svg class="w-4 h-4 stroke-[2.5]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"></path>
+            </svg>
+          </button>
+          <h2 class="font-bold text-slate-900 text-sm">New Post</h2>
+        </div>
+        <button onclick="publishGroupPost()" class="bg-[#FF5E2B] hover:bg-[#e04f20] text-white px-5 py-2 rounded-full text-xs font-bold transition-all shadow-md shadow-[#FF5E2B]/15">
+          Post
+        </button>
+      </div>
+
+      <div class="flex-1 overflow-y-auto custom-scrollbar p-4 space-y-4">
+        <div class="flex gap-2 border-b border-slate-100 pb-3 overflow-x-auto custom-scrollbar shrink-0 text-slate-500 font-bold text-[10px]">
+          <button onclick="selectPostType('standard', this)" class="bg-slate-100 text-slate-800 px-3 py-1.5 rounded-lg flex items-center gap-1 shrink-0">
+            <i class="fa-regular fa-file-lines"></i> Post
+          </button>
+          <button onclick="selectPostType('photo', this)" class="hover:bg-slate-50 px-3 py-1.5 rounded-lg flex items-center gap-1 shrink-0">
+            <i class="fa-regular fa-image"></i> Photo
+          </button>
+          <button onclick="openCreatePollModal()" class="hover:bg-slate-50 px-3 py-1.5 rounded-lg text-[#FF5E2B] flex items-center gap-1 shrink-0">
+            <i class="fa-regular fa-chart-bar"></i> Poll
+          </button>
+        </div>
+
+        <div class="flex items-center gap-3">
+          <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=150&auto=format&fit=crop&q=80" class="w-10 h-10 rounded-full object-cover">
+          <div class="space-y-0.5">
+            <span class="font-bold text-slate-900 text-xs block">Jordan Blake</span>
+            <button class="bg-slate-100 hover:bg-slate-200 text-slate-600 text-[9px] font-bold py-0.5 px-2.5 rounded-full flex items-center gap-1">
+              <i class="fa-solid fa-earth-americas text-[8px]"></i>
+              <span>Everyone</span>
+              <i class="fa-solid fa-chevron-down text-[7px]"></i>
+            </button>
+          </div>
+        </div>
+
+        <textarea id="postTextContent" rows="4" placeholder="Write something amazing in this community..." class="w-full text-xs font-medium text-slate-800 placeholder-slate-400 focus:outline-none resize-none"></textarea>
+
+        <div id="postImageContainer" class="relative rounded-2xl overflow-hidden shadow-sm">
+          <img id="postImagePreview" src="https://images.unsplash.com/photo-1508098682722-e99c43a406b2?w=500&auto=format&fit=crop&q=80" class="w-full h-48 object-cover">
+          <button onclick="removeAttachedPhoto()" class="absolute top-2.5 right-2.5 bg-black/60 hover:bg-black/80 text-white p-1.5 rounded-full transition-all">
+            <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"></path></svg>
+          </button>
+        </div>
+      </div>
+
+      <div class="bg-slate-50/80 backdrop-blur border-t border-slate-100 py-3.5 px-6 flex justify-around items-center shrink-0">
+        <button onclick="attachSamplePhoto()" class="p-2.5 hover:bg-slate-200 text-slate-600 rounded-full transition-all flex items-center justify-center">
+          <i class="fa-solid fa-image text-sm"></i>
+        </button>
+        <button class="p-2.5 hover:bg-slate-200 text-slate-600 rounded-full transition-all flex items-center justify-center">
+          <i class="fa-solid fa-location-dot text-sm"></i>
+        </button>
+        <button class="p-2.5 hover:bg-slate-200 text-slate-600 rounded-full transition-all flex items-center justify-center">
+          <i class="fa-regular fa-face-smile text-sm"></i>
+        </button>
+        <button class="p-2.5 hover:bg-slate-200 text-slate-600 rounded-full transition-all flex items-center justify-center">
+          <i class="fa-solid fa-palette text-sm"></i>
+        </button>
+        <button class="p-2.5 hover:bg-slate-200 text-slate-600 rounded-full transition-all flex items-center justify-center">
+          <i class="fa-solid fa-microphone text-sm"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- INTERACTIVE SUB-PAGE: Poll Creator Page (Replicating Create Poll.jpg) -->
+    <div id="createPollModal" class="absolute inset-0 bg-white z-50 slide-page translate-y-full flex flex-col">
+      <div class="bg-white border-b border-slate-100 px-4 py-3.5 flex items-center justify-between shrink-0">
+        <div class="flex items-center gap-3">
+          <button onclick="closeCreatePollModal()" class="p-2 bg-slate-50 hover:bg-slate-100 rounded-full text-slate-800 transition-all flex items-center justify-center">
+            <svg class="w-4 h-4 stroke-[2.5]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"></path>
+            </svg>
+          </button>
+          <h2 class="font-bold text-slate-900 text-sm">Create a poll</h2>
+        </div>
+      </div>
+
+      <div class="flex-1 overflow-y-auto custom-scrollbar p-5 space-y-5">
+        <div class="space-y-2">
+          <div class="flex justify-between items-center text-slate-800 font-bold text-xs">
+            <span class="flex items-center gap-1.5"><i class="fa-solid fa-circle-question text-orange-500"></i> Poll Title / Question</span>
+            <span class="bg-slate-100 text-slate-600 text-[9px] font-semibold px-2 py-0.5 rounded-full flex items-center gap-1">
+              <i class="fa-solid fa-earth-americas text-[8px]"></i> Everyone
+            </span>
+          </div>
+          <textarea id="pollQuestionInput" rows="3" placeholder="Ask a question..." class="w-full bg-white border border-slate-200 focus:border-[#FF5E2B] focus:ring-1 focus:ring-[#FF5E2B] focus:outline-none p-3.5 rounded-2xl text-xs font-semibold text-slate-800 placeholder-slate-400 transition-all resize-none"></textarea>
+        </div>
+
+        <div class="space-y-3">
+          <label class="text-xs font-bold text-slate-800 flex items-center gap-1.5"><i class="fa-solid fa-list-ul text-orange-500"></i> Poll Choices</label>
+          <div id="pollChoicesList" class="space-y-2">
+            <input type="text" placeholder="Option 1" class="poll-choice-input w-full bg-white border border-slate-200 focus:border-[#FF5E2B] focus:ring-1 focus:ring-[#FF5E2B] focus:outline-none py-3 px-4 rounded-xl text-xs font-medium text-slate-800 placeholder-slate-400 transition-all">
+            <input type="text" placeholder="Option 2" class="poll-choice-input w-full bg-white border border-slate-200 focus:border-[#FF5E2B] focus:ring-1 focus:ring-[#FF5E2B] focus:outline-none py-3 px-4 rounded-xl text-xs font-medium text-slate-800 placeholder-slate-400 transition-all">
+          </div>
+          <button onclick="addPollChoiceOption()" class="text-xs font-bold text-[#FF5E2B] bg-[#FFF0EB] hover:bg-[#FFE2D6] px-4 py-2 rounded-xl transition-all flex items-center gap-1">
+            + Add Choice
+          </button>
+        </div>
+
+        <div class="space-y-3">
+          <label class="text-xs font-bold text-slate-800 flex items-center gap-1.5"><i class="fa-solid fa-users-viewfinder text-orange-500"></i> Voter Visibility</label>
+          <p class="text-[10px] text-slate-400 leading-relaxed">Specify whether voters see each other's identity inside results.</p>
+          
+          <div class="grid grid-cols-2 gap-2.5">
+            <div onclick="selectVoterVisibility('visible', this)" id="visVisibleBtn" class="border-2 border-[#FF5E2B] bg-[#FFF0EB]/45 p-3 rounded-2xl text-center cursor-pointer transition-all flex flex-col items-center justify-center gap-1">
+              <span class="text-xs font-bold text-[#FF5E2B]"><i class="fa-regular fa-eye"></i> Yes, Show Voters</span>
+            </div>
+            <div onclick="selectVoterVisibility('anonymous', this)" id="visAnonBtn" class="border border-slate-200 p-3 rounded-2xl text-center cursor-pointer transition-all flex flex-col items-center justify-center gap-1 hover:border-slate-300">
+              <span class="text-xs font-bold text-slate-700"><i class="fa-regular fa-eye-slash"></i> No, Keep Anonymous</span>
+            </div>
+          </div>
+          <input type="hidden" id="voterVisibilityValue" value="visible">
+        </div>
+
+        <button onclick="publishInteractivePoll()" class="w-full bg-[#FF5E2B] hover:bg-[#e04f20] text-white py-3.5 rounded-2xl text-xs font-bold transition-all shadow-lg shadow-[#FF5E2B]/15">
+          Publish Poll
+        </button>
+      </div>
+    </div>
+
+    <!-- SIMULATED INTERACTIVE MODAL: CREATE A GROUP -->
+    <div id="createGroupModal" class="absolute inset-0 bg-black/60 z-50 fade-overlay opacity-0 pointer-events-none flex flex-col justify-end">
+      <div id="createGroupModalContent" class="bg-white w-full rounded-t-[32px] p-5 space-y-4 transform translate-y-full transition-transform duration-300 shadow-xl">
+        <div class="w-10 h-1 bg-slate-200 rounded-full mx-auto cursor-pointer" onclick="closeCreateModal()"></div>
+        
+        <div class="flex justify-between items-center">
+          <h2 class="text-base font-extrabold text-slate-900 tracking-tight">Create a Community</h2>
+          <button type="button" onclick="closeCreateModal()" class="p-1 text-slate-400 hover:text-slate-600">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+          </button>
+        </div>
+
+        <form id="createGroupForm" onsubmit="createNewGroup(event)" class="space-y-3.5">
+          <div>
+            <label class="text-[10px] font-bold text-slate-500 block mb-1 uppercase tracking-wider">Group Name</label>
+            <input type="text" id="newGroupName" required placeholder="Name your community..." class="w-full bg-slate-50 border border-slate-200 focus:border-[#FF5E2B] focus:outline-none p-3 rounded-xl text-xs font-medium transition-all">
+          </div>
+
+          <div>
+            <label class="text-[10px] font-bold text-slate-500 block mb-1 uppercase tracking-wider">About / Purpose</label>
+            <textarea id="newGroupDesc" required placeholder="What is this community about?" rows="3" class="w-full bg-slate-50 border border-slate-200 focus:border-[#FF5E2B] focus:outline-none p-3 rounded-xl text-xs font-medium transition-all resize-none"></textarea>
+          </div>
+
+          <div>
+            <label class="text-[10px] font-bold text-slate-500 block mb-1 uppercase tracking-wider">Privacy Level</label>
+            <div class="grid grid-cols-2 gap-2.5">
+              <div onclick="selectPrivacy('public', this)" class="privacy-btn p-3 border border-[#FF5E2B] bg-[#FFF0EB]/40 rounded-xl text-center cursor-pointer transition-all">
+                <span class="block text-xs font-bold text-[#FF5E2B]">Public</span>
+                <span class="block text-[8px] text-[#FF5E2B]/80 mt-0.5">Anyone can find / see</span>
+              </div>
+              <div onclick="selectPrivacy('private', this)" class="privacy-btn p-3 border border-slate-200 rounded-xl text-center cursor-pointer transition-all">
+                <span class="block text-xs font-bold text-slate-700">Private</span>
+                <span class="block text-[8px] text-slate-400 mt-0.5">Only members can view</span>
+              </div>
+            </div>
+            <input type="hidden" id="groupPrivacy" value="public">
+          </div>
+
+          <button type="submit" class="w-full bg-[#FF5E2B] hover:bg-[#e04f20] text-white py-3 rounded-xl text-xs font-bold transition-all shadow-lg shadow-[#FF5E2B]/10">
+            Create Community
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <!-- INTERACTIVE SUB-PAGE: INVITE FRIENDS BOTTOM SHEET DRAWER -->
+    <div id="inviteModal" class="absolute inset-0 bg-black/60 z-50 fade-overlay opacity-0 pointer-events-none flex flex-col justify-end">
+      <div id="inviteModalContent" class="bg-white w-full rounded-t-[32px] p-5 space-y-4 transform translate-y-full transition-transform duration-300 shadow-xl max-h-[85%] flex flex-col">
+        <!-- Close Handle Bar for Swipe/Tidy feel -->
+        <div class="w-10 h-1 bg-slate-200 rounded-full mx-auto cursor-pointer shrink-0" onclick="closeInviteModal()"></div>
+        
+        <div class="flex justify-between items-center shrink-0">
+          <div>
+            <h2 class="text-sm font-extrabold text-slate-900 tracking-tight">Invite Friends</h2>
+            <p class="text-[10px] text-slate-400 font-medium">Add members from your circle to <span id="inviteGroupName" class="text-slate-800 font-bold">this community</span></p>
+          </div>
+          <button onclick="closeInviteModal()" class="p-1.5 bg-slate-50 text-slate-400 hover:text-slate-600 rounded-full transition-all">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"></path></svg>
+          </button>
+        </div>
+
+        <!-- In-Modal Quick Friends Search -->
+        <div class="relative flex items-center shrink-0">
+          <input type="text" id="inviteFriendsSearch" onkeyup="filterInviteFriends()" placeholder="Search friends by name..." class="w-full bg-slate-50 border border-slate-100 focus:border-[#FF5E2B] focus:ring-1 focus:ring-[#FF5E2B] focus:outline-none py-2.5 pl-9 pr-4 rounded-xl text-xs font-semibold text-slate-800 placeholder-slate-400 transition-all">
+          <svg class="w-3.5 h-3.5 text-slate-400 absolute left-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+          </svg>
+        </div>
+
+        <!-- Scrollable Friends List Grid -->
+        <div id="inviteFriendsContainer" class="flex-1 overflow-y-auto custom-scrollbar space-y-2.5 max-h-[320px] pr-0.5">
+          <!-- Dynamic Friends will be rendered here by JS -->
+        </div>
+
+        <!-- Extra: Share invitation Link option -->
+        <div class="border-t border-slate-100 pt-4 shrink-0">
+          <div class="bg-slate-50/80 rounded-2xl p-3 flex items-center justify-between border border-slate-100">
+            <div class="min-w-0">
+              <span class="text-[9px] uppercase font-bold text-slate-400 tracking-wider block">Invite Link</span>
+              <span class="text-[10px] font-semibold text-slate-600 block truncate">evinie.com/join/invite-code-78a</span>
+            </div>
+            <button onclick="copyInviteLink()" class="bg-[#FFF0EB] hover:bg-[#FFE2D6] text-[#FF5E2B] text-xs font-bold py-2 px-4 rounded-xl transition-all shrink-0">
+              <i class="fa-regular fa-copy"></i> Copy
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Dynamic feedback Toast Notifications -->
+    <div id="toastMessage" class="absolute top-16 left-1/2 -translate-x-1/2 bg-slate-900/90 backdrop-blur text-white text-[10px] font-bold py-2.5 px-5 rounded-full shadow-lg transition-all duration-300 scale-90 opacity-0 pointer-events-none z-50 flex items-center gap-2">
+      <i class="fa-solid fa-circle-check text-emerald-400"></i>
+      <span id="toastText">Action successful</span>
+    </div>
+
+  </div>
+
+  <script>
+    // Comprehensive High-Fidelity Mock Database containing proper contextual information for all groups
+    const MOCK_GROUPS_DB = {
+      'Argentina Fans BD': {
+        name: 'Argentina Fans BD 🇦🇷',
+        count: '85,120 Members',
+        desc: 'The official hub for Argentina fans in Bangladesh. Celebrating football history, match analyses, and live streams.',
+        cover: 'https://images.unsplash.com/photo-1543351611-58f69d7c1781?w=600&auto=format&fit=crop&q=80',
+        avatar: 'https://images.unsplash.com/photo-1543351611-58f69d7c1781?w=150&auto=format&fit=crop&q=80',
+        about: [
+          { q: 'What is the purpose of this group?', a: 'To connect all Argentine Football fans across Bangladesh and celebrate international match moments together.' },
+          { q: 'Community Rule #1', a: 'No toxic comments or bashing rival squads (Brazil, France etc.). Pure football discussions only.' },
+          { q: 'Founded Year', a: 'July 14, 2014 — After the legendary World Cup run.' }
+        ],
+        members: [
+          { name: 'Tariq Jamil', role: 'Founder & Admin', isAdmin: true, isFriend: false, avatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=120&fit=crop&q=80' },
+          { name: 'Fatema Tuz Zohra', role: 'Moderator', isAdmin: true, isFriend: false, avatar: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=120&fit=crop&q=80' },
+          { name: 'Nabila Rahman', role: 'Active Fan', isAdmin: false, isFriend: true, avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=120&fit=crop&q=80' },
+          { name: 'Kazi Tanvir', role: 'Premium Member', isAdmin: false, isFriend: true, avatar: 'https://images.unsplash.com/photo-1519345182560-3f2917c472ef?w=120&fit=crop&q=80' },
+          { name: 'Sajid Al Hasan', role: 'New Member', isAdmin: false, isFriend: false, avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=120&fit=crop&q=80' },
+          { name: 'Rahat Chowdhury', role: 'Superfan', isAdmin: false, isFriend: false, avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=120&fit=crop&q=80' }
+        ],
+        polls: [
+          {
+            id: 'arg-poll-1',
+            question: "Will Lionel Messi secure yet another historic Copa America title? Vote below! 🏆",
+            options: [
+              { text: 'Yes, without a doubt! 🐐', percent: 78 },
+              { text: 'No, other teams are rising fast', percent: 22 }
+            ],
+            votes: 1420
+          },
+          {
+            id: 'arg-poll-2',
+            question: "Who was the best young talent for Argentina recently?",
+            options: [
+              { text: 'Enzo Fernandez ⚡', percent: 55 },
+              { text: 'Alejandro Garnacho 🚀', percent: 45 }
+            ],
+            votes: 932
+          }
+        ],
+        feed: [
+          {
+            author: 'Jordan Blake',
+            avatar: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=150&auto=format&fit=crop&q=80',
+            time: '2 hours ago',
+            text: 'Messi hat-trick fires holders Argentina to win over Algeria at World Cup! Truly magical performance by the goat.',
+            image: 'https://images.unsplash.com/photo-1508098682722-e99c43a406b2?w=500&auto=format&fit=crop&q=80',
+            likes: '1.2k',
+            comments: '88 Comments'
+          }
+        ],
+        mods: [
+          { name: 'Tariq Jamil', role: 'Founder & Head Admin', avatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=120&fit=crop&q=80' },
+          { name: 'Fatema Tuz Zohra', role: 'Chief Moderator', avatar: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=120&fit=crop&q=80' }
+        ],
+        videos: [
+          { title: 'Argentina National Anthem in Dhaka Stadium! 🏟️', views: '254k views', duration: '03:15', cover: 'https://images.unsplash.com/photo-1518091043644-c1d4457512c6?w=300&fit=crop&q=80' },
+          { title: 'Messi Magic compilation vs Brazil', views: '88k views', duration: '06:40', cover: 'https://images.unsplash.com/photo-1508098682722-e99c43a406b2?w=300&fit=crop&q=80' }
+        ],
+        events: [
+          { title: 'World Cup Qualifier Watch Party! 📺', time: 'July 15, 2026 at 8:00 PM', loc: 'Dhanmondi Club Cafe, Dhaka', users: '420 Going', cover: 'https://images.unsplash.com/photo-1543351611-58f69d7c1781?w=500&auto=format&fit=crop&q=80', category: 'Live Match' },
+          { title: 'Dhaka Argentina Fans Friendly Match ⚽', time: 'August 12, 2026 at 4:30 PM', loc: 'Abahani Playground, Dhanmondi', users: '110 Going', cover: 'https://images.unsplash.com/photo-1508098682722-e99c43a406b2?w=500&auto=format&fit=crop&q=80', category: 'Match Day' }
+        ]
+      },
+      'Tech BD': {
+        name: 'Tech BD',
+        count: '24,520 Members',
+        desc: 'Technology, Startups, & Next-Gen engineering Bangladeshi community.',
+        cover: 'https://images.unsplash.com/photo-1531403009284-440f080d1e12?w=600&auto=format&fit=crop&q=80',
+        avatar: 'https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?w=150&auto=format&fit=crop&q=80',
+        about: [
+          { q: 'What is Tech BD?', a: 'Bangladesh\'s premier technology and development knowledge sharing platform.' },
+          { q: 'Community Rule #1', a: 'No spamming or sales pitch without moderator approval. Strictly tech discussions.' }
+        ],
+        members: [
+          { name: 'Asif Rahman', role: 'Tech Lead / Admin', isAdmin: true, isFriend: false, avatar: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=120&fit=crop&q=80' },
+          { name: 'Suhana Haque', role: 'UX Lead', isAdmin: false, isFriend: true, avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=120&fit=crop&q=80' },
+          { name: 'Imran Chowdhury', role: 'AI Engineer', isAdmin: false, isFriend: false, avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=120&fit=crop&q=80' }
+        ],
+        polls: [
+          {
+            id: 'tech-poll-1',
+            question: "Which framework is dominating your workspace in 2026?",
+            options: [
+              { text: 'React & Next.js 🚀', percent: 64 },
+              { text: 'Svelte / Vue / Angular', percent: 36 }
+            ],
+            votes: 1120
+          }
+        ],
+        feed: [
+          {
+            author: 'Elizabeth Oleson',
+            avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80',
+            time: '10 mins ago',
+            text: 'Designing our micro-interactions for the new evinie workspace model. Should we shift the main post CTA button to a floating deck action?',
+            image: 'https://images.unsplash.com/photo-1531403009284-440f080d1e12?w=500&auto=format&fit=crop&q=80',
+            likes: '340',
+            comments: '12 Comments'
+          }
+        ],
+        mods: [
+          { name: 'Asif Rahman', role: 'Tech Lead / Admin', avatar: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=120&fit=crop&q=80' }
+        ],
+        videos: [
+          { title: 'Next.js 16 - New Features Walkthrough!', views: '12k views', duration: '14:20', cover: 'https://images.unsplash.com/photo-1531403009284-440f080d1e12?w=300&fit=crop&q=80' }
+        ],
+        events: [
+          { title: 'Dhaka Tech Meetup 2026 💻', time: 'July 20, 2026 at 6:30 PM', loc: 'Gulshan Innovation Center, Dhaka', users: '350 Going', cover: 'https://images.unsplash.com/photo-1515187029135-18ee286d815b?w=500&auto=format&fit=crop&q=80', category: 'Tech Conf' }
+        ]
+      },
+      'Dev Hub': {
+        name: 'Dev Hub',
+        count: '12,300 Members',
+        desc: 'Dev Hub Bangladesh connects programmers, developers, and computer scientists together to share coding solutions.',
+        cover: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=600&auto=format&fit=crop&q=80',
+        avatar: 'https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=150&auto=format&fit=crop&q=80',
+        about: [
+          { q: 'Who is this group for?', a: 'All software developers, testers, and computer enthusiasts in Bangladesh.' },
+          { q: 'Can I post job circulars?', a: 'Yes, but please use the #hiring tag and specify salaries transparently.' }
+        ],
+        members: [
+          { name: 'Fahim Morshed', role: 'Lead Admin & Architect', isAdmin: true, isFriend: false, avatar: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=120&fit=crop&q=80' },
+          { name: 'Tasnim Alam', role: 'Senior Dev', isAdmin: false, isFriend: true, avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=120&fit=crop&q=80' },
+          { name: 'Nafis Sadik', role: 'Fullstack Dev', isAdmin: false, isFriend: false, avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=120&fit=crop&q=80' }
+        ],
+        polls: [
+          {
+            id: 'dev-poll-1',
+            question: "Are you switching to Neovim or keeping VS Code in 2026?",
+            options: [
+              { text: 'VS Code is King 👑', percent: 68 },
+              { text: 'Neovim with customized lua config 🚀', percent: 32 }
+            ],
+            votes: 450
+          }
+        ],
+        feed: [
+          {
+            author: 'Tasnim Alam',
+            avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80',
+            time: 'Yesterday',
+            text: 'Just solved an insane performance bottleneck by migrating our micro-services communication to gRPC. Highly recommend testing it out!',
+            image: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=500&auto=format&fit=crop&q=80',
+            likes: '145',
+            comments: '32 Comments'
+          }
+        ],
+        mods: [
+          { name: 'Fahim Morshed', role: 'Lead Admin', avatar: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=120&fit=crop&q=80' }
+        ],
+        videos: [
+          { title: 'Rust vs Go: Speed Test & API Benchmarks ⚡', views: '2k views', duration: '18:10', cover: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=300&fit=crop&q=80' }
+        ],
+        events: [
+          { title: 'Leetcode Speedrun & Algorithm Contest', time: 'July 29, 2026 at 9:00 PM', loc: 'Online (Discord Live)', users: '89 Going', cover: 'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=500&auto=format&fit=crop&q=80', category: 'Hackathon' }
+        ]
+      },
+      'Gamer Spot': {
+        name: 'Gamer Spot',
+        count: '18,200 Members',
+        desc: 'Gamer Spot: Ultimate Gaming Hub Bangladesh. Tournaments, hardware reviews, and LFG rooms.',
+        cover: 'https://images.unsplash.com/photo-1538481199705-c710c4e965fc?w=600&auto=format&fit=crop&q=80',
+        avatar: 'https://images.unsplash.com/photo-1511512578047-dfb367046420?w=150&auto=format&fit=crop&q=80',
+        about: [
+          { q: 'Is toxicity allowed?', a: 'Strictly zero tolerance for toxic matchmaking behavior or abuse.' },
+          { q: 'How can I register my squad for tournaments?', a: 'Check the Events tab for registered links before the deadline.' }
+        ],
+        members: [
+          { name: 'Sabbir Ahmed', role: 'Host & Admin', isAdmin: true, isFriend: false, avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=120&fit=crop&q=80' },
+          { name: 'Arafat Rahman', role: 'VALORANT Competitive', isAdmin: false, isFriend: true, avatar: 'https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=120&fit=crop&q=80' },
+          { name: 'Meghla Roy', role: 'Co-Host', isAdmin: true, isFriend: false, avatar: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?w=120&fit=crop&q=80' }
+        ],
+        polls: [
+          {
+            id: 'game-poll-1',
+            question: "Which multiplayer map is the most legendary of all time?",
+            options: [
+              { text: 'De_dust2 (CS:GO) 🔫', percent: 72 },
+              { text: 'Bind (VALORANT)', percent: 28 }
+            ],
+            votes: 980
+          }
+        ],
+        feed: [
+          {
+            author: 'Arafat Rahman',
+            avatar: 'https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=150&auto=format&fit=crop&q=80',
+            time: '5 hours ago',
+            text: 'Completed my ultimate white-out gaming rig! RTX 5080 is performing absolutely insane at 4K. Let me know if you need part suggestions!',
+            image: 'https://images.unsplash.com/photo-1538481199705-c710c4e965fc?w=500&auto=format&fit=crop&q=80',
+            likes: '512',
+            comments: '120 Comments'
+          }
+        ],
+        mods: [
+          { name: 'Sabbir Ahmed', role: 'Staff Head', avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=120&fit=crop&q=80' },
+          { name: 'Meghla Roy', role: 'Event Mod', avatar: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?w=120&fit=crop&q=80' }
+        ],
+        videos: [
+          { title: 'Valorant Tournament Banani LAN Grand Finale!', views: '15k views', duration: '24:15', cover: 'https://images.unsplash.com/photo-1538481199705-c710c4e965fc?w=300&fit=crop&q=80' }
+        ],
+        events: [
+          { title: 'VALORANT Banani LAN Showdown', time: 'August 1, 2026 at 3:00 PM', loc: 'Waffle Ground, Banani', users: '240 Going', cover: 'https://images.unsplash.com/photo-1542751371-adc38448a05e?w=500&auto=format&fit=crop&q=80', category: 'Tournament' }
+        ]
+      },
+      'Dhaka Tech Hub': {
+        name: 'Dhaka Tech Hub',
+        count: '12,800 Members',
+        desc: 'The ultimate technology workspace and meetup channel for innovators in Dhaka.',
+        cover: 'https://images.unsplash.com/photo-1557683316-973673baf926?w=600&auto=format&fit=crop&q=80',
+        avatar: 'https://placehold.co/150x150/FF5E2B/ffffff?text=DH',
+        about: [
+          { q: 'What is Dhaka Tech Hub?', a: 'A collaborative workspace for founders, creators, and engineers located in Dhaka.' }
+        ],
+        members: [
+          { name: 'Jordan Blake', role: 'Founder & Investor', isAdmin: true, isFriend: false, avatar: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=150&auto=format&fit=crop&q=80' },
+          { name: 'Rashedul Bari', role: 'Startup CTO', isAdmin: false, isFriend: true, avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=120&fit=crop&q=80' }
+        ],
+        polls: [
+          {
+            id: 'dh-poll-1',
+            question: "What is your main hub for remote work in Dhaka?",
+            options: [
+              { text: 'Gulshan / Banani Cafes ☕', percent: 60 },
+              { text: 'Dhanmondi Co-working spaces', percent: 40 }
+            ],
+            votes: 310
+          }
+        ],
+        feed: [
+          {
+            author: 'Jordan Blake',
+            avatar: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=150&auto=format&fit=crop&q=80',
+            time: '1 day ago',
+            text: 'Just funded three brilliant student startups today! Looking forward to launching our incubation pipeline in Karwan Bazar next month.',
+            image: 'https://images.unsplash.com/photo-1557683316-973673baf926?w=500&auto=format&fit=crop&q=80',
+            likes: '890',
+            comments: '45 Comments'
+          }
+        ],
+        mods: [
+          { name: 'Jordan Blake', role: 'Owner', avatar: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=150&auto=format&fit=crop&q=80' }
+        ],
+        videos: [],
+        events: [
+          { title: 'Dhaka Founder Breakfast Meeting 🥐', time: 'July 18, 2026 at 9:00 AM', loc: 'The Westin Dhaka, Gulshan', users: '50 Going', cover: 'https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=500&auto=format&fit=crop&q=80', category: 'Networking' }
+        ]
+      },
+      'UI/UX Bangladesh': {
+        name: 'UI/UX Bangladesh',
+        count: '4,300 Members',
+        desc: 'A design-first workspace community for UI designers and developers in Bangladesh.',
+        cover: 'https://images.unsplash.com/photo-1581291518633-83b4ebd1d83e?w=600&auto=format&fit=crop&q=80',
+        avatar: 'https://placehold.co/150x150/FF5E2B/ffffff?text=UI',
+        about: [
+          { q: 'Who can join?', a: 'Any UI, UX, Product, or Graphic Designer in Bangladesh!' }
+        ],
+        members: [
+          { name: 'Nabila Rahman', role: 'Product Lead', isAdmin: true, isFriend: true, avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=120&fit=crop&q=80' }
+        ],
+        polls: [],
+        feed: [],
+        mods: [
+          { name: 'Nabila Rahman', role: 'Owner', avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=120&fit=crop&q=80' }
+        ],
+        videos: [],
+        events: [
+          { title: 'Dhaka UI/UX Portfolio Critique 🎨', time: 'August 5, 2026 at 5:00 PM', loc: 'Dhanmondi Co-working, Dhaka', users: '120 Going', cover: 'https://images.unsplash.com/photo-1581291518633-83b4ebd1d83e?w=500&auto=format&fit=crop&q=80', category: 'Portfolio' }
+        ]
+      }
+    };
+
+    // Mock Friends list available specifically for invitations (Matching evinie Home.jpg profiles)
+    const MOCK_INVITABLE_FRIENDS = [
+      { name: 'Emma Cart', username: '@emmacart', avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=120&fit=crop&q=80', isInvited: false },
+      { name: 'Bessie Cooper', username: '@bessiecooper', avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=120&fit=crop&q=80', isInvited: false },
+      { name: 'Ronald Richards', username: '@ronaldrichards', avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=120&fit=crop&q=80', isInvited: false },
+      { name: 'Alex Hales', username: '@alexhales', avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=120&fit=crop&q=80', isInvited: false },
+      { name: 'Elizabeth Oleson', username: '@elizabetholeson', avatar: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=120&fit=crop&q=80', isInvited: false },
+      { name: 'Robert Hales', username: '@roberthales', avatar: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=120&fit=crop&q=80', isInvited: false }
+    ];
+
+    let activeGroupName = 'Argentina Fans BD';
+
+    // Open the premium Invite modal bottom drawer
+    function openInviteModal() {
+      const modal = document.getElementById('inviteModal');
+      const content = document.getElementById('inviteModalContent');
+      const textGroupName = document.getElementById('inviteGroupName');
+
+      // Update current group name in modal header context
+      const db = MOCK_GROUPS_DB[activeGroupName] || { name: activeGroupName };
+      textGroupName.innerText = db.name;
+
+      // Reset friends invited status for fresh feel or keep state
+      document.getElementById('inviteFriendsSearch').value = '';
+      renderInviteFriends();
+
+      modal.classList.remove('pointer-events-none', 'opacity-0');
+      modal.classList.add('opacity-100');
+      content.classList.remove('translate-y-full');
+      content.classList.add('translate-y-0');
+    }
+
+    // Close the invite modal bottom drawer
+    function closeInviteModal() {
+      const modal = document.getElementById('inviteModal');
+      const content = document.getElementById('inviteModalContent');
+      content.classList.add('translate-y-full');
+      content.classList.remove('translate-y-0');
+      setTimeout(() => {
+        modal.classList.add('pointer-events-none', 'opacity-0');
+        modal.classList.remove('opacity-100');
+      }, 300);
+    }
+
+    // Render invitable friends list dynamically
+    function renderInviteFriends() {
+      const container = document.getElementById('inviteFriendsContainer');
+      container.innerHTML = '';
+
+      MOCK_INVITABLE_FRIENDS.forEach((friend, idx) => {
+        const inviteBtnStyle = friend.isInvited 
+          ? "bg-emerald-500 text-white" 
+          : "bg-[#FF5E2B] hover:bg-[#e04f20] text-white";
+        const inviteBtnText = friend.isInvited 
+          ? `<i class="fa-solid fa-check"></i> Invited` 
+          : "Invite";
+
+        container.innerHTML += `
+          <div class="invite-friend-row flex items-center justify-between p-2 hover:bg-slate-50/80 rounded-2xl transition-all border border-transparent hover:border-slate-100" data-name="${friend.name}">
+            <div class="flex items-center gap-3">
+              <img src="${friend.avatar}" class="w-10 h-10 rounded-xl object-cover border border-slate-100 shadow-sm">
+              <div>
+                <h4 class="text-xs font-bold text-slate-800">${friend.name}</h4>
+                <span class="text-[9px] text-slate-400 block mt-0.5">${friend.username}</span>
+              </div>
+            </div>
+            <button onclick="sendCommunityInvite(this, ${idx})" class="text-[10px] font-bold py-2 px-4 rounded-xl transition-all shadow-sm ${inviteBtnStyle}">
+              ${inviteBtnText}
+            </button>
+          </div>
+        `;
+      });
+    }
+
+    // Filter friends local search live
+    function filterInviteFriends() {
+      const query = document.getElementById('inviteFriendsSearch').value.toLowerCase();
+      const rows = document.querySelectorAll('.invite-friend-row');
+      
+      rows.forEach(row => {
+        const name = row.getAttribute('data-name') || '';
+        if (name.toLowerCase().includes(query)) {
+          row.classList.remove('hidden');
+        } else {
+          row.classList.add('hidden');
+        }
+      });
+    }
+
+    // Send dynamic community invite animation & state update
+    function sendCommunityInvite(btn, friendIndex) {
+      const friend = MOCK_INVITABLE_FRIENDS[friendIndex];
+      if (!friend) return;
+
+      if (!friend.isInvited) {
+        friend.isInvited = true;
+        btn.className = "text-[10px] font-bold py-2 px-4 rounded-xl transition-all shadow-sm bg-emerald-500 text-white";
+        btn.innerHTML = `<i class="fa-solid fa-check"></i> Invited`;
+        showNotification(`Invitation sent to ${friend.name}!`);
+      } else {
+        friend.isInvited = false;
+        btn.className = "text-[10px] font-bold py-2 px-4 rounded-xl transition-all shadow-sm bg-[#FF5E2B] hover:bg-[#e04f20] text-white";
+        btn.innerHTML = "Invite";
+        showNotification(`Invitation cancelled for ${friend.name}.`, false);
+      }
+    }
+
+    // Copy Invite link via clipboard simulation
+    function copyInviteLink() {
+      const dummyText = "https://evinie.com/join/invite-code-78ad45f";
+      const tempInput = document.createElement("input");
+      tempInput.value = dummyText;
+      document.body.appendChild(tempInput);
+      tempInput.select();
+      document.execCommand("copy");
+      document.body.removeChild(tempInput);
+      
+      showNotification("Invite link copied to clipboard!");
+    }
+
+    // Toast Notification helper
+    function showNotification(text, isSuccess = true) {
+      const toast = document.getElementById('toastMessage');
+      const toastText = document.getElementById('toastText');
+      toastText.innerText = text;
+      
+      const icon = toast.querySelector('i');
+      if (isSuccess) {
+        icon.className = "fa-solid fa-circle-check text-emerald-400";
+      } else {
+        icon.className = "fa-solid fa-circle-exclamation text-[#FF5E2B]";
+      }
+
+      toast.classList.remove('scale-90', 'opacity-0', 'pointer-events-none');
+      toast.classList.add('scale-100', 'opacity-100');
+      
+      setTimeout(() => {
+        toast.classList.add('scale-90', 'opacity-0', 'pointer-events-none');
+        toast.classList.remove('scale-100', 'opacity-100');
+      }, 3000);
+    }
+
+    // Dynamic Segmented Tab Controller
+    function switchTab(tabId, buttonElement) {
+      const sections = document.querySelectorAll('.tab-section');
+      sections.forEach(sec => sec.classList.add('hidden'));
+
+      let targetId = 'tabContentJoined';
+      if (tabId === 'my-groups') {
+        targetId = 'tabContentMyGroups';
+      } else if (tabId === 'explore') {
+        targetId = 'tabContentExplore';
+      }
+
+      const targetSec = document.getElementById(targetId);
+      if (targetSec) {
+        targetSec.classList.remove('hidden');
+      }
+
+      const buttons = buttonElement.parentNode.querySelectorAll('button');
+      buttons.forEach(btn => {
+        btn.classList.remove('text-slate-900');
+        btn.classList.add('text-slate-500');
+      });
+      buttonElement.classList.add('text-slate-900');
+      buttonElement.classList.remove('text-slate-500');
+
+      const indicator = document.getElementById('tabIndicator');
+      if (indicator) {
+        if (tabId === 'joined') {
+          indicator.style.left = '4px';
+          indicator.style.width = '31%';
+        } else if (tabId === 'my-groups') {
+          indicator.style.left = '34.5%';
+          indicator.style.width = '31%';
+        } else if (tabId === 'explore') {
+          indicator.style.left = '65.5%';
+          indicator.style.width = '31%';
+        }
+      }
+    }
+
+    // Toggle Collapsible Search Input Box
+    function toggleSearch() {
+      const tray = document.getElementById('searchTray');
+      if (tray.classList.contains('max-h-0')) {
+        tray.classList.remove('max-h-0');
+        tray.classList.add('max-h-16', 'py-1');
+        document.getElementById('groupSearchInput').focus();
+      } else {
+        tray.classList.add('max-h-0');
+        tray.classList.remove('max-h-16', 'py-1');
+      }
+    }
+
+    // Live Local Search Filters
+    function filterGroups() {
+      const query = document.getElementById('groupSearchInput').value.toLowerCase();
+      const cards = document.querySelectorAll('.group-card');
+      
+      cards.forEach(card => {
+        const nameAttr = card.getAttribute('data-name') || '';
+        if (nameAttr.toLowerCase().includes(query)) {
+          card.classList.remove('hidden');
+        } else {
+          card.classList.add('hidden');
+        }
+      });
+    }
+
+    // Interactive modal presentation transitions
+    function triggerCreateModal() {
+      const modal = document.getElementById('createGroupModal');
+      const content = document.getElementById('createGroupModalContent');
+      modal.classList.remove('pointer-events-none', 'opacity-0');
+      modal.classList.add('opacity-100');
+      content.classList.remove('translate-y-full');
+      content.classList.add('translate-y-0');
+    }
+
+    function closeCreateModal() {
+      const modal = document.getElementById('createGroupModal');
+      const content = document.getElementById('createGroupModalContent');
+      content.classList.add('translate-y-full');
+      content.classList.remove('translate-y-0');
+      setTimeout(() => {
+        modal.classList.add('pointer-events-none', 'opacity-0');
+        modal.classList.remove('opacity-100');
+      }, 300);
+    }
+
+    // Handle Privacy selections on Group Creation form
+    function selectPrivacy(type, element) {
+      document.querySelectorAll('.privacy-btn').forEach(btn => {
+        btn.classList.remove('border-[#FF5E2B]', 'bg-[#FFF0EB]/40');
+        btn.classList.add('border-slate-200');
+        const boldText = btn.querySelector('.font-bold');
+        if (boldText) {
+          boldText.classList.remove('text-[#FF5E2B]');
+          boldText.classList.add('text-slate-700');
+        }
+      });
+
+      element.classList.add('border-[#FF5E2B]', 'bg-[#FFF0EB]/40');
+      element.classList.remove('border-slate-200');
+      
+      const boldText = element.querySelector('.font-bold');
+      if (boldText) {
+        boldText.classList.add('text-[#FF5E2B]');
+        boldText.classList.remove('text-slate-700');
+      }
+
+      document.getElementById('groupPrivacy').value = type;
+    }
+
+    // Dynamically insert new group to layout lists
+    function createNewGroup(e) {
+      e.preventDefault();
+      const name = document.getElementById('newGroupName').value;
+      const desc = document.getElementById('newGroupDesc').value;
+      const privacy = document.getElementById('groupPrivacy').value;
+
+      // Add to dynamic database
+      MOCK_GROUPS_DB[name] = {
+        name: name,
+        count: '1 Member',
+        desc: desc,
+        cover: 'https://images.unsplash.com/photo-1557683316-973673baf926?w=600&auto=format&fit=crop&q=80',
+        avatar: `https://placehold.co/150x150/FF5E2B/ffffff?text=${name.substring(0, 2).toUpperCase()}`,
+        about: [
+          { q: 'Purpose', a: desc }
+        ],
+        members: [
+          { name: 'Jordan Blake', role: 'Founder', avatar: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=150&auto=format&fit=crop&q=80' }
+        ],
+        polls: [],
+        feed: [],
+        mods: [
+          { name: 'Jordan Blake', role: 'Owner', avatar: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=150&auto=format&fit=crop&q=80' }
+        ],
+        videos: [],
+        events: []
+      };
+
+      const myGroupsList = document.getElementById('myGroupsList');
+      const initials = name.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase() || 'GP';
+
+      const newCardMy = document.createElement('div');
+      newCardMy.className = "bg-white rounded-2xl p-3 shadow-sm border border-slate-100 flex items-center justify-between group-card hover:border-slate-200 transform scale-95 opacity-0 transition-all duration-300";
+      newCardMy.setAttribute('data-name', name);
+      newCardMy.innerHTML = `
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 bg-[#FFF0EB] rounded-xl flex items-center justify-center font-bold text-[#FF5E2B] text-xs">
+            ${initials}
+          </div>
+          <div>
+            <h3 class="font-bold text-slate-900 text-xs">${name}</h3>
+            <span class="text-[9px] text-slate-400">1 Member • Owner</span>
+          </div>
+        </div>
+        <button onclick="enterGroup('${name}')" class="text-xs font-semibold text-slate-700 bg-slate-100 hover:bg-slate-200 px-3 py-1.5 rounded-lg transition-all shrink-0">
+          Visit
+        </button>
+      `;
+      myGroupsList.prepend(newCardMy);
+
+      const joinedList = document.getElementById('tabContentJoined');
+      const newCardJoined = document.createElement('div');
+      newCardJoined.className = "bg-white rounded-2xl p-3 shadow-sm border border-slate-100 group-card hover:border-slate-200 transform scale-95 opacity-0 transition-all duration-300";
+      newCardJoined.setAttribute('data-name', name);
+      newCardJoined.innerHTML = `
+        <div class="flex items-center justify-between gap-3">
+          <div class="flex items-center gap-3 min-w-0">
+            <div class="w-11 h-11 bg-[#FFF0EB] rounded-xl flex items-center justify-center font-bold text-[#FF5E2B] text-xs shrink-0">
+              ${initials}
+            </div>
+            <div class="min-w-0">
+              <h3 class="font-bold text-slate-900 text-xs truncate">${name}</h3>
+              <p class="text-[10px] text-slate-400 mt-0.5">1 Member</p>
+            </div>
+          </div>
+          <button onclick="enterGroup('${name}')" class="text-xs font-bold text-[#FF5E2B] bg-[#FFF0EB] hover:bg-[#FFE2D6] px-4 py-2 rounded-xl transition-all shrink-0">
+            Visit
+          </button>
+        </div>
+      `;
+      joinedList.insertBefore(newCardJoined, joinedList.children[1]);
+
+      closeCreateModal();
+      const myGroupsTabBtn = document.querySelector('button[onclick*="my-groups"]');
+      switchTab('my-groups', myGroupsTabBtn);
+
+      setTimeout(() => {
+        newCardMy.classList.remove('scale-95', 'opacity-0');
+        newCardMy.classList.add('scale-100', 'opacity-100');
+        newCardJoined.classList.remove('scale-95', 'opacity-0');
+        newCardJoined.classList.add('scale-100', 'opacity-100');
+      }, 300);
+
+      document.getElementById('createGroupForm').reset();
+      showNotification(`"${name}" created successfully!`);
+    }
+
+    // Toggle membership action inside recommended groups
+    function toggleJoinBtn(btn) {
+      if (btn.innerText === 'Join') {
+        btn.innerText = 'Joined';
+        btn.classList.remove('bg-[#FFF0EB]', 'text-[#FF5E2B]');
+        btn.classList.add('bg-slate-100', 'text-slate-600');
+        showNotification("You joined this community!");
+      } else {
+        btn.innerText = 'Join';
+        btn.classList.add('bg-[#FFF0EB]', 'text-[#FF5E2B]');
+        btn.classList.remove('bg-slate-100', 'text-slate-600');
+        showNotification("You left this community.", false);
+      }
+    }
+
+    // Toggle Workspace Join Button
+    function toggleWorkspaceJoin(btn) {
+      const span = btn.querySelector('span');
+      const icon = btn.querySelector('i');
+      if (span.innerText === 'Joined') {
+        span.innerText = 'Join Group';
+        btn.className = "flex-1 bg-[#FF5E2B] hover:bg-[#e04f20] text-white py-2.5 px-3 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-1.5 shadow-sm";
+        icon.className = "fa-solid fa-plus";
+        showNotification("Left the workspace.", false);
+      } else {
+        span.innerText = 'Joined';
+        btn.className = "flex-1 bg-emerald-500 hover:bg-emerald-600 text-white py-2.5 px-3 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-1.5 shadow-sm";
+        icon.className = "fa-solid fa-circle-check";
+        showNotification("Successfully joined the workspace!");
+      }
+    }
+
+    // Populate dynamic group layout data from mock DB
+    function populateGroupSections(groupKey) {
+      const db = MOCK_GROUPS_DB[groupKey] || MOCK_GROUPS_DB['Argentina Fans BD'];
+      activeGroupName = groupKey;
+
+      // Discussion Feed Populating
+      const feedContainer = document.getElementById('wsSubTabFeed');
+      feedContainer.innerHTML = '';
+      if (db.feed.length === 0 && db.polls.length === 0) {
+        feedContainer.innerHTML = `
+          <div class="bg-white rounded-2xl p-6 text-center border border-slate-100">
+            <div class="w-12 h-12 bg-slate-50 text-slate-400 rounded-full flex items-center justify-center mx-auto mb-3">
+              <i class="fa-regular fa-comments text-lg"></i>
+            </div>
+            <h4 class="font-bold text-slate-800 text-xs">No updates yet</h4>
+            <p class="text-[10px] text-slate-400 mt-1">Be the first to share something with this community.</p>
+          </div>
+        `;
+      } else {
+        // Prepend Polls to Discussion tab
+        db.polls.forEach(poll => {
+          const pollCard = document.createElement('div');
+          pollCard.className = "bg-white rounded-2xl p-4 shadow-sm border border-slate-100";
+          let choicesHtml = '';
+          poll.options.forEach((opt, idx) => {
+            choicesHtml += `
+              <div onclick="vote(this, ${opt.percent})" class="relative border border-slate-100 hover:border-[#FF5E2B]/50 p-3 rounded-xl cursor-pointer transition-all overflow-hidden flex justify-between items-center bg-slate-50">
+                <div class="absolute left-0 top-0 bottom-0 bg-[#FF5E2B]/10 transition-all duration-500" style="width: 0%"></div>
+                <span class="relative z-10 text-xs font-semibold text-slate-800">${opt.text}</span>
+                <span class="relative z-10 text-xs font-bold text-[#FF5E2B] hidden percentage">${opt.percent}%</span>
+              </div>
+            `;
+          });
+
+          pollCard.innerHTML = `
+            <div class="flex items-center justify-between mb-3">
+              <div class="flex items-center gap-2.5">
+                <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=150&auto=format&fit=crop&q=80" class="w-9 h-9 rounded-full object-cover">
+                <div>
+                  <span class="font-bold text-slate-900 text-xs block">Jordan Blake</span>
+                  <span class="text-[9px] text-slate-400">1 hour ago • Active Poll</span>
+                </div>
+              </div>
+            </div>
+            <h3 class="text-xs font-bold text-slate-800 leading-snug mb-3">${poll.question}</h3>
+            <div class="space-y-2 mb-3">${choicesHtml}</div>
+            <div class="text-[9px] text-slate-400 flex justify-between items-center pt-1">
+              <span>Total Votes: ${poll.votes}</span>
+              <span class="text-[#FF5E2B] font-semibold">Active</span>
+            </div>
+          `;
+          feedContainer.appendChild(pollCard);
+        });
+
+        // Add regular posts to Discussion tab
+        db.feed.forEach(post => {
+          const postCard = document.createElement('div');
+          postCard.className = "bg-white rounded-2xl p-4 shadow-sm border border-slate-100";
+          postCard.innerHTML = `
+            <div class="flex items-center justify-between mb-3">
+              <div class="flex items-center gap-2.5">
+                <img src="${post.avatar}" class="w-9 h-9 rounded-full object-cover">
+                <div>
+                  <span class="font-bold text-slate-900 text-xs block">${post.author}</span>
+                  <span class="text-[9px] text-slate-400">${post.time}</span>
+                </div>
+              </div>
+            </div>
+            <p class="text-xs text-slate-700 leading-relaxed mb-3">${post.text}</p>
+            ${post.image ? `<div class="relative rounded-xl overflow-hidden mb-3"><img src="${post.image}" class="w-full h-44 object-cover"></div>` : ''}
+            <div class="flex items-center justify-between pt-3 border-t border-slate-50 text-[11px] text-slate-400">
+              <button onclick="likePost(this)" class="flex items-center gap-1 hover:text-[#FF5E2B] transition-colors"><i class="fa-regular fa-heart"></i> <span>${post.likes}</span></button>
+              <button class="flex items-center gap-1 hover:text-[#FF5E2B] transition-colors"><i class="fa-regular fa-comment"></i> ${post.comments}</button>
+            </div>
+          `;
+          feedContainer.appendChild(postCard);
+        });
+      }
+
+      // About Sub-tab Populating (Guidelines Accordion)
+      const aboutContainer = document.getElementById('aboutContentArea');
+      aboutContainer.innerHTML = '';
+      db.about.forEach((rule, idx) => {
+        aboutContainer.innerHTML += `
+          <div class="border border-slate-100 rounded-xl overflow-hidden">
+            <button onclick="toggleAccordion(this)" class="w-full text-left bg-slate-50 px-4 py-3 flex justify-between items-center text-xs font-bold text-slate-800">
+              <span>${rule.q}</span>
+              <i class="fa-solid fa-chevron-down text-[9px] transition-transform duration-200"></i>
+            </button>
+            <div class="max-h-0 overflow-hidden transition-all duration-300 bg-white">
+              <p class="p-4 text-xs text-slate-500 leading-relaxed">${rule.a}</p>
+            </div>
+          </div>
+        `;
+      });
+
+      // Members Sub-tab Populating (Admin first, then Friends, then Others)
+      document.getElementById('membersTotalText').innerText = db.count;
+      const membersContainer = document.getElementById('membersContainer');
+      membersContainer.innerHTML = '';
+      
+      if (!db.members || db.members.length === 0) {
+        membersContainer.innerHTML = '<p class="text-[10px] text-slate-400 text-center py-4">Members are hidden due to privacy settings.</p>';
+      } else {
+        // Dynamic sorting: Admins first -> Friends -> Others
+        const sortedMembers = [...db.members].sort((a, b) => {
+          const aAdmin = a.isAdmin || a.role.toLowerCase().includes('admin') || a.role.toLowerCase().includes('moderator');
+          const bAdmin = b.isAdmin || b.role.toLowerCase().includes('admin') || b.role.toLowerCase().includes('moderator');
+          if (aAdmin && !bAdmin) return -1;
+          if (!aAdmin && bAdmin) return 1;
+
+          if (a.isFriend && !b.isFriend) return -1;
+          if (!a.isFriend && b.isFriend) return 1;
+
+          return 0;
+        });
+
+        sortedMembers.forEach(member => {
+          const isMemberAdmin = member.isAdmin || member.role.toLowerCase().includes('admin') || member.role.toLowerCase().includes('moderator');
+          
+          let badgeHtml = '';
+          let actionBtnHtml = '';
+
+          if (isMemberAdmin) {
+            badgeHtml = `<span class="text-[8px] bg-red-50 text-red-600 px-2 py-0.5 rounded-md font-extrabold uppercase tracking-wide flex items-center gap-0.5"><i class="fa-solid fa-crown text-[7px]"></i> Admin</span>`;
+            actionBtnHtml = `<span class="text-[10px] font-bold text-slate-400 bg-slate-50 px-3 py-1.5 rounded-lg border border-slate-100">Staff</span>`;
+          } else if (member.isFriend) {
+            badgeHtml = `<span class="text-[8px] bg-emerald-50 text-emerald-600 px-2 py-0.5 rounded-md font-bold uppercase tracking-wide">Friend</span>`;
+            actionBtnHtml = `<button onclick="removeFriend(this, '${member.name}')" class="text-[10px] font-bold text-slate-500 bg-slate-100 hover:bg-slate-200 px-3 py-1.5 rounded-lg transition-all">Unfriend</button>`;
+          } else {
+            badgeHtml = `<span class="text-[8px] bg-slate-100 text-slate-500 px-2 py-0.5 rounded-md font-bold uppercase tracking-wide">Member</span>`;
+            actionBtnHtml = `<button onclick="sendFriendRequest(this, '${member.name}')" class="text-[10px] font-bold text-[#FF5E2B] bg-[#FFF0EB] hover:bg-[#FFE2D6] px-3 py-1.5 rounded-lg transition-all">Add Friend</button>`;
+          }
+
+          membersContainer.innerHTML += `
+            <div class="flex items-center justify-between p-2.5 hover:bg-slate-50/80 rounded-2xl transition-all border border-transparent hover:border-slate-100">
+              <div class="flex items-center gap-3">
+                <div class="relative">
+                  <img src="${member.avatar}" class="w-10 h-10 rounded-xl object-cover border border-slate-100 shadow-sm">
+                  ${member.isFriend ? `<span class="absolute -bottom-0.5 -right-0.5 w-3 h-3 bg-emerald-500 border-2 border-white rounded-full"></span>` : ''}
+                </div>
+                <div>
+                  <div class="flex items-center gap-1.5">
+                    <h4 class="text-xs font-bold text-slate-800">${member.name}</h4>
+                    ${badgeHtml}
+                  </div>
+                  <span class="text-[9px] text-slate-400 block mt-0.5">${member.role}</span>
+                </div>
+              </div>
+              <div class="shrink-0">
+                ${actionBtnHtml}
+              </div>
+            </div>
+          `;
+        });
+      }
+
+      // Polls Sub-tab Populating
+      const pollsTabContainer = document.getElementById('pollsTabContainer');
+      pollsTabContainer.innerHTML = '';
+      if (db.polls.length === 0) {
+        pollsTabContainer.innerHTML = `
+          <div class="text-center py-8">
+            <p class="text-[10px] text-slate-400">No active polls inside this group.</p>
+          </div>
+        `;
+      } else {
+        db.polls.forEach(poll => {
+          const pollCard = document.createElement('div');
+          pollCard.className = "bg-white rounded-2xl p-4 shadow-sm border border-slate-100";
+          let choicesHtml = '';
+          poll.options.forEach((opt, idx) => {
+            choicesHtml += `
+              <div onclick="vote(this, ${opt.percent})" class="relative border border-slate-100 hover:border-[#FF5E2B]/50 p-3 rounded-xl cursor-pointer transition-all overflow-hidden flex justify-between items-center bg-slate-50">
+                <div class="absolute left-0 top-0 bottom-0 bg-[#FF5E2B]/10 transition-all duration-500" style="width: 0%"></div>
+                <span class="relative z-10 text-xs font-semibold text-slate-800">${opt.text}</span>
+                <span class="relative z-10 text-xs font-bold text-[#FF5E2B] hidden percentage">${opt.percent}%</span>
+              </div>
+            `;
+          });
+
+          pollCard.innerHTML = `
+            <h3 class="text-xs font-bold text-slate-800 leading-snug mb-3">${poll.question}</h3>
+            <div class="space-y-2 mb-3">${choicesHtml}</div>
+            <div class="text-[9px] text-slate-400 flex justify-between items-center pt-1">
+              <span>Total Votes: ${poll.votes}</span>
+              <span class="text-[#FF5E2B] font-semibold">Live Booth</span>
+            </div>
+          `;
+          pollsTabContainer.appendChild(pollCard);
+        });
+      }
+
+      // Moderators Sub-tab Populating
+      const modsContainer = document.getElementById('moderatorsContainer');
+      modsContainer.innerHTML = '';
+      if (db.mods.length === 0) {
+        modsContainer.innerHTML = '<p class="text-[10px] text-slate-400 text-center py-4">Moderators can be reached out through support.</p>';
+      } else {
+        db.mods.forEach(mod => {
+          modsContainer.innerHTML += `
+            <div class="flex items-center justify-between p-2 border border-slate-100 rounded-xl">
+              <div class="flex items-center gap-2.5">
+                <img src="${mod.avatar}" class="w-9 h-9 rounded-full object-cover">
+                <div>
+                  <h4 class="text-xs font-bold text-slate-800">${mod.name}</h4>
+                  <span class="text-[9px] bg-amber-50 text-amber-600 px-2 py-0.5 rounded font-extrabold tracking-wide uppercase">${mod.role}</span>
+                </div>
+              </div>
+              <button onclick="showNotification('Opening Chat...')" class="p-2 hover:bg-slate-100 rounded-full text-slate-500 transition-colors">
+                <i class="fa-regular fa-message text-xs"></i>
+              </button>
+            </div>
+          `;
+        });
+      }
+
+      // Videos Sub-tab Populating
+      const videosContainer = document.getElementById('videosContainer');
+      videosContainer.innerHTML = '';
+      if (db.videos.length === 0) {
+        videosContainer.innerHTML = '<div class="col-span-2 py-8 text-center text-[10px] text-slate-400">No videos uploaded to this workspace.</div>';
+      } else {
+        db.videos.forEach(vid => {
+          videosContainer.innerHTML += `
+            <div onclick="showNotification('Initializing premium video player...')" class="bg-white rounded-2xl overflow-hidden border border-slate-100 shadow-sm cursor-pointer hover:shadow transition-all group">
+              <div class="relative h-24 bg-slate-100">
+                <img src="${vid.cover}" class="w-full h-full object-cover">
+                <div class="absolute inset-0 bg-black/25 flex items-center justify-center opacity-90 group-hover:bg-black/35 transition-colors">
+                  <div class="w-8 h-8 bg-white/90 rounded-full flex items-center justify-center text-[#FF5E2B] shadow">
+                    <i class="fa-solid fa-play text-[10px] translate-x-[1px]"></i>
+                  </div>
+                </div>
+                <span class="absolute bottom-1.5 right-1.5 bg-black/75 text-white text-[8px] font-extrabold px-1.5 py-0.5 rounded">${vid.duration}</span>
+              </div>
+              <div class="p-2 space-y-1">
+                <h4 class="text-[10px] font-bold text-slate-800 line-clamp-2">${vid.title}</h4>
+                <span class="text-[8px] text-slate-400 block">${vid.views}</span>
+              </div>
+            </div>
+          `;
+        });
+      }
+
+      // Events Sub-tab Populating
+      const eventsContainer = document.getElementById('eventsContainer');
+      eventsContainer.innerHTML = '';
+      if (db.events.length === 0) {
+        eventsContainer.innerHTML = '<p class="text-[10px] text-slate-400 text-center py-8">No upcoming events listed for this community.</p>';
+      } else {
+        db.events.forEach(event => {
+          const defaultCover = 'https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=500&auto=format&fit=crop&q=80';
+          const eventCover = event.cover || defaultCover;
+          const eventCategory = event.category || 'Upcoming Event';
+          
+          eventsContainer.innerHTML += `
+            <div class="bg-white rounded-2xl overflow-hidden border border-slate-100 shadow-sm hover:shadow transition-all space-y-0">
+              <!-- Event Cover Image with Elegant Overlay Badge -->
+              <div class="relative h-32 bg-slate-100">
+                <img src="${eventCover}" class="w-full h-full object-cover">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent"></div>
+                <span class="absolute top-3 left-3 bg-[#FF5E2B] text-white text-[8px] font-extrabold tracking-wider uppercase px-2.5 py-1 rounded-md shadow-sm">
+                  ${eventCategory}
+                </span>
+                <span class="absolute bottom-3 right-3 text-white text-[8px] font-extrabold bg-black/45 backdrop-blur-sm px-2.5 py-1 rounded-md">
+                  <i class="fa-regular fa-clock text-[8px]"></i> Upcoming
+                </span>
+              </div>
+              
+              <!-- Event Body Details -->
+              <div class="p-4 space-y-3">
+                <div>
+                  <h4 class="text-xs font-bold text-slate-900 leading-snug">${event.title}</h4>
+                  <p class="text-[9px] text-slate-500 mt-2 flex items-center gap-1.5 font-medium">
+                    <i class="fa-regular fa-calendar-days text-[10px] text-[#FF5E2B]"></i> ${event.time}
+                  </p>
+                  <p class="text-[9px] text-slate-400 flex items-center gap-1.5 mt-1 font-medium">
+                    <i class="fa-solid fa-location-dot text-[10px] text-slate-400"></i> ${event.loc}
+                  </p>
+                </div>
+                
+                <div class="flex items-center justify-between pt-3 border-t border-slate-50">
+                  <span class="text-[9px] text-slate-400 font-semibold">${event.users}</span>
+                  <button onclick="rsvpEvent(this)" class="bg-[#FF5E2B] hover:bg-[#e04f20] text-white text-[10px] font-bold px-4 py-1.5 rounded-lg transition-all shadow-sm">
+                    Going
+                  </button>
+                </div>
+              </div>
+            </div>
+          `;
+        });
+      }
+    }
+
+    // Like Post interaction
+    function likePost(button) {
+      const icon = button.querySelector('i');
+      const textSpan = button.querySelector('span');
+      if (icon.classList.contains('fa-regular')) {
+        icon.className = "fa-solid fa-heart text-[#FF5E2B]";
+        textSpan.innerText = "Liked";
+        showNotification("Post liked!");
+      } else {
+        icon.className = "fa-regular fa-heart";
+        textSpan.innerText = "1.2k";
+      }
+    }
+
+    // Dynamic Friend request action
+    function sendFriendRequest(btn, memberName) {
+      const db = MOCK_GROUPS_DB[activeGroupName];
+      const member = db.members.find(m => m.name === memberName);
+      if (member) {
+        member.isFriend = true; // Set friend state
+        showNotification(`${memberName} is now your friend!`);
+        populateGroupSections(activeGroupName); // Re-render triggers automatic sorted update
+      }
+    }
+
+    // Dynamic Remove friend action
+    function removeFriend(btn, memberName) {
+      const db = MOCK_GROUPS_DB[activeGroupName];
+      const member = db.members.find(m => m.name === memberName);
+      if (member) {
+        member.isFriend = false; // Revoke friend state
+        showNotification(`Removed ${memberName} from friends list.`, false);
+        populateGroupSections(activeGroupName); // Re-render triggers automatic sorted update
+      }
+    }
+
+    // RSVP Action state controller
+    function rsvpEvent(btn) {
+      if (btn.innerText === "Going") {
+        btn.innerText = "You're Going";
+        btn.className = "bg-emerald-500 text-white text-[10px] font-bold px-3 py-1.5 rounded-lg transition-all";
+        showNotification("RSVP confirmed! See you there.");
+      } else {
+        btn.innerText = "Going";
+        btn.className = "bg-[#FF5E2B] hover:bg-[#e04f20] text-white text-[10px] font-bold px-3 py-1.5 rounded-lg transition-all";
+        showNotification("RSVP cancelled.", false);
+      }
+    }
+
+    // Group Detail View Opener
+    function enterGroup(groupKey) {
+      const db = MOCK_GROUPS_DB[groupKey];
+      if (!db) return;
+
+      document.getElementById('gdHeaderName').innerText = db.name;
+      document.getElementById('gdDetailsTitle').innerText = db.name;
+      document.getElementById('gdHeaderCount').innerText = db.count;
+      document.getElementById('gdDescription').innerText = db.desc;
+      
+      document.getElementById('gdCoverImg').src = db.cover;
+      document.getElementById('gdAvatar').src = db.avatar;
+
+      // Populate elements
+      populateGroupSections(groupKey);
+
+      // Switch sub-tab to Feed discussion by default
+      const feedSubTabBtn = document.querySelector('button[onclick*="feed"]');
+      switchWorkspaceSubTab('feed', feedSubTabBtn);
+
+      // Slide in transition
+      const groupSubpage = document.getElementById('groupDetailsView');
+      groupSubpage.classList.remove('translate-x-full');
+      groupSubpage.classList.add('translate-x-0');
+    }
+
+    function exitGroup() {
+      const groupSubpage = document.getElementById('groupDetailsView');
+      groupSubpage.classList.add('translate-x-full');
+      groupSubpage.classList.remove('translate-x-0');
+    }
+
+    // Workspace Inner Sub-Tab Swapping controller
+    function switchWorkspaceSubTab(tabType, element) {
+      const parent = element.parentNode;
+      const buttons = parent.querySelectorAll('button');
+      buttons.forEach(btn => {
+        btn.classList.remove('text-[#FF5E2B]', 'border-b-2', 'border-[#FF5E2B]');
+        btn.classList.add('text-slate-400');
+      });
+
+      element.classList.add('text-[#FF5E2B]', 'border-b-2', 'border-[#FF5E2B]');
+      element.classList.remove('text-slate-400');
+
+      document.querySelectorAll('.workspace-tab-section').forEach(sec => {
+        sec.classList.add('hidden');
+      });
+
+      const writeBox = document.getElementById('quickWriteBox');
+      if (tabType === 'feed') {
+        document.getElementById('wsSubTabFeed').classList.remove('hidden');
+        writeBox.classList.remove('hidden');
+      } else {
+        writeBox.classList.add('hidden');
+        if (tabType === 'about') document.getElementById('wsSubTabAbout').classList.remove('hidden');
+        if (tabType === 'members') document.getElementById('wsSubTabMembers').classList.remove('hidden');
+        if (tabType === 'polls') document.getElementById('wsSubTabPolls').classList.remove('hidden');
+        if (tabType === 'moderators') document.getElementById('wsSubTabModerators').classList.remove('hidden');
+        if (tabType === 'videos') document.getElementById('wsSubTabVideos').classList.remove('hidden');
+        if (tabType === 'events') document.getElementById('wsSubTabEvents').classList.remove('hidden');
+      }
+    }
+
+    // Toggle About accordion Guidelines
+    function toggleAccordion(btn) {
+      const content = btn.nextElementSibling;
+      const icon = btn.querySelector('i');
+      if (content.style.maxHeight && content.style.maxHeight !== '0px') {
+        content.style.maxHeight = '0px';
+        icon.style.transform = 'rotate(0deg)';
+      } else {
+        content.style.maxHeight = content.scrollHeight + 'px';
+        icon.style.transform = 'rotate(180deg)';
+      }
+    }
+
+    // Handle Poll selections inside Joined feeds
+    function vote(element, percentValue) {
+      const parent = element.parentNode;
+      const options = parent.querySelectorAll('.relative');
+      
+      options.forEach(opt => {
+        opt.onclick = null; // deactivate clicking
+        opt.classList.remove('hover:border-[#FF5E2B]/50');
+        opt.classList.add('border-slate-100');
+        
+        const pctTag = opt.querySelector('.percentage');
+        if (pctTag) {
+          pctTag.classList.remove('hidden');
+        }
+        
+        const fillBar = opt.querySelector('.absolute');
+        if (fillBar) {
+          const targetPercent = opt === element ? percentValue : (100 - percentValue);
+          fillBar.style.width = targetPercent + '%';
+        }
+      });
+      showNotification("Vote counted!");
+    }
+
+    // Create.jpg Nested Post Modal Interaction
+    function openCreatePostModal() {
+      const modal = document.getElementById('createPostModal');
+      modal.classList.remove('translate-y-full');
+      modal.classList.add('translate-y-0');
+      document.getElementById('postTextContent').value = '';
+    }
+
+    function closeCreatePostModal() {
+      const modal = document.getElementById('createPostModal');
+      modal.classList.add('translate-y-full');
+      modal.classList.remove('translate-y-0');
+    }
+
+    function selectPostType(type, element) {
+      const buttons = element.parentNode.querySelectorAll('button');
+      buttons.forEach(btn => btn.className = "hover:bg-slate-50 px-3 py-1.5 rounded-lg flex items-center gap-1 shrink-0");
+      element.className = "bg-slate-100 text-slate-800 px-3 py-1.5 rounded-lg flex items-center gap-1 shrink-0";
+    }
+
+    function attachSamplePhoto() {
+      const container = document.getElementById('postImageContainer');
+      container.style.display = 'block';
+      showNotification("Photo attached successfully!");
+    }
+
+    function removeAttachedPhoto() {
+      const container = document.getElementById('postImageContainer');
+      container.style.display = 'none';
+      showNotification("Photo attachment removed", false);
+    }
+
+    // Publishes standard/photo user post into target group feed container
+    function publishGroupPost() {
+      const text = document.getElementById('postTextContent').value;
+      if (!text.trim()) {
+        showNotification("Please write something to post", false);
+        return;
+      }
+
+      // Add to mock DB to persist during current session
+      const db = MOCK_GROUPS_DB[activeGroupName];
+      const isPhotoAttached = document.getElementById('postImageContainer').style.display === 'block';
+      const sampleImg = isPhotoAttached ? 'https://images.unsplash.com/photo-1508098682722-e99c43a406b2?w=500&auto=format&fit=crop&q=80' : null;
+
+      db.feed.unshift({
+        author: 'Jordan Blake',
+        avatar: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=150&auto=format&fit=crop&q=80',
+        time: 'Just now',
+        text: text,
+        image: sampleImg,
+        likes: '0',
+        comments: '0 Comments'
+      });
+
+      // Reload UI
+      populateGroupSections(activeGroupName);
+      closeCreatePostModal();
+      showNotification("Post published to workspace!");
+    }
+
+    // Create Poll.jpg Nested Poll Modal Interaction
+    function openCreatePollModal() {
+      closeCreatePostModal(); // Hide regular editor
+      const modal = document.getElementById('createPollModal');
+      modal.classList.remove('translate-y-full');
+      modal.classList.add('translate-y-0');
+      
+      document.getElementById('pollQuestionInput').value = '';
+      const list = document.getElementById('pollChoicesList');
+      list.innerHTML = `
+        <input type="text" placeholder="Option 1" class="poll-choice-input w-full bg-white border border-slate-200 focus:border-[#FF5E2B] focus:ring-1 focus:ring-[#FF5E2B] focus:outline-none py-3 px-4 rounded-xl text-xs font-medium text-slate-800 placeholder-slate-400 transition-all">
+        <input type="text" placeholder="Option 2" class="poll-choice-input w-full bg-white border border-slate-200 focus:border-[#FF5E2B] focus:ring-1 focus:ring-[#FF5E2B] focus:outline-none py-3 px-4 rounded-xl text-xs font-medium text-slate-800 placeholder-slate-400 transition-all">
+      `;
+    }
+
+    function closeCreatePollModal() {
+      const modal = document.getElementById('createPollModal');
+      modal.classList.add('translate-y-full');
+      modal.classList.remove('translate-y-0');
+    }
+
+    function addPollChoiceOption() {
+      const list = document.getElementById('pollChoicesList');
+      const optionCount = list.querySelectorAll('input').length + 1;
+      
+      const newInput = document.createElement('input');
+      newInput.type = "text";
+      newInput.placeholder = `Option ${optionCount}`;
+      newInput.className = "poll-choice-input w-full bg-white border border-slate-200 focus:border-[#FF5E2B] focus:ring-1 focus:ring-[#FF5E2B] focus:outline-none py-3 px-4 rounded-xl text-xs font-medium text-slate-800 placeholder-slate-400 transition-all";
+      
+      list.appendChild(newInput);
+    }
+
+    function selectVoterVisibility(type, element) {
+      document.getElementById('visVisibleBtn').className = "border border-slate-200 p-3 rounded-2xl text-center cursor-pointer transition-all flex flex-col items-center justify-center gap-1 hover:border-slate-300";
+      document.getElementById('visAnonBtn').className = "border border-slate-200 p-3 rounded-2xl text-center cursor-pointer transition-all flex flex-col items-center justify-center gap-1 hover:border-slate-300";
+      
+      const labelVisible = document.getElementById('visVisibleBtn').querySelector('span');
+      const labelAnon = document.getElementById('visAnonBtn').querySelector('span');
+      
+      labelVisible.className = "text-xs font-bold text-slate-700";
+      labelAnon.className = "text-xs font-bold text-slate-700";
+
+      element.className = "border-2 border-[#FF5E2B] bg-[#FFF0EB]/45 p-3 rounded-2xl text-center cursor-pointer transition-all flex flex-col items-center justify-center gap-1";
+      element.querySelector('span').className = "text-xs font-bold text-[#FF5E2B]";
+      document.getElementById('voterVisibilityValue').value = type;
+    }
+
+    // Publishes simulated Poll into feed discussion block
+    function publishInteractivePoll() {
+      const question = document.getElementById('pollQuestionInput').value;
+      if (!question.trim()) {
+        showNotification("Please write a poll question", false);
+        return;
+      }
+
+      const inputs = document.querySelectorAll('.poll-choice-input');
+      const choices = [];
+      inputs.forEach(input => {
+        if (input.value.trim()) choices.push(input.value.trim());
+      });
+
+      if (choices.length < 2) {
+        showNotification("Please supply at least 2 choice options", false);
+        return;
+      }
+
+      // Add to Polls database for this group
+      const db = MOCK_GROUPS_DB[activeGroupName];
+      const newPollOptions = choices.map((c, i) => ({
+        text: c,
+        percent: i === 0 ? 60 : (i === 1 ? 40 : 0)
+      }));
+
+      db.polls.unshift({
+        id: 'poll-' + Date.now(),
+        question: question,
+        options: newPollOptions,
+        votes: 0
+      });
+
+      // Reload UI
+      populateGroupSections(activeGroupName);
+      closeCreatePollModal();
+      showNotification("Interactive poll published successfully!");
+    }
+
+    // Toggle presentation device perspective wrapper frame
+    function toggleDeviceMock() {
+      const shell = document.getElementById('deviceShell');
+      const btn = document.getElementById('viewModeBtn');
+      if (shell.classList.contains('max-w-[412px]')) {
+        shell.classList.remove('max-w-[412px]', 'h-[860px]', 'rounded-[48px]');
+        shell.classList.add('max-w-full', 'w-full', 'h-[880px]', 'rounded-none');
+        btn.innerText = "Switch View: Mobile Phone Canvas";
+      } else {
+        shell.classList.add('max-w-[412px]', 'h-[860px]', 'rounded-[48px]');
+        shell.classList.remove('max-w-full', 'w-full', 'h-[880px]', 'rounded-none');
+        btn.innerText = "Switch View: Full Width Canvas";
+      }
+    }
+
+    // Pre-flight checks on page load
+    window.onload = function() {
+      // Hide photo preview container by default
+      document.getElementById('postImageContainer').style.display = 'none';
+    };
+  </script>
+</body>
+</html>

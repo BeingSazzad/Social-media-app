@@ -1,0 +1,353 @@
+<!-- module: home-extra -->
+
+<!-- ===================================================== -->
+<!-- SCREEN — Composer (Create Post)                        -->
+<!-- ===================================================== -->
+<section class="screen" id="scr-composer" data-topbar="none" data-nav="hide" style="background:#fff">
+  <!-- Custom sticky header -->
+  <div style="height:56px;display:flex;align-items:center;gap:10px;padding:0 8px 0 12px;background:#fff;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:5">
+    <button class="icon-btn" onclick="App.back()" aria-label="Close"><i class="fa-solid fa-xmark" style="font-size:20px"></i></button>
+    <div class="tb-title" style="font-size:17px">Create Post</div>
+    <button class="btn-sm btn-pill" style="background:var(--brand-grad);color:#fff;font-weight:700;border:none;cursor:pointer;padding:0 20px"
+      onclick="App.toast('Post published 🚀');App.tab('scr-home')">Post</button>
+  </div>
+
+  <!-- Composer tabs -->
+  <div style="display:flex;border-bottom:1px solid var(--line);padding:0 8px">
+    <button onclick="App.toast('Post selected')" style="flex:1;background:none;border:none;cursor:pointer;font-family:inherit;font-weight:700;font-size:13px;color:var(--ink);padding:13px 0;border-bottom:2.5px solid var(--brand)">Post</button>
+    <button onclick="App.go('scr-poll-composer')" style="flex:1;background:none;border:none;cursor:pointer;font-family:inherit;font-weight:700;font-size:13px;color:var(--ink-3);padding:13px 0;border-bottom:2.5px solid transparent">Poll</button>
+    <button onclick="App.go('scr-add-video')" style="flex:1;background:none;border:none;cursor:pointer;font-family:inherit;font-weight:700;font-size:13px;color:var(--ink-3);padding:13px 0;border-bottom:2.5px solid transparent">Videos</button>
+    <button onclick="App.go('scr-add-event')" style="flex:1;background:none;border:none;cursor:pointer;font-family:inherit;font-weight:700;font-size:13px;color:var(--ink-3);padding:13px 0;border-bottom:2.5px solid transparent">Event</button>
+  </div>
+
+  <!-- Author + textarea -->
+  <div class="pad" style="padding-bottom:8px">
+    <div style="display:flex;gap:12px;align-items:flex-start">
+      <img class="ava" src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=120&q=80" style="width:44px;height:44px">
+      <div style="flex:1;min-width:0">
+        <div style="font-weight:700;font-size:14px">Sohag Rahman</div>
+        <div class="t-sm" style="margin-top:2px">Sharing a public post</div>
+      </div>
+    </div>
+    <textarea class="input" placeholder="What is on your mind?"
+      oninput="this.style.height='auto';this.style.height=this.scrollHeight+'px'"
+      style="border:none;background:none;box-shadow:none;padding:12px 2px;min-height:110px;font-size:15px;line-height:1.55"></textarea>
+
+    <!-- Media preview -->
+    <div style="position:relative;border-radius:16px;overflow:hidden;border:1px solid var(--line)">
+      <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=800&auto=format&fit=crop&q=70" style="width:100%;height:230px;object-fit:cover">
+      <button onclick="this.parentElement.remove()" aria-label="Remove media"
+        style="position:absolute;top:10px;right:10px;width:32px;height:32px;border-radius:50%;background:rgba(12,10,9,.65);color:#fff;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+    </div>
+  </div>
+
+  <!-- Privacy selector row -->
+  <div class="pad" style="padding-top:4px;padding-bottom:10px">
+    <div class="card" onclick="App.openSheet('sheet-privacy')" style="cursor:pointer">
+      <div class="list-row">
+        <i class="fa-solid fa-earth-asia" style="color:var(--brand)"></i>
+        <div style="flex:1"><div class="h3">Who can see this?</div><div class="t-sm">Public · Anyone on EVINIE</div></div>
+        <i class="fa-solid fa-chevron-right chev"></i>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bottom action bar -->
+  <div style="position:sticky;bottom:0;background:#fff;border-top:1px solid var(--line);padding:10px 6px;display:flex;justify-content:space-around;align-items:center">
+    <button class="icon-btn" onclick="App.go('scr-contacts')" aria-label="Tag Friends" style="color:#0EA5E9"><i class="fa-solid fa-user-group"></i></button>
+    <button class="icon-btn" onclick="App.toast('Add location')" aria-label="Location" style="color:#EF4444"><i class="fa-solid fa-location-dot"></i></button>
+    <button class="icon-btn" onclick="App.toast('Open gallery')" aria-label="Photo/Video" style="color:var(--ok)"><i class="fa-solid fa-image"></i></button>
+    <button class="icon-btn" onclick="App.toast('Pick an emoji')" aria-label="Emoji" style="color:#F59E0B"><i class="fa-regular fa-face-smile"></i></button>
+    <button class="icon-btn" onclick="App.toast('Draw on photo')" aria-label="Draw" style="color:#8B5CF6"><i class="fa-solid fa-pen"></i></button>
+    <button class="icon-btn" onclick="App.toast('Record voice note')" aria-label="Voice" style="color:var(--brand)"><i class="fa-solid fa-microphone"></i></button>
+  </div>
+</section>
+
+
+<!-- ===================================================== -->
+<!-- SCREEN — Poll Composer (Create Poll)                   -->
+<!-- ===================================================== -->
+<section class="screen" id="scr-poll-composer" data-topbar="back" data-nav="hide" data-title="Create Poll" style="background:#fff">
+  <div class="pad" style="padding:18px 20px 28px">
+    <div class="field">
+      <label class="label">Ask a question</label>
+      <textarea class="input" placeholder="e.g. Which design tool do you use most?" style="min-height:90px"></textarea>
+    </div>
+
+    <label class="label" style="display:block;margin-top:4px">Options</label>
+    <div id="pollOptions" class="stack" style="margin-bottom:14px">
+      <div style="position:relative">
+        <input class="input" placeholder="Option 1" value="Figma" style="padding-right:42px">
+        <span style="position:absolute;top:50%;right:14px;transform:translateY(-50%);width:22px;height:22px;border-radius:50%;background:var(--bg);color:var(--ink-2);font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center">1</span>
+      </div>
+      <div style="position:relative">
+        <input class="input" placeholder="Option 2" value="Adobe XD" style="padding-right:42px">
+        <span style="position:absolute;top:50%;right:14px;transform:translateY(-50%);width:22px;height:22px;border-radius:50%;background:var(--bg);color:var(--ink-2);font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center">2</span>
+      </div>
+    </div>
+
+    <button class="btn btn-soft" style="margin-bottom:6px"
+      onclick="App.toast('Add an option (max 6)')">
+      <i class="fa-solid fa-plus"></i> Add Option
+    </button>
+    <p class="t-sm" style="margin:4px 0 22px">You can add up to 6 options.</p>
+
+    <div class="field">
+      <label class="label">Poll duration ends</label>
+      <input class="input" type="datetime-local" value="2026-06-28T18:00">
+    </div>
+
+    <div class="card" onclick="App.openSheet('sheet-privacy')" style="cursor:pointer;margin-bottom:22px">
+      <div class="list-row">
+        <i class="fa-solid fa-earth-asia" style="color:var(--brand)"></i>
+        <div style="flex:1"><div class="h3">Public</div><div class="t-sm">Who can vote in this poll</div></div>
+        <i class="fa-solid fa-chevron-right chev"></i>
+      </div>
+    </div>
+
+    <button class="btn btn-primary" onclick="App.toast('Poll published 📊');App.tab('scr-home')">Post Poll</button>
+  </div>
+</section>
+
+
+<!-- ===================================================== -->
+<!-- SCREEN — Post Detail                                   -->
+<!-- ===================================================== -->
+<section class="screen" id="scr-post-detail" data-topbar="back" data-nav="hide" data-title="Post" style="background:var(--bg)">
+  <div class="pad stack" style="padding-bottom:96px">
+    <!-- Full post card -->
+    <article class="post">
+      <div style="display:flex;align-items:center;gap:11px;padding:13px 14px">
+        <img class="ava" src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=120&q=80" style="width:42px;height:42px" onclick="App.go('scr-user-profile')">
+        <div style="flex:1;min-width:0">
+          <div style="font-weight:700;font-size:14px">Rakib Hasan <i class="fa-solid fa-circle-check verified" style="font-size:12px"></i></div>
+          <div class="t-sm">4 mins ago · <i class="fa-solid fa-earth-asia"></i></div>
+        </div>
+        <button class="icon-btn" onclick="App.openSheet('sheet-post-options')"><i class="fa-solid fa-ellipsis"></i></button>
+      </div>
+      <p style="padding:0 14px 12px;font-size:14px;line-height:1.55">Just shipped a new design system for our community app 🚀 Clean, warm, and built thumb-first. Feedback welcome! <span class="text-brand">#design #ux</span></p>
+      <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?w=800&auto=format&fit=crop&q=70" style="width:100%;height:240px;object-fit:cover">
+
+      <!-- Reactions summary line -->
+      <div style="padding:11px 14px;display:flex;align-items:center;justify-content:space-between" class="t-sm">
+        <span style="display:flex;align-items:center;gap:5px">
+          <span style="display:inline-flex">
+            <i class="fa-solid fa-heart" style="color:#EF4444"></i>
+            <i class="fa-solid fa-thumbs-up" style="color:#3B82F6;margin-left:-3px"></i>
+          </span>
+          Nusrat & 1,203 others
+        </span>
+        <span>36 comments · 12 shares</span>
+      </div>
+      <div class="divider"></div>
+      <div class="post-actions">
+        <button onclick="likeBtn(this)"><i class="fa-regular fa-heart"></i> Like</button>
+        <button onclick="App.toast('Jump to comments')"><i class="fa-regular fa-comment"></i> Comment</button>
+        <button onclick="App.toast('Shared to your timeline')"><i class="fa-solid fa-share"></i> Share</button>
+      </div>
+    </article>
+
+    <!-- Comments -->
+    <div style="display:flex;justify-content:space-between;align-items:center;margin:4px 2px 0">
+      <span class="section-title">Comments</span>
+      <button onclick="App.toast('Sorted by Most relevant')" style="background:none;border:none;color:var(--ink-2);font-weight:700;font-size:12px;cursor:pointer">Most relevant <i class="fa-solid fa-chevron-down" style="font-size:9px"></i></button>
+    </div>
+
+    <div class="card card-p stack" style="padding:14px">
+      <!-- comment 1 -->
+      <div style="display:flex;gap:10px">
+        <img class="ava" src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=120&q=80" style="width:36px;height:36px" onclick="App.go('scr-user-profile')">
+        <div style="flex:1;min-width:0">
+          <div style="background:var(--bg);border-radius:14px;padding:9px 12px">
+            <div style="font-weight:700;font-size:13px">Nusrat Jahan</div>
+            <div style="font-size:13px;line-height:1.5;margin-top:1px">This is gorgeous 😍 the spacing feels so calm. What did you use for the type scale?</div>
+          </div>
+          <div class="t-sm" style="display:flex;gap:14px;padding:6px 12px 0">
+            <button onclick="App.toast('Liked comment')" style="background:none;border:none;font:inherit;color:var(--brand);font-weight:700;cursor:pointer">Like</button>
+            <button onclick="App.toast('Reply to Nusrat')" style="background:none;border:none;font:inherit;color:var(--ink-2);font-weight:700;cursor:pointer">Reply</button>
+            <span>3m</span>
+          </div>
+        </div>
+      </div>
+      <!-- comment 2 -->
+      <div style="display:flex;gap:10px">
+        <img class="ava" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=120&q=80" style="width:36px;height:36px" onclick="App.go('scr-user-profile')">
+        <div style="flex:1;min-width:0">
+          <div style="background:var(--bg);border-radius:14px;padding:9px 12px">
+            <div style="font-weight:700;font-size:13px">Tanvir Ahmed</div>
+            <div style="font-size:13px;line-height:1.5;margin-top:1px">Clean work bro 🔥 Are you open-sourcing the components?</div>
+          </div>
+          <div class="t-sm" style="display:flex;gap:14px;padding:6px 12px 0">
+            <button onclick="App.toast('Liked comment')" style="background:none;border:none;font:inherit;color:var(--ink-2);font-weight:700;cursor:pointer">Like</button>
+            <button onclick="App.toast('Reply to Tanvir')" style="background:none;border:none;font:inherit;color:var(--ink-2);font-weight:700;cursor:pointer">Reply</button>
+            <span>12m</span>
+          </div>
+        </div>
+      </div>
+      <!-- comment 3 -->
+      <div style="display:flex;gap:10px">
+        <img class="ava" src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=120&q=80" style="width:36px;height:36px" onclick="App.go('scr-user-profile')">
+        <div style="flex:1;min-width:0">
+          <div style="background:var(--bg);border-radius:14px;padding:9px 12px">
+            <div style="font-weight:700;font-size:13px">Mitu Rahman</div>
+            <div style="font-size:13px;line-height:1.5;margin-top:1px">Bookmarking this for our next sprint. The warm amber accent is 👌</div>
+          </div>
+          <div class="t-sm" style="display:flex;gap:14px;padding:6px 12px 0">
+            <button onclick="App.toast('Liked comment')" style="background:none;border:none;font:inherit;color:var(--ink-2);font-weight:700;cursor:pointer">Like</button>
+            <button onclick="App.toast('Reply to Mitu')" style="background:none;border:none;font:inherit;color:var(--ink-2);font-weight:700;cursor:pointer">Reply</button>
+            <span>28m</span>
+          </div>
+        </div>
+      </div>
+      <!-- comment 4 -->
+      <div style="display:flex;gap:10px">
+        <img class="ava" src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=120&q=80" style="width:36px;height:36px" onclick="App.go('scr-user-profile')">
+        <div style="flex:1;min-width:0">
+          <div style="background:var(--bg);border-radius:14px;padding:9px 12px">
+            <div style="font-weight:700;font-size:13px">Arif Hossain</div>
+            <div style="font-size:13px;line-height:1.5;margin-top:1px">Sent you a DM about a freelance collab on this 🙌</div>
+          </div>
+          <div class="t-sm" style="display:flex;gap:14px;padding:6px 12px 0">
+            <button onclick="App.toast('Liked comment')" style="background:none;border:none;font:inherit;color:var(--ink-2);font-weight:700;cursor:pointer">Like</button>
+            <button onclick="App.toast('Reply to Arif')" style="background:none;border:none;font:inherit;color:var(--ink-2);font-weight:700;cursor:pointer">Reply</button>
+            <span>1h</span>
+          </div>
+        </div>
+      </div>
+      <!-- comment 5 -->
+      <div style="display:flex;gap:10px">
+        <img class="ava" src="https://images.unsplash.com/photo-1531123897727-8f129e1688ce?w=120&q=80" style="width:36px;height:36px" onclick="App.go('scr-user-profile')">
+        <div style="flex:1;min-width:0">
+          <div style="background:var(--bg);border-radius:14px;padding:9px 12px">
+            <div style="font-weight:700;font-size:13px">Chidi Okeke</div>
+            <div style="font-size:13px;line-height:1.5;margin-top:1px">We'd pay ₦25,000 for a license of this kit. Serious 👀</div>
+          </div>
+          <div class="t-sm" style="display:flex;gap:14px;padding:6px 12px 0">
+            <button onclick="App.toast('Liked comment')" style="background:none;border:none;font:inherit;color:var(--ink-2);font-weight:700;cursor:pointer">Like</button>
+            <button onclick="App.toast('Reply to Chidi')" style="background:none;border:none;font:inherit;color:var(--ink-2);font-weight:700;cursor:pointer">Reply</button>
+            <span>2h</span>
+          </div>
+        </div>
+      </div>
+      <!-- comment 6 -->
+      <div style="display:flex;gap:10px">
+        <img class="ava" src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?w=120&q=80" style="width:36px;height:36px" onclick="App.go('scr-user-profile')">
+        <div style="flex:1;min-width:0">
+          <div style="background:var(--bg);border-radius:14px;padding:9px 12px">
+            <div style="font-weight:700;font-size:13px">Amina Bello</div>
+            <div style="font-size:13px;line-height:1.5;margin-top:1px">Following for the open-source drop 🚀</div>
+          </div>
+          <div class="t-sm" style="display:flex;gap:14px;padding:6px 12px 0">
+            <button onclick="App.toast('Liked comment')" style="background:none;border:none;font:inherit;color:var(--ink-2);font-weight:700;cursor:pointer">Like</button>
+            <button onclick="App.toast('Reply to Amina')" style="background:none;border:none;font:inherit;color:var(--ink-2);font-weight:700;cursor:pointer">Reply</button>
+            <span>3h</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Sticky bottom comment bar -->
+  <div style="position:sticky;bottom:0;background:#fff;border-top:1px solid var(--line);padding:10px 12px;display:flex;align-items:center;gap:10px">
+    <img class="ava" src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=120&q=80" style="width:34px;height:34px">
+    <div style="flex:1;display:flex;align-items:center;gap:6px;background:var(--bg);border-radius:999px;padding:0 6px 0 14px">
+      <input placeholder="Write a comment..." style="flex:1;border:none;background:none;outline:none;font-family:inherit;font-size:14px;height:42px;color:var(--ink)">
+      <button class="icon-btn" onclick="App.toast('Pick a GIF')" aria-label="GIF" style="width:30px;height:30px;font-size:11px;font-weight:800;color:var(--ink-2)">GIF</button>
+      <button class="icon-btn" onclick="App.toast('Pick an emoji')" aria-label="Emoji" style="width:30px;height:30px;font-size:15px;color:#F59E0B"><i class="fa-regular fa-face-smile"></i></button>
+    </div>
+    <button onclick="App.toast('Comment posted')" aria-label="Send"
+      style="width:42px;height:42px;border-radius:50%;background:var(--brand-grad);color:#fff;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;flex:none">
+      <i class="fa-solid fa-paper-plane" style="font-size:15px"></i>
+    </button>
+  </div>
+</section>
+
+
+<!-- ===================================================== -->
+<!-- SCREEN — Story (fullscreen viewer)                     -->
+<!-- ===================================================== -->
+<section class="screen" id="scr-story" data-topbar="none" data-nav="hide" style="background:#000">
+  <div style="position:relative;height:100%;width:100%">
+    <!-- Full-bleed story image -->
+    <img src="https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=800&auto=format&fit=crop&q=80" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover">
+    <!-- top gradient for legibility -->
+    <div style="position:absolute;top:0;left:0;right:0;height:160px;background:linear-gradient(180deg,rgba(0,0,0,.55),transparent);pointer-events:none"></div>
+    <!-- bottom gradient -->
+    <div style="position:absolute;bottom:0;left:0;right:0;height:160px;background:linear-gradient(0deg,rgba(0,0,0,.55),transparent);pointer-events:none"></div>
+
+    <!-- Segmented progress bars -->
+    <div style="position:absolute;top:14px;left:12px;right:12px;display:flex;gap:5px;z-index:3">
+      <div style="flex:1;height:3px;border-radius:99px;background:rgba(255,255,255,.35);overflow:hidden"><i style="display:block;height:100%;width:100%;background:#fff"></i></div>
+      <div style="flex:1;height:3px;border-radius:99px;background:rgba(255,255,255,.35);overflow:hidden"><i style="display:block;height:100%;width:40%;background:#fff"></i></div>
+      <div style="flex:1;height:3px;border-radius:99px;background:rgba(255,255,255,.35)"></div>
+    </div>
+
+    <!-- Header -->
+    <div style="position:absolute;top:30px;left:12px;right:8px;display:flex;align-items:center;gap:10px;z-index:3">
+      <img class="ava" src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=120&q=80" style="width:38px;height:38px;border:1.5px solid rgba(255,255,255,.7)" onclick="App.go('scr-user-profile')">
+      <div style="flex:1;min-width:0;color:#fff">
+        <div style="font-weight:700;font-size:14px;text-shadow:0 1px 3px rgba(0,0,0,.4)">Rakib Hasan</div>
+        <div style="font-size:12px;opacity:.85">2h</div>
+      </div>
+      <button class="icon-btn" onclick="App.toast('Mute story')" style="color:#fff" aria-label="Mute"><i class="fa-solid fa-volume-high" style="font-size:16px"></i></button>
+      <button class="icon-btn" onclick="App.back()" style="color:#fff" aria-label="Close"><i class="fa-solid fa-xmark" style="font-size:20px"></i></button>
+    </div>
+
+    <!-- Reply input -->
+    <div style="position:absolute;bottom:24px;left:12px;right:12px;display:flex;align-items:center;gap:10px;z-index:3">
+      <div style="flex:1;display:flex;align-items:center;background:rgba(255,255,255,.12);border:1.5px solid rgba(255,255,255,.5);border-radius:999px;padding:0 16px">
+        <input placeholder="Reply to Rakib..." style="flex:1;border:none;background:none;outline:none;color:#fff;font-family:inherit;font-size:14px;height:46px">
+      </div>
+      <button onclick="App.toast('Like sent ❤️')" aria-label="Like" style="width:46px;height:46px;border-radius:50%;background:rgba(255,255,255,.12);border:1.5px solid rgba(255,255,255,.5);color:#fff;cursor:pointer;flex:none"><i class="fa-regular fa-heart" style="font-size:18px"></i></button>
+      <button onclick="App.toast('Reply sent to Rakib')" aria-label="Send" style="width:46px;height:46px;border-radius:50%;background:var(--brand-grad);color:#fff;border:none;cursor:pointer;flex:none"><i class="fa-solid fa-paper-plane" style="font-size:16px"></i></button>
+    </div>
+  </div>
+</section>
+
+
+<!-- ===================================================== -->
+<!-- SCREEN — Add Story (camera)                            -->
+<!-- ===================================================== -->
+<section class="screen" id="scr-add-story" data-topbar="none" data-nav="hide" style="background:#000">
+  <div style="position:relative;height:100%;width:100%;background:linear-gradient(160deg,#3b2f1a 0%,#1a1512 45%,#000 100%);display:flex;flex-direction:column">
+    <!-- Viewfinder hint -->
+    <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;color:rgba(255,255,255,.5);gap:12px">
+      <i class="fa-solid fa-camera" style="font-size:46px"></i>
+      <div style="font-size:13px;font-weight:600">Capture a moment for your Story</div>
+    </div>
+
+    <!-- Top bar -->
+    <div style="position:absolute;top:14px;left:8px;right:8px;display:flex;align-items:center;justify-content:space-between;z-index:3">
+      <button class="icon-btn" onclick="App.back()" style="color:#fff" aria-label="Close"><i class="fa-solid fa-xmark" style="font-size:22px"></i></button>
+      <div style="display:flex;flex-direction:column;gap:14px">
+        <button onclick="App.toast('Add text')" aria-label="Text" style="width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,.14);color:#fff;border:none;cursor:pointer;font-weight:800;font-size:16px">Aa</button>
+        <button onclick="App.toast('Add sticker')" aria-label="Sticker" style="width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,.14);color:#fff;border:none;cursor:pointer"><i class="fa-regular fa-face-laugh"></i></button>
+        <button onclick="App.toast('Draw')" aria-label="Draw" style="width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,.14);color:#fff;border:none;cursor:pointer"><i class="fa-solid fa-pen"></i></button>
+        <button onclick="App.toast('Add music')" aria-label="Music" style="width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,.14);color:#fff;border:none;cursor:pointer"><i class="fa-solid fa-music"></i></button>
+      </div>
+    </div>
+
+    <!-- Bottom capture controls -->
+    <div style="position:absolute;bottom:96px;left:0;right:0;display:flex;align-items:center;justify-content:space-around;z-index:3;padding:0 28px">
+      <!-- gallery thumb -->
+      <button onclick="App.toast('Open gallery')" aria-label="Gallery" style="width:48px;height:48px;border-radius:12px;border:2px solid rgba(255,255,255,.7);overflow:hidden;cursor:pointer;padding:0;background:none">
+        <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=120&q=80" style="width:100%;height:100%;object-fit:cover">
+      </button>
+      <!-- record circle -->
+      <button onclick="App.toast('Captured 📸')" aria-label="Capture" style="width:78px;height:78px;border-radius:50%;background:none;border:5px solid #fff;cursor:pointer;display:flex;align-items:center;justify-content:center">
+        <span style="width:60px;height:60px;border-radius:50%;background:#fff"></span>
+      </button>
+      <!-- flip camera -->
+      <button onclick="App.toast('Camera flipped')" aria-label="Flip Camera" style="width:48px;height:48px;border-radius:50%;background:rgba(255,255,255,.14);color:#fff;border:none;cursor:pointer;font-size:18px"><i class="fa-solid fa-camera-rotate"></i></button>
+    </div>
+
+    <!-- Share to Story -->
+    <div style="position:absolute;bottom:24px;left:16px;right:16px;z-index:3">
+      <button class="btn btn-primary" onclick="App.toast('Shared to your Story ✨');App.tab('scr-home')">
+        <i class="fa-solid fa-circle-plus"></i> Share to Story
+      </button>
+    </div>
+  </div>
+</section>

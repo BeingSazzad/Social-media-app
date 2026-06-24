@@ -1,0 +1,410 @@
+<!-- marketplace module -->
+
+<!-- ===================== 1) MARKETPLACE ===================== -->
+<section class="screen" id="scr-marketplace" data-topbar="back" data-nav="hide" data-title="Marketplace">
+  <div class="pad" style="padding-bottom:104px">
+
+    <!-- Search -->
+    <div class="input-group" style="margin-bottom:14px">
+      <input class="input" type="text" placeholder="Search products..." onkeydown="if(event.key==='Enter')App.toast('Searching marketplace…')">
+      <span class="input-icon"><i class="fa-solid fa-magnifying-glass" style="color:var(--ink-3)"></i></span>
+    </div>
+
+    <!-- Category chips -->
+    <div class="chip-row" style="margin-bottom:18px">
+      <span class="chip active" onclick="App.toast('All products')">All</span>
+      <span class="chip" onclick="App.toast('Electronics')">Electronics</span>
+      <span class="chip" onclick="App.toast('Fashion')">Fashion</span>
+      <span class="chip" onclick="App.toast('Food')">Food</span>
+      <span class="chip" onclick="App.toast('Services')">Services</span>
+      <span class="chip" onclick="App.toast('Home')">Home</span>
+      <span class="chip" onclick="App.toast('Others')">Others</span>
+    </div>
+
+    <!-- Product grid (2-col) -->
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:13px">
+
+      <!-- card -->
+      <div class="card" style="overflow:hidden;cursor:pointer" onclick="App.go('scr-product')">
+        <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=400&q=80" style="width:100%;height:130px;object-fit:cover">
+        <div style="padding:10px 11px 12px">
+          <div class="h3" style="line-height:1.3;font-size:14px">Wireless Headphones</div>
+          <div style="font-weight:700;font-size:15px;margin:5px 0 4px;color:var(--brand)">₦18,500</div>
+          <div class="t-sm" style="display:flex;align-items:center;gap:5px"><img class="ava" src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=80&q=80" style="width:16px;height:16px">Tunde A.</div>
+          <div class="t-sm" style="margin-top:3px"><i class="fa-solid fa-location-dot" style="color:var(--brand)"></i> Lagos</div>
+        </div>
+      </div>
+
+      <div class="card" style="overflow:hidden;cursor:pointer" onclick="App.go('scr-product')">
+        <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400&q=80" style="width:100%;height:130px;object-fit:cover">
+        <div style="padding:10px 11px 12px">
+          <div class="h3" style="line-height:1.3;font-size:14px">Air Sneakers</div>
+          <div style="font-weight:700;font-size:15px;margin:5px 0 4px;color:var(--brand)">₦24,000</div>
+          <div class="t-sm" style="display:flex;align-items:center;gap:5px"><img class="ava" src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=80&q=80" style="width:16px;height:16px">Aisha B.</div>
+          <div class="t-sm" style="margin-top:3px"><i class="fa-solid fa-location-dot" style="color:var(--brand)"></i> Abuja</div>
+        </div>
+      </div>
+
+      <div class="card" style="overflow:hidden;cursor:pointer" onclick="App.go('scr-product')">
+        <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400&q=80" style="width:100%;height:130px;object-fit:cover">
+        <div style="padding:10px 11px 12px">
+          <div class="h3" style="line-height:1.3;font-size:14px">Smart Watch Pro</div>
+          <div style="font-weight:700;font-size:15px;margin:5px 0 4px;color:var(--brand)">₦32,900</div>
+          <div class="t-sm" style="display:flex;align-items:center;gap:5px"><img class="ava" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=80&q=80" style="width:16px;height:16px">Rahim K.</div>
+          <div class="t-sm" style="margin-top:3px"><i class="fa-solid fa-location-dot" style="color:var(--brand)"></i> Kano</div>
+        </div>
+      </div>
+
+      <div class="card" style="overflow:hidden;cursor:pointer" onclick="App.go('scr-product')">
+        <img src="https://images.unsplash.com/photo-1556910103-1c02745aae4d?w=400&q=80" style="width:100%;height:130px;object-fit:cover">
+        <div style="padding:10px 11px 12px">
+          <div class="h3" style="line-height:1.3;font-size:14px">Jollof Combo Pack</div>
+          <div style="font-weight:700;font-size:15px;margin:5px 0 4px;color:var(--brand)">₦4,500</div>
+          <div class="t-sm" style="display:flex;align-items:center;gap:5px"><img class="ava" src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=80&q=80" style="width:16px;height:16px">Fatima O.</div>
+          <div class="t-sm" style="margin-top:3px"><i class="fa-solid fa-location-dot" style="color:var(--brand)"></i> Ibadan</div>
+        </div>
+      </div>
+
+      <div class="card" style="overflow:hidden;cursor:pointer" onclick="App.go('scr-product')">
+        <img src="https://images.unsplash.com/photo-1491553895911-0055eca6402d?w=400&q=80" style="width:100%;height:130px;object-fit:cover">
+        <div style="padding:10px 11px 12px">
+          <div class="h3" style="line-height:1.3;font-size:14px">Classic Loafers</div>
+          <div style="font-weight:700;font-size:15px;margin:5px 0 4px;color:var(--brand)">₦15,750</div>
+          <div class="t-sm" style="display:flex;align-items:center;gap:5px"><img class="ava" src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=80&q=80" style="width:16px;height:16px">Sadiq M.</div>
+          <div class="t-sm" style="margin-top:3px"><i class="fa-solid fa-location-dot" style="color:var(--brand)"></i> Port Harcourt</div>
+        </div>
+      </div>
+
+      <div class="card" style="overflow:hidden;cursor:pointer" onclick="App.go('scr-product')">
+        <img src="https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=400&q=80" style="width:100%;height:130px;object-fit:cover">
+        <div style="padding:10px 11px 12px">
+          <div class="h3" style="line-height:1.3;font-size:14px">Laptop Ultrabook</div>
+          <div style="font-weight:700;font-size:15px;margin:5px 0 4px;color:var(--brand)">₦210,000</div>
+          <div class="t-sm" style="display:flex;align-items:center;gap:5px"><img class="ava" src="https://images.unsplash.com/photo-1531123897727-8f129e1688ce?w=80&q=80" style="width:16px;height:16px">Nadia H.</div>
+          <div class="t-sm" style="margin-top:3px"><i class="fa-solid fa-location-dot" style="color:var(--brand)"></i> Lagos</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Floating "My Products" -->
+  <button onclick="App.go('scr-my-products')"
+    style="position:absolute;right:16px;bottom:18px;height:48px;padding:0 20px;border-radius:999px;background:var(--brand-grad);color:#fff;border:2px solid #fff;font-weight:700;font-size:14px;display:flex;align-items:center;gap:8px;box-shadow:0 12px 26px -8px rgba(255,106,1,.55);cursor:pointer;z-index:6">
+    <i class="fa-solid fa-store"></i> My Products
+  </button>
+</section>
+
+
+<!-- ===================== 2) PRODUCT ===================== -->
+<section class="screen" id="scr-product" data-topbar="back" data-nav="hide" data-title="Product">
+  <div style="padding-bottom:96px">
+
+    <!-- Main image + carousel dots -->
+    <div style="position:relative">
+      <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=600&q=80" style="width:100%;height:300px;object-fit:cover">
+      <div style="position:absolute;bottom:12px;left:0;right:0;display:flex;justify-content:center;gap:7px">
+        <span style="width:8px;height:8px;border-radius:50%;background:#fff"></span>
+        <span style="width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.5)"></span>
+        <span style="width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.5)"></span>
+        <span style="width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.5)"></span>
+      </div>
+    </div>
+
+    <div class="pad stack">
+
+      <!-- Title + price -->
+      <div>
+        <div class="h2" style="font-size:20px">Wireless Headphones</div>
+        <div style="font-weight:800;font-size:26px;margin-top:6px;color:var(--brand)">₦18,500</div>
+      </div>
+
+      <!-- Badges row -->
+      <div style="display:flex;gap:8px;flex-wrap:wrap">
+        <span class="badge badge-ok"><i class="fa-solid fa-circle-check"></i> New</span>
+        <span class="badge badge-gray"><i class="fa-solid fa-box"></i> 7 in stock</span>
+        <span class="badge badge-brand"><i class="fa-solid fa-location-dot"></i> Lagos</span>
+      </div>
+
+      <!-- Seller card -->
+      <div class="card card-p" style="display:flex;align-items:center;gap:12px">
+        <img class="ava" src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=120&q=80" style="width:46px;height:46px">
+        <div style="flex:1;min-width:0">
+          <div class="h3">Tunde Adeyemi <i class="fa-solid fa-circle-check verified" style="font-size:12px"></i></div>
+          <div class="t-sm">4.8 ★ · 132 sales</div>
+        </div>
+        <button class="btn-sm btn-soft" onclick="App.go('scr-user-profile')">View Profile</button>
+      </div>
+
+      <!-- Expandable description -->
+      <details class="card card-p">
+        <summary style="cursor:pointer;font-weight:700;font-size:14px;display:flex;align-items:center;justify-content:space-between">
+          Description <i class="fa-solid fa-chevron-down" style="color:var(--ink-3);font-size:12px"></i>
+        </summary>
+        <p style="font-size:13px;line-height:1.6;color:var(--ink-2);margin-top:10px">
+          Premium over-ear wireless headphones with active noise cancellation, 40-hour battery life
+          and plush memory-foam cushions. Comes with a hard carry case, USB-C cable and a 6-month
+          warranty. Lightly used display unit — fully functional, no scratches.
+        </p>
+      </details>
+
+      <!-- Spec rows -->
+      <div class="card">
+        <div class="list-row"><i class="fa-solid fa-tag" style="color:var(--brand)"></i>
+          <div style="flex:1"><div class="t-sm">Condition</div></div>
+          <span class="badge badge-ok">New</span></div>
+        <div class="divider"></div>
+        <div class="list-row"><i class="fa-solid fa-boxes-stacked" style="color:var(--brand)"></i>
+          <div style="flex:1"><div class="t-sm">Stock</div></div>
+          <span class="h3">7 units</span></div>
+        <div class="divider"></div>
+        <div class="list-row"><i class="fa-solid fa-location-dot" style="color:var(--brand)"></i>
+          <div style="flex:1"><div class="t-sm">Location</div></div>
+          <span class="h3">Lagos, NG</span></div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Sticky action bar -->
+  <div style="position:absolute;left:0;right:0;bottom:0;background:#fff;border-top:1px solid var(--line);padding:12px 16px;display:flex;gap:10px;z-index:6">
+    <button class="btn btn-outline" style="flex:1" onclick="App.go('scr-chat')"><i class="fa-regular fa-comment"></i> Message</button>
+    <button class="btn btn-primary" style="flex:1.3" onclick="App.go('scr-cart')">Buy Now</button>
+  </div>
+</section>
+
+
+<!-- ===================== 3) CART / CHECKOUT ===================== -->
+<section class="screen" id="scr-cart" data-topbar="back" data-nav="hide" data-title="Checkout">
+  <div class="pad stack" style="padding-bottom:96px">
+
+    <!-- Product summary -->
+    <div class="card card-p" style="display:flex;align-items:center;gap:12px">
+      <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=160&q=80" style="width:58px;height:58px;border-radius:12px;object-fit:cover">
+      <div style="flex:1;min-width:0">
+        <div class="h3">Wireless Headphones</div>
+        <div class="t-sm">Sold by Tunde Adeyemi</div>
+      </div>
+      <div style="font-weight:800;font-size:15px">₦18,500</div>
+    </div>
+
+    <!-- Breakdown -->
+    <div class="card card-p">
+      <div style="display:flex;justify-content:space-between;font-size:14px;padding:6px 0">
+        <span style="color:var(--ink-2)">Subtotal</span><span style="font-weight:600">₦18,500</span>
+      </div>
+      <div style="display:flex;justify-content:space-between;font-size:14px;padding:6px 0">
+        <span style="color:var(--ink-2)">Transaction Fee (5%)</span><span style="font-weight:600">₦925</span>
+      </div>
+      <div class="divider" style="margin:8px 0"></div>
+      <div style="display:flex;justify-content:space-between;font-size:16px;padding:4px 0">
+        <span style="font-weight:800">Total</span><span style="font-weight:800;color:var(--brand)">₦19,425</span>
+      </div>
+    </div>
+
+    <!-- Wallet — sufficient -->
+    <div class="card card-p" style="display:flex;align-items:center;gap:12px">
+      <i class="fa-solid fa-wallet" style="color:var(--brand);font-size:18px"></i>
+      <div style="flex:1">
+        <div class="h3">Wallet Balance</div>
+        <div class="t-sm" style="color:#15803D;font-weight:700"><i class="fa-solid fa-circle-check"></i> Sufficient balance</div>
+      </div>
+      <div style="font-weight:800;font-size:15px">₦24,000</div>
+    </div>
+
+    <button class="btn btn-primary" onclick="App.go('scr-order-confirm')">Confirm Purchase</button>
+
+    <!-- Alternative state: insufficient balance variant -->
+    <div class="section-title" style="margin-top:8px">Alternative state · insufficient balance</div>
+    <div class="card card-p" style="border:1.5px solid #FCD9B6">
+      <div style="display:flex;gap:10px;background:#FEF3C7;border-radius:12px;padding:12px;margin-bottom:12px">
+        <i class="fa-solid fa-triangle-exclamation" style="color:#B45309;font-size:16px;margin-top:1px"></i>
+        <div style="font-size:13px;color:#92400E;line-height:1.5">
+          <strong>Insufficient wallet balance.</strong> You need ₦19,425 but have ₦12,300. Top up to complete this purchase.
+        </div>
+      </div>
+      <button class="btn btn-outline" onclick="App.go('scr-fund-wallet')"><i class="fa-solid fa-plus"></i> Top Up Wallet</button>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ===================== 4) ORDER CONFIRMED ===================== -->
+<section class="screen" id="scr-order-confirm" data-topbar="back" data-nav="hide" data-title="Order Confirmed">
+  <div class="pad stack" style="padding-bottom:40px">
+
+    <!-- Hero check -->
+    <div style="text-align:center;padding:18px 0 6px">
+      <div style="width:88px;height:88px;border-radius:50%;background:#DCFCE7;display:inline-flex;align-items:center;justify-content:center;margin-bottom:14px">
+        <i class="fa-solid fa-check" style="font-size:40px;color:#15803D"></i>
+      </div>
+      <div class="h2" style="font-size:22px">Order Confirmed!</div>
+      <div class="t-sm" style="margin-top:6px;font-size:13px">Invoice <strong style="color:var(--ink-2)">EVN-20240611-8842</strong></div>
+    </div>
+
+    <!-- Details -->
+    <div class="card card-p">
+      <div style="display:flex;justify-content:space-between;font-size:14px;padding:7px 0">
+        <span style="color:var(--ink-2)">Item</span><span style="font-weight:600">Wireless Headphones</span>
+      </div>
+      <div class="divider"></div>
+      <div style="display:flex;justify-content:space-between;font-size:14px;padding:7px 0">
+        <span style="color:var(--ink-2)">Seller</span><span style="font-weight:600">Tunde Adeyemi</span>
+      </div>
+      <div class="divider"></div>
+      <div style="display:flex;justify-content:space-between;font-size:14px;padding:7px 0">
+        <span style="color:var(--ink-2)">Amount Paid</span><span style="font-weight:700">₦19,425</span>
+      </div>
+      <div class="divider"></div>
+      <div style="display:flex;justify-content:space-between;font-size:14px;padding:7px 0">
+        <span style="color:var(--ink-2)">Transaction Fee</span><span style="font-weight:600">₦925</span>
+      </div>
+      <div class="divider"></div>
+      <div style="display:flex;justify-content:space-between;font-size:14px;padding:7px 0">
+        <span style="color:var(--ink-2)">Date</span><span style="font-weight:600">11 Jun 2024, 3:42 PM</span>
+      </div>
+    </div>
+
+    <button class="btn btn-outline" onclick="App.toast('Invoice EVN-20240611-8842 saved')"><i class="fa-solid fa-file-invoice"></i> View Invoice</button>
+    <button class="btn btn-primary" onclick="App.go('scr-marketplace')">Continue Shopping</button>
+
+  </div>
+</section>
+
+
+<!-- ===================== 5) MY PRODUCTS ===================== -->
+<section class="screen" id="scr-my-products" data-topbar="back" data-nav="hide" data-title="My Products">
+  <div class="pad stack" style="padding-bottom:40px">
+
+    <button class="btn btn-primary" onclick="App.go('scr-add-product')"><i class="fa-solid fa-plus"></i> Add Product</button>
+
+    <div class="section-title" style="margin-top:4px">Your Listings · 4</div>
+
+    <!-- row -->
+    <div class="card card-p" style="display:flex;align-items:center;gap:12px">
+      <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=160&q=80" style="width:58px;height:58px;border-radius:12px;object-fit:cover">
+      <div style="flex:1;min-width:0">
+        <div class="h3" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Wireless Headphones</div>
+        <div style="font-weight:700;font-size:14px;margin:2px 0;color:var(--brand)">₦18,500</div>
+        <div class="t-sm"><i class="fa-solid fa-box"></i> 12 in stock</div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:6px">
+        <button class="btn-sm btn-soft" onclick="App.go('scr-add-product')">Edit</button>
+        <button class="btn-sm" style="background:#FEE2E2;color:#B91C1C;border:none;height:36px;border-radius:10px;font-weight:700;cursor:pointer" onclick="App.toast('Listing deleted')">Delete</button>
+      </div>
+    </div>
+
+    <div class="card card-p" style="display:flex;align-items:center;gap:12px">
+      <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=160&q=80" style="width:58px;height:58px;border-radius:12px;object-fit:cover">
+      <div style="flex:1;min-width:0">
+        <div class="h3" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Air Sneakers</div>
+        <div style="font-weight:700;font-size:14px;margin:2px 0;color:var(--brand)">₦24,000</div>
+        <div class="t-sm"><i class="fa-solid fa-box"></i> 5 in stock</div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:6px">
+        <button class="btn-sm btn-soft" onclick="App.go('scr-add-product')">Edit</button>
+        <button class="btn-sm" style="background:#FEE2E2;color:#B91C1C;border:none;height:36px;border-radius:10px;font-weight:700;cursor:pointer" onclick="App.toast('Listing deleted')">Delete</button>
+      </div>
+    </div>
+
+    <div class="card card-p" style="display:flex;align-items:center;gap:12px">
+      <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=160&q=80" style="width:58px;height:58px;border-radius:12px;object-fit:cover">
+      <div style="flex:1;min-width:0">
+        <div class="h3" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Smart Watch Pro</div>
+        <div style="font-weight:700;font-size:14px;margin:2px 0;color:var(--brand)">₦32,900</div>
+        <div class="t-sm"><i class="fa-solid fa-box"></i> 9 in stock</div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:6px">
+        <button class="btn-sm btn-soft" onclick="App.go('scr-add-product')">Edit</button>
+        <button class="btn-sm" style="background:#FEE2E2;color:#B91C1C;border:none;height:36px;border-radius:10px;font-weight:700;cursor:pointer" onclick="App.toast('Listing deleted')">Delete</button>
+      </div>
+    </div>
+
+    <div class="card card-p" style="display:flex;align-items:center;gap:12px">
+      <img src="https://images.unsplash.com/photo-1556910103-1c02745aae4d?w=160&q=80" style="width:58px;height:58px;border-radius:12px;object-fit:cover">
+      <div style="flex:1;min-width:0">
+        <div class="h3" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Jollof Combo Pack</div>
+        <div style="font-weight:700;font-size:14px;margin:2px 0;color:var(--brand)">₦4,500</div>
+        <div class="t-sm"><i class="fa-solid fa-box"></i> 30 in stock</div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:6px">
+        <button class="btn-sm btn-soft" onclick="App.go('scr-add-product')">Edit</button>
+        <button class="btn-sm" style="background:#FEE2E2;color:#B91C1C;border:none;height:36px;border-radius:10px;font-weight:700;cursor:pointer" onclick="App.toast('Listing deleted')">Delete</button>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ===================== 6) ADD PRODUCT ===================== -->
+<section class="screen" id="scr-add-product" data-topbar="back" data-nav="hide" data-title="Add Product">
+  <div class="pad" style="padding-bottom:96px">
+
+    <div class="field">
+      <label class="label">Title</label>
+      <input class="input" type="text" placeholder="e.g. Wireless Headphones">
+    </div>
+
+    <div class="field">
+      <label class="label">Description</label>
+      <textarea class="input" placeholder="Describe your product, condition, and what's included…"></textarea>
+    </div>
+
+    <div class="field">
+      <label class="label">Category</label>
+      <select class="input">
+        <option>Electronics</option>
+        <option>Fashion</option>
+        <option>Food</option>
+        <option>Services</option>
+        <option>Home</option>
+        <option>Others</option>
+      </select>
+    </div>
+
+    <div class="field">
+      <label class="label">Price (₦)</label>
+      <input class="input" type="number" placeholder="0.00" inputmode="numeric">
+    </div>
+
+    <!-- Image upload area -->
+    <div class="field">
+      <label class="label">Photos</label>
+      <div onclick="App.toast('Photo picker opened')"
+        style="border:2px dashed #DDD6CC;border-radius:14px;padding:26px;text-align:center;cursor:pointer;background:var(--surface)">
+        <div style="width:46px;height:46px;border-radius:50%;background:var(--brand-50,#FFF3EA);display:inline-flex;align-items:center;justify-content:center;color:var(--brand);font-size:20px;margin-bottom:8px">
+          <i class="fa-solid fa-plus"></i>
+        </div>
+        <div class="h3">Add Photos</div>
+        <div class="t-sm" style="margin-top:3px">Upload up to 5 images · max 5MB each</div>
+      </div>
+    </div>
+
+    <!-- Condition seg -->
+    <div class="field">
+      <label class="label">Condition</label>
+      <div class="seg">
+        <button class="active" onclick="this.parentNode.querySelectorAll('button').forEach(b=>b.classList.remove('active'));this.classList.add('active')">New</button>
+        <button onclick="this.parentNode.querySelectorAll('button').forEach(b=>b.classList.remove('active'));this.classList.add('active')">Used</button>
+      </div>
+    </div>
+
+    <div class="field">
+      <label class="label">Location</label>
+      <div class="input-group">
+        <input class="input" type="text" placeholder="e.g. Lagos, NG">
+        <span class="input-icon"><i class="fa-solid fa-location-dot" style="color:var(--brand)"></i></span>
+      </div>
+    </div>
+
+    <div class="field">
+      <label class="label">Stock Quantity</label>
+      <input class="input" type="number" placeholder="1" inputmode="numeric">
+    </div>
+
+    <button class="btn btn-primary" onclick="App.toast('Listing submitted for review');App.go('scr-my-products')">Submit Listing</button>
+
+  </div>
+</section>

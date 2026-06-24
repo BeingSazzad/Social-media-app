@@ -1,0 +1,378 @@
+<!-- ads module -->
+
+<section class="screen" id="scr-my-ads"
+         data-topbar="back" data-nav="hide" data-title="My Ads">
+  <div class="pad stack">
+
+    <button class="btn btn-primary" onclick="App.go('scr-create-ad')">
+      <i class="fa-solid fa-plus"></i>&nbsp; Create Ad
+    </button>
+
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-top:6px">
+      <span class="section-title">Campaigns</span>
+      <span class="t-sm">3 active campaigns</span>
+    </div>
+
+    <!-- Campaign 1 — Active -->
+    <div class="card card-p" onclick="App.go('scr-ad-analytics')" style="cursor:pointer">
+      <div style="display:flex;align-items:center;gap:11px">
+        <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=400&q=80"
+             style="width:52px;height:52px;border-radius:12px;object-fit:cover">
+        <div style="flex:1;min-width:0">
+          <div class="h3" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Eid Fashion Sale 2026</div>
+          <div class="t-sm">Image Ad · Lagos & Kano</div>
+        </div>
+        <span class="badge badge-ok">Active</span>
+      </div>
+      <div class="divider" style="margin:12px 0"></div>
+      <div style="display:flex;gap:18px">
+        <div style="flex:1">
+          <div style="font-weight:700;font-size:15px">₦4,200</div>
+          <div class="t-sm">spent</div>
+        </div>
+        <div style="flex:1">
+          <div style="font-weight:700;font-size:15px">82,400</div>
+          <div class="t-sm">impressions</div>
+        </div>
+        <i class="fa-solid fa-chevron-right chev" style="align-self:center"></i>
+      </div>
+    </div>
+
+    <!-- Campaign 2 — Paused -->
+    <div class="card card-p" onclick="App.go('scr-ad-analytics')" style="cursor:pointer">
+      <div style="display:flex;align-items:center;gap:11px">
+        <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400&q=80"
+             style="width:52px;height:52px;border-radius:12px;object-fit:cover">
+        <div style="flex:1;min-width:0">
+          <div class="h3" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Adidas Sneaker Drop</div>
+          <div class="t-sm">Video Ad · Nationwide</div>
+        </div>
+        <span class="badge badge-gray">Paused</span>
+      </div>
+      <div class="divider" style="margin:12px 0"></div>
+      <div style="display:flex;gap:18px">
+        <div style="flex:1">
+          <div style="font-weight:700;font-size:15px">₦12,750</div>
+          <div class="t-sm">spent</div>
+        </div>
+        <div style="flex:1">
+          <div style="font-weight:700;font-size:15px">214,900</div>
+          <div class="t-sm">impressions</div>
+        </div>
+        <i class="fa-solid fa-chevron-right chev" style="align-self:center"></i>
+      </div>
+    </div>
+
+    <!-- Campaign 3 — Ended -->
+    <div class="card card-p" onclick="App.go('scr-ad-analytics')" style="cursor:pointer">
+      <div style="display:flex;align-items:center;gap:11px">
+        <img src="https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?w=400&q=80"
+             style="width:52px;height:52px;border-radius:12px;object-fit:cover">
+        <div style="flex:1;min-width:0">
+          <div class="h3" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Tariq's Tech Gadgets</div>
+          <div class="t-sm">Post Boost · Lagos</div>
+        </div>
+        <span class="badge badge-warn" style="background:#F1EFEC;color:var(--ink-2)">Ended</span>
+      </div>
+      <div class="divider" style="margin:12px 0"></div>
+      <div style="display:flex;gap:18px">
+        <div style="flex:1">
+          <div style="font-weight:700;font-size:15px">₦8,000</div>
+          <div class="t-sm">spent</div>
+        </div>
+        <div style="flex:1">
+          <div style="font-weight:700;font-size:15px">156,300</div>
+          <div class="t-sm">impressions</div>
+        </div>
+        <i class="fa-solid fa-chevron-right chev" style="align-self:center"></i>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<section class="screen" id="scr-create-ad"
+         data-topbar="back" data-nav="hide" data-title="Create Ad">
+  <div class="pad stack">
+
+    <div class="field">
+      <label class="label">Ad Title</label>
+      <input class="input" type="text" placeholder="e.g. Eid Fashion Sale 2026">
+    </div>
+
+    <div class="field">
+      <label class="label">Ad Type</label>
+      <div class="seg">
+        <button class="active" onclick="App.toast('Image ad selected')">Image</button>
+        <button onclick="App.toast('Video ad selected')">Video</button>
+        <button onclick="App.toast('Post boost selected')">Post Boost</button>
+      </div>
+    </div>
+
+    <div class="section-title" style="margin-top:4px">Target Audience</div>
+
+    <div class="field">
+      <label class="label">Country</label>
+      <select class="input">
+        <option>Nigeria</option>
+        <option>Bangladesh</option>
+        <option>Ghana</option>
+        <option>Kenya</option>
+        <option>United Kingdom</option>
+      </select>
+    </div>
+
+    <div class="field">
+      <label class="label">Age Range</label>
+      <select class="input">
+        <option>18 – 24</option>
+        <option selected>25 – 34</option>
+        <option>35 – 44</option>
+        <option>45 – 54</option>
+        <option>55+</option>
+      </select>
+    </div>
+
+    <div class="field">
+      <label class="label">Interests</label>
+      <div class="chip-row">
+        <span class="chip active" onclick="App.toast('Fashion added')">Fashion</span>
+        <span class="chip active" onclick="App.toast('Shopping added')">Shopping</span>
+        <span class="chip" onclick="App.toast('Tech added')">Tech</span>
+        <span class="chip" onclick="App.toast('Sports added')">Sports</span>
+        <span class="chip" onclick="App.toast('Beauty added')">Beauty</span>
+        <span class="chip" onclick="App.toast('Travel added')">Travel</span>
+      </div>
+    </div>
+
+    <div class="field">
+      <label class="label">Budget (₦ per day)</label>
+      <input class="input" type="number" value="1000" placeholder="1000">
+    </div>
+
+    <div style="display:flex;gap:12px">
+      <div class="field" style="flex:1">
+        <label class="label">Start Date</label>
+        <input class="input" type="date" value="2026-06-26">
+      </div>
+      <div class="field" style="flex:1">
+        <label class="label">End Date</label>
+        <input class="input" type="date" value="2026-07-02">
+      </div>
+    </div>
+
+    <div class="field">
+      <label class="label">Media</label>
+      <div onclick="App.toast('Media picker opened')"
+           style="border:1.5px dashed var(--line);border-radius:14px;padding:28px 16px;text-align:center;cursor:pointer;background:var(--surface)">
+        <i class="fa-solid fa-cloud-arrow-up" style="font-size:26px;color:var(--brand)"></i>
+        <div class="h3" style="margin-top:8px">Upload Media</div>
+        <p class="t-sm">PNG, JPG or MP4 · up to 30MB</p>
+      </div>
+    </div>
+
+    <div class="field">
+      <label class="label">Ad Copy</label>
+      <textarea class="input" rows="3" placeholder="Write a short, catchy message for your audience…">Up to 50% off this Eid! Shop the freshest fits before they're gone.</textarea>
+    </div>
+
+    <!-- Total cost preview -->
+    <div class="card card-p navy" style="color:#fff">
+      <div style="display:flex;justify-content:space-between;align-items:center">
+        <div>
+          <div class="t-sm" style="color:#C9C4BD">Total Cost</div>
+          <div style="font-weight:700;font-size:22px">₦7,000</div>
+        </div>
+        <div style="text-align:right">
+          <div class="t-sm" style="color:#C9C4BD">₦1,000 / day</div>
+          <div class="t-sm" style="color:#C9C4BD">× 7 days</div>
+        </div>
+      </div>
+    </div>
+
+    <div style="display:flex;justify-content:space-between;align-items:center;padding:0 4px">
+      <span class="t-sm"><i class="fa-solid fa-wallet" style="color:var(--brand)"></i>&nbsp; Wallet balance</span>
+      <span style="font-weight:700;font-size:13px">₦42,500</span>
+    </div>
+
+    <button class="btn btn-primary" onclick="App.toast('Campaign launched! 🚀')">Launch Campaign</button>
+
+  </div>
+</section>
+
+
+<section class="screen" id="scr-ad-analytics"
+         data-topbar="back" data-nav="hide" data-title="Ad Analytics">
+  <div class="pad stack">
+
+    <div style="display:flex;align-items:center;gap:11px">
+      <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=400&q=80"
+           style="width:48px;height:48px;border-radius:12px;object-fit:cover">
+      <div style="flex:1;min-width:0">
+        <div class="h3">Eid Fashion Sale 2026</div>
+        <div class="t-sm">Image Ad · started Jun 19</div>
+      </div>
+      <span class="badge badge-ok">Active</span>
+    </div>
+
+    <!-- 2x2 stat grid -->
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+      <div class="card card-p">
+        <div class="t-sm">Impressions</div>
+        <div style="font-weight:700;font-size:21px;margin-top:3px">82,400</div>
+        <div class="t-sm" style="color:var(--ok)"><i class="fa-solid fa-arrow-up"></i> 12% this week</div>
+      </div>
+      <div class="card card-p">
+        <div class="t-sm">Clicks</div>
+        <div style="font-weight:700;font-size:21px;margin-top:3px">3,180</div>
+        <div class="t-sm" style="color:var(--ok)"><i class="fa-solid fa-arrow-up"></i> 8% this week</div>
+      </div>
+      <div class="card card-p">
+        <div class="t-sm">CTR</div>
+        <div style="font-weight:700;font-size:21px;margin-top:3px">3.8%</div>
+        <div class="t-sm" style="color:var(--ink-3)">avg 2.1%</div>
+      </div>
+      <div class="card card-p">
+        <div class="t-sm">Spend</div>
+        <div style="font-weight:700;font-size:21px;margin-top:3px">₦4,200</div>
+        <div class="t-sm" style="color:var(--ink-3)">of ₦7,000</div>
+      </div>
+    </div>
+
+    <!-- Daily impressions bar chart -->
+    <div class="card card-p">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px">
+        <span class="section-title">Daily Impressions</span>
+        <span class="t-sm">Last 7 days</span>
+      </div>
+      <div style="display:flex;gap:9px">
+        <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:8px">
+          <div style="width:100%;height:110px;background:#F4EFE9;border-radius:7px;display:flex;align-items:flex-end;overflow:hidden">
+            <div style="width:100%;height:48%;background:var(--brand-grad)"></div>
+          </div>
+          <span class="t-sm" style="font-size:11px">Thu</span>
+        </div>
+        <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:8px">
+          <div style="width:100%;height:110px;background:#F4EFE9;border-radius:7px;display:flex;align-items:flex-end;overflow:hidden">
+            <div style="width:100%;height:64%;background:var(--brand-grad)"></div>
+          </div>
+          <span class="t-sm" style="font-size:11px">Fri</span>
+        </div>
+        <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:8px">
+          <div style="width:100%;height:110px;background:#F4EFE9;border-radius:7px;display:flex;align-items:flex-end;overflow:hidden">
+            <div style="width:100%;height:42%;background:var(--brand-grad)"></div>
+          </div>
+          <span class="t-sm" style="font-size:11px">Sat</span>
+        </div>
+        <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:8px">
+          <div style="width:100%;height:110px;background:#F4EFE9;border-radius:7px;display:flex;align-items:flex-end;overflow:hidden">
+            <div style="width:100%;height:88%;background:var(--brand-grad)"></div>
+          </div>
+          <span class="t-sm" style="font-size:11px">Sun</span>
+        </div>
+        <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:8px">
+          <div style="width:100%;height:110px;background:#F4EFE9;border-radius:7px;display:flex;align-items:flex-end;overflow:hidden">
+            <div style="width:100%;height:70%;background:var(--brand-grad)"></div>
+          </div>
+          <span class="t-sm" style="font-size:11px">Mon</span>
+        </div>
+        <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:8px">
+          <div style="width:100%;height:110px;background:#F4EFE9;border-radius:7px;display:flex;align-items:flex-end;overflow:hidden">
+            <div style="width:100%;height:100%;background:var(--brand-grad)"></div>
+          </div>
+          <span class="t-sm" style="font-size:11px">Tue</span>
+        </div>
+        <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:8px">
+          <div style="width:100%;height:110px;background:#F4EFE9;border-radius:7px;display:flex;align-items:flex-end;overflow:hidden">
+            <div style="width:100%;height:76%;background:var(--brand-grad)"></div>
+          </div>
+          <span class="t-sm" style="font-size:11px">Wed</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Pause control -->
+    <div class="card card-p">
+      <div class="list-row">
+        <i class="fa-solid fa-circle-pause" style="color:var(--brand)"></i>
+        <div style="flex:1">
+          <div class="h3">Pause Campaign</div>
+          <div class="t-sm">Stop spending without ending the ad</div>
+        </div>
+        <label class="switch"><input type="checkbox" onclick="App.toast('Campaign paused')"><span></span></label>
+      </div>
+    </div>
+
+    <button class="btn btn-outline" onclick="App.go('scr-boost-post')">Boost a Post Instead</button>
+
+  </div>
+</section>
+
+
+<section class="screen" id="scr-boost-post"
+         data-topbar="back" data-nav="hide" data-title="Boost Post">
+  <div class="pad stack">
+
+    <div class="section-title">Post Preview</div>
+
+    <!-- Read-only post preview -->
+    <article class="card" style="overflow:hidden;padding:0">
+      <div style="display:flex;align-items:center;gap:11px;padding:13px 14px">
+        <img class="ava" src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?w=400&q=80"
+             style="width:42px;height:42px">
+        <div style="flex:1;min-width:0">
+          <div style="font-weight:700;font-size:14px">Rahima Akter <i class="fa-solid fa-circle-check verified" style="font-size:12px"></i></div>
+          <div class="t-sm">2 days ago · <i class="fa-solid fa-earth-asia"></i></div>
+        </div>
+      </div>
+      <p style="padding:0 14px 12px;font-size:14px;line-height:1.55">New arrivals just landed at the boutique — handwoven Eid collection in stock now. Tap to shop before they sell out!</p>
+      <img src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=400&q=80"
+           style="width:100%;height:200px;object-fit:cover">
+      <div style="padding:10px 14px;display:flex;justify-content:space-between" class="t-sm">
+        <span><i class="fa-solid fa-heart" style="color:#EF4444"></i> 842</span>
+        <span>54 comments</span>
+      </div>
+    </article>
+
+    <div class="field">
+      <label class="label">Budget (₦ per day)</label>
+      <input class="input" type="number" value="1000" placeholder="1000">
+    </div>
+
+    <div class="field">
+      <label class="label">Duration</label>
+      <div class="chip-row">
+        <span class="chip" onclick="App.toast('1 day selected')">1 day</span>
+        <span class="chip" onclick="App.toast('3 days selected')">3 days</span>
+        <span class="chip active" onclick="App.toast('7 days selected')">7 days</span>
+        <span class="chip" onclick="App.toast('14 days selected')">14 days</span>
+      </div>
+    </div>
+
+    <!-- Estimated reach -->
+    <div class="card card-p">
+      <div class="list-row">
+        <i class="fa-solid fa-users-viewfinder" style="color:var(--brand)"></i>
+        <div style="flex:1">
+          <div class="h3">Estimated reach</div>
+          <div class="t-sm">~12,000 – 18,000 people</div>
+        </div>
+      </div>
+      <div class="bar" style="margin-top:12px"><i style="width:68%"></i></div>
+    </div>
+
+    <div style="display:flex;justify-content:space-between;align-items:center;padding:0 4px">
+      <span class="t-sm">Total cost</span>
+      <span style="font-weight:700;font-size:18px">₦7,000</span>
+    </div>
+
+    <div style="display:flex;justify-content:space-between;align-items:center;padding:0 4px">
+      <span class="t-sm"><i class="fa-solid fa-wallet" style="color:var(--brand)"></i>&nbsp; Wallet balance</span>
+      <span style="font-weight:700;font-size:13px">₦42,500</span>
+    </div>
+
+    <button class="btn btn-primary" onclick="App.toast('Post boosted! 🚀')">Boost Now</button>
+
+  </div>
+</section>

@@ -1,0 +1,514 @@
+<!-- module: profile -->
+
+<!-- ============================================================= -->
+<!-- 1) OWN PROFILE -->
+<!-- ============================================================= -->
+<section class="screen" id="scr-profile" data-topbar="app" data-nav="show" data-tab="profile" data-title="Profile">
+
+  <!-- Cover + avatar -->
+  <div style="position:relative;height:130px;overflow:hidden">
+    <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=800&auto=format&fit=crop&q=70" style="width:100%;height:100%;object-fit:cover">
+    <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(28,25,23,.05),rgba(28,25,23,.35))"></div>
+    <button onclick="App.toast('Cover photo updated')" style="position:absolute;top:12px;right:12px;display:flex;align-items:center;gap:6px;background:rgba(28,25,23,.55);color:#fff;border:none;border-radius:999px;padding:7px 13px;font-size:12px;font-weight:700;cursor:pointer;backdrop-filter:blur(6px)">
+      <i class="fa-solid fa-camera"></i> Change Cover
+    </button>
+  </div>
+
+  <!-- Avatar overlapping cover -->
+  <div class="pad" style="padding-top:0;padding-bottom:0;position:relative">
+    <div style="position:relative;width:88px;height:88px;margin-top:-44px">
+      <img class="ava ava-ring" src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=200&q=80" style="width:88px;height:88px;border:3px solid #fff">
+      <button onclick="App.toast('Tap to change photo')" style="position:absolute;right:-2px;bottom:-2px;width:30px;height:30px;border-radius:50%;background:var(--brand-grad);color:#fff;border:2px solid #fff;display:flex;align-items:center;justify-content:center;font-size:12px;cursor:pointer;box-shadow:0 4px 10px -4px rgba(255,106,1,.6)">
+        <i class="fa-solid fa-camera"></i>
+      </button>
+    </div>
+
+    <!-- Identity -->
+    <div style="margin-top:10px">
+      <div style="display:flex;align-items:center;gap:7px">
+        <span class="h2" style="font-weight:700">Sohag Rahman</span>
+        <i class="fa-solid fa-circle-check verified" style="font-size:16px"></i>
+      </div>
+      <div class="t-sm" style="margin-top:2px">@sohag_rahman</div>
+      <div class="t-sm" style="margin-top:6px;display:flex;align-items:center;gap:10px">
+        <span style="color:var(--ink-2);font-weight:600"><i class="fa-solid fa-star" style="color:#F59E0B"></i> 4.9 rating</span>
+        <span style="width:3px;height:3px;border-radius:50%;background:var(--ink-3);display:inline-block"></span>
+        <span>Visited 1.2k&nbsp;×</span>
+      </div>
+    </div>
+
+    <!-- Stats strip -->
+    <div style="display:flex;margin-top:14px;border:1px solid var(--line);border-radius:14px;overflow:hidden;background:#fff">
+      <button onclick="App.toast('Your posts')" style="flex:1;background:none;border:none;padding:11px 4px;cursor:pointer;text-align:center">
+        <div style="font-size:16px;font-weight:700;color:var(--ink)">184</div>
+        <div class="t-sm" style="margin-top:1px">Posts</div>
+      </button>
+      <button onclick="App.go('scr-contacts')" style="flex:1;background:none;border:none;border-left:1px solid var(--line);padding:11px 4px;cursor:pointer;text-align:center">
+        <div style="font-size:16px;font-weight:700;color:var(--ink)">248</div>
+        <div class="t-sm" style="margin-top:1px">Friends</div>
+      </button>
+      <button onclick="App.go('scr-contacts')" style="flex:1;background:none;border:none;border-left:1px solid var(--line);padding:11px 4px;cursor:pointer;text-align:center">
+        <div style="font-size:16px;font-weight:700;color:var(--ink)">12.4k</div>
+        <div class="t-sm" style="margin-top:1px">Followers</div>
+      </button>
+    </div>
+  </div>
+
+  <!-- Action row -->
+  <div class="pad" style="padding-bottom:6px;display:flex;gap:10px">
+    <button class="btn btn-dark" style="flex:1" onclick="App.go('scr-edit-profile')"><i class="fa-solid fa-pen" style="font-size:13px;margin-right:6px"></i>Edit Profile</button>
+    <button class="btn btn-primary" style="flex:1" onclick="App.go('scr-messages')"><i class="fa-regular fa-comment" style="font-size:14px;margin-right:6px"></i>Messages</button>
+  </div>
+
+  <!-- Profile tab chip row -->
+  <div class="chip-row pad" style="padding-top:8px;padding-bottom:8px">
+    <span class="chip active" onclick="App.toast('Timeline')">Timeline</span>
+    <span class="chip" onclick="App.go('scr-contacts')">Friends</span>
+    <span class="chip" onclick="App.toast('Photos')">Photos</span>
+    <span class="chip" onclick="App.go('scr-egifts')">eGifts</span>
+    <span class="chip" onclick="App.go('scr-blogs')">Blogs</span>
+    <span class="chip" onclick="App.go('scr-videos')">Videos</span>
+    <span class="chip" onclick="App.go('scr-events')">Events</span>
+  </div>
+
+  <!-- Timeline content -->
+  <div class="pad stack" style="padding-top:0">
+
+    <!-- Composer -->
+    <div class="card card-p" style="display:flex;align-items:center;gap:12px;cursor:pointer" onclick="App.go('scr-composer')">
+      <img class="ava" src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=120&q=80" style="width:42px;height:42px">
+      <div style="flex:1;color:var(--ink-3);font-size:14px">Share something, Sohag…</div>
+      <i class="fa-solid fa-image" style="color:var(--ok)"></i>
+    </div>
+
+    <!-- post 1 -->
+    <article class="post">
+      <div style="display:flex;align-items:center;gap:11px;padding:13px 14px">
+        <img class="ava" src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=120&q=80" style="width:42px;height:42px">
+        <div style="flex:1;min-width:0">
+          <div style="font-weight:700;font-size:14px">Sohag Rahman <i class="fa-solid fa-circle-check verified" style="font-size:12px"></i></div>
+          <div class="t-sm">3 hrs ago · <i class="fa-solid fa-earth-asia"></i></div>
+        </div>
+        <button class="icon-btn" onclick="App.openSheet('sheet-post-options')"><i class="fa-solid fa-ellipsis"></i></button>
+      </div>
+      <p style="padding:0 14px 12px;font-size:14px;line-height:1.55">Sunset over the Buriganga tonight 🌇 Grateful for this community. <span class="text-brand">#evinie #dhaka</span></p>
+      <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=800&auto=format&fit=crop&q=70" style="width:100%;height:220px;object-fit:cover">
+      <div style="padding:10px 14px;display:flex;align-items:center;justify-content:space-between" class="t-sm">
+        <span><i class="fa-solid fa-heart" style="color:#EF4444"></i> 842 reactions</span><span>54 comments · 9 shares</span>
+      </div>
+      <div class="divider"></div>
+      <div class="post-actions">
+        <button onclick="likeBtn(this)"><i class="fa-regular fa-heart"></i> Like</button>
+        <button onclick="App.go('scr-post-detail')"><i class="fa-regular fa-comment"></i> Comment</button>
+        <button onclick="App.toast('Shared to your timeline')"><i class="fa-solid fa-share"></i> Share</button>
+      </div>
+    </article>
+
+    <!-- post 2 -->
+    <article class="post">
+      <div style="display:flex;align-items:center;gap:11px;padding:13px 14px">
+        <img class="ava" src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=120&q=80" style="width:42px;height:42px">
+        <div style="flex:1;min-width:0">
+          <div style="font-weight:700;font-size:14px">Sohag Rahman <i class="fa-solid fa-circle-check verified" style="font-size:12px"></i></div>
+          <div class="t-sm">Yesterday · <i class="fa-solid fa-earth-asia"></i></div>
+        </div>
+        <button class="icon-btn" onclick="App.openSheet('sheet-post-options')"><i class="fa-solid fa-ellipsis"></i></button>
+      </div>
+      <p style="padding:0 14px 12px;font-size:14px;line-height:1.55">Hit 1.2k profile visits this month — thank you all 🙏 Drop a hello below if we haven't met yet!</p>
+      <div class="divider"></div>
+      <div class="post-actions">
+        <button onclick="likeBtn(this)"><i class="fa-regular fa-heart"></i> Like</button>
+        <button onclick="App.go('scr-post-detail')"><i class="fa-regular fa-comment"></i> Comment</button>
+        <button onclick="App.toast('Shared to your timeline')"><i class="fa-solid fa-share"></i> Share</button>
+      </div>
+    </article>
+
+    <!-- Audio / Video Call widget -->
+    <div class="card card-p navy" style="border:none">
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px">
+        <div style="width:42px;height:42px;border-radius:12px;background:rgba(255,255,255,.12);display:flex;align-items:center;justify-content:center"><i class="fa-solid fa-video" style="color:#fff;font-size:16px"></i></div>
+        <div style="flex:1">
+          <div class="h3" style="color:#fff">Audio / Video Call</div>
+          <div style="font-size:12px;color:#CBD5E1;margin-top:1px">Connect face-to-face instantly</div>
+        </div>
+      </div>
+      <button class="btn btn-success" style="width:100%" onclick="App.toast('Starting Google Meet…')"><i class="fa-brands fa-google" style="margin-right:8px"></i>Start Google Meet</button>
+    </div>
+
+    <!-- Friends mini grid -->
+    <div class="card card-p">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
+        <span class="section-title">Friends · 248</span>
+        <button onclick="App.go('scr-contacts')" style="background:none;border:none;color:var(--brand);font-weight:700;font-size:12px;cursor:pointer">See all</button>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px">
+        <div style="text-align:center;cursor:pointer" onclick="App.go('scr-user-profile')">
+          <img class="ava" src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=120&q=80" style="width:100%;aspect-ratio:1;border-radius:14px">
+          <div class="t-sm" style="margin-top:5px;color:var(--ink-2);font-weight:600">Nusrat</div>
+        </div>
+        <div style="text-align:center;cursor:pointer" onclick="App.go('scr-user-profile')">
+          <img class="ava" src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=120&q=80" style="width:100%;aspect-ratio:1;border-radius:14px">
+          <div class="t-sm" style="margin-top:5px;color:var(--ink-2);font-weight:600">Tanvir</div>
+        </div>
+        <div style="text-align:center;cursor:pointer" onclick="App.go('scr-user-profile')">
+          <img class="ava" src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=120&q=80" style="width:100%;aspect-ratio:1;border-radius:14px">
+          <div class="t-sm" style="margin-top:5px;color:var(--ink-2);font-weight:600">Mitu</div>
+        </div>
+        <div style="text-align:center;cursor:pointer" onclick="App.go('scr-user-profile')">
+          <img class="ava" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=120&q=80" style="width:100%;aspect-ratio:1;border-radius:14px">
+          <div class="t-sm" style="margin-top:5px;color:var(--ink-2);font-weight:600">Adebayo</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Photo Albums preview -->
+    <div class="card card-p">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
+        <span class="section-title">Photo Albums</span>
+        <button onclick="App.toast('Opening albums')" style="background:none;border:none;color:var(--brand);font-weight:700;font-size:12px;cursor:pointer">See all</button>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px">
+        <img onclick="App.toast('Album: Travel')" src="https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?w=300&q=80" style="width:100%;aspect-ratio:1;object-fit:cover;border-radius:12px;cursor:pointer">
+        <img onclick="App.toast('Album: Food')" src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=300&q=80" style="width:100%;aspect-ratio:1;object-fit:cover;border-radius:12px;cursor:pointer">
+        <div style="position:relative;cursor:pointer" onclick="App.toast('Album: City')">
+          <img src="https://images.unsplash.com/photo-1480714378408-67cf0d13bc1b?w=300&q=80" style="width:100%;aspect-ratio:1;object-fit:cover;border-radius:12px">
+          <div style="position:absolute;inset:0;background:rgba(28,25,23,.5);border-radius:12px;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:15px">+24</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div style="height:24px"></div>
+</section>
+
+
+<!-- ============================================================= -->
+<!-- 2) EDIT PROFILE -->
+<!-- ============================================================= -->
+<section class="screen" id="scr-edit-profile" data-topbar="back" data-nav="hide" data-title="Edit Profile">
+  <div class="pad stack" style="padding-bottom:24px">
+
+    <!-- Basic Settings -->
+    <div class="card card-p">
+      <div class="section-title" style="margin-bottom:14px">Basic Settings</div>
+
+      <div style="display:flex;gap:12px">
+        <div class="field" style="flex:1;margin-bottom:14px">
+          <label class="label">First Name</label>
+          <input class="input" value="Sohag">
+        </div>
+        <div class="field" style="flex:1;margin-bottom:14px">
+          <label class="label">Last Name</label>
+          <input class="input" value="Rahman">
+        </div>
+      </div>
+
+      <div class="field">
+        <label class="label">Username</label>
+        <input class="input" value="sohag_rahman">
+      </div>
+      <div class="field">
+        <label class="label">Mobile</label>
+        <input class="input" type="tel" value="+880 1711 223344">
+      </div>
+      <div class="field">
+        <label class="label">Birthdate</label>
+        <input class="input" type="date" value="1996-04-12">
+      </div>
+      <div class="field">
+        <label class="label">Country</label>
+        <select class="input">
+          <option>Bangladesh</option>
+          <option>Nigeria</option>
+          <option>United Kingdom</option>
+          <option>United States</option>
+          <option>India</option>
+        </select>
+      </div>
+      <div class="field">
+        <label class="label">Gender</label>
+        <div class="seg">
+          <button class="active" onclick="this.parentNode.querySelectorAll('button').forEach(b=>b.classList.remove('active'));this.classList.add('active')">Male</button>
+          <button onclick="this.parentNode.querySelectorAll('button').forEach(b=>b.classList.remove('active'));this.classList.add('active')">Female</button>
+          <button onclick="this.parentNode.querySelectorAll('button').forEach(b=>b.classList.remove('active'));this.classList.add('active')">Other</button>
+        </div>
+      </div>
+      <div class="field">
+        <label class="label">Bio</label>
+        <textarea class="input" rows="3" style="resize:none;line-height:1.5" placeholder="Tell people about yourself…">Product designer in Dhaka. Building warm, human-centric communities. ☕</textarea>
+      </div>
+      <div class="field" style="margin-bottom:16px">
+        <label class="label">Language</label>
+        <select class="input">
+          <option>English</option>
+          <option>বাংলা (Bangla)</option>
+          <option>Hausa</option>
+          <option>Yoruba</option>
+        </select>
+      </div>
+
+      <button class="btn btn-primary" style="width:100%" onclick="App.toast('Profile saved')">Save Changes</button>
+    </div>
+
+    <!-- Payout Details -->
+    <div class="card card-p">
+      <div class="section-title" style="margin-bottom:14px">Payout Details</div>
+      <div class="field">
+        <label class="label">Account Name</label>
+        <input class="input" value="Sohag Rahman">
+      </div>
+      <div class="field">
+        <label class="label">Account Number</label>
+        <input class="input" type="text" value="0123456789">
+      </div>
+      <div class="field" style="margin-bottom:16px">
+        <label class="label">Cashout Bank</label>
+        <select class="input">
+          <option selected disabled>Select Cashout Bank</option>
+          <option>Access Bank</option>
+          <option>Guaranty Trust Bank (GTB)</option>
+          <option>First Bank of Nigeria</option>
+          <option>Zenith Bank</option>
+          <option>Dutch-Bangla Bank</option>
+        </select>
+      </div>
+      <button class="btn btn-dark" style="width:100%" onclick="App.toast('Payout details saved')">Save Payout Details</button>
+    </div>
+
+    <!-- Blocking -->
+    <div class="card card-p">
+      <div class="section-title" style="margin-bottom:12px">Blocking</div>
+      <div class="input-group" style="margin-bottom:12px">
+        <input class="input" placeholder="Search a user to block…">
+        <span class="input-icon"><i class="fa-solid fa-magnifying-glass" style="color:var(--ink-3)"></i></span>
+      </div>
+      <div class="list-row" style="padding:8px 0;border-top:1px solid var(--line)">
+        <img class="ava" src="https://images.unsplash.com/photo-1502685104226-ee32379fefbe?w=120&q=80" style="width:40px;height:40px">
+        <div style="flex:1"><div class="h3">Imran Khalid</div><div class="t-sm">@imran_k</div></div>
+        <button class="btn-sm btn-soft" onclick="this.textContent='Unblocked';this.disabled=true;App.toast('User unblocked')">Unblock</button>
+      </div>
+    </div>
+
+    <!-- Two-Factor Authentication -->
+    <div class="card card-p">
+      <div class="section-title" style="margin-bottom:12px">Two-Factor Authentication</div>
+      <div class="list-row" style="padding:6px 0">
+        <i class="fa-solid fa-shield-halved" style="color:var(--brand);font-size:17px"></i>
+        <div style="flex:1"><div class="h3">Enable 2FA</div><div class="t-sm">Add an extra layer of security</div></div>
+        <label class="switch"><input type="checkbox" checked onchange="App.toast(this.checked?'2FA on':'2FA off')"><span></span></label>
+      </div>
+      <div style="margin-top:10px">
+        <label class="label">Method</label>
+        <div class="seg">
+          <button class="active" onclick="this.parentNode.querySelectorAll('button').forEach(b=>b.classList.remove('active'));this.classList.add('active');App.toast('2FA via Authenticator App')">Authenticator App</button>
+          <button onclick="this.parentNode.querySelectorAll('button').forEach(b=>b.classList.remove('active'));this.classList.add('active');App.toast('2FA via SMS')">SMS</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Push Notifications -->
+    <div class="card card-p">
+      <div class="section-title" style="margin-bottom:6px">Push Notifications</div>
+      <div class="list-row" style="padding:11px 0;border-bottom:1px solid var(--line)">
+        <i class="fa-regular fa-comment-dots" style="color:var(--info);width:20px;text-align:center"></i>
+        <div style="flex:1"><div class="h3">Messages</div></div>
+        <label class="switch"><input type="checkbox" checked onchange="App.toast('Message alerts '+(this.checked?'on':'off'))"><span></span></label>
+      </div>
+      <div class="list-row" style="padding:11px 0;border-bottom:1px solid var(--line)">
+        <i class="fa-solid fa-heart" style="color:#EF4444;width:20px;text-align:center"></i>
+        <div style="flex:1"><div class="h3">Likes &amp; Reactions</div></div>
+        <label class="switch"><input type="checkbox" checked onchange="App.toast('Like alerts '+(this.checked?'on':'off'))"><span></span></label>
+      </div>
+      <div class="list-row" style="padding:11px 0;border-bottom:1px solid var(--line)">
+        <i class="fa-regular fa-comments" style="color:var(--ink-2);width:20px;text-align:center"></i>
+        <div style="flex:1"><div class="h3">Comments</div></div>
+        <label class="switch"><input type="checkbox" checked onchange="App.toast('Comment alerts '+(this.checked?'on':'off'))"><span></span></label>
+      </div>
+      <div class="list-row" style="padding:11px 0;border-bottom:1px solid var(--line)">
+        <i class="fa-solid fa-user-plus" style="color:var(--ok);width:20px;text-align:center"></i>
+        <div style="flex:1"><div class="h3">Friend Requests</div></div>
+        <label class="switch"><input type="checkbox" checked onchange="App.toast('Friend request alerts '+(this.checked?'on':'off'))"><span></span></label>
+      </div>
+      <div class="list-row" style="padding:11px 0;border-bottom:1px solid var(--line)">
+        <i class="fa-solid fa-gift" style="color:var(--brand);width:20px;text-align:center"></i>
+        <div style="flex:1"><div class="h3">eGifts</div></div>
+        <label class="switch"><input type="checkbox" onchange="App.toast('eGift alerts '+(this.checked?'on':'off'))"><span></span></label>
+      </div>
+      <div class="list-row" style="padding:11px 0">
+        <i class="fa-solid fa-triangle-exclamation" style="color:var(--warn);width:20px;text-align:center"></i>
+        <div style="flex:1"><div class="h3">System Alerts</div></div>
+        <label class="switch"><input type="checkbox" checked onchange="App.toast('System alerts '+(this.checked?'on':'off'))"><span></span></label>
+      </div>
+    </div>
+
+    <!-- Contact Suggestions -->
+    <div class="card card-p">
+      <div class="section-title" style="margin-bottom:6px">Contact Suggestions</div>
+      <div class="list-row" style="padding:11px 0;border-bottom:1px solid var(--line)">
+        <div style="flex:1"><div class="h3">Suggest me to others</div><div class="t-sm">Appear in people-you-may-know</div></div>
+        <label class="switch"><input type="checkbox" checked onchange="App.toast('Suggestions '+(this.checked?'on':'off'))"><span></span></label>
+      </div>
+      <div class="list-row" style="padding:11px 0">
+        <div style="flex:1"><div class="h3">Show my contacts to me</div><div class="t-sm">Sync from your phonebook</div></div>
+        <label class="switch"><input type="checkbox" onchange="App.toast('Contact sync '+(this.checked?'on':'off'))"><span></span></label>
+      </div>
+    </div>
+
+    <!-- Email Notifications -->
+    <div class="card card-p">
+      <div class="section-title" style="margin-bottom:6px">Email Notifications</div>
+      <div class="list-row" style="padding:11px 0;border-bottom:1px solid var(--line)">
+        <div style="flex:1"><div class="h3">Weekly digest</div><div class="t-sm">Top activity, every Monday</div></div>
+        <label class="switch"><input type="checkbox" checked onchange="App.toast('Weekly digest '+(this.checked?'on':'off'))"><span></span></label>
+      </div>
+      <div class="list-row" style="padding:11px 0">
+        <div style="flex:1"><div class="h3">Product &amp; offer emails</div><div class="t-sm">News, tips and promotions</div></div>
+        <label class="switch"><input type="checkbox" onchange="App.toast('Offer emails '+(this.checked?'on':'off'))"><span></span></label>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ============================================================= -->
+<!-- 3) OTHER USER PROFILE -->
+<!-- ============================================================= -->
+<section class="screen" id="scr-user-profile" data-topbar="back" data-nav="hide" data-title="Profile">
+
+  <!-- Cover + avatar (no edit affordances) -->
+  <div style="position:relative;height:130px;overflow:hidden">
+    <img src="https://images.unsplash.com/photo-1519681393784-d120267933ba?w=800&auto=format&fit=crop&q=70" style="width:100%;height:100%;object-fit:cover">
+    <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(28,25,23,.05),rgba(28,25,23,.35))"></div>
+  </div>
+
+  <div class="pad" style="padding-top:0;padding-bottom:0;position:relative">
+    <div style="width:88px;height:88px;margin-top:-44px">
+      <img class="ava ava-ring" src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=200&q=80" style="width:88px;height:88px;border:3px solid #fff">
+    </div>
+
+    <div style="margin-top:10px;display:flex;align-items:flex-start;gap:10px">
+      <div style="flex:1;min-width:0">
+        <div style="display:flex;align-items:center;gap:7px">
+          <span class="h2" style="font-weight:700">Nusrat Jahan</span>
+          <i class="fa-solid fa-circle-check verified" style="font-size:16px"></i>
+        </div>
+        <div class="t-sm" style="margin-top:2px">@nusrat.jahan</div>
+        <div class="t-sm" style="margin-top:6px;display:flex;align-items:center;gap:10px">
+          <span style="color:var(--ink-2);font-weight:600"><i class="fa-solid fa-star" style="color:#F59E0B"></i> 4.9 rating</span>
+          <span style="width:3px;height:3px;border-radius:50%;background:var(--ink-3);display:inline-block"></span>
+          <span>Visited 1.2k&nbsp;×</span>
+        </div>
+      </div>
+      <button class="icon-btn" style="margin-top:2px" onclick="App.openSheet('sheet-post-options')"><i class="fa-solid fa-ellipsis"></i></button>
+    </div>
+
+    <!-- Stats strip -->
+    <div style="display:flex;margin-top:14px;border:1px solid var(--line);border-radius:14px;overflow:hidden;background:#fff">
+      <button onclick="App.toast('Her posts')" style="flex:1;background:none;border:none;padding:11px 4px;cursor:pointer;text-align:center">
+        <div style="font-size:16px;font-weight:700;color:var(--ink)">326</div>
+        <div class="t-sm" style="margin-top:1px">Posts</div>
+      </button>
+      <button onclick="App.go('scr-contacts')" style="flex:1;background:none;border:none;border-left:1px solid var(--line);padding:11px 4px;cursor:pointer;text-align:center">
+        <div style="font-size:16px;font-weight:700;color:var(--ink)">512</div>
+        <div class="t-sm" style="margin-top:1px">Friends</div>
+      </button>
+      <button onclick="App.go('scr-contacts')" style="flex:1;background:none;border:none;border-left:1px solid var(--line);padding:11px 4px;cursor:pointer;text-align:center">
+        <div style="font-size:16px;font-weight:700;color:var(--ink)">28.9k</div>
+        <div class="t-sm" style="margin-top:1px">Followers</div>
+      </button>
+    </div>
+  </div>
+
+  <!-- Action row -->
+  <div class="pad" style="padding-bottom:6px;display:flex;gap:10px;align-items:center">
+    <button class="btn btn-primary" style="flex:1" onclick="this.textContent='Requested';this.disabled=true;App.toast('Friend request sent')"><i class="fa-solid fa-user-plus" style="font-size:13px;margin-right:6px"></i>Add Friend</button>
+    <button class="btn btn-ghost" style="flex:1" onclick="App.go('scr-chat')"><i class="fa-regular fa-comment" style="font-size:14px;margin-right:6px"></i>Message</button>
+    <button class="btn-sm btn-soft" style="height:48px;border-radius:14px" onclick="App.go('scr-send-gift')"><i class="fa-solid fa-gift"></i></button>
+  </div>
+
+  <!-- Profile tab chip row -->
+  <div class="chip-row pad" style="padding-top:8px;padding-bottom:8px">
+    <span class="chip active" onclick="App.toast('Timeline')">Timeline</span>
+    <span class="chip" onclick="App.go('scr-contacts')">Friends</span>
+    <span class="chip" onclick="App.toast('Photos')">Photos</span>
+    <span class="chip" onclick="App.go('scr-egifts')">eGifts</span>
+    <span class="chip" onclick="App.go('scr-blogs')">Blogs</span>
+    <span class="chip" onclick="App.go('scr-videos')">Videos</span>
+    <span class="chip" onclick="App.go('scr-events')">Events</span>
+  </div>
+
+  <!-- Timeline content -->
+  <div class="pad stack" style="padding-top:0">
+
+    <!-- post 1 -->
+    <article class="post">
+      <div style="display:flex;align-items:center;gap:11px;padding:13px 14px">
+        <img class="ava" src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=120&q=80" style="width:42px;height:42px">
+        <div style="flex:1;min-width:0">
+          <div style="font-weight:700;font-size:14px">Nusrat Jahan <i class="fa-solid fa-circle-check verified" style="font-size:12px"></i></div>
+          <div class="t-sm">1 hr ago · <i class="fa-solid fa-earth-asia"></i></div>
+        </div>
+        <button class="icon-btn" onclick="App.openSheet('sheet-post-options')"><i class="fa-solid fa-ellipsis"></i></button>
+      </div>
+      <p style="padding:0 14px 12px;font-size:14px;line-height:1.55">Launched my new pottery collection today! 🏺 So proud of how these turned out. <span class="text-brand">#handmade #lagos</span></p>
+      <img src="https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?w=800&auto=format&fit=crop&q=70" style="width:100%;height:220px;object-fit:cover">
+      <div style="padding:10px 14px;display:flex;align-items:center;justify-content:space-between" class="t-sm">
+        <span><i class="fa-solid fa-heart" style="color:#EF4444"></i> 1,540 reactions</span><span>88 comments · 21 shares</span>
+      </div>
+      <div class="divider"></div>
+      <div class="post-actions">
+        <button onclick="likeBtn(this)"><i class="fa-regular fa-heart"></i> Like</button>
+        <button onclick="App.go('scr-post-detail')"><i class="fa-regular fa-comment"></i> Comment</button>
+        <button onclick="App.toast('Shared to your timeline')"><i class="fa-solid fa-share"></i> Share</button>
+      </div>
+    </article>
+
+    <!-- post 2 -->
+    <article class="post">
+      <div style="display:flex;align-items:center;gap:11px;padding:13px 14px">
+        <img class="ava" src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=120&q=80" style="width:42px;height:42px">
+        <div style="flex:1;min-width:0">
+          <div style="font-weight:700;font-size:14px">Nusrat Jahan <i class="fa-solid fa-circle-check verified" style="font-size:12px"></i></div>
+          <div class="t-sm">2 days ago · <i class="fa-solid fa-earth-asia"></i></div>
+        </div>
+        <button class="icon-btn" onclick="App.openSheet('sheet-post-options')"><i class="fa-solid fa-ellipsis"></i></button>
+      </div>
+      <p style="padding:0 14px 12px;font-size:14px;line-height:1.55">Thank you for ₦250,000 raised for the community art studio 💛 You all are incredible.</p>
+      <div class="divider"></div>
+      <div class="post-actions">
+        <button onclick="likeBtn(this)"><i class="fa-regular fa-heart"></i> Like</button>
+        <button onclick="App.go('scr-post-detail')"><i class="fa-regular fa-comment"></i> Comment</button>
+        <button onclick="App.toast('Shared to your timeline')"><i class="fa-solid fa-share"></i> Share</button>
+      </div>
+    </article>
+
+    <!-- Friends mini grid -->
+    <div class="card card-p">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
+        <span class="section-title">Friends · 512</span>
+        <button onclick="App.go('scr-contacts')" style="background:none;border:none;color:var(--brand);font-weight:700;font-size:12px;cursor:pointer">See all</button>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px">
+        <div style="text-align:center;cursor:pointer" onclick="App.go('scr-user-profile')">
+          <img class="ava" src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=120&q=80" style="width:100%;aspect-ratio:1;border-radius:14px">
+          <div class="t-sm" style="margin-top:5px;color:var(--ink-2);font-weight:600">Arif</div>
+        </div>
+        <div style="text-align:center;cursor:pointer" onclick="App.go('scr-user-profile')">
+          <img class="ava" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=120&q=80" style="width:100%;aspect-ratio:1;border-radius:14px">
+          <div class="t-sm" style="margin-top:5px;color:var(--ink-2);font-weight:600">Tunde</div>
+        </div>
+        <div style="text-align:center;cursor:pointer" onclick="App.go('scr-user-profile')">
+          <img class="ava" src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=120&q=80" style="width:100%;aspect-ratio:1;border-radius:14px">
+          <div class="t-sm" style="margin-top:5px;color:var(--ink-2);font-weight:600">Mitu</div>
+        </div>
+        <div style="text-align:center;cursor:pointer" onclick="App.go('scr-user-profile')">
+          <img class="ava" src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=120&q=80" style="width:100%;aspect-ratio:1;border-radius:14px">
+          <div class="t-sm" style="margin-top:5px;color:var(--ink-2);font-weight:600">Sohag</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div style="height:24px"></div>
+</section>

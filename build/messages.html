@@ -1,0 +1,367 @@
+<!-- module: messages -->
+
+<!-- ============================ SCR-MESSAGES ============================ -->
+<section class="screen" id="scr-messages"
+         data-topbar="back" data-nav="hide" data-title="Messages">
+  <div class="pad stack">
+
+    <!-- search + New -->
+    <div style="display:flex;align-items:center;gap:10px">
+      <div style="flex:1;position:relative">
+        <i class="fa-solid fa-magnifying-glass"
+           style="position:absolute;left:14px;top:50%;transform:translateY(-50%);color:var(--ink-3);font-size:13px"></i>
+        <input class="input" type="text" placeholder="Search conversations"
+               style="padding-left:38px"
+               oninput="App.toast('Searching…')">
+      </div>
+      <button class="btn-sm"
+              onclick="App.toast('Start a new chat')"
+              style="background:var(--brand-grad);color:#fff;border:none;height:42px;padding:0 16px;border-radius:14px;font-weight:700;font-size:13px;display:flex;align-items:center;gap:6px;cursor:pointer;white-space:nowrap">
+        <i class="fa-solid fa-pen-to-square"></i> New
+      </button>
+    </div>
+
+    <!-- conversation list -->
+    <div class="card">
+
+      <!-- row 1: online + unread -->
+      <div class="list-row" onclick="App.go('scr-chat')" style="cursor:pointer">
+        <div style="position:relative;flex-shrink:0">
+          <img class="ava" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&q=80" style="width:48px;height:48px">
+          <span style="position:absolute;right:1px;bottom:1px;width:12px;height:12px;border-radius:50%;background:var(--ok);border:2px solid #fff"></span>
+        </div>
+        <div style="flex:1;min-width:0">
+          <div style="display:flex;justify-content:space-between;align-items:center;gap:8px">
+            <div class="h3" style="font-size:14px">Aisha Bello</div>
+            <div class="t-sm" style="font-size:11px;color:var(--brand)">2 min</div>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;margin-top:2px">
+            <div class="t-sm" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-weight:600;color:var(--ink-2)">Did you see the new listing? 😍</div>
+            <span style="flex-shrink:0;min-width:20px;height:20px;padding:0 6px;border-radius:10px;background:var(--brand-grad);color:#fff;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center">3</span>
+          </div>
+        </div>
+      </div>
+      <div class="divider"></div>
+
+      <!-- row 2: online + unread -->
+      <div class="list-row" onclick="App.go('scr-chat')" style="cursor:pointer">
+        <div style="position:relative;flex-shrink:0">
+          <img class="ava" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&q=80" style="width:48px;height:48px">
+          <span style="position:absolute;right:1px;bottom:1px;width:12px;height:12px;border-radius:50%;background:var(--ok);border:2px solid #fff"></span>
+        </div>
+        <div style="flex:1;min-width:0">
+          <div style="display:flex;justify-content:space-between;align-items:center;gap:8px">
+            <div class="h3" style="font-size:14px">Tunde Okafor</div>
+            <div class="t-sm" style="font-size:11px;color:var(--brand)">14 min</div>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;margin-top:2px">
+            <div class="t-sm" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-weight:600;color:var(--ink-2)"><i class="fa-solid fa-microphone" style="font-size:11px"></i> Voice note · 0:14</div>
+            <span style="flex-shrink:0;min-width:20px;height:20px;padding:0 6px;border-radius:10px;background:var(--brand-grad);color:#fff;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center">1</span>
+          </div>
+        </div>
+      </div>
+      <div class="divider"></div>
+
+      <!-- row 3: read, no badge -->
+      <div class="list-row" onclick="App.go('scr-chat')" style="cursor:pointer">
+        <div style="position:relative;flex-shrink:0">
+          <img class="ava" src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&q=80" style="width:48px;height:48px">
+        </div>
+        <div style="flex:1;min-width:0">
+          <div style="display:flex;justify-content:space-between;align-items:center;gap:8px">
+            <div class="h3" style="font-size:14px">Fatima Rahman</div>
+            <div class="t-sm" style="font-size:11px">1 hr</div>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;margin-top:2px">
+            <div class="t-sm" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis"><i class="fa-solid fa-check-double" style="color:var(--info);font-size:11px"></i> Sounds good, see you then!</div>
+          </div>
+        </div>
+      </div>
+      <div class="divider"></div>
+
+      <!-- row 4: group convo with unread -->
+      <div class="list-row" onclick="App.go('scr-group-chat')" style="cursor:pointer">
+        <div style="position:relative;flex-shrink:0">
+          <img class="ava" src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=400&q=80" style="width:48px;height:48px">
+        </div>
+        <div style="flex:1;min-width:0">
+          <div style="display:flex;justify-content:space-between;align-items:center;gap:8px">
+            <div class="h3" style="font-size:14px">Lagos Hustlers 🚀</div>
+            <div class="t-sm" style="font-size:11px;color:var(--brand)">3 hr</div>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;margin-top:2px">
+            <div class="t-sm" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-weight:600;color:var(--ink-2)"><b>Chidi:</b> Meeting moved to 4pm tomorrow</div>
+            <span style="flex-shrink:0;min-width:20px;height:20px;padding:0 6px;border-radius:10px;background:var(--brand-grad);color:#fff;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center">12</span>
+          </div>
+        </div>
+      </div>
+      <div class="divider"></div>
+
+      <!-- row 5: read, online -->
+      <div class="list-row" onclick="App.go('scr-chat')" style="cursor:pointer">
+        <div style="position:relative;flex-shrink:0">
+          <img class="ava" src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&q=80" style="width:48px;height:48px">
+          <span style="position:absolute;right:1px;bottom:1px;width:12px;height:12px;border-radius:50%;background:var(--ok);border:2px solid #fff"></span>
+        </div>
+        <div style="flex:1;min-width:0">
+          <div style="display:flex;justify-content:space-between;align-items:center;gap:8px">
+            <div class="h3" style="font-size:14px">Kabir Hassan</div>
+            <div class="t-sm" style="font-size:11px">Yesterday</div>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;margin-top:2px">
+            <div class="t-sm" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis"><i class="fa-solid fa-check-double" style="color:var(--info);font-size:11px"></i> I'll send the ₦25,000 now</div>
+          </div>
+        </div>
+      </div>
+      <div class="divider"></div>
+
+      <!-- row 6: read, no badge -->
+      <div class="list-row" onclick="App.go('scr-chat')" style="cursor:pointer">
+        <div style="position:relative;flex-shrink:0">
+          <img class="ava" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&q=80" style="width:48px;height:48px">
+        </div>
+        <div style="flex:1;min-width:0">
+          <div style="display:flex;justify-content:space-between;align-items:center;gap:8px">
+            <div class="h3" style="font-size:14px">Nadia Islam</div>
+            <div class="t-sm" style="font-size:11px">Mon</div>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;margin-top:2px">
+            <div class="t-sm" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis"><i class="fa-solid fa-image" style="font-size:11px"></i> Photo</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================== SCR-CHAT ============================== -->
+<section class="screen" id="scr-chat"
+         data-topbar="none" data-nav="hide" data-title="Chat">
+
+  <!-- custom sticky header -->
+  <div style="height:60px;display:flex;align-items:center;gap:10px;padding:0 10px;background:#fff;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:5">
+    <button class="icon-btn" onclick="App.back()"><i class="fa-solid fa-arrow-left"></i></button>
+    <img class="ava" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&q=80" style="width:40px;height:40px" onclick="App.go('scr-user-profile')">
+    <div style="flex:1;min-width:0" onclick="App.go('scr-user-profile')">
+      <div style="font-weight:700;font-size:15px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Aisha Bello</div>
+      <div style="font-size:12px;color:var(--ok);font-weight:600;display:flex;align-items:center;gap:5px">
+        <span style="width:7px;height:7px;border-radius:50%;background:var(--ok);display:inline-block"></span>Online
+      </div>
+    </div>
+    <button class="icon-btn" onclick="App.toast('Calling Aisha…')"><i class="fa-solid fa-phone" style="color:var(--brand)"></i></button>
+    <button class="icon-btn" onclick="App.toast('Starting video call…')"><i class="fa-solid fa-video" style="color:var(--brand)"></i></button>
+  </div>
+
+  <!-- thread -->
+  <div style="padding:16px 14px 24px;display:flex;flex-direction:column;gap:10px;background:var(--bg);min-height:calc(100vh - 124px)">
+
+    <!-- date pill -->
+    <div style="text-align:center;margin:2px 0 6px">
+      <span class="t-sm" style="background:#fff;padding:4px 12px;border-radius:12px;font-size:11px;box-shadow:0 1px 2px rgba(0,0,0,.04)">Today</span>
+    </div>
+
+    <!-- received -->
+    <div style="align-self:flex-start;max-width:78%">
+      <div style="background:#fff;padding:10px 13px;border-radius:16px 16px 16px 4px;box-shadow:0 1px 2px rgba(0,0,0,.05);font-size:14px;line-height:1.5">
+        Hey! Are you still selling the Ankara fabric bundle? 👗
+      </div>
+      <div class="t-sm" style="font-size:10px;margin:3px 0 0 6px">9:24 AM</div>
+    </div>
+
+    <!-- sent -->
+    <div style="align-self:flex-end;max-width:78%">
+      <div style="background:var(--brand-grad);color:#fff;padding:10px 13px;border-radius:16px 16px 4px 16px;font-size:14px;line-height:1.5;box-shadow:0 2px 6px rgba(187,128,19,.25)">
+        Yes! Still available — ₦12,500 for the full bundle of 6 yards.
+      </div>
+      <div style="display:flex;align-items:center;gap:4px;justify-content:flex-end;margin:3px 6px 0 0">
+        <span class="t-sm" style="font-size:10px">9:25 AM</span>
+        <i class="fa-solid fa-check-double" style="font-size:11px;color:var(--info)"></i>
+      </div>
+    </div>
+
+    <!-- received: image bubble -->
+    <div style="align-self:flex-start;max-width:78%">
+      <div style="background:#fff;padding:4px;border-radius:16px 16px 16px 4px;box-shadow:0 1px 2px rgba(0,0,0,.05)">
+        <img src="https://images.unsplash.com/photo-1558769132-cb1aea458c5e?w=400&q=80"
+             style="width:200px;height:240px;object-fit:cover;border-radius:13px 13px 13px 3px;display:block;cursor:pointer"
+             onclick="App.toast('Opening photo')">
+      </div>
+      <div class="t-sm" style="font-size:10px;margin:3px 0 0 6px">9:26 AM</div>
+    </div>
+
+    <!-- received -->
+    <div style="align-self:flex-start;max-width:78%">
+      <div style="background:#fff;padding:10px 13px;border-radius:16px 16px 16px 4px;box-shadow:0 1px 2px rgba(0,0,0,.05);font-size:14px;line-height:1.5">
+        Love these colours! Can you do ₦11,000? 🙏
+      </div>
+      <div class="t-sm" style="font-size:10px;margin:3px 0 0 6px">9:26 AM</div>
+    </div>
+
+    <!-- sent: voice note bubble -->
+    <div style="align-self:flex-end;max-width:78%">
+      <div style="background:var(--brand-grad);color:#fff;padding:10px 12px;border-radius:16px 16px 4px 16px;box-shadow:0 2px 6px rgba(187,128,19,.25);display:flex;align-items:center;gap:10px;cursor:pointer" onclick="App.toast('Playing voice note')">
+        <i class="fa-solid fa-play" style="font-size:14px"></i>
+        <div style="display:flex;align-items:center;gap:2px;height:24px">
+          <i style="width:3px;height:8px;background:rgba(255,255,255,.85);border-radius:2px"></i>
+          <i style="width:3px;height:16px;background:rgba(255,255,255,.85);border-radius:2px"></i>
+          <i style="width:3px;height:22px;background:#fff;border-radius:2px"></i>
+          <i style="width:3px;height:12px;background:rgba(255,255,255,.85);border-radius:2px"></i>
+          <i style="width:3px;height:20px;background:#fff;border-radius:2px"></i>
+          <i style="width:3px;height:9px;background:rgba(255,255,255,.7);border-radius:2px"></i>
+          <i style="width:3px;height:16px;background:rgba(255,255,255,.85);border-radius:2px"></i>
+          <i style="width:3px;height:7px;background:rgba(255,255,255,.7);border-radius:2px"></i>
+          <i style="width:3px;height:14px;background:rgba(255,255,255,.85);border-radius:2px"></i>
+          <i style="width:3px;height:18px;background:#fff;border-radius:2px"></i>
+          <i style="width:3px;height:6px;background:rgba(255,255,255,.7);border-radius:2px"></i>
+        </div>
+        <span style="font-size:12px;font-weight:600">0:14</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:4px;justify-content:flex-end;margin:3px 6px 0 0">
+        <span class="t-sm" style="font-size:10px">9:27 AM</span>
+        <i class="fa-solid fa-check-double" style="font-size:11px;color:var(--info)"></i>
+      </div>
+    </div>
+
+    <!-- sent -->
+    <div style="align-self:flex-end;max-width:78%">
+      <div style="background:var(--brand-grad);color:#fff;padding:10px 13px;border-radius:16px 16px 4px 16px;font-size:14px;line-height:1.5;box-shadow:0 2px 6px rgba(187,128,19,.25)">
+        Let's meet at ₦11,800 and I'll throw in free delivery within Lagos 😊
+      </div>
+      <div style="display:flex;align-items:center;gap:4px;justify-content:flex-end;margin:3px 6px 0 0">
+        <span class="t-sm" style="font-size:10px">9:27 AM</span>
+        <i class="fa-solid fa-check-double" style="font-size:11px;color:var(--info)"></i>
+      </div>
+    </div>
+
+    <!-- typing indicator -->
+    <div style="align-self:flex-start">
+      <div style="background:#fff;padding:12px 16px;border-radius:16px 16px 16px 4px;box-shadow:0 1px 2px rgba(0,0,0,.05);display:flex;align-items:center;gap:4px">
+        <span style="width:7px;height:7px;border-radius:50%;background:var(--ink-3);display:inline-block;opacity:.4"></span>
+        <span style="width:7px;height:7px;border-radius:50%;background:var(--ink-3);display:inline-block;opacity:.7"></span>
+        <span style="width:7px;height:7px;border-radius:50%;background:var(--ink-3);display:inline-block"></span>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- sticky bottom input bar -->
+  <div style="position:sticky;bottom:0;left:0;right:0;background:#fff;border-top:1px solid var(--line);padding:8px 10px;display:flex;align-items:center;gap:8px;z-index:5">
+    <button class="icon-btn" onclick="App.openSheet('sheet-create')"><i class="fa-solid fa-plus" style="color:var(--brand)"></i></button>
+    <div style="flex:1;display:flex;align-items:center;background:var(--bg);border-radius:22px;padding:0 12px;height:42px;gap:8px">
+      <input type="text" placeholder="Type a message…"
+             style="flex:1;border:none;background:transparent;outline:none;font-size:14px;font-family:inherit;color:var(--ink)"
+             oninput="App.toast('Typing…')">
+      <button class="icon-btn" style="width:auto;height:auto" onclick="App.toast('Emoji picker')"><i class="fa-regular fa-face-smile" style="color:var(--ink-3)"></i></button>
+      <button class="icon-btn" style="width:auto;height:auto" onclick="App.toast('Hold to record')"><i class="fa-solid fa-microphone" style="color:var(--ink-3)"></i></button>
+    </div>
+    <button onclick="App.toast('Message sent')"
+            style="width:42px;height:42px;border-radius:50%;background:var(--brand-grad);border:none;color:#fff;cursor:pointer;flex-shrink:0;box-shadow:0 2px 8px rgba(187,128,19,.3);display:flex;align-items:center;justify-content:center">
+      <i class="fa-solid fa-paper-plane" style="font-size:15px"></i>
+    </button>
+  </div>
+</section>
+
+
+<!-- =========================== SCR-GROUP-CHAT =========================== -->
+<section class="screen" id="scr-group-chat"
+         data-topbar="none" data-nav="hide" data-title="Group Chat">
+
+  <!-- custom sticky header -->
+  <div style="height:60px;display:flex;align-items:center;gap:10px;padding:0 10px;background:#fff;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:5">
+    <button class="icon-btn" onclick="App.back()"><i class="fa-solid fa-arrow-left"></i></button>
+    <img class="ava" src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=400&q=80" style="width:40px;height:40px" onclick="App.go('scr-group-page')">
+    <div style="flex:1;min-width:0" onclick="App.go('scr-group-page')">
+      <div style="font-weight:700;font-size:15px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Lagos Hustlers 🚀</div>
+      <div style="font-size:12px;color:var(--ink-2);font-weight:600">12 members</div>
+    </div>
+    <button class="btn-sm btn-soft" onclick="App.toast('Opening group info')" style="height:34px;padding:0 12px;font-size:12px">Group Info</button>
+  </div>
+
+  <!-- thread -->
+  <div style="padding:16px 14px 24px;display:flex;flex-direction:column;gap:10px;background:var(--bg);min-height:calc(100vh - 124px)">
+
+    <!-- date pill -->
+    <div style="text-align:center;margin:2px 0 6px">
+      <span class="t-sm" style="background:#fff;padding:4px 12px;border-radius:12px;font-size:11px;box-shadow:0 1px 2px rgba(0,0,0,.04)">Today</span>
+    </div>
+
+    <!-- received: Chidi -->
+    <div style="align-self:flex-start;max-width:80%;display:flex;gap:8px">
+      <img class="ava" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&q=80" style="width:30px;height:30px;flex-shrink:0">
+      <div style="min-width:0">
+        <div style="font-size:11px;font-weight:700;color:var(--brand);margin:0 0 3px 4px">Chidi Eze</div>
+        <div style="background:#fff;padding:10px 13px;border-radius:4px 16px 16px 16px;box-shadow:0 1px 2px rgba(0,0,0,.05);font-size:14px;line-height:1.5">
+          Morning everyone! Quick update — the meeting is moved to 4pm tomorrow 📅
+        </div>
+        <div class="t-sm" style="font-size:10px;margin:3px 0 0 6px">8:02 AM</div>
+      </div>
+    </div>
+
+    <!-- received: Amara -->
+    <div style="align-self:flex-start;max-width:80%;display:flex;gap:8px">
+      <img class="ava" src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&q=80" style="width:30px;height:30px;flex-shrink:0">
+      <div style="min-width:0">
+        <div style="font-size:11px;font-weight:700;color:#2563EB;margin:0 0 3px 4px">Amara Nwosu</div>
+        <div style="background:#fff;padding:10px 13px;border-radius:4px 16px 16px 16px;box-shadow:0 1px 2px rgba(0,0,0,.05);font-size:14px;line-height:1.5">
+          Works for me 👍 I'll bring the sales report.
+        </div>
+        <div class="t-sm" style="font-size:10px;margin:3px 0 0 6px">8:05 AM</div>
+      </div>
+    </div>
+
+    <!-- sent -->
+    <div style="align-self:flex-end;max-width:80%">
+      <div style="background:var(--brand-grad);color:#fff;padding:10px 13px;border-radius:16px 16px 4px 16px;font-size:14px;line-height:1.5;box-shadow:0 2px 6px rgba(187,128,19,.25)">
+        Perfect, 4pm it is. I'll book the conference room at the hub.
+      </div>
+      <div style="display:flex;align-items:center;gap:4px;justify-content:flex-end;margin:3px 6px 0 0">
+        <span class="t-sm" style="font-size:10px">8:09 AM</span>
+        <i class="fa-solid fa-check-double" style="font-size:11px;color:var(--info)"></i>
+      </div>
+    </div>
+
+    <!-- received: Kabir -->
+    <div style="align-self:flex-start;max-width:80%;display:flex;gap:8px">
+      <img class="ava" src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&q=80" style="width:30px;height:30px;flex-shrink:0">
+      <div style="min-width:0">
+        <div style="font-size:11px;font-weight:700;color:#16A34A;margin:0 0 3px 4px">Kabir Hassan</div>
+        <div style="background:#fff;padding:10px 13px;border-radius:4px 16px 16px 16px;box-shadow:0 1px 2px rgba(0,0,0,.05);font-size:14px;line-height:1.5">
+          Great. I'll share the budget figures before then 💰
+        </div>
+        <div class="t-sm" style="font-size:10px;margin:3px 0 0 6px">8:11 AM</div>
+      </div>
+    </div>
+
+    <!-- typing indicator (group member) -->
+    <div style="align-self:flex-start;display:flex;gap:8px;align-items:flex-end">
+      <img class="ava" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&q=80" style="width:30px;height:30px;flex-shrink:0">
+      <div>
+        <div style="font-size:11px;font-weight:700;color:#DB2777;margin:0 0 3px 4px">Nadia is typing…</div>
+        <div style="background:#fff;padding:12px 16px;border-radius:4px 16px 16px 16px;box-shadow:0 1px 2px rgba(0,0,0,.05);display:flex;align-items:center;gap:4px;width:fit-content">
+          <span style="width:7px;height:7px;border-radius:50%;background:var(--ink-3);display:inline-block;opacity:.4"></span>
+          <span style="width:7px;height:7px;border-radius:50%;background:var(--ink-3);display:inline-block;opacity:.7"></span>
+          <span style="width:7px;height:7px;border-radius:50%;background:var(--ink-3);display:inline-block"></span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- sticky bottom input bar -->
+  <div style="position:sticky;bottom:0;left:0;right:0;background:#fff;border-top:1px solid var(--line);padding:8px 10px;display:flex;align-items:center;gap:8px;z-index:5">
+    <button class="icon-btn" onclick="App.openSheet('sheet-create')"><i class="fa-solid fa-plus" style="color:var(--brand)"></i></button>
+    <div style="flex:1;display:flex;align-items:center;background:var(--bg);border-radius:22px;padding:0 12px;height:42px;gap:8px">
+      <input type="text" placeholder="Type a message…"
+             style="flex:1;border:none;background:transparent;outline:none;font-size:14px;font-family:inherit;color:var(--ink)"
+             oninput="App.toast('Typing…')">
+      <button class="icon-btn" style="width:auto;height:auto" onclick="App.toast('Emoji picker')"><i class="fa-regular fa-face-smile" style="color:var(--ink-3)"></i></button>
+      <button class="icon-btn" style="width:auto;height:auto" onclick="App.toast('Hold to record')"><i class="fa-solid fa-microphone" style="color:var(--ink-3)"></i></button>
+    </div>
+    <button onclick="App.toast('Message sent')"
+            style="width:42px;height:42px;border-radius:50%;background:var(--brand-grad);border:none;color:#fff;cursor:pointer;flex-shrink:0;box-shadow:0 2px 8px rgba(187,128,19,.3);display:flex;align-items:center;justify-content:center">
+      <i class="fa-solid fa-paper-plane" style="font-size:15px"></i>
+    </button>
+  </div>
+</section>

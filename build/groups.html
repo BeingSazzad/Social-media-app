@@ -1,0 +1,280 @@
+<!-- groups module -->
+
+<!-- ============ SCREEN — Groups ============ -->
+<section class="screen" id="scr-groups" data-topbar="back" data-nav="hide" data-title="Groups">
+  <div class="pad" style="padding:14px 16px 28px">
+
+    <div class="seg" style="margin-bottom:14px">
+      <button class="active" onclick="grpSeg(this,'grp-mine')">My Groups</button>
+      <button onclick="grpSeg(this,'grp-all')">All Groups</button>
+    </div>
+
+    <button class="btn btn-primary" style="margin-bottom:18px" onclick="App.go('scr-create-group')">
+      <i class="fa-solid fa-plus"></i>&nbsp; Create Group
+    </button>
+
+    <!-- MY GROUPS -->
+    <div id="grp-mine" class="stack">
+
+      <div class="card" style="overflow:hidden;padding:0;cursor:pointer" onclick="App.go('scr-group-page')">
+        <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=400&q=80" style="width:100%;height:120px;object-fit:cover">
+        <div style="display:flex;align-items:center;gap:11px;padding:12px 14px">
+          <div style="flex:1;min-width:0">
+            <div class="h3" style="margin-bottom:2px">Dhaka Tech Hub</div>
+            <div class="t-sm"><i class="fa-solid fa-user-group" style="color:var(--ink-3)"></i> 12,800 members</div>
+          </div>
+          <span class="badge badge-brand">Admin</span>
+        </div>
+      </div>
+
+      <div class="card" style="overflow:hidden;padding:0;cursor:pointer" onclick="App.go('scr-group-page')">
+        <img src="https://images.unsplash.com/photo-1517048676732-d65bc937f952?w=400&q=80" style="width:100%;height:120px;object-fit:cover">
+        <div style="display:flex;align-items:center;gap:11px;padding:12px 14px">
+          <div style="flex:1;min-width:0">
+            <div class="h3" style="margin-bottom:2px">Lagos Founders Circle</div>
+            <div class="t-sm"><i class="fa-solid fa-user-group" style="color:var(--ink-3)"></i> 8,420 members</div>
+          </div>
+          <span class="badge badge-gray">Member</span>
+        </div>
+      </div>
+
+      <div class="card" style="overflow:hidden;padding:0;cursor:pointer" onclick="App.go('scr-group-page')">
+        <img src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=400&q=80" style="width:100%;height:120px;object-fit:cover">
+        <div style="display:flex;align-items:center;gap:11px;padding:12px 14px">
+          <div style="flex:1;min-width:0">
+            <div class="h3" style="margin-bottom:2px">Naija Foodies</div>
+            <div class="t-sm"><i class="fa-solid fa-user-group" style="color:var(--ink-3)"></i> 24,310 members</div>
+          </div>
+          <span class="badge badge-gray">Member</span>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ALL GROUPS -->
+    <div id="grp-all" class="stack" style="display:none">
+
+      <div class="card" style="overflow:hidden;padding:0;cursor:pointer" onclick="App.go('scr-group-page')">
+        <img src="https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=400&q=80" style="width:100%;height:120px;object-fit:cover">
+        <div style="display:flex;align-items:center;gap:11px;padding:12px 14px">
+          <div style="flex:1;min-width:0">
+            <div class="h3" style="margin-bottom:2px">Abuja Photographers</div>
+            <div class="t-sm"><i class="fa-solid fa-user-group" style="color:var(--ink-3)"></i> 5,640 members</div>
+          </div>
+          <button class="btn-sm btn-soft" onclick="event.stopPropagation();App.toast('Request sent to join')">Join</button>
+        </div>
+      </div>
+
+      <div class="card" style="overflow:hidden;padding:0;cursor:pointer" onclick="App.go('scr-group-page')">
+        <img src="https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=400&q=80" style="width:100%;height:120px;object-fit:cover">
+        <div style="display:flex;align-items:center;gap:11px;padding:12px 14px">
+          <div style="flex:1;min-width:0">
+            <div class="h3" style="margin-bottom:2px">Chittagong Travelers</div>
+            <div class="t-sm"><i class="fa-solid fa-user-group" style="color:var(--ink-3)"></i> 9,180 members</div>
+          </div>
+          <button class="btn-sm btn-soft" onclick="event.stopPropagation();App.toast('Request sent to join')">Join</button>
+        </div>
+      </div>
+
+      <div class="card" style="overflow:hidden;padding:0;cursor:pointer" onclick="App.go('scr-group-page')">
+        <img src="https://images.unsplash.com/photo-1531482615713-2afd69097998?w=400&q=80" style="width:100%;height:120px;object-fit:cover">
+        <div style="display:flex;align-items:center;gap:11px;padding:12px 14px">
+          <div style="flex:1;min-width:0">
+            <div class="h3" style="margin-bottom:2px">Naija Crypto &amp; Web3</div>
+            <div class="t-sm"><i class="fa-solid fa-user-group" style="color:var(--ink-3)"></i> 17,950 members</div>
+          </div>
+          <button class="btn-sm btn-soft" onclick="event.stopPropagation();App.toast('Request sent to join')">Join</button>
+        </div>
+      </div>
+
+    </div>
+
+    <script>
+      function grpSeg(btn,id){
+        btn.parentNode.querySelectorAll('button').forEach(b=>b.classList.remove('active'));
+        btn.classList.add('active');
+        document.getElementById('grp-mine').style.display = (id==='grp-mine')?'':'none';
+        document.getElementById('grp-all').style.display  = (id==='grp-all')?'':'none';
+      }
+    </script>
+  </div>
+</section>
+
+
+<!-- ============ SCREEN — Create Group ============ -->
+<section class="screen" id="scr-create-group" data-topbar="back" data-nav="hide" data-title="Create Group">
+  <div class="pad" style="padding:18px 18px 36px">
+
+    <div class="field">
+      <label class="label">Group Name</label>
+      <input class="input" placeholder="e.g. Dhaka Tech Hub">
+    </div>
+
+    <div class="field">
+      <label class="label">Description</label>
+      <textarea class="input" rows="4" placeholder="What is this group about?"></textarea>
+    </div>
+
+    <div class="field">
+      <label class="label">Category</label>
+      <select class="input">
+        <option>Technology</option>
+        <option>Business &amp; Startups</option>
+        <option>Food &amp; Cooking</option>
+        <option>Travel</option>
+        <option>Photography</option>
+        <option>Crypto &amp; Web3</option>
+        <option>Sports</option>
+      </select>
+    </div>
+
+    <div class="field">
+      <label class="label">Privacy</label>
+      <div class="seg">
+        <button class="active" onclick="segPick(this)">Public</button>
+        <button onclick="segPick(this)">Private</button>
+        <button onclick="segPick(this)">Secret</button>
+      </div>
+    </div>
+
+    <div class="field">
+      <label class="label">Cover Photo</label>
+      <div onclick="App.toast('Choose a cover photo')"
+           style="border:1.5px dashed var(--brand-200,#FFC79E);border-radius:16px;padding:28px 16px;text-align:center;background:var(--brand-50,#FFF3EA);cursor:pointer">
+        <i class="fa-solid fa-cloud-arrow-up" style="font-size:28px;color:var(--brand)"></i>
+        <div class="h3" style="margin-top:10px">Upload Cover Photo</div>
+        <p class="t-sm" style="margin-top:3px">JPG or PNG · up to 5MB · 1200×400 recommended</p>
+      </div>
+    </div>
+
+    <button class="btn btn-primary" style="margin-top:22px"
+            onclick="App.toast('Group created'); App.back()">Create Group</button>
+
+    <script>
+      function segPick(btn){
+        btn.parentNode.querySelectorAll('button').forEach(b=>b.classList.remove('active'));
+        btn.classList.add('active');
+      }
+    </script>
+  </div>
+</section>
+
+
+<!-- ============ SCREEN — Group Page ============ -->
+<section class="screen" id="scr-group-page" data-topbar="back" data-nav="hide" data-title="Dhaka Tech Hub">
+
+  <!-- Cover banner + overlapping avatar -->
+  <div style="position:relative">
+    <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=600&q=80"
+         style="width:100%;height:160px;object-fit:cover">
+    <img class="ava" src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=200&q=80"
+         style="width:84px;height:84px;border:4px solid #fff;position:absolute;left:18px;bottom:-40px;box-shadow:0 4px 14px rgba(0,0,0,.12)">
+  </div>
+
+  <div class="pad" style="padding:52px 16px 8px">
+    <div style="display:flex;align-items:flex-start;gap:10px">
+      <div style="flex:1;min-width:0">
+        <div class="h2" style="font-weight:700">Dhaka Tech Hub</div>
+        <div class="t-sm" style="margin-top:4px;color:var(--ink-2)">
+          <i class="fa-solid fa-user-group" style="color:var(--ink-3)"></i> 12,800 members
+          · <i class="fa-solid fa-earth-asia" style="color:var(--ink-3)"></i> Public
+        </div>
+      </div>
+    </div>
+
+    <div style="display:flex;gap:10px;margin-top:16px">
+      <button class="btn btn-soft" data-joined="1" style="flex:1" onclick="grpLeave(this)">
+        <i class="fa-solid fa-check"></i>&nbsp; Joined
+      </button>
+      <button class="icon-btn" style="width:48px;height:48px;border:1px solid var(--line);border-radius:14px;background:var(--surface)"
+              onclick="App.toast('Invite link copied')">
+        <i class="fa-solid fa-user-plus" style="color:var(--brand)"></i>
+      </button>
+    </div>
+  </div>
+
+  <!-- Tab chip row -->
+  <div class="chip-row" style="padding:10px 16px 12px">
+    <span class="chip brand active" onclick="grpTab(this)">Posts</span>
+    <span class="chip" onclick="grpTab(this);App.go('scr-group-chat')">Chat</span>
+    <span class="chip" onclick="grpTab(this);App.toast('Members')">Members</span>
+    <span class="chip" onclick="grpTab(this);App.go('scr-events')">Events</span>
+    <span class="chip" onclick="grpTab(this);App.toast('Media gallery')">Media</span>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- Posts content -->
+  <div class="pad" style="padding:14px 16px 28px">
+
+    <!-- Composer row -->
+    <div class="card card-p" style="display:flex;align-items:center;gap:11px;margin-bottom:14px;cursor:pointer"
+         onclick="App.go('scr-composer')">
+      <img class="ava" src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=120&q=80" style="width:40px;height:40px">
+      <div style="flex:1;color:var(--ink-3);font-size:14px">Share something with the group…</div>
+      <i class="fa-solid fa-image" style="color:var(--brand)"></i>
+    </div>
+
+    <!-- Post 1 -->
+    <article class="post" style="margin-bottom:14px">
+      <div style="display:flex;align-items:center;gap:11px;padding:13px 14px">
+        <img class="ava" src="https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=120&q=80" style="width:42px;height:42px" onclick="App.go('scr-user-profile')">
+        <div style="flex:1;min-width:0">
+          <div style="font-weight:700;font-size:14px">Rahim Chowdhury <i class="fa-solid fa-circle-check verified" style="font-size:12px"></i></div>
+          <div class="t-sm">2 hours ago · <i class="fa-solid fa-earth-asia"></i></div>
+        </div>
+        <button class="icon-btn" onclick="App.openSheet('sheet-post-options')"><i class="fa-solid fa-ellipsis"></i></button>
+      </div>
+      <p style="padding:0 14px 12px;font-size:14px;line-height:1.55">Hosting a free React Native workshop this Saturday at our co-working space in Banani. 30 seats only — drop a comment to reserve yours! 🚀</p>
+      <img src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=600&q=80" style="width:100%;height:220px;object-fit:cover">
+      <div style="padding:10px 14px;display:flex;justify-content:space-between" class="t-sm"><span><i class="fa-solid fa-heart" style="color:#EF4444"></i> 842</span><span>96 comments</span></div>
+      <div class="divider"></div>
+      <div class="post-actions">
+        <button onclick="App.toast('Liked')"><i class="fa-regular fa-heart"></i> Like</button>
+        <button onclick="App.go('scr-post-detail')"><i class="fa-regular fa-comment"></i> Comment</button>
+        <button onclick="App.toast('Shared')"><i class="fa-solid fa-share"></i> Share</button>
+      </div>
+    </article>
+
+    <!-- Post 2 -->
+    <article class="post">
+      <div style="display:flex;align-items:center;gap:11px;padding:13px 14px">
+        <img class="ava" src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=120&q=80" style="width:42px;height:42px" onclick="App.go('scr-user-profile')">
+        <div style="flex:1;min-width:0">
+          <div style="font-weight:700;font-size:14px">Aisha Bello</div>
+          <div class="t-sm">5 hours ago · <i class="fa-solid fa-earth-asia"></i></div>
+        </div>
+        <button class="icon-btn" onclick="App.openSheet('sheet-post-options')"><i class="fa-solid fa-ellipsis"></i></button>
+      </div>
+      <p style="padding:0 14px 12px;font-size:14px;line-height:1.55">We just crossed ₦2,400,000 in community grants for member-led projects this quarter. Proud of everyone shipping! Applications for round 4 are open. 💛</p>
+      <div style="padding:10px 14px;display:flex;justify-content:space-between" class="t-sm"><span><i class="fa-solid fa-heart" style="color:#EF4444"></i> 1.5k</span><span>214 comments</span></div>
+      <div class="divider"></div>
+      <div class="post-actions">
+        <button onclick="App.toast('Liked')"><i class="fa-regular fa-heart"></i> Like</button>
+        <button onclick="App.go('scr-post-detail')"><i class="fa-regular fa-comment"></i> Comment</button>
+        <button onclick="App.toast('Shared')"><i class="fa-solid fa-share"></i> Share</button>
+      </div>
+    </article>
+
+  </div>
+
+  <script>
+    function grpTab(chip){
+      chip.parentNode.querySelectorAll('.chip').forEach(c=>{c.classList.remove('active');c.classList.remove('brand');});
+      chip.classList.add('brand');chip.classList.add('active');
+    }
+    function grpLeave(btn){
+      if(btn.dataset.joined==='0'){
+        btn.dataset.joined='1';
+        btn.className='btn btn-soft';
+        btn.innerHTML='<i class="fa-solid fa-check"></i>&nbsp; Joined';
+        App.toast('Joined group');
+      } else {
+        btn.dataset.joined='0';
+        btn.className='btn btn-primary';
+        btn.innerHTML='<i class="fa-solid fa-plus"></i>&nbsp; Join Group';
+        App.toast('Left group');
+      }
+    }
+  </script>
+</section>

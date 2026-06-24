@@ -1,0 +1,543 @@
+<!-- module: discover -->
+
+<!-- ===================================================== -->
+<!-- SCREEN — Discover (tab root)                          -->
+<!-- ===================================================== -->
+<section class="screen" id="scr-discover" data-topbar="app" data-nav="show" data-tab="discover">
+
+  <!-- Sticky search -->
+  <div style="position:sticky;top:0;z-index:6;background:var(--bg);padding:14px 16px 10px">
+    <div class="input-group" onclick="App.toast('Search is mocked in this prototype')" style="cursor:text">
+      <input class="input" placeholder="Search people, groups, posts..." style="padding-left:42px">
+      <i class="fa-solid fa-magnifying-glass" style="position:absolute;left:16px;top:50%;transform:translateY(-50%);color:var(--ink-3);font-size:15px"></i>
+      <button class="input-icon" onclick="event.stopPropagation();App.toast('Listening...')" aria-label="Voice search"><i class="fa-solid fa-microphone"></i></button>
+    </div>
+    <!-- Filter chips -->
+    <div class="chip-row" style="margin-top:12px">
+      <span class="chip active" onclick="App.toast('Showing: All')">All</span>
+      <span class="chip" onclick="App.go('scr-contacts')">People</span>
+      <span class="chip" onclick="App.go('scr-groups')">Groups</span>
+      <span class="chip" onclick="App.toast('Filter: Pages')">Pages</span>
+      <span class="chip" onclick="App.go('scr-blogs')">Blogs</span>
+      <span class="chip" onclick="App.go('scr-videos')">Videos</span>
+      <span class="chip" onclick="App.go('scr-events')">Events</span>
+      <span class="chip" onclick="App.toast('Filter: Countries')">Countries</span>
+    </div>
+  </div>
+
+  <!-- Quick-access strip -->
+  <div class="pad" style="padding-top:8px;padding-bottom:0">
+    <div style="display:flex;gap:10px">
+      <button onclick="App.go('scr-online')" style="flex:1;background:#fff;border:1px solid var(--line);border-radius:14px;padding:12px 8px;display:flex;flex-direction:column;align-items:center;gap:6px;cursor:pointer;box-shadow:var(--shadow-sm)">
+        <i class="fa-solid fa-circle-user" style="color:var(--ok);font-size:15px"></i>
+        <span style="font-size:12px;font-weight:700;color:var(--ink)">Online Now</span>
+        <span class="t-sm">42 friends</span>
+      </button>
+      <button onclick="App.go('scr-profile-views')" style="flex:1;background:#fff;border:1px solid var(--line);border-radius:14px;padding:12px 8px;display:flex;flex-direction:column;align-items:center;gap:6px;cursor:pointer;box-shadow:var(--shadow-sm)">
+        <i class="fa-solid fa-eye" style="color:var(--brand);font-size:15px"></i>
+        <span style="font-size:12px;font-weight:700;color:var(--ink)">Profile Views</span>
+        <span class="t-sm">128 this week</span>
+      </button>
+      <button onclick="App.go('scr-contacts')" style="flex:1;background:#fff;border:1px solid var(--line);border-radius:14px;padding:12px 8px;display:flex;flex-direction:column;align-items:center;gap:6px;cursor:pointer;box-shadow:var(--shadow-sm)">
+        <i class="fa-solid fa-user-plus" style="color:var(--info);font-size:15px"></i>
+        <span style="font-size:12px;font-weight:700;color:var(--ink)">Find People</span>
+        <span class="t-sm">You may know</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Trending hashtags -->
+  <div class="pad" style="padding-bottom:0">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
+      <span class="section-title">Trending Now</span>
+      <button onclick="App.go('scr-hashtag')" style="background:none;border:none;color:var(--brand);font-weight:700;font-size:12px;cursor:pointer">See all</button>
+    </div>
+    <div style="display:flex;flex-wrap:wrap;gap:8px">
+      <button onclick="App.go('scr-hashtag')" style="background:#fff;border:1px solid var(--line);border-radius:999px;padding:9px 14px;cursor:pointer;display:flex;align-items:center;gap:8px;box-shadow:var(--shadow-sm)">
+        <span style="font-weight:700;font-size:13px;color:var(--brand)">#design</span><span class="t-sm">2,481 posts</span>
+      </button>
+      <button onclick="App.go('scr-hashtag')" style="background:#fff;border:1px solid var(--line);border-radius:999px;padding:9px 14px;cursor:pointer;display:flex;align-items:center;gap:8px;box-shadow:var(--shadow-sm)">
+        <span style="font-weight:700;font-size:13px;color:var(--brand)">#EviEarner</span><span class="t-sm">1,902 posts</span>
+      </button>
+      <button onclick="App.go('scr-hashtag')" style="background:#fff;border:1px solid var(--line);border-radius:999px;padding:9px 14px;cursor:pointer;display:flex;align-items:center;gap:8px;box-shadow:var(--shadow-sm)">
+        <span style="font-weight:700;font-size:13px;color:var(--brand)">#NaijaTech</span><span class="t-sm">1,344 posts</span>
+      </button>
+      <button onclick="App.go('scr-hashtag')" style="background:#fff;border:1px solid var(--line);border-radius:999px;padding:9px 14px;cursor:pointer;display:flex;align-items:center;gap:8px;box-shadow:var(--shadow-sm)">
+        <span style="font-weight:700;font-size:13px;color:var(--brand)">#DhakaLife</span><span class="t-sm">986 posts</span>
+      </button>
+      <button onclick="App.go('scr-hashtag')" style="background:#fff;border:1px solid var(--line);border-radius:999px;padding:9px 14px;cursor:pointer;display:flex;align-items:center;gap:8px;box-shadow:var(--shadow-sm)">
+        <span style="font-weight:700;font-size:13px;color:var(--brand)">#startup</span><span class="t-sm">742 posts</span>
+      </button>
+      <button onclick="App.go('scr-hashtag')" style="background:#fff;border:1px solid var(--line);border-radius:999px;padding:9px 14px;cursor:pointer;display:flex;align-items:center;gap:8px;box-shadow:var(--shadow-sm)">
+        <span style="font-weight:700;font-size:13px;color:var(--brand)">#Lagos</span><span class="t-sm">631 posts</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Suggested People -->
+  <div class="pad" style="padding-bottom:0">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
+      <span class="section-title">Suggested People</span>
+      <button onclick="App.go('scr-contacts')" style="background:none;border:none;color:var(--brand);font-weight:700;font-size:12px;cursor:pointer">See all</button>
+    </div>
+  </div>
+  <div class="chip-row" style="padding:0 16px 4px;gap:12px">
+    <div style="flex:none;width:150px;background:#fff;border:1px solid var(--line);border-radius:16px;padding:16px 12px;text-align:center;box-shadow:var(--shadow-sm);cursor:pointer" onclick="App.go('scr-user-profile')">
+      <img class="ava" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&q=80" style="width:62px;height:62px;margin:0 auto 10px">
+      <div style="font-weight:700;font-size:14px">Tanvir Ahmed <i class="fa-solid fa-circle-check verified" style="font-size:11px"></i></div>
+      <div class="t-sm" style="margin-bottom:12px">@tanvir.codes</div>
+      <button class="btn-sm btn-soft" style="width:100%" onclick="event.stopPropagation();this.textContent='Requested';this.classList.add('btn-ghost')">Add Friend</button>
+    </div>
+    <div style="flex:none;width:150px;background:#fff;border:1px solid var(--line);border-radius:16px;padding:16px 12px;text-align:center;box-shadow:var(--shadow-sm);cursor:pointer" onclick="App.go('scr-user-profile')">
+      <img class="ava" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=200&q=80" style="width:62px;height:62px;margin:0 auto 10px">
+      <div style="font-weight:700;font-size:14px">Chioma Okafor <i class="fa-solid fa-circle-check verified" style="font-size:11px"></i></div>
+      <div class="t-sm" style="margin-bottom:12px">@chiomawrites</div>
+      <button class="btn-sm btn-soft" style="width:100%" onclick="event.stopPropagation();this.textContent='Requested';this.classList.add('btn-ghost')">Add Friend</button>
+    </div>
+    <div style="flex:none;width:150px;background:#fff;border:1px solid var(--line);border-radius:16px;padding:16px 12px;text-align:center;box-shadow:var(--shadow-sm);cursor:pointer" onclick="App.go('scr-user-profile')">
+      <img class="ava" src="https://images.unsplash.com/photo-1531123897727-8f129e1688ce?w=200&q=80" style="width:62px;height:62px;margin:0 auto 10px">
+      <div style="font-weight:700;font-size:14px">Emeka Obi</div>
+      <div class="t-sm" style="margin-bottom:12px">@emeka.dev</div>
+      <button class="btn-sm btn-soft" style="width:100%" onclick="event.stopPropagation();this.textContent='Requested';this.classList.add('btn-ghost')">Add Friend</button>
+    </div>
+    <div style="flex:none;width:150px;background:#fff;border:1px solid var(--line);border-radius:16px;padding:16px 12px;text-align:center;box-shadow:var(--shadow-sm);cursor:pointer" onclick="App.go('scr-user-profile')">
+      <img class="ava" src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=200&q=80" style="width:62px;height:62px;margin:0 auto 10px">
+      <div style="font-weight:700;font-size:14px">Nusrat Jahan <i class="fa-solid fa-circle-check verified" style="font-size:11px"></i></div>
+      <div class="t-sm" style="margin-bottom:12px">@nusrat.j</div>
+      <button class="btn-sm btn-soft" style="width:100%" onclick="event.stopPropagation();this.textContent='Requested';this.classList.add('btn-ghost')">Add Friend</button>
+    </div>
+  </div>
+
+  <!-- Active Groups -->
+  <div class="pad" style="padding-bottom:0">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
+      <span class="section-title">Active Groups</span>
+      <button onclick="App.go('scr-groups')" style="background:none;border:none;color:var(--brand);font-weight:700;font-size:12px;cursor:pointer">See all</button>
+    </div>
+    <div class="card stack" style="padding:4px 0">
+      <div class="list-row" style="cursor:pointer" onclick="App.go('scr-group-page')">
+        <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=200&q=80" style="width:48px;height:48px;border-radius:13px;object-fit:cover;flex:none">
+        <div style="flex:1;min-width:0">
+          <div class="h3">UI/UX Bangladesh</div>
+          <div class="t-sm">24.3k members · <span style="color:var(--ok);font-weight:700">38 online</span></div>
+        </div>
+        <i class="fa-solid fa-chevron-right chev"></i>
+      </div>
+      <div class="divider"></div>
+      <div class="list-row" style="cursor:pointer" onclick="App.go('scr-group-page')">
+        <img src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=200&q=80" style="width:48px;height:48px;border-radius:13px;object-fit:cover;flex:none">
+        <div style="flex:1;min-width:0">
+          <div class="h3">Lagos Founders Hub</div>
+          <div class="t-sm">11.8k members · <span style="color:var(--ok);font-weight:700">21 online</span></div>
+        </div>
+        <i class="fa-solid fa-chevron-right chev"></i>
+      </div>
+      <div class="divider"></div>
+      <div class="list-row" style="cursor:pointer" onclick="App.go('scr-group-page')">
+        <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=200&q=80" style="width:48px;height:48px;border-radius:13px;object-fit:cover;flex:none">
+        <div style="flex:1;min-width:0">
+          <div class="h3">Dhaka Photographers</div>
+          <div class="t-sm">8.5k members · <span style="color:var(--ok);font-weight:700">14 online</span></div>
+        </div>
+        <i class="fa-solid fa-chevron-right chev"></i>
+      </div>
+    </div>
+  </div>
+
+  <!-- Upcoming Events -->
+  <div class="pad">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
+      <span class="section-title">Upcoming Events</span>
+      <button onclick="App.go('scr-events')" style="background:none;border:none;color:var(--brand);font-weight:700;font-size:12px;cursor:pointer">See all</button>
+    </div>
+    <div class="stack">
+      <div class="card" style="overflow:hidden;cursor:pointer" onclick="App.go('scr-event-detail')">
+        <div style="position:relative;height:128px">
+          <img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=600&q=80" style="width:100%;height:100%;object-fit:cover">
+          <div style="position:absolute;top:10px;left:10px;background:#fff;border-radius:12px;padding:6px 10px;text-align:center;box-shadow:var(--shadow-sm)">
+            <div style="font-size:16px;font-weight:800;line-height:1;color:var(--brand)">12</div>
+            <div class="t-sm" style="font-weight:700">JUL</div>
+          </div>
+          <span class="badge badge-brand" style="position:absolute;top:10px;right:10px">Free</span>
+        </div>
+        <div class="card-p">
+          <div class="h3">EVINIE Creators Meetup 2026</div>
+          <div class="t-sm" style="margin:4px 0 8px"><i class="fa-solid fa-location-dot"></i> Banani, Dhaka · 4:00 PM</div>
+          <div style="display:flex;align-items:center;justify-content:space-between">
+            <div style="display:flex;align-items:center">
+              <img class="ava" src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=80&q=80" style="width:26px;height:26px;border:2px solid #fff">
+              <img class="ava" src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=80&q=80" style="width:26px;height:26px;border:2px solid #fff;margin-left:-10px">
+              <img class="ava" src="https://images.unsplash.com/photo-1531123897727-8f129e1688ce?w=80&q=80" style="width:26px;height:26px;border:2px solid #fff;margin-left:-10px">
+              <span class="t-sm" style="margin-left:8px">+212 going</span>
+            </div>
+            <span style="color:var(--brand);font-weight:700;font-size:13px">Details →</span>
+          </div>
+        </div>
+      </div>
+      <div class="card" style="overflow:hidden;cursor:pointer" onclick="App.go('scr-event-detail')">
+        <div style="position:relative;height:128px">
+          <img src="https://images.unsplash.com/photo-1531058020387-3be344556be6?w=600&q=80" style="width:100%;height:100%;object-fit:cover">
+          <div style="position:absolute;top:10px;left:10px;background:#fff;border-radius:12px;padding:6px 10px;text-align:center;box-shadow:var(--shadow-sm)">
+            <div style="font-size:16px;font-weight:800;line-height:1;color:var(--brand)">19</div>
+            <div class="t-sm" style="font-weight:700">JUL</div>
+          </div>
+          <span class="badge badge-warn" style="position:absolute;top:10px;right:10px">₦5,000</span>
+        </div>
+        <div class="card-p">
+          <div class="h3">Lagos Tech Founders Night</div>
+          <div class="t-sm" style="margin:4px 0 8px"><i class="fa-solid fa-location-dot"></i> Victoria Island, Lagos · 6:30 PM</div>
+          <div style="display:flex;align-items:center;justify-content:space-between">
+            <div style="display:flex;align-items:center">
+              <img class="ava" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=80&q=80" style="width:26px;height:26px;border:2px solid #fff">
+              <img class="ava" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=80&q=80" style="width:26px;height:26px;border:2px solid #fff;margin-left:-10px">
+              <span class="t-sm" style="margin-left:8px">+98 going</span>
+            </div>
+            <span style="color:var(--brand);font-weight:700;font-size:13px">Details →</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div style="height:20px"></div>
+</section>
+
+
+<!-- ===================================================== -->
+<!-- SCREEN — Hashtag feed (#design)                       -->
+<!-- ===================================================== -->
+<section class="screen" id="scr-hashtag" data-topbar="back" data-nav="hide" data-title="#design">
+  <div class="pad" style="padding-bottom:0">
+    <!-- Header summary -->
+    <div class="card card-p" style="display:flex;align-items:center;gap:14px;margin-bottom:14px">
+      <div style="width:54px;height:54px;border-radius:16px;background:var(--brand-grad);display:flex;align-items:center;justify-content:center;color:#fff;font-size:24px;flex:none">
+        <i class="fa-solid fa-hashtag"></i>
+      </div>
+      <div style="flex:1;min-width:0">
+        <div class="h2">#design</div>
+        <div class="t-sm">2,481 posts · 14.2k followers</div>
+      </div>
+      <button class="btn-sm btn-soft" onclick="this.textContent='Following';this.classList.add('btn-ghost')">Follow</button>
+    </div>
+  </div>
+
+  <div class="pad stack" style="padding-top:0">
+    <!-- post 1 -->
+    <article class="post">
+      <div style="display:flex;align-items:center;gap:11px;padding:13px 14px">
+        <img class="ava" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=120&q=80" style="width:42px;height:42px;cursor:pointer" onclick="App.go('scr-user-profile')">
+        <div style="flex:1;min-width:0">
+          <div style="font-weight:700;font-size:14px">Tanvir Ahmed <i class="fa-solid fa-circle-check verified" style="font-size:12px"></i></div>
+          <div class="t-sm">8 mins ago · <i class="fa-solid fa-earth-asia"></i></div>
+        </div>
+        <button class="icon-btn" onclick="App.openSheet('sheet-post-options')"><i class="fa-solid fa-ellipsis"></i></button>
+      </div>
+      <p style="padding:0 14px 12px;font-size:14px;line-height:1.55">Spent the weekend rebuilding our onboarding flow with a warm amber system. Less clutter, bigger tap targets, happier users. <span class="text-brand">#design #ux</span></p>
+      <img src="https://images.unsplash.com/photo-1561070791-2526d30994b5?w=800&q=70" style="width:100%;height:220px;object-fit:cover">
+      <div style="padding:10px 14px;display:flex;align-items:center;justify-content:space-between" class="t-sm">
+        <span><i class="fa-solid fa-heart" style="color:#EF4444"></i> 892 reactions</span><span>54 comments · 22 shares</span>
+      </div>
+      <div class="divider"></div>
+      <div class="post-actions">
+        <button onclick="likeBtn(this)"><i class="fa-regular fa-heart"></i> Like</button>
+        <button onclick="App.go('scr-post-detail')"><i class="fa-regular fa-comment"></i> Comment</button>
+        <button onclick="App.toast('Shared to your timeline')"><i class="fa-solid fa-share"></i> Share</button>
+      </div>
+    </article>
+
+    <!-- post 2 -->
+    <article class="post">
+      <div style="display:flex;align-items:center;gap:11px;padding:13px 14px">
+        <img class="ava" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=120&q=80" style="width:42px;height:42px;cursor:pointer" onclick="App.go('scr-user-profile')">
+        <div style="flex:1;min-width:0">
+          <div style="font-weight:700;font-size:14px">Chioma Okafor <i class="fa-solid fa-circle-check verified" style="font-size:12px"></i></div>
+          <div class="t-sm">1 hr ago · <i class="fa-solid fa-earth-asia"></i></div>
+        </div>
+        <button class="icon-btn" onclick="App.openSheet('sheet-post-options')"><i class="fa-solid fa-ellipsis"></i></button>
+      </div>
+      <p style="padding:0 14px 12px;font-size:14px;line-height:1.55">Color tip: pick ONE accent and let your neutrals breathe. This dashboard uses a single amber CTA and nothing fights for attention. <span class="text-brand">#design</span></p>
+      <img src="https://images.unsplash.com/photo-1545235617-9465d2a55698?w=800&q=70" style="width:100%;height:220px;object-fit:cover">
+      <div style="padding:10px 14px;display:flex;align-items:center;justify-content:space-between" class="t-sm">
+        <span><i class="fa-solid fa-heart" style="color:#EF4444"></i> 1,140 reactions</span><span>76 comments · 31 shares</span>
+      </div>
+      <div class="divider"></div>
+      <div class="post-actions">
+        <button onclick="likeBtn(this)"><i class="fa-regular fa-heart"></i> Like</button>
+        <button onclick="App.go('scr-post-detail')"><i class="fa-regular fa-comment"></i> Comment</button>
+        <button onclick="App.toast('Shared to your timeline')"><i class="fa-solid fa-share"></i> Share</button>
+      </div>
+    </article>
+
+    <!-- post 3 -->
+    <article class="post">
+      <div style="display:flex;align-items:center;gap:11px;padding:13px 14px">
+        <div class="ava" style="width:42px;height:42px;background:var(--brand-50,#FFF3EA);display:flex;align-items:center;justify-content:center;font-weight:800;color:var(--brand)">UI</div>
+        <div style="flex:1"><div style="font-weight:700;font-size:14px">UI/UX Bangladesh</div><div class="t-sm">3 hrs ago · <i class="fa-solid fa-earth-asia"></i></div></div>
+        <button class="icon-btn" onclick="App.openSheet('sheet-post-options')"><i class="fa-solid fa-ellipsis"></i></button>
+      </div>
+      <p style="padding:0 14px 12px;font-size:14px;line-height:1.55">📌 Weekly thread: drop a screen you designed this week and tell us the ONE decision you're proudest of. We'll feature the best 3! <span class="text-brand">#design #community</span></p>
+      <div class="divider"></div>
+      <div class="post-actions">
+        <button onclick="likeBtn(this)"><i class="fa-regular fa-heart"></i> Like</button>
+        <button onclick="App.go('scr-post-detail')"><i class="fa-regular fa-comment"></i> Comment</button>
+        <button onclick="App.toast('Shared to your timeline')"><i class="fa-solid fa-share"></i> Share</button>
+      </div>
+    </article>
+  </div>
+  <div style="height:20px"></div>
+</section>
+
+
+<!-- ===================================================== -->
+<!-- SCREEN — Who is online                                -->
+<!-- ===================================================== -->
+<section class="screen" id="scr-online" data-topbar="back" data-nav="hide" data-title="Who is online">
+  <div class="pad" style="padding-bottom:0">
+    <div style="display:flex;align-items:center;gap:8px;margin-bottom:12px">
+      <span style="width:9px;height:9px;border-radius:50%;background:var(--ok);flex:none"></span>
+      <span style="font-size:13px;color:var(--ink-2)"><b style="color:var(--ink)">42 friends</b> active right now</span>
+    </div>
+  </div>
+  <div class="pad" style="padding-top:0">
+    <div class="card" style="padding:4px 0">
+
+      <div class="list-row">
+        <div style="position:relative;flex:none">
+          <img class="ava" src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=120&q=80" style="width:46px;height:46px">
+          <span style="position:absolute;bottom:1px;right:1px;width:13px;height:13px;background:var(--ok);border-radius:50%;border:2.5px solid #fff"></span>
+        </div>
+        <div style="flex:1;min-width:0">
+          <div class="h3">Rakib Hasan</div>
+          <div class="t-sm" style="color:var(--ok)">Active now</div>
+        </div>
+        <button class="btn-sm btn-soft" onclick="App.go('scr-chat')"><i class="fa-regular fa-comment"></i> Message</button>
+      </div>
+      <div class="divider"></div>
+
+      <div class="list-row">
+        <div style="position:relative;flex:none">
+          <img class="ava" src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=120&q=80" style="width:46px;height:46px">
+          <span style="position:absolute;bottom:1px;right:1px;width:13px;height:13px;background:var(--ok);border-radius:50%;border:2.5px solid #fff"></span>
+        </div>
+        <div style="flex:1;min-width:0">
+          <div class="h3">Mitu Rahman</div>
+          <div class="t-sm" style="color:var(--ok)">Active now</div>
+        </div>
+        <button class="btn-sm btn-soft" onclick="App.go('scr-chat')"><i class="fa-regular fa-comment"></i> Message</button>
+      </div>
+      <div class="divider"></div>
+
+      <div class="list-row">
+        <div style="position:relative;flex:none">
+          <img class="ava" src="https://images.unsplash.com/photo-1531123897727-8f129e1688ce?w=120&q=80" style="width:46px;height:46px">
+          <span style="position:absolute;bottom:1px;right:1px;width:13px;height:13px;background:var(--ok);border-radius:50%;border:2.5px solid #fff"></span>
+        </div>
+        <div style="flex:1;min-width:0">
+          <div class="h3">Emeka Obi</div>
+          <div class="t-sm" style="color:var(--ok)">Active now</div>
+        </div>
+        <button class="btn-sm btn-soft" onclick="App.go('scr-chat')"><i class="fa-regular fa-comment"></i> Message</button>
+      </div>
+      <div class="divider"></div>
+
+      <div class="list-row">
+        <div style="position:relative;flex:none">
+          <img class="ava" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=120&q=80" style="width:46px;height:46px">
+          <span style="position:absolute;bottom:1px;right:1px;width:13px;height:13px;background:var(--ok);border-radius:50%;border:2.5px solid #fff"></span>
+        </div>
+        <div style="flex:1;min-width:0">
+          <div class="h3">Chioma Okafor</div>
+          <div class="t-sm" style="color:var(--ok)">Active now</div>
+        </div>
+        <button class="btn-sm btn-soft" onclick="App.go('scr-chat')"><i class="fa-regular fa-comment"></i> Message</button>
+      </div>
+      <div class="divider"></div>
+
+      <div class="list-row">
+        <div style="position:relative;flex:none">
+          <img class="ava" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=120&q=80" style="width:46px;height:46px">
+          <span style="position:absolute;bottom:1px;right:1px;width:13px;height:13px;background:var(--ok);border-radius:50%;border:2.5px solid #fff"></span>
+        </div>
+        <div style="flex:1;min-width:0">
+          <div class="h3">Tanvir Ahmed</div>
+          <div class="t-sm" style="color:var(--ok)">Active now</div>
+        </div>
+        <button class="btn-sm btn-soft" onclick="App.go('scr-chat')"><i class="fa-regular fa-comment"></i> Message</button>
+      </div>
+      <div class="divider"></div>
+
+      <div class="list-row">
+        <div style="position:relative;flex:none">
+          <img class="ava" src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=120&q=80" style="width:46px;height:46px">
+          <span style="position:absolute;bottom:1px;right:1px;width:13px;height:13px;background:var(--ok);border-radius:50%;border:2.5px solid #fff"></span>
+        </div>
+        <div style="flex:1;min-width:0">
+          <div class="h3">Nusrat Jahan</div>
+          <div class="t-sm" style="color:var(--ok)">Active now</div>
+        </div>
+        <button class="btn-sm btn-soft" onclick="App.go('scr-chat')"><i class="fa-regular fa-comment"></i> Message</button>
+      </div>
+      <div class="divider"></div>
+
+      <div class="list-row">
+        <div style="position:relative;flex:none">
+          <img class="ava" src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=120&q=80" style="width:46px;height:46px">
+          <span style="position:absolute;bottom:1px;right:1px;width:13px;height:13px;background:var(--ok);border-radius:50%;border:2.5px solid #fff"></span>
+        </div>
+        <div style="flex:1;min-width:0">
+          <div class="h3">Arif Hossain</div>
+          <div class="t-sm" style="color:var(--ink-3)">Active 2m ago</div>
+        </div>
+        <button class="btn-sm btn-soft" onclick="App.go('scr-chat')"><i class="fa-regular fa-comment"></i> Message</button>
+      </div>
+
+    </div>
+  </div>
+  <div style="height:20px"></div>
+</section>
+
+
+<!-- ===================================================== -->
+<!-- SCREEN — People You May Know (contacts)               -->
+<!-- ===================================================== -->
+<section class="screen" id="scr-contacts" data-topbar="back" data-nav="hide" data-title="People You May Know">
+  <div class="pad" style="padding-bottom:8px">
+    <div class="t-sm">Based on mutual friends and your interests</div>
+  </div>
+  <div class="pad" style="padding-top:0;display:grid;grid-template-columns:1fr 1fr;gap:12px">
+
+    <div class="card" style="position:relative;padding:16px 12px;text-align:center">
+      <button onclick="this.closest('.card').style.display='none';App.toast('Suggestion removed')" style="position:absolute;top:8px;right:8px;width:26px;height:26px;border-radius:50%;background:var(--bg-2);border:none;color:var(--ink-3);cursor:pointer;font-size:12px"><i class="fa-solid fa-xmark"></i></button>
+      <img class="ava" src="https://images.unsplash.com/photo-1531123897727-8f129e1688ce?w=200&q=80" style="width:72px;height:72px;margin:8px auto 10px;cursor:pointer" onclick="App.go('scr-user-profile')">
+      <div style="font-weight:700;font-size:14px">Emeka Obi</div>
+      <div class="t-sm" style="margin-bottom:12px">14 mutual friends</div>
+      <button class="btn-sm btn-soft" style="width:100%" onclick="this.textContent='Requested';this.classList.add('btn-ghost')">Add Friend</button>
+    </div>
+
+    <div class="card" style="position:relative;padding:16px 12px;text-align:center">
+      <button onclick="this.closest('.card').style.display='none';App.toast('Suggestion removed')" style="position:absolute;top:8px;right:8px;width:26px;height:26px;border-radius:50%;background:var(--bg-2);border:none;color:var(--ink-3);cursor:pointer;font-size:12px"><i class="fa-solid fa-xmark"></i></button>
+      <img class="ava" src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=200&q=80" style="width:72px;height:72px;margin:8px auto 10px;cursor:pointer" onclick="App.go('scr-user-profile')">
+      <div style="font-weight:700;font-size:14px">Mitu Rahman</div>
+      <div class="t-sm" style="margin-bottom:12px">9 mutual friends</div>
+      <button class="btn-sm btn-soft" style="width:100%" onclick="this.textContent='Requested';this.classList.add('btn-ghost')">Add Friend</button>
+    </div>
+
+    <div class="card" style="position:relative;padding:16px 12px;text-align:center">
+      <button onclick="this.closest('.card').style.display='none';App.toast('Suggestion removed')" style="position:absolute;top:8px;right:8px;width:26px;height:26px;border-radius:50%;background:var(--bg-2);border:none;color:var(--ink-3);cursor:pointer;font-size:12px"><i class="fa-solid fa-xmark"></i></button>
+      <img class="ava" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=200&q=80" style="width:72px;height:72px;margin:8px auto 10px;cursor:pointer" onclick="App.go('scr-user-profile')">
+      <div style="font-weight:700;font-size:14px">Chioma Okafor</div>
+      <div class="t-sm" style="margin-bottom:12px">7 mutual friends</div>
+      <button class="btn-sm btn-soft" style="width:100%" onclick="this.textContent='Requested';this.classList.add('btn-ghost')">Add Friend</button>
+    </div>
+
+    <div class="card" style="position:relative;padding:16px 12px;text-align:center">
+      <button onclick="this.closest('.card').style.display='none';App.toast('Suggestion removed')" style="position:absolute;top:8px;right:8px;width:26px;height:26px;border-radius:50%;background:var(--bg-2);border:none;color:var(--ink-3);cursor:pointer;font-size:12px"><i class="fa-solid fa-xmark"></i></button>
+      <img class="ava" src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=200&q=80" style="width:72px;height:72px;margin:8px auto 10px;cursor:pointer" onclick="App.go('scr-user-profile')">
+      <div style="font-weight:700;font-size:14px">Arif Hossain</div>
+      <div class="t-sm" style="margin-bottom:12px">5 mutual friends</div>
+      <button class="btn-sm btn-soft" style="width:100%" onclick="this.textContent='Requested';this.classList.add('btn-ghost')">Add Friend</button>
+    </div>
+
+    <div class="card" style="position:relative;padding:16px 12px;text-align:center">
+      <button onclick="this.closest('.card').style.display='none';App.toast('Suggestion removed')" style="position:absolute;top:8px;right:8px;width:26px;height:26px;border-radius:50%;background:var(--bg-2);border:none;color:var(--ink-3);cursor:pointer;font-size:12px"><i class="fa-solid fa-xmark"></i></button>
+      <img class="ava" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&q=80" style="width:72px;height:72px;margin:8px auto 10px;cursor:pointer" onclick="App.go('scr-user-profile')">
+      <div style="font-weight:700;font-size:14px">Tanvir Ahmed</div>
+      <div class="t-sm" style="margin-bottom:12px">4 mutual friends</div>
+      <button class="btn-sm btn-soft" style="width:100%" onclick="this.textContent='Requested';this.classList.add('btn-ghost')">Add Friend</button>
+    </div>
+
+    <div class="card" style="position:relative;padding:16px 12px;text-align:center">
+      <button onclick="this.closest('.card').style.display='none';App.toast('Suggestion removed')" style="position:absolute;top:8px;right:8px;width:26px;height:26px;border-radius:50%;background:var(--bg-2);border:none;color:var(--ink-3);cursor:pointer;font-size:12px"><i class="fa-solid fa-xmark"></i></button>
+      <img class="ava" src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=200&q=80" style="width:72px;height:72px;margin:8px auto 10px;cursor:pointer" onclick="App.go('scr-user-profile')">
+      <div style="font-weight:700;font-size:14px">Nusrat Jahan</div>
+      <div class="t-sm" style="margin-bottom:12px">3 mutual friends</div>
+      <button class="btn-sm btn-soft" style="width:100%" onclick="this.textContent='Requested';this.classList.add('btn-ghost')">Add Friend</button>
+    </div>
+
+  </div>
+  <div style="height:20px"></div>
+</section>
+
+
+<!-- ===================================================== -->
+<!-- SCREEN — Profile Views                                -->
+<!-- ===================================================== -->
+<section class="screen" id="scr-profile-views" data-topbar="back" data-nav="hide" data-title="Profile Views">
+  <!-- Summary banner -->
+  <div class="pad" style="padding-bottom:0">
+    <div class="navy card-p" style="border-radius:16px;display:flex;align-items:center;gap:14px">
+      <div style="width:46px;height:46px;border-radius:13px;background:rgba(255,255,255,.12);display:flex;align-items:center;justify-content:center;color:#fff;font-size:18px;flex:none">
+        <i class="fa-solid fa-eye"></i>
+      </div>
+      <div style="flex:1">
+        <div style="font-size:22px;font-weight:800;color:#fff">128 views</div>
+        <div style="font-size:12px;color:#CBD5E1">this week · <span style="color:#86EFAC;font-weight:700">+18%</span> vs last week</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="pad" style="padding-top:14px">
+    <div class="card" style="padding:4px 0">
+
+      <div class="list-row">
+        <img class="ava" src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=120&q=80" style="width:46px;height:46px;cursor:pointer" onclick="App.go('scr-user-profile')">
+        <div style="flex:1;min-width:0">
+          <div class="h3">Mitu Rahman</div>
+          <div class="t-sm">2 hours ago</div>
+        </div>
+        <button class="btn-sm btn-soft" onclick="this.textContent='Requested';this.classList.add('btn-ghost')">Add Friend</button>
+      </div>
+      <div class="divider"></div>
+
+      <div class="list-row">
+        <img class="ava" src="https://images.unsplash.com/photo-1531123897727-8f129e1688ce?w=120&q=80" style="width:46px;height:46px;cursor:pointer" onclick="App.go('scr-user-profile')">
+        <div style="flex:1;min-width:0">
+          <div class="h3">Emeka Obi</div>
+          <div class="t-sm">5 hours ago</div>
+        </div>
+        <button class="btn-sm btn-soft" onclick="this.textContent='Requested';this.classList.add('btn-ghost')">Add Friend</button>
+      </div>
+      <div class="divider"></div>
+
+      <div class="list-row">
+        <img class="ava" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=120&q=80" style="width:46px;height:46px;cursor:pointer" onclick="App.go('scr-user-profile')">
+        <div style="flex:1;min-width:0">
+          <div class="h3">Chioma Okafor <i class="fa-solid fa-circle-check verified" style="font-size:11px"></i></div>
+          <div class="t-sm">Yesterday</div>
+        </div>
+        <button class="btn-sm btn-soft" onclick="this.textContent='Requested';this.classList.add('btn-ghost')">Add Friend</button>
+      </div>
+      <div class="divider"></div>
+
+      <div class="list-row">
+        <img class="ava" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=120&q=80" style="width:46px;height:46px;cursor:pointer" onclick="App.go('scr-user-profile')">
+        <div style="flex:1;min-width:0">
+          <div class="h3">Tanvir Ahmed <i class="fa-solid fa-circle-check verified" style="font-size:11px"></i></div>
+          <div class="t-sm">Yesterday</div>
+        </div>
+        <button class="btn-sm btn-soft" onclick="this.textContent='Requested';this.classList.add('btn-ghost')">Add Friend</button>
+      </div>
+      <div class="divider"></div>
+
+      <div class="list-row">
+        <img class="ava" src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=120&q=80" style="width:46px;height:46px;cursor:pointer" onclick="App.go('scr-user-profile')">
+        <div style="flex:1;min-width:0">
+          <div class="h3">Arif Hossain</div>
+          <div class="t-sm">2 days ago</div>
+        </div>
+        <button class="btn-sm btn-soft" onclick="this.textContent='Requested';this.classList.add('btn-ghost')">Add Friend</button>
+      </div>
+      <div class="divider"></div>
+
+      <div class="list-row">
+        <img class="ava" src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=120&q=80" style="width:46px;height:46px;cursor:pointer" onclick="App.go('scr-user-profile')">
+        <div style="flex:1;min-width:0">
+          <div class="h3">Nusrat Jahan <i class="fa-solid fa-circle-check verified" style="font-size:11px"></i></div>
+          <div class="t-sm">3 days ago</div>
+        </div>
+        <button class="btn-sm btn-soft" onclick="this.textContent='Requested';this.classList.add('btn-ghost')">Add Friend</button>
+      </div>
+
+    </div>
+  </div>
+  <div style="height:20px"></div>
+</section>
