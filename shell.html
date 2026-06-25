@@ -673,6 +673,106 @@
       document.querySelectorAll('#friendList .frow').forEach(r=>{ const m=(r.dataset.n||'').includes(q); r.style.display=m?'':'none'; if(m) shown++; });
       const e=document.getElementById('frEmpty'); if(e) e.style.display=shown?'none':''; }
 
+    /* ================= eGift flow ================= */
+    const Gift = (function(){
+      const CATALOG = [
+        {id:'rose',    e:'🌹', n:'Rose',    v:50},
+        {id:'star',    e:'⭐', n:'Star',    v:100},
+        {id:'diamond', e:'💎', n:'Diamond', v:250},
+        {id:'trophy',  e:'🏆', n:'Trophy',  v:500},
+        {id:'crown',   e:'👑', n:'Crown',   v:1000},
+        {id:'rocket',  e:'🚀', n:'Rocket',  v:2000},
+      ];
+      const FEE = 0.20;
+      const DEFAULT = {name:'Nusrat Jahan', handle:'@nusrat_j', loc:'Lagos',
+        ava:'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=200&q=80', verified:true};
+      let to = Object.assign({}, DEFAULT), sel = 'trophy', source = 'wallet';
+
+      const $ = id => document.getElementById(id);
+      const money = n => '₦'+Number(n).toLocaleString('en-US');
+      const gift = () => CATALOG.find(g=>g.id===sel) || CATALOG[3];
+
+      function setRecipient(name, handle, loc, ava, verified){
+        to = {name:name, handle:handle||'', loc:loc||'', ava:ava||DEFAULT.ava, verified:verified!==false};
+        paint();
+      }
+      function start(name, handle, loc, ava, verified){
+        if(name){ setRecipient(name, handle, loc, ava, verified); } else { paint(); }
+        App.go('scr-send-gift');
+      }
+      function compose(id){ if(id) sel=id; App.go('scr-send-gift'); paint(); }
+      function pick(id){ sel=id; paint(); }
+      function pay(src){ source=src; paint(); }
+
+      function paint(){
+        if($('giftToAva'))  $('giftToAva').src = to.ava;
+        if($('giftToName')) $('giftToName').innerHTML = to.name + (to.verified?' <i class="fa-solid fa-circle-check verified" style="font-size:13px"></i>':'');
+        if($('giftToMeta')) $('giftToMeta').textContent = (to.handle||'') + (to.loc? ' · '+to.loc : '');
+        const grid = $('giftGrid');
+        if(grid){
+          grid.innerHTML = CATALOG.map(g=>{
+            const on = g.id===sel;
+            return '<button type="button" onclick="Gift.pick(\''+g.id+'\')" style="position:relative;background:var(--surface);border:'+(on?'2px solid var(--brand)':'1.5px solid var(--line)')+';border-radius:16px;padding:18px 12px;display:flex;flex-direction:column;align-items:center;gap:6px;cursor:pointer'+(on?';box-shadow:0 4px 16px rgba(255,106,1,.18)':'')+'">'
+              + (on?'<i class="fa-solid fa-circle-check" style="position:absolute;top:8px;right:9px;color:var(--brand);font-size:15px"></i>':'')
+              + '<span style="font-size:34px;line-height:1">'+g.e+'</span>'
+              + '<span style="font-weight:700;font-size:14px;color:var(--ink)">'+g.n+'</span>'
+              + '<span class="t-sm" style="font-weight:700'+(on?';color:var(--brand)':'')+'">'+money(g.v)+'</span>'
+              + '</button>';
+          }).join('');
+        }
+        const g = gift(), fee = Math.round(g.v*FEE), receives = g.v-fee;
+        if($('bdEmoji')) $('bdEmoji').textContent = g.e;
+        if($('bdTitle')) $('bdTitle').textContent = g.n+' · breakdown';
+        if($('bdValue')) $('bdValue').textContent = money(g.v);
+        if($('bdFee'))   $('bdFee').textContent = '−'+money(fee);
+        if($('bdPay'))   $('bdPay').textContent = money(g.v);
+        if($('bdRecv'))  $('bdRecv').textContent = money(receives);
+        if($('paySeg'))  $('paySeg').querySelectorAll('button').forEach(b=>b.classList.toggle('active', b.dataset.src===source));
+      }
+
+      function send(){
+        const g = gift(), receives = g.v-Math.round(g.v*FEE);
+        if($('gsEmoji')) $('gsEmoji').textContent = g.e;
+        if($('gsLine'))  $('gsLine').innerHTML = '<b>'+to.name+'</b> received your <b>'+g.n+'</b>';
+        if($('gsRecv'))  $('gsRecv').textContent = money(receives);
+        if($('gsPaid'))  $('gsPaid').textContent = money(g.v)+' · '+(source==='wallet'?'Wallet':'UserPoints');
+        const msg = $('giftMsg') ? $('giftMsg').value.trim() : '';
+        if($('gsMsgWrap')) $('gsMsgWrap').style.display = msg ? '' : 'none';
+        if($('gsMsg'))  $('gsMsg').textContent = msg ? '“'+msg+'”' : '';
+        App.go('scr-gift-sent');
+        if($('giftMsg')) $('giftMsg').value='';
+      }
+
+      return { CATALOG, setRecipient, start, compose, pick, pay, send, paint };
+    })();
+
+    /* eGifts hub tabs */
+    function egiftTab(btn, which){
+      btn.parentElement.querySelectorAll('button').forEach(b=>b.classList.remove('active'));
+      btn.classList.add('active');
+      document.querySelectorAll('#scr-egifts .eg-pane').forEach(p=>{ p.style.display = p.id==='eg-'+which ? '' : 'none'; });
+    }
+
+    /* ================= report post ================= */
+    function reportPick(el){
+      document.querySelectorAll('#reportReasons .rep-opt').forEach(o=>{
+        o.classList.remove('sel'); o.style.borderColor='var(--line)';
+        const r=o.querySelector('.rep-radio'); if(r){ r.style.borderColor='var(--ink-3)'; r.style.background='none'; r.innerHTML=''; }
+      });
+      el.classList.add('sel'); el.style.borderColor='var(--brand)';
+      const r=el.querySelector('.rep-radio'); if(r){ r.style.borderColor='var(--brand)'; r.style.background='var(--brand)'; r.innerHTML='<i class="fa-solid fa-check" style="color:#fff;font-size:10px"></i>'; }
+      const btn=document.getElementById('reportSubmit'); if(btn){ btn.disabled=false; btn.style.opacity='1'; }
+    }
+    function submitReport(){
+      const sel=document.querySelector('#reportReasons .rep-opt.sel');
+      if(!sel){ App.toast('Please choose a reason first'); return; }
+      App.back();
+      App.toast('Report submitted — thanks for keeping EVINIE safe');
+      document.querySelectorAll('#reportReasons .rep-opt').forEach(o=>{ o.classList.remove('sel'); o.style.borderColor='var(--line)'; const r=o.querySelector('.rep-radio'); if(r){ r.style.borderColor='var(--ink-3)'; r.style.background='none'; r.innerHTML=''; } });
+      const d=document.getElementById('reportDetails'); if(d) d.value='';
+      const b=document.getElementById('reportSubmit'); if(b){ b.disabled=true; b.style.opacity='.5'; }
+    }
+
     /* onboarding slides */
     const ONB=[
       {t:'Your World, Connected', x:'Connect with friends, share moments, and build your community — all in one place.', ic:'fa-users'},
@@ -689,6 +789,7 @@
 
     /* deep-link + splash auto-advance */
     window.addEventListener('load',()=>{
+      Gift.paint();
       const raw=(location.hash||'').replace('#','');
       const [scr,overlay]=raw.split('~');
       if(scr && document.getElementById(scr)){

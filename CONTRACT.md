@@ -147,14 +147,14 @@ Open with `App.openSheet('sheet-NAME')`.
 ## CANONICAL SCREEN IDs (link to these; they will all exist)
 Auth (built): scr-splash scr-onboarding scr-login scr-register scr-otp scr-setup1 scr-setup2 scr-forgot
 Home (built): scr-home
-Home extra: scr-composer scr-poll-composer scr-post-detail scr-story scr-add-story
+Home extra: scr-composer scr-poll-composer scr-post-detail scr-story scr-add-story scr-report-post
 Discover: scr-discover scr-hashtag scr-online scr-contacts scr-profile-views
 Notifications: scr-notifications
 Profile: scr-profile scr-edit-profile scr-user-profile
 Messages: scr-messages scr-chat scr-group-chat
 Marketplace: scr-marketplace scr-product scr-cart scr-order-confirm scr-my-products scr-add-product
 Wallet: scr-wallet scr-fund-wallet scr-cashout scr-userpoints
-eGifts: scr-send-gift scr-egifts
+eGifts: scr-send-gift scr-gift-recipient scr-gift-sent scr-egifts
 Ads: scr-my-ads scr-create-ad scr-ad-analytics scr-boost-post
 Verification: scr-verify
 Groups: scr-groups scr-create-group scr-group-page

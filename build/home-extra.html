@@ -351,3 +351,80 @@
     </div>
   </div>
 </section>
+
+
+<!-- Report a post -->
+<section class="screen" id="scr-report-post" data-topbar="back" data-nav="hide" data-title="Report Post">
+  <div class="pad stack">
+
+    <!-- Post being reported -->
+    <div class="card card-p" style="display:flex;align-items:center;gap:11px">
+      <img class="ava" src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=120&q=80" style="width:42px;height:42px;flex:none">
+      <div style="flex:1;min-width:0">
+        <div style="font-weight:700;font-size:14px">Rakib Hasan <i class="fa-solid fa-circle-check verified" style="font-size:11px"></i></div>
+        <div class="t-sm" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Just shipped a new design system for our community app…</div>
+      </div>
+    </div>
+
+    <p class="t-sm" style="line-height:1.5">Your report is <b>anonymous</b>. We'll review this post against our Community Guidelines and take action if needed.</p>
+
+    <div class="section-title">Why are you reporting this?</div>
+
+    <div id="reportReasons" class="stack" style="gap:10px">
+
+      <button type="button" class="rep-opt" onclick="reportPick(this)" style="width:100%;text-align:left;background:var(--surface);border:1.5px solid var(--line);border-radius:14px;padding:13px 14px;display:flex;align-items:center;gap:12px;cursor:pointer">
+        <span class="rep-radio" style="width:20px;height:20px;border-radius:50%;border:2px solid var(--ink-3);flex:none;display:flex;align-items:center;justify-content:center"></span>
+        <span style="flex:1;min-width:0"><span style="display:block;font-weight:700;font-size:14px;color:var(--ink)">Spam or misleading</span><span class="t-sm">Repetitive, deceptive or unwanted content</span></span>
+      </button>
+
+      <button type="button" class="rep-opt" onclick="reportPick(this)" style="width:100%;text-align:left;background:var(--surface);border:1.5px solid var(--line);border-radius:14px;padding:13px 14px;display:flex;align-items:center;gap:12px;cursor:pointer">
+        <span class="rep-radio" style="width:20px;height:20px;border-radius:50%;border:2px solid var(--ink-3);flex:none;display:flex;align-items:center;justify-content:center"></span>
+        <span style="flex:1;min-width:0"><span style="display:block;font-weight:700;font-size:14px;color:var(--ink)">Nudity or sexual activity</span><span class="t-sm">Explicit or adult content</span></span>
+      </button>
+
+      <button type="button" class="rep-opt" onclick="reportPick(this)" style="width:100%;text-align:left;background:var(--surface);border:1.5px solid var(--line);border-radius:14px;padding:13px 14px;display:flex;align-items:center;gap:12px;cursor:pointer">
+        <span class="rep-radio" style="width:20px;height:20px;border-radius:50%;border:2px solid var(--ink-3);flex:none;display:flex;align-items:center;justify-content:center"></span>
+        <span style="flex:1;min-width:0"><span style="display:block;font-weight:700;font-size:14px;color:var(--ink)">Hate speech or symbols</span><span class="t-sm">Attacks on people or protected groups</span></span>
+      </button>
+
+      <button type="button" class="rep-opt" onclick="reportPick(this)" style="width:100%;text-align:left;background:var(--surface);border:1.5px solid var(--line);border-radius:14px;padding:13px 14px;display:flex;align-items:center;gap:12px;cursor:pointer">
+        <span class="rep-radio" style="width:20px;height:20px;border-radius:50%;border:2px solid var(--ink-3);flex:none;display:flex;align-items:center;justify-content:center"></span>
+        <span style="flex:1;min-width:0"><span style="display:block;font-weight:700;font-size:14px;color:var(--ink)">Violence or dangerous behaviour</span><span class="t-sm">Threats, self-harm or graphic violence</span></span>
+      </button>
+
+      <button type="button" class="rep-opt" onclick="reportPick(this)" style="width:100%;text-align:left;background:var(--surface);border:1.5px solid var(--line);border-radius:14px;padding:13px 14px;display:flex;align-items:center;gap:12px;cursor:pointer">
+        <span class="rep-radio" style="width:20px;height:20px;border-radius:50%;border:2px solid var(--ink-3);flex:none;display:flex;align-items:center;justify-content:center"></span>
+        <span style="flex:1;min-width:0"><span style="display:block;font-weight:700;font-size:14px;color:var(--ink)">False information</span><span class="t-sm">Misinformation or manipulated media</span></span>
+      </button>
+
+      <button type="button" class="rep-opt" onclick="reportPick(this)" style="width:100%;text-align:left;background:var(--surface);border:1.5px solid var(--line);border-radius:14px;padding:13px 14px;display:flex;align-items:center;gap:12px;cursor:pointer">
+        <span class="rep-radio" style="width:20px;height:20px;border-radius:50%;border:2px solid var(--ink-3);flex:none;display:flex;align-items:center;justify-content:center"></span>
+        <span style="flex:1;min-width:0"><span style="display:block;font-weight:700;font-size:14px;color:var(--ink)">Harassment or bullying</span><span class="t-sm">Targeting or intimidating someone</span></span>
+      </button>
+
+      <button type="button" class="rep-opt" onclick="reportPick(this)" style="width:100%;text-align:left;background:var(--surface);border:1.5px solid var(--line);border-radius:14px;padding:13px 14px;display:flex;align-items:center;gap:12px;cursor:pointer">
+        <span class="rep-radio" style="width:20px;height:20px;border-radius:50%;border:2px solid var(--ink-3);flex:none;display:flex;align-items:center;justify-content:center"></span>
+        <span style="flex:1;min-width:0"><span style="display:block;font-weight:700;font-size:14px;color:var(--ink)">Scam or fraud</span><span class="t-sm">Phishing, fake offers or financial scams</span></span>
+      </button>
+
+      <button type="button" class="rep-opt" onclick="reportPick(this)" style="width:100%;text-align:left;background:var(--surface);border:1.5px solid var(--line);border-radius:14px;padding:13px 14px;display:flex;align-items:center;gap:12px;cursor:pointer">
+        <span class="rep-radio" style="width:20px;height:20px;border-radius:50%;border:2px solid var(--ink-3);flex:none;display:flex;align-items:center;justify-content:center"></span>
+        <span style="flex:1;min-width:0"><span style="display:block;font-weight:700;font-size:14px;color:var(--ink)">Something else</span><span class="t-sm">Tell us more below</span></span>
+      </button>
+
+    </div>
+
+    <div class="field">
+      <label class="label">Add details <span class="t-sm" style="font-weight:500">(optional)</span></label>
+      <textarea id="reportDetails" class="input" rows="3" maxlength="300" placeholder="Anything that helps us understand the issue…"></textarea>
+    </div>
+
+    <div style="height:8px"></div>
+
+  </div>
+
+  <!-- Primary CTA -->
+  <div class="pad" style="position:sticky;bottom:0;background:linear-gradient(to top,var(--bg) 88%,transparent);padding-top:14px">
+    <button id="reportSubmit" class="btn btn-primary" disabled style="opacity:.5" onclick="submitReport()">Submit Report</button>
+  </div>
+</section>

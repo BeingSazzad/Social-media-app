@@ -4,93 +4,58 @@
          data-topbar="back" data-nav="hide" data-title="Send a Gift">
   <div class="pad stack">
 
-    <!-- Recipient header line -->
+    <!-- Recipient header line (filled by Gift.paint) -->
     <div class="card card-p" style="display:flex;align-items:center;gap:12px">
-      <img class="ava" src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&q=80" style="width:48px;height:48px">
+      <img id="giftToAva" class="ava" src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=200&q=80" style="width:48px;height:48px">
       <div style="flex:1;min-width:0">
         <div class="section-title" style="margin-bottom:2px">Sending to</div>
-        <div class="h3" style="font-size:16px">Nusrat Jahan
-          <i class="fa-solid fa-circle-check verified" style="font-size:13px"></i>
-        </div>
-        <div class="t-sm">@nusrat_j · Lagos</div>
+        <div id="giftToName" class="h3" style="font-size:16px">Nusrat Jahan</div>
+        <div id="giftToMeta" class="t-sm">@nusrat_j · Lagos</div>
       </div>
-      <button class="btn-sm btn-soft" onclick="App.go('scr-user-profile')">Profile</button>
+      <button class="btn-sm btn-soft" onclick="App.go('scr-gift-recipient')">Change</button>
     </div>
 
-    <!-- Catalog grid -->
+    <!-- Catalog grid (rendered by Gift.paint) -->
     <div class="section-title">Choose a gift</div>
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+    <div id="giftGrid" style="display:grid;grid-template-columns:1fr 1fr;gap:12px"></div>
 
-      <button onclick="App.toast('Rose selected · ₦50')" style="background:var(--surface);border:1.5px solid var(--line);border-radius:16px;padding:18px 12px;display:flex;flex-direction:column;align-items:center;gap:6px;cursor:pointer">
-        <span style="font-size:34px;line-height:1">🌹</span>
-        <span style="font-weight:700;font-size:14px;color:var(--ink)">Rose</span>
-        <span class="t-sm" style="font-weight:700">₦50</span>
-      </button>
-
-      <button onclick="App.toast('Star selected · ₦100')" style="background:var(--surface);border:1.5px solid var(--line);border-radius:16px;padding:18px 12px;display:flex;flex-direction:column;align-items:center;gap:6px;cursor:pointer">
-        <span style="font-size:34px;line-height:1">⭐</span>
-        <span style="font-weight:700;font-size:14px;color:var(--ink)">Star</span>
-        <span class="t-sm" style="font-weight:700">₦100</span>
-      </button>
-
-      <button onclick="App.toast('Diamond selected · ₦250')" style="background:var(--surface);border:1.5px solid var(--line);border-radius:16px;padding:18px 12px;display:flex;flex-direction:column;align-items:center;gap:6px;cursor:pointer">
-        <span style="font-size:34px;line-height:1">💎</span>
-        <span style="font-weight:700;font-size:14px;color:var(--ink)">Diamond</span>
-        <span class="t-sm" style="font-weight:700">₦250</span>
-      </button>
-
-      <button onclick="App.toast('Trophy selected · ₦500')" style="background:var(--surface);border:2px solid var(--brand);border-radius:16px;padding:18px 12px;display:flex;flex-direction:column;align-items:center;gap:6px;cursor:pointer;position:relative;box-shadow:0 4px 16px rgba(255,106,1,.18)">
-        <i class="fa-solid fa-circle-check" style="position:absolute;top:8px;right:9px;color:var(--brand);font-size:15px"></i>
-        <span style="font-size:34px;line-height:1">🏆</span>
-        <span style="font-weight:700;font-size:14px;color:var(--ink)">Trophy</span>
-        <span class="t-sm" style="font-weight:700;color:var(--brand)">₦500</span>
-      </button>
-
-      <button onclick="App.toast('Crown selected · ₦1,000')" style="background:var(--surface);border:1.5px solid var(--line);border-radius:16px;padding:18px 12px;display:flex;flex-direction:column;align-items:center;gap:6px;cursor:pointer">
-        <span style="font-size:34px;line-height:1">👑</span>
-        <span style="font-weight:700;font-size:14px;color:var(--ink)">Crown</span>
-        <span class="t-sm" style="font-weight:700">₦1,000</span>
-      </button>
-
-      <button onclick="App.toast('Rocket selected · ₦2,000')" style="background:var(--surface);border:1.5px solid var(--line);border-radius:16px;padding:18px 12px;display:flex;flex-direction:column;align-items:center;gap:6px;cursor:pointer">
-        <span style="font-size:34px;line-height:1">🚀</span>
-        <span style="font-weight:700;font-size:14px;color:var(--ink)">Rocket</span>
-        <span class="t-sm" style="font-weight:700">₦2,000</span>
-      </button>
-
-    </div>
-
-    <!-- Fee breakdown for selected gift (Trophy) -->
+    <!-- Live fee breakdown (filled by Gift.paint) -->
     <div class="card card-p stack" style="gap:10px">
       <div style="display:flex;align-items:center;gap:8px;margin-bottom:2px">
-        <span style="font-size:20px">🏆</span>
-        <span class="h3" style="font-size:15px">Trophy · breakdown</span>
+        <span id="bdEmoji" style="font-size:20px">🏆</span>
+        <span id="bdTitle" class="h3" style="font-size:15px">Trophy · breakdown</span>
       </div>
       <div class="divider"></div>
       <div style="display:flex;justify-content:space-between;font-size:14px">
         <span class="t-sm" style="font-size:14px">Gift Value</span>
-        <span style="font-weight:600">₦500</span>
+        <span id="bdValue" style="font-weight:600">₦500</span>
       </div>
       <div style="display:flex;justify-content:space-between;font-size:14px">
-        <span class="t-sm" style="font-size:14px">Transaction Fee (20%)</span>
-        <span style="font-weight:600;color:var(--danger)">₦100</span>
+        <span class="t-sm" style="font-size:14px">Platform Fee (20%)</span>
+        <span id="bdFee" style="font-weight:600;color:var(--danger)">−₦100</span>
       </div>
       <div class="divider"></div>
       <div style="display:flex;justify-content:space-between;align-items:center">
         <span style="font-weight:700;font-size:15px">You Pay</span>
-        <span style="font-weight:700;font-size:18px;color:var(--brand)">₦600</span>
+        <span id="bdPay" style="font-weight:700;font-size:18px;color:var(--brand)">₦500</span>
       </div>
       <div style="display:flex;justify-content:space-between;font-size:13px">
         <span class="t-sm">Recipient receives</span>
-        <span style="font-weight:700;color:var(--ok)">₦400</span>
+        <span id="bdRecv" style="font-weight:700;color:var(--ok)">₦400</span>
       </div>
+    </div>
+
+    <!-- Optional message -->
+    <div class="field">
+      <label class="label">Add a message <span class="t-sm" style="font-weight:500">(optional)</span></label>
+      <textarea id="giftMsg" class="input" rows="2" maxlength="120" placeholder="Happy birthday! 🎉"></textarea>
     </div>
 
     <!-- Payment source segmented toggle -->
     <div class="section-title">Pay with</div>
-    <div class="seg">
-      <button class="active" onclick="App.toast('Paying from Wallet')">Wallet · ₦3,200</button>
-      <button onclick="App.toast('Paying with UserPoints')">UserPoints · 750</button>
+    <div id="paySeg" class="seg">
+      <button class="active" data-src="wallet" onclick="Gift.pay('wallet')">Wallet · ₦3,200</button>
+      <button data-src="points" onclick="Gift.pay('points')">UserPoints · 750</button>
     </div>
 
     <div style="height:8px"></div>
@@ -99,7 +64,121 @@
 
   <!-- Thumb-first primary CTA -->
   <div class="pad" style="position:sticky;bottom:0;background:linear-gradient(to top,var(--bg) 88%,transparent);padding-top:14px">
-    <button class="btn btn-primary" onclick="App.toast('Nusrat received ₦400!')">Send Gift 🎁</button>
+    <button class="btn btn-primary" onclick="Gift.send()">Send Gift 🎁</button>
+  </div>
+</section>
+
+
+<section class="screen" id="scr-gift-recipient"
+         data-topbar="back" data-nav="hide" data-title="Send to">
+  <div class="pad stack">
+    <div class="input-group">
+      <input class="input" placeholder="Search friends" onkeyup="filterFriends(this.value)">
+      <span class="input-icon" style="pointer-events:none"><i class="fa-solid fa-magnifying-glass"></i></span>
+    </div>
+    <div class="section-title">Choose a recipient</div>
+
+    <div class="stack" id="friendList">
+      <div class="card card-p frow" data-n="nusrat jahan" style="display:flex;align-items:center;gap:11px;cursor:pointer"
+           onclick="Gift.setRecipient('Nusrat Jahan','@nusrat_j','Lagos','https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=200&q=80',true);App.back()">
+        <img class="ava" src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=120&q=80" style="width:46px;height:46px;flex:none">
+        <div style="flex:1;min-width:0">
+          <div style="font-weight:700;font-size:14px">Nusrat Jahan <i class="fa-solid fa-circle-check verified" style="font-size:11px"></i></div>
+          <div class="t-sm">@nusrat_j · 8 mutual friends</div>
+        </div>
+        <i class="fa-solid fa-chevron-right chev"></i>
+      </div>
+
+      <div class="card card-p frow" data-n="rakib hasan" style="display:flex;align-items:center;gap:11px;cursor:pointer"
+           onclick="Gift.setRecipient('Rakib Hasan','@rakib_h','Dhaka','https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=200&q=80',true);App.back()">
+        <img class="ava" src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=120&q=80" style="width:46px;height:46px;flex:none">
+        <div style="flex:1;min-width:0">
+          <div style="font-weight:700;font-size:14px">Rakib Hasan <i class="fa-solid fa-circle-check verified" style="font-size:11px"></i></div>
+          <div class="t-sm">@rakib_h · 23 mutual friends</div>
+        </div>
+        <i class="fa-solid fa-chevron-right chev"></i>
+      </div>
+
+      <div class="card card-p frow" data-n="tanvir ahmed" style="display:flex;align-items:center;gap:11px;cursor:pointer"
+           onclick="Gift.setRecipient('Tanvir Ahmed','@tanvir','Dhaka','https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&q=80',false);App.back()">
+        <img class="ava" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=120&q=80" style="width:46px;height:46px;flex:none">
+        <div style="flex:1;min-width:0">
+          <div style="font-weight:700;font-size:14px">Tanvir Ahmed</div>
+          <div class="t-sm">@tanvir · 4 mutual friends</div>
+        </div>
+        <i class="fa-solid fa-chevron-right chev"></i>
+      </div>
+
+      <div class="card card-p frow" data-n="mitu rahman" style="display:flex;align-items:center;gap:11px;cursor:pointer"
+           onclick="Gift.setRecipient('Mitu Rahman','@mitu_r','Chattogram','https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=200&q=80',false);App.back()">
+        <img class="ava" src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=120&q=80" style="width:46px;height:46px;flex:none">
+        <div style="flex:1;min-width:0">
+          <div style="font-weight:700;font-size:14px">Mitu Rahman</div>
+          <div class="t-sm">@mitu_r · 12 mutual friends</div>
+        </div>
+        <i class="fa-solid fa-chevron-right chev"></i>
+      </div>
+
+      <div class="card card-p frow" data-n="aisha bello" style="display:flex;align-items:center;gap:11px;cursor:pointer"
+           onclick="Gift.setRecipient('Aisha Bello','@aisha_b','Abuja','https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=200&q=80',false);App.back()">
+        <img class="ava" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=120&q=80" style="width:46px;height:46px;flex:none">
+        <div style="flex:1;min-width:0">
+          <div style="font-weight:700;font-size:14px">Aisha Bello</div>
+          <div class="t-sm">@aisha_b · 6 mutual friends</div>
+        </div>
+        <i class="fa-solid fa-chevron-right chev"></i>
+      </div>
+
+      <div class="card card-p frow" data-n="chidi okafor" style="display:flex;align-items:center;gap:11px;cursor:pointer"
+           onclick="Gift.setRecipient('Chidi Okafor','@chidi','Lagos','https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?w=200&q=80',false);App.back()">
+        <img class="ava" src="https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?w=120&q=80" style="width:46px;height:46px;flex:none">
+        <div style="flex:1;min-width:0">
+          <div style="font-weight:700;font-size:14px">Chidi Okafor</div>
+          <div class="t-sm">@chidi · 2 mutual friends</div>
+        </div>
+        <i class="fa-solid fa-chevron-right chev"></i>
+      </div>
+    </div>
+    <div class="empty" id="frEmpty" style="display:none"><i class="fa-regular fa-face-frown"></i><div class="h3" style="color:var(--ink-2)">No friends found</div></div>
+  </div>
+</section>
+
+
+<section class="screen" id="scr-gift-sent"
+         data-topbar="none" data-nav="hide">
+  <div class="pad stack" style="min-height:100%;justify-content:center;text-align:center;padding-top:40px">
+
+    <div style="width:96px;height:96px;border-radius:50%;background:rgba(34,197,94,.12);display:flex;align-items:center;justify-content:center;margin:0 auto 6px;position:relative">
+      <i class="fa-solid fa-circle-check" style="font-size:54px;color:var(--ok)"></i>
+      <span id="gsEmoji" style="position:absolute;bottom:-2px;right:-2px;font-size:30px">🏆</span>
+    </div>
+
+    <div style="font-weight:700;font-size:22px">Gift sent! 🎉</div>
+    <p id="gsLine" class="t-sm" style="font-size:14px;max-width:280px;margin:0 auto;line-height:1.5"><b>Nusrat Jahan</b> received your <b>Trophy</b></p>
+
+    <!-- optional message echo -->
+    <div id="gsMsgWrap" class="card card-p" style="display:none;text-align:left">
+      <div class="section-title">Your message</div>
+      <p id="gsMsg" style="font-size:14px;line-height:1.5;color:var(--ink-2)"></p>
+    </div>
+
+    <!-- receipt -->
+    <div class="card card-p stack" style="gap:10px;text-align:left">
+      <div style="display:flex;justify-content:space-between;align-items:center">
+        <span class="t-sm" style="font-size:14px">Recipient receives</span>
+        <span id="gsRecv" style="font-weight:700;font-size:18px;color:var(--ok)">₦400</span>
+      </div>
+      <div class="divider"></div>
+      <div style="display:flex;justify-content:space-between;align-items:center">
+        <span class="t-sm" style="font-size:14px">You paid</span>
+        <span id="gsPaid" style="font-weight:700;font-size:14px">₦500 · Wallet</span>
+      </div>
+    </div>
+
+    <div style="height:4px"></div>
+    <button class="btn btn-primary" onclick="App.go('scr-egifts')">View my eGifts</button>
+    <button class="btn btn-outline" onclick="App.tab('scr-home')">Back to Home</button>
+
   </div>
 </section>
 
@@ -110,74 +189,123 @@
 
     <!-- 3-tab segmented -->
     <div class="seg">
-      <button onclick="App.toast('Gift lists')">Lists</button>
-      <button onclick="App.toast('Gifts you sent')">Sent</button>
-      <button class="active" onclick="App.toast('Gifts received')">Received</button>
+      <button class="active" onclick="egiftTab(this,'received')">Received</button>
+      <button onclick="egiftTab(this,'sent')">Sent</button>
+      <button onclick="egiftTab(this,'catalog')">Catalog</button>
     </div>
 
-    <!-- Summary strip -->
-    <div class="navy" style="border-radius:16px;padding:16px;display:flex;align-items:center;justify-content:space-between">
-      <div>
-        <div style="font-size:12px;opacity:.7;text-transform:uppercase;letter-spacing:.05em">Received this month</div>
-        <div style="font-weight:700;font-size:22px;margin-top:2px">₦1,150</div>
+    <!-- ============ RECEIVED ============ -->
+    <div class="eg-pane stack" id="eg-received">
+      <div class="navy" style="border-radius:16px;padding:16px;display:flex;align-items:center;justify-content:space-between">
+        <div>
+          <div style="font-size:12px;opacity:.7;text-transform:uppercase;letter-spacing:.05em">Received this month</div>
+          <div style="font-weight:700;font-size:22px;margin-top:2px">₦1,150</div>
+        </div>
+        <span style="font-size:30px">🎁</span>
       </div>
-      <span style="font-size:30px">🎁</span>
+
+      <div class="section-title">Received</div>
+      <div class="card">
+        <div class="list-row">
+          <span style="font-size:24px;width:32px;text-align:center">👑</span>
+          <div style="flex:1;min-width:0"><div class="h3">Tanvir Ahmed</div><div class="t-sm">Crown · 24 Jun 2026</div></div>
+          <div style="text-align:right"><div style="font-weight:700;color:var(--ok)">+₦800</div><div class="t-sm">received</div></div>
+        </div>
+        <div class="divider"></div>
+        <div class="list-row">
+          <span style="font-size:24px;width:32px;text-align:center">💎</span>
+          <div style="flex:1;min-width:0"><div class="h3">Aisha Bello</div><div class="t-sm">Diamond · 22 Jun 2026</div></div>
+          <div style="text-align:right"><div style="font-weight:700;color:var(--ok)">+₦200</div><div class="t-sm">received</div></div>
+        </div>
+        <div class="divider"></div>
+        <div class="list-row">
+          <span style="font-size:24px;width:32px;text-align:center">🏆</span>
+          <div style="flex:1;min-width:0"><div class="h3">Sadia Islam</div><div class="t-sm">Trophy · 19 Jun 2026</div></div>
+          <div style="text-align:right"><div style="font-weight:700;color:var(--ok)">+₦400</div><div class="t-sm">received</div></div>
+        </div>
+        <div class="divider"></div>
+        <div class="list-row">
+          <span style="font-size:24px;width:32px;text-align:center">⭐</span>
+          <div style="flex:1;min-width:0"><div class="h3">Chidi Okafor</div><div class="t-sm">Star · 15 Jun 2026</div></div>
+          <div style="text-align:right"><div style="font-weight:700;color:var(--ok)">+₦80</div><div class="t-sm">received</div></div>
+        </div>
+      </div>
+
+      <button class="btn btn-outline" onclick="Gift.start()">Send a Gift 🎁</button>
     </div>
 
-    <!-- Received list -->
-    <div class="section-title">Received</div>
+    <!-- ============ SENT ============ -->
+    <div class="eg-pane stack" id="eg-sent" style="display:none">
+      <div class="navy" style="border-radius:16px;padding:16px;display:flex;align-items:center;justify-content:space-between">
+        <div>
+          <div style="font-size:12px;opacity:.7;text-transform:uppercase;letter-spacing:.05em">Sent this month</div>
+          <div style="font-weight:700;font-size:22px;margin-top:2px">₦1,600</div>
+        </div>
+        <span style="font-size:30px">🎁</span>
+      </div>
 
-    <div class="card">
-      <div class="list-row">
-        <span style="font-size:24px;width:32px;text-align:center">👑</span>
-        <div style="flex:1;min-width:0">
-          <div class="h3">Tanvir Ahmed</div>
-          <div class="t-sm">Crown · 24 Jun 2026</div>
+      <div class="section-title">Sent</div>
+      <div class="card">
+        <div class="list-row">
+          <span style="font-size:24px;width:32px;text-align:center">👑</span>
+          <div style="flex:1;min-width:0"><div class="h3">Tasnim Rahman</div><div class="t-sm">Crown · 22 Jun 2026 · <span style="color:var(--ok)">Delivered</span></div></div>
+          <div style="text-align:right"><div style="font-weight:700;color:var(--danger)">−₦1,000</div><div class="t-sm">sent</div></div>
         </div>
-        <div style="text-align:right">
-          <div style="font-weight:700;color:var(--ok)">+₦800</div>
-          <div class="t-sm">received</div>
+        <div class="divider"></div>
+        <div class="list-row">
+          <span style="font-size:24px;width:32px;text-align:center">🏆</span>
+          <div style="flex:1;min-width:0"><div class="h3">Habiba Sani</div><div class="t-sm">Trophy · 18 Jun 2026 · <span style="color:var(--ok)">Delivered</span></div></div>
+          <div style="text-align:right"><div style="font-weight:700;color:var(--danger)">−₦500</div><div class="t-sm">sent</div></div>
         </div>
-      </div>
-      <div class="divider"></div>
-      <div class="list-row">
-        <span style="font-size:24px;width:32px;text-align:center">💎</span>
-        <div style="flex:1;min-width:0">
-          <div class="h3">Aisha Bello</div>
-          <div class="t-sm">Diamond · 22 Jun 2026</div>
-        </div>
-        <div style="text-align:right">
-          <div style="font-weight:700;color:var(--ok)">+₦200</div>
-          <div class="t-sm">received</div>
+        <div class="divider"></div>
+        <div class="list-row">
+          <span style="font-size:24px;width:32px;text-align:center">⭐</span>
+          <div style="flex:1;min-width:0"><div class="h3">Emeka Obi</div><div class="t-sm">Star · 12 Jun 2026 · <span style="color:var(--ok)">Delivered</span></div></div>
+          <div style="text-align:right"><div style="font-weight:700;color:var(--danger)">−₦100</div><div class="t-sm">sent</div></div>
         </div>
       </div>
-      <div class="divider"></div>
-      <div class="list-row">
-        <span style="font-size:24px;width:32px;text-align:center">🏆</span>
-        <div style="flex:1;min-width:0">
-          <div class="h3">Sadia Islam</div>
-          <div class="t-sm">Trophy · 19 Jun 2026</div>
-        </div>
-        <div style="text-align:right">
-          <div style="font-weight:700;color:var(--ok)">+₦400</div>
-          <div class="t-sm">received</div>
-        </div>
-      </div>
-      <div class="divider"></div>
-      <div class="list-row">
-        <span style="font-size:24px;width:32px;text-align:center">⭐</span>
-        <div style="flex:1;min-width:0">
-          <div class="h3">Chidi Okafor</div>
-          <div class="t-sm">Star · 15 Jun 2026</div>
-        </div>
-        <div style="text-align:right">
-          <div style="font-weight:700;color:var(--ok)">+₦80</div>
-          <div class="t-sm">received</div>
-        </div>
-      </div>
+
+      <button class="btn btn-outline" onclick="Gift.start()">Send another 🎁</button>
     </div>
 
-    <button class="btn btn-outline" onclick="App.go('scr-send-gift')">Send a Gift 🎁</button>
+    <!-- ============ CATALOG ============ -->
+    <div class="eg-pane stack" id="eg-catalog" style="display:none">
+      <p class="t-sm" style="line-height:1.5">Browse gifts you can send. The recipient receives the gift value minus a 20% platform fee.</p>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+
+        <button type="button" onclick="Gift.compose('rose')" style="background:var(--surface);border:1.5px solid var(--line);border-radius:16px;padding:18px 12px;display:flex;flex-direction:column;align-items:center;gap:6px;cursor:pointer">
+          <span style="font-size:34px;line-height:1">🌹</span>
+          <span style="font-weight:700;font-size:14px;color:var(--ink)">Rose</span>
+          <span class="t-sm" style="font-weight:700">₦50</span>
+        </button>
+        <button type="button" onclick="Gift.compose('star')" style="background:var(--surface);border:1.5px solid var(--line);border-radius:16px;padding:18px 12px;display:flex;flex-direction:column;align-items:center;gap:6px;cursor:pointer">
+          <span style="font-size:34px;line-height:1">⭐</span>
+          <span style="font-weight:700;font-size:14px;color:var(--ink)">Star</span>
+          <span class="t-sm" style="font-weight:700">₦100</span>
+        </button>
+        <button type="button" onclick="Gift.compose('diamond')" style="background:var(--surface);border:1.5px solid var(--line);border-radius:16px;padding:18px 12px;display:flex;flex-direction:column;align-items:center;gap:6px;cursor:pointer">
+          <span style="font-size:34px;line-height:1">💎</span>
+          <span style="font-weight:700;font-size:14px;color:var(--ink)">Diamond</span>
+          <span class="t-sm" style="font-weight:700">₦250</span>
+        </button>
+        <button type="button" onclick="Gift.compose('trophy')" style="background:var(--surface);border:1.5px solid var(--line);border-radius:16px;padding:18px 12px;display:flex;flex-direction:column;align-items:center;gap:6px;cursor:pointer">
+          <span style="font-size:34px;line-height:1">🏆</span>
+          <span style="font-weight:700;font-size:14px;color:var(--ink)">Trophy</span>
+          <span class="t-sm" style="font-weight:700">₦500</span>
+        </button>
+        <button type="button" onclick="Gift.compose('crown')" style="background:var(--surface);border:1.5px solid var(--line);border-radius:16px;padding:18px 12px;display:flex;flex-direction:column;align-items:center;gap:6px;cursor:pointer">
+          <span style="font-size:34px;line-height:1">👑</span>
+          <span style="font-weight:700;font-size:14px;color:var(--ink)">Crown</span>
+          <span class="t-sm" style="font-weight:700">₦1,000</span>
+        </button>
+        <button type="button" onclick="Gift.compose('rocket')" style="background:var(--surface);border:1.5px solid var(--line);border-radius:16px;padding:18px 12px;display:flex;flex-direction:column;align-items:center;gap:6px;cursor:pointer">
+          <span style="font-size:34px;line-height:1">🚀</span>
+          <span style="font-weight:700;font-size:14px;color:var(--ink)">Rocket</span>
+          <span class="t-sm" style="font-weight:700">₦2,000</span>
+        </button>
+
+      </div>
+    </div>
 
     <div style="height:4px"></div>
 
