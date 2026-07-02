@@ -1,0 +1,386 @@
+<!-- module: pages (Business Pages) -->
+
+<!-- ============================================================= -->
+<!-- ALL PAGES (browse + your pages + create) -->
+<!-- ============================================================= -->
+<section class="screen" id="scr-pages" data-topbar="back" data-nav="hide" data-title="Pages">
+  <div style="position:sticky;top:0;background:var(--bg);padding:14px 16px 8px;z-index:5">
+    <div class="input-group">
+      <input class="input" placeholder="Search pages" onkeyup="pagesSearch(this.value)">
+      <span class="input-icon" style="pointer-events:none"><i class="fa-solid fa-magnifying-glass"></i></span>
+    </div>
+    <div class="seg" style="margin-top:10px">
+      <button class="active" onclick="pagesSeg(this,'discover')">Discover</button>
+      <button onclick="pagesSeg(this,'yours')">Your Pages</button>
+    </div>
+  </div>
+
+  <div class="pad stack" style="padding-top:6px;padding-bottom:24px">
+
+    <button class="btn btn-primary" onclick="App.go('scr-create-page')"><i class="fa-solid fa-plus"></i> Create New Page</button>
+
+    <!-- DISCOVER -->
+    <div class="pg-list" id="pages-discover">
+      <div class="card card-p pg-row" data-n="aroma coffee house" style="display:flex;align-items:center;gap:12px;cursor:pointer" onclick="App.go('scr-page')">
+        <img class="ava" src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?w=160&q=80" style="width:50px;height:50px;border-radius:14px">
+        <div style="flex:1;min-width:0"><div class="h3" style="font-size:14px">Aroma Coffee House <i class="fa-solid fa-circle-check verified" style="font-size:11px"></i></div><div class="t-sm">Café · 12.4k followers</div></div>
+        <button class="btn-sm btn-soft" onclick="event.stopPropagation();pageFollowSm(this)"><i class="fa-solid fa-thumbs-up" style="font-size:11px"></i> Like</button>
+      </div>
+      <div class="card card-p pg-row" data-n="techhub lagos" style="display:flex;align-items:center;gap:12px;cursor:pointer;margin-top:12px" onclick="App.go('scr-page')">
+        <img class="ava" src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=160&q=80" style="width:50px;height:50px;border-radius:14px">
+        <div style="flex:1;min-width:0"><div class="h3" style="font-size:14px">TechHub Lagos</div><div class="t-sm">Technology · 8.1k followers</div></div>
+        <button class="btn-sm btn-soft" onclick="event.stopPropagation();pageFollowSm(this)"><i class="fa-solid fa-thumbs-up" style="font-size:11px"></i> Like</button>
+      </div>
+      <div class="card card-p pg-row" data-n="naija eats" style="display:flex;align-items:center;gap:12px;cursor:pointer;margin-top:12px" onclick="App.go('scr-page')">
+        <img class="ava" src="https://images.unsplash.com/photo-1556910103-1c02745aae4d?w=160&q=80" style="width:50px;height:50px;border-radius:14px">
+        <div style="flex:1;min-width:0"><div class="h3" style="font-size:14px">Naija Eats</div><div class="t-sm">Restaurant · 23.7k followers</div></div>
+        <button class="btn-sm btn-soft" onclick="event.stopPropagation();pageFollowSm(this)"><i class="fa-solid fa-thumbs-up" style="font-size:11px"></i> Like</button>
+      </div>
+      <div class="card card-p pg-row" data-n="lagos fashion co" style="display:flex;align-items:center;gap:12px;cursor:pointer;margin-top:12px" onclick="App.go('scr-page')">
+        <img class="ava" src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=160&q=80" style="width:50px;height:50px;border-radius:14px">
+        <div style="flex:1;min-width:0"><div class="h3" style="font-size:14px">Lagos Fashion Co <i class="fa-solid fa-circle-check verified" style="font-size:11px"></i></div><div class="t-sm">Shopping · 5.6k followers</div></div>
+        <button class="btn-sm btn-soft" onclick="event.stopPropagation();pageFollowSm(this)"><i class="fa-solid fa-thumbs-up" style="font-size:11px"></i> Like</button>
+      </div>
+      <div id="pagesEmpty" class="empty" style="display:none"><i class="fa-regular fa-flag"></i><div class="h3" style="color:var(--ink-2)">No pages found</div></div>
+    </div>
+
+    <!-- YOUR PAGES -->
+    <div class="pg-list" id="pages-yours" style="display:none">
+      <div class="card card-p" style="display:flex;align-items:center;gap:12px;cursor:pointer" onclick="App.go('scr-page-admin')">
+        <img class="ava" src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?w=160&q=80" style="width:50px;height:50px;border-radius:14px">
+        <div style="flex:1;min-width:0"><div class="h3" style="font-size:14px">Aroma Coffee House</div><div class="t-sm"><span class="badge badge-ok" style="font-size:10px">Admin</span> · 12.4k followers</div></div>
+        <i class="fa-solid fa-chevron-right chev"></i>
+      </div>
+      <div class="empty" style="padding:28px 20px"><i class="fa-regular fa-flag"></i><div class="t-sm">Pages you create or manage appear here.</div></div>
+    </div>
+
+  </div>
+
+  <script>
+    function pagesSeg(btn,which){
+      btn.parentElement.querySelectorAll('button').forEach(b=>b.classList.remove('active'));
+      btn.classList.add('active');
+      document.getElementById('pages-discover').style.display = which==='discover'?'':'none';
+      document.getElementById('pages-yours').style.display = which==='yours'?'':'none';
+    }
+    function pagesSearch(q){ q=(q||'').toLowerCase().trim(); var shown=0;
+      document.querySelectorAll('#pages-discover .pg-row').forEach(function(r){ var m=(r.dataset.n||'').includes(q); r.style.display=m?'':'none'; if(m) shown++; });
+      var e=document.getElementById('pagesEmpty'); if(e) e.style.display=shown?'none':'';
+    }
+    function pageFollowSm(btn){
+      if(btn.dataset.on!=='1'){ btn.dataset.on='1'; btn.className='btn-sm btn-ghost'; btn.innerHTML='<i class="fa-solid fa-check" style="font-size:11px"></i> Liked'; App.toast('Page liked'); }
+      else{ btn.dataset.on='0'; btn.className='btn-sm btn-soft'; btn.innerHTML='<i class="fa-solid fa-thumbs-up" style="font-size:11px"></i> Like'; }
+    }
+  </script>
+</section>
+
+
+<!-- ============================================================= -->
+<!-- PAGE DETAIL (Timeline / About / Videos / Polls / Events) -->
+<!-- ============================================================= -->
+<section class="screen" id="scr-page" data-topbar="back" data-nav="hide" data-title="Page">
+  <!-- Cover -->
+  <div style="position:relative;height:130px;overflow:hidden">
+    <img src="https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?w=800&auto=format&fit=crop&q=70" style="width:100%;height:100%;object-fit:cover">
+    <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(28,25,23,.05),rgba(28,25,23,.4))"></div>
+  </div>
+
+  <div class="pad" style="padding-top:0;padding-bottom:0">
+    <div style="display:flex;align-items:flex-end;gap:12px;margin-top:-30px">
+      <img src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?w=200&q=80" style="width:72px;height:72px;border-radius:18px;border:3px solid #fff;object-fit:cover">
+      <div style="flex:1;min-width:0;padding-bottom:4px">
+        <div style="display:flex;align-items:center;gap:6px"><span class="h2" style="font-size:19px">Aroma Coffee House</span><i class="fa-solid fa-circle-check verified" style="font-size:14px"></i></div>
+        <div class="t-sm">Café · ☕ Victoria Island, Lagos</div>
+      </div>
+    </div>
+
+    <!-- Stats -->
+    <div style="display:flex;margin-top:14px;border:1px solid var(--line);border-radius:14px;overflow:hidden;background:#fff">
+      <div style="flex:1;padding:10px 4px;text-align:center"><div style="font-size:15px;font-weight:700">12.4k</div><div class="t-sm">Followers</div></div>
+      <div style="flex:1;padding:10px 4px;text-align:center;border-left:1px solid var(--line)"><div style="font-size:15px;font-weight:700">186</div><div class="t-sm">Posts</div></div>
+      <div style="flex:1;padding:10px 4px;text-align:center;border-left:1px solid var(--line)"><div style="font-size:15px;font-weight:700">4.8 ★</div><div class="t-sm">Rating</div></div>
+    </div>
+
+    <!-- Actions -->
+    <div style="display:flex;gap:10px;margin-top:12px">
+      <button class="btn btn-primary" style="flex:1" data-on="0" onclick="pageFollow(this)"><i class="fa-solid fa-thumbs-up" style="font-size:13px;margin-right:6px"></i>Like Page</button>
+      <button class="btn btn-ghost" style="flex:1" onclick="App.go('scr-chat')"><i class="fa-regular fa-comment" style="font-size:14px;margin-right:6px"></i>Message</button>
+    </div>
+  </div>
+
+  <!-- Tabs -->
+  <div class="chip-row pad" style="padding-top:12px;padding-bottom:8px">
+    <span class="chip active" onclick="pageTab(this,'timeline')">Timeline</span>
+    <span class="chip" onclick="pageTab(this,'about')">About</span>
+    <span class="chip" onclick="pageTab(this,'videos')">Videos</span>
+    <span class="chip" onclick="pageTab(this,'polls')">Polls</span>
+    <span class="chip" onclick="pageTab(this,'events')">Events</span>
+  </div>
+
+  <!-- TIMELINE -->
+  <div class="pg-pane pad stack" id="pg-timeline" style="padding-top:0;padding-bottom:30px">
+    <article class="post">
+      <div style="display:flex;align-items:center;gap:11px;padding:13px 14px">
+        <img src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?w=120&q=80" style="width:42px;height:42px;border-radius:12px;object-fit:cover">
+        <div style="flex:1"><div style="font-weight:700;font-size:14px">Aroma Coffee House</div><div class="t-sm">3 hrs ago · <i class="fa-solid fa-earth-asia"></i></div></div>
+      </div>
+      <p style="padding:0 14px 12px;font-size:14px;line-height:1.55">New seasonal blend just dropped ☕ Come try our Lagos Sunrise latte this weekend — 20% off for followers!</p>
+      <img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=800&auto=format&fit=crop&q=70" style="width:100%;height:200px;object-fit:cover">
+      <div style="padding:10px 14px;display:flex;justify-content:space-between" class="t-sm"><span><i class="fa-solid fa-heart" style="color:#EF4444"></i> 842</span><span>56 comments</span></div>
+      <div class="divider"></div>
+      <div class="post-actions">
+        <button onclick="likeBtn(this)"><i class="fa-regular fa-heart"></i> Like</button>
+        <button onclick="App.go('scr-post-detail')"><i class="fa-regular fa-comment"></i> Comment</button>
+        <button onclick="App.toast('Shared')"><i class="fa-solid fa-share"></i> Share</button>
+      </div>
+    </article>
+    <article class="post">
+      <div style="display:flex;align-items:center;gap:11px;padding:13px 14px">
+        <img src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?w=120&q=80" style="width:42px;height:42px;border-radius:12px;object-fit:cover">
+        <div style="flex:1"><div style="font-weight:700;font-size:14px">Aroma Coffee House</div><div class="t-sm">Yesterday</div></div>
+      </div>
+      <p style="padding:0 14px 12px;font-size:14px;line-height:1.55">Thank you for 12k followers! 🎉 Drop your favourite order below 👇</p>
+      <div class="divider"></div>
+      <div class="post-actions">
+        <button onclick="likeBtn(this)"><i class="fa-regular fa-heart"></i> Like</button>
+        <button onclick="App.go('scr-post-detail')"><i class="fa-regular fa-comment"></i> Comment</button>
+        <button onclick="App.toast('Shared')"><i class="fa-solid fa-share"></i> Share</button>
+      </div>
+    </article>
+  </div>
+
+  <!-- ABOUT -->
+  <div class="pg-pane pad stack" id="pg-about" style="display:none;padding-top:0;padding-bottom:30px">
+    <div class="card card-p">
+      <div class="section-title" style="margin-bottom:8px">Intro</div>
+      <p class="t-body">Speciality coffee house in the heart of Victoria Island. Locally roasted beans, cosy space, free Wi-Fi. Open daily.</p>
+    </div>
+    <div class="card">
+      <div class="list-row"><i class="fa-solid fa-tag" style="color:var(--brand);width:20px;text-align:center"></i><div style="flex:1"><div class="t-sm">Category</div><div class="h3" style="font-size:14px">Café · Restaurant</div></div></div>
+      <div class="divider"></div>
+      <div class="list-row"><i class="fa-solid fa-phone" style="color:var(--brand);width:20px;text-align:center"></i><div style="flex:1"><div class="t-sm">Phone</div><div class="h3" style="font-size:14px">+234 801 234 5678</div></div></div>
+      <div class="divider"></div>
+      <div class="list-row"><i class="fa-regular fa-envelope" style="color:var(--brand);width:20px;text-align:center"></i><div style="flex:1"><div class="t-sm">Email</div><div class="h3" style="font-size:14px">hello@aromacoffee.ng</div></div></div>
+      <div class="divider"></div>
+      <div class="list-row"><i class="fa-solid fa-globe" style="color:var(--brand);width:20px;text-align:center"></i><div style="flex:1"><div class="t-sm">Website</div><div class="h3" style="font-size:14px">aromacoffee.ng</div></div></div>
+      <div class="divider"></div>
+      <div class="list-row"><i class="fa-solid fa-location-dot" style="color:var(--brand);width:20px;text-align:center"></i><div style="flex:1"><div class="t-sm">Address</div><div class="h3" style="font-size:14px">14 Adeola Odeku St, Victoria Island, Lagos</div></div></div>
+      <div class="divider"></div>
+      <div class="list-row"><i class="fa-regular fa-clock" style="color:var(--brand);width:20px;text-align:center"></i><div style="flex:1"><div class="t-sm">Hours</div><div class="h3" style="font-size:14px">Mon–Sun · 8:00 AM – 10:00 PM</div></div></div>
+    </div>
+  </div>
+
+  <!-- VIDEOS -->
+  <div class="pg-pane pad" id="pg-videos" style="display:none;padding-top:0;padding-bottom:30px">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+      <div class="card" style="overflow:hidden;cursor:pointer" onclick="App.go('scr-video-player')"><div style="position:relative"><img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=400&q=80" style="width:100%;height:120px;object-fit:cover"><span style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:#fff;font-size:26px"><i class="fa-solid fa-circle-play"></i></span></div><div style="padding:8px 10px"><div class="t-sm" style="font-weight:600;color:var(--ink)">Latte art class</div><div class="t-sm">1.2k views</div></div></div>
+      <div class="card" style="overflow:hidden;cursor:pointer" onclick="App.go('scr-video-player')"><div style="position:relative"><img src="https://images.unsplash.com/photo-1442512595331-e89e73853f31?w=400&q=80" style="width:100%;height:120px;object-fit:cover"><span style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:#fff;font-size:26px"><i class="fa-solid fa-circle-play"></i></span></div><div style="padding:8px 10px"><div class="t-sm" style="font-weight:600;color:var(--ink)">Bean to cup tour</div><div class="t-sm">3.4k views</div></div></div>
+      <div class="card" style="overflow:hidden;cursor:pointer" onclick="App.go('scr-video-player')"><div style="position:relative"><img src="https://images.unsplash.com/photo-1497935586351-b67a49e012bf?w=400&q=80" style="width:100%;height:120px;object-fit:cover"><span style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:#fff;font-size:26px"><i class="fa-solid fa-circle-play"></i></span></div><div style="padding:8px 10px"><div class="t-sm" style="font-weight:600;color:var(--ink)">Weekend vibes</div><div class="t-sm">980 views</div></div></div>
+      <div class="card" style="overflow:hidden;cursor:pointer" onclick="App.go('scr-video-player')"><div style="position:relative"><img src="https://images.unsplash.com/photo-1511920170033-f8396924c348?w=400&q=80" style="width:100%;height:120px;object-fit:cover"><span style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:#fff;font-size:26px"><i class="fa-solid fa-circle-play"></i></span></div><div style="padding:8px 10px"><div class="t-sm" style="font-weight:600;color:var(--ink)">New menu reveal</div><div class="t-sm">2.1k views</div></div></div>
+    </div>
+  </div>
+
+  <!-- POLLS -->
+  <div class="pg-pane pad stack" id="pg-polls" style="display:none;padding-top:0;padding-bottom:30px">
+    <div class="card card-p">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px"><img src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?w=80&q=80" style="width:32px;height:32px;border-radius:9px"><div class="t-sm">Aroma Coffee House · 1 day left</div></div>
+      <div class="h3" style="margin-bottom:12px">What should our next seasonal flavour be? ☕</div>
+      <div class="stack">
+        <button class="poll-opt" onclick="pollVote(this)" style="width:100%;text-align:left;border:1.5px solid var(--line);background:#fff;border-radius:12px;padding:12px 14px;cursor:pointer;font-family:inherit;font-weight:600;font-size:14px;position:relative;overflow:hidden">Pumpkin Spice <span style="float:right;color:var(--ink-3)">46%</span></button>
+        <button class="poll-opt" onclick="pollVote(this)" style="width:100%;text-align:left;border:1.5px solid var(--line);background:#fff;border-radius:12px;padding:12px 14px;cursor:pointer;font-family:inherit;font-weight:600;font-size:14px;position:relative;overflow:hidden">Caramel Macchiato <span style="float:right;color:var(--ink-3)">33%</span></button>
+        <button class="poll-opt" onclick="pollVote(this)" style="width:100%;text-align:left;border:1.5px solid var(--line);background:#fff;border-radius:12px;padding:12px 14px;cursor:pointer;font-family:inherit;font-weight:600;font-size:14px;position:relative;overflow:hidden">Hazelnut Mocha <span style="float:right;color:var(--ink-3)">21%</span></button>
+      </div>
+      <div class="t-sm" style="margin-top:10px">1,204 votes</div>
+    </div>
+  </div>
+
+  <!-- EVENTS -->
+  <div class="pg-pane pad stack" id="pg-events" style="display:none;padding-top:0;padding-bottom:30px">
+    <div class="card" style="overflow:hidden">
+      <img src="https://images.unsplash.com/photo-1511920170033-f8396924c348?w=600&q=80" style="width:100%;height:130px;object-fit:cover">
+      <div class="card-p">
+        <div style="display:flex;gap:12px;align-items:flex-start">
+          <div style="text-align:center;background:var(--brand-50,#FFF3EA);border-radius:12px;padding:8px 12px;flex:none"><div style="font-size:12px;font-weight:700;color:var(--brand)">JUL</div><div style="font-size:20px;font-weight:800;line-height:1">12</div></div>
+          <div style="flex:1"><div class="h3" style="font-size:15px">Latte Art Workshop</div><div class="t-sm" style="margin-top:2px"><i class="fa-regular fa-clock"></i> Sat, 4:00 PM · Victoria Island</div><div class="t-sm" style="margin-top:2px">86 going</div></div>
+        </div>
+        <button class="btn btn-soft" style="width:100%;margin-top:12px" onclick="this.textContent='Interested ✓';this.disabled=true;App.toast('You are interested')">Interested</button>
+      </div>
+    </div>
+    <div class="card" style="overflow:hidden">
+      <img src="https://images.unsplash.com/photo-1470337458703-46ad1756a187?w=600&q=80" style="width:100%;height:130px;object-fit:cover">
+      <div class="card-p">
+        <div style="display:flex;gap:12px;align-items:flex-start">
+          <div style="text-align:center;background:var(--brand-50,#FFF3EA);border-radius:12px;padding:8px 12px;flex:none"><div style="font-size:12px;font-weight:700;color:var(--brand)">JUL</div><div style="font-size:20px;font-weight:800;line-height:1">20</div></div>
+          <div style="flex:1"><div class="h3" style="font-size:15px">Live Acoustic Night</div><div class="t-sm" style="margin-top:2px"><i class="fa-regular fa-clock"></i> Sat, 7:00 PM · Aroma Café</div><div class="t-sm" style="margin-top:2px">142 going</div></div>
+        </div>
+        <button class="btn btn-soft" style="width:100%;margin-top:12px" onclick="this.textContent='Interested ✓';this.disabled=true;App.toast('You are interested')">Interested</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function pageTab(btn,which){
+      btn.parentElement.querySelectorAll('.chip').forEach(c=>c.classList.remove('active'));
+      btn.classList.add('active');
+      document.querySelectorAll('#scr-page .pg-pane').forEach(p=>{ p.style.display = p.id==='pg-'+which ? '' : 'none'; });
+      document.getElementById('scr-page').scrollTop = document.getElementById('scr-page').scrollTop; // keep position
+    }
+    function pageFollow(btn){
+      if(btn.dataset.on!=='1'){ btn.dataset.on='1'; btn.className='btn btn-ghost'; btn.style.flex='1'; btn.innerHTML='<i class="fa-solid fa-check" style="font-size:13px;margin-right:6px"></i>Following'; App.toast('You liked this Page'); }
+      else{ btn.dataset.on='0'; btn.className='btn btn-primary'; btn.style.flex='1'; btn.innerHTML='<i class="fa-solid fa-thumbs-up" style="font-size:13px;margin-right:6px"></i>Like Page'; App.toast('Unliked'); }
+    }
+    function pollVote(btn){
+      btn.parentElement.querySelectorAll('.poll-opt').forEach(b=>{ b.style.borderColor='var(--line)'; b.style.background='#fff'; });
+      btn.style.borderColor='var(--brand)'; btn.style.background='var(--brand-50,#FFF3EA)';
+      App.toast('Vote counted ✓');
+    }
+  </script>
+</section>
+
+
+<!-- ============================================================= -->
+<!-- PAGE — ADMIN / OWNER VIEW -->
+<!-- ============================================================= -->
+<section class="screen" id="scr-page-admin" data-topbar="back" data-nav="hide" data-title="Your Page">
+  <!-- Cover -->
+  <div style="position:relative;height:130px;overflow:hidden">
+    <img src="https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?w=800&auto=format&fit=crop&q=70" style="width:100%;height:100%;object-fit:cover">
+    <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(28,25,23,.05),rgba(28,25,23,.4))"></div>
+    <button onclick="App.toast('Choose a cover photo')" style="position:absolute;right:12px;bottom:12px;background:rgba(0,0,0,.5);color:#fff;border:none;border-radius:10px;padding:7px 12px;font-size:12px;font-weight:600;cursor:pointer"><i class="fa-solid fa-camera"></i> Edit cover</button>
+  </div>
+
+  <div class="pad" style="padding-top:0;padding-bottom:0">
+    <div style="display:flex;align-items:flex-end;gap:12px;margin-top:-30px">
+      <img src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?w=200&q=80" style="width:72px;height:72px;border-radius:18px;border:3px solid #fff;object-fit:cover">
+      <div style="flex:1;min-width:0;padding-bottom:4px">
+        <div style="display:flex;align-items:center;gap:6px"><span class="h2" style="font-size:19px">Aroma Coffee House</span><i class="fa-solid fa-circle-check verified" style="font-size:14px"></i></div>
+        <div class="t-sm"><span class="badge badge-ok" style="font-size:10px"><i class="fa-solid fa-shield-halved" style="font-size:9px"></i> You're an admin</span></div>
+      </div>
+    </div>
+
+    <!-- Stats -->
+    <div style="display:flex;margin-top:14px;border:1px solid var(--line);border-radius:14px;overflow:hidden;background:#fff">
+      <div style="flex:1;padding:10px 4px;text-align:center"><div style="font-size:15px;font-weight:700">12.4k</div><div class="t-sm">Followers</div></div>
+      <div style="flex:1;padding:10px 4px;text-align:center;border-left:1px solid var(--line)"><div style="font-size:15px;font-weight:700">186</div><div class="t-sm">Posts</div></div>
+      <div style="flex:1;padding:10px 4px;text-align:center;border-left:1px solid var(--line)"><div style="font-size:15px;font-weight:700">3.1k</div><div class="t-sm">Reach</div></div>
+    </div>
+
+    <!-- Owner actions -->
+    <div style="display:flex;gap:10px;margin-top:12px">
+      <button class="btn btn-primary" style="flex:1" onclick="App.go('scr-edit-page')"><i class="fa-solid fa-pen" style="font-size:13px;margin-right:6px"></i>Edit Page</button>
+      <button class="btn btn-ghost" style="flex:1" onclick="App.go('scr-page')"><i class="fa-regular fa-eye" style="font-size:14px;margin-right:6px"></i>View as visitor</button>
+    </div>
+
+    <!-- Admin tools -->
+    <div class="card" style="margin-top:14px">
+      <div class="list-row" style="cursor:pointer" onclick="App.toast('Page insights')">
+        <span style="width:38px;height:38px;border-radius:11px;background:var(--brand-50,#FFF3EA);display:flex;align-items:center;justify-content:center;flex:none"><i class="fa-solid fa-chart-line" style="color:var(--brand)"></i></span>
+        <div style="flex:1"><div class="h3" style="font-size:14px">Insights</div><div class="t-sm">Reach, followers &amp; engagement</div></div>
+        <i class="fa-solid fa-chevron-right chev"></i>
+      </div>
+      <div class="divider"></div>
+      <div class="list-row" style="cursor:pointer" onclick="App.go('scr-edit-page')">
+        <span style="width:38px;height:38px;border-radius:11px;background:var(--brand-50,#FFF3EA);display:flex;align-items:center;justify-content:center;flex:none"><i class="fa-solid fa-sliders" style="color:var(--brand)"></i></span>
+        <div style="flex:1"><div class="h3" style="font-size:14px">Page Settings</div><div class="t-sm">Info, contact &amp; category</div></div>
+        <i class="fa-solid fa-chevron-right chev"></i>
+      </div>
+    </div>
+  </div>
+
+  <!-- Posts (owner can publish) -->
+  <div class="pad stack" style="padding-top:14px;padding-bottom:30px">
+    <!-- Composer: post AS the page -->
+    <div class="card card-p" style="display:flex;align-items:center;gap:11px;cursor:pointer" onclick="App.go('scr-composer')">
+      <img src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?w=120&q=80" style="width:40px;height:40px;border-radius:12px;object-fit:cover">
+      <div style="flex:1;color:var(--ink-3);font-size:14px">Publish a post as your page…</div>
+      <i class="fa-solid fa-image" style="color:var(--brand)"></i>
+    </div>
+
+    <article class="post">
+      <div style="display:flex;align-items:center;gap:11px;padding:13px 14px">
+        <img src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?w=120&q=80" style="width:42px;height:42px;border-radius:12px;object-fit:cover">
+        <div style="flex:1"><div style="font-weight:700;font-size:14px">Aroma Coffee House</div><div class="t-sm">3 hrs ago · <i class="fa-solid fa-earth-africa"></i></div></div>
+        <button class="icon-btn" onclick="App.openSheet('sheet-post-options')"><i class="fa-solid fa-ellipsis"></i></button>
+      </div>
+      <p style="padding:0 14px 12px;font-size:14px;line-height:1.55">New seasonal blend just dropped ☕ Come try our Lagos Sunrise latte this weekend — 20% off for followers!</p>
+      <img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=800&auto=format&fit=crop&q=70" style="width:100%;height:200px;object-fit:cover">
+      <div style="padding:10px 14px;display:flex;justify-content:space-between" class="t-sm"><span><i class="fa-solid fa-heart" style="color:#EF4444"></i> 842</span><span>56 comments</span></div>
+    </article>
+  </div>
+</section>
+
+
+<!-- ============================================================= -->
+<!-- EDIT PAGE (owner) -->
+<!-- ============================================================= -->
+<section class="screen" id="scr-edit-page" data-topbar="back" data-nav="hide" data-title="Edit Page">
+  <div class="pad" style="padding-bottom:96px">
+
+    <!-- Logo -->
+    <div style="display:flex;justify-content:center;margin:8px 0 18px">
+      <div style="position:relative" onclick="App.toast('Choose a logo')">
+        <img src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?w=200&q=80" style="width:96px;height:96px;border-radius:24px;object-fit:cover">
+        <button style="position:absolute;right:-4px;bottom:-4px;width:34px;height:34px;border-radius:50%;background:var(--brand-grad);color:#fff;border:3px solid #fff;cursor:pointer"><i class="fa-solid fa-camera" style="font-size:13px"></i></button>
+      </div>
+    </div>
+
+    <div class="field"><label class="label">Page Name</label><input class="input" value="Aroma Coffee House"></div>
+
+    <div class="field"><label class="label">Category</label>
+      <select class="input">
+        <option selected>Café · Restaurant</option><option>Shopping · Retail</option><option>Technology</option>
+        <option>Fashion &amp; Beauty</option><option>Health &amp; Fitness</option><option>Education</option>
+        <option>Entertainment</option><option>Services</option><option>Other</option>
+      </select>
+    </div>
+
+    <div class="field"><label class="label">Description</label><textarea class="input">Speciality coffee house in the heart of Victoria Island. Locally roasted beans, cosy space, free Wi-Fi. Open daily.</textarea></div>
+
+    <div class="section-title" style="margin:6px 2px 10px">Contact Info</div>
+    <div class="field"><label class="label">Phone</label><input class="input" type="tel" value="+234 801 234 5678"></div>
+    <div class="field"><label class="label">Email</label><input class="input" type="email" value="hello@aromacoffee.ng"></div>
+    <div class="field"><label class="label">Website</label><input class="input" type="url" value="https://aromacoffee.ng"></div>
+    <div class="field" style="margin-bottom:18px"><label class="label">Address</label><input class="input" value="14 Adeola Odeku St, Victoria Island, Lagos"></div>
+
+    <button class="btn btn-primary" onclick="App.toast('Page updated ✓');App.back()">Save Changes</button>
+
+    <button class="btn btn-outline" style="color:#DC2626;border-color:#FCA5A5;margin-top:12px" onclick="App.confirm('Delete this page?','The page and all its content will be permanently removed. This can\'t be undone.',function(){App.toast('Page deleted');App.go('scr-pages')},'Delete')"><i class="fa-solid fa-trash"></i> Delete Page</button>
+  </div>
+</section>
+
+
+<!-- ============================================================= -->
+<!-- CREATE PAGE -->
+<!-- ============================================================= -->
+<section class="screen" id="scr-create-page" data-topbar="back" data-nav="hide" data-title="Create Page">
+  <div class="pad" style="padding-bottom:96px">
+
+    <!-- Logo upload -->
+    <div style="display:flex;justify-content:center;margin:8px 0 18px">
+      <div style="position:relative" onclick="App.toast('Choose a logo')">
+        <div style="width:96px;height:96px;border-radius:24px;background:var(--bg-2);display:flex;align-items:center;justify-content:center;color:var(--ink-3)"><i class="fa-solid fa-store" style="font-size:36px"></i></div>
+        <button style="position:absolute;right:-4px;bottom:-4px;width:34px;height:34px;border-radius:50%;background:var(--brand-grad);color:#fff;border:3px solid #fff;cursor:pointer"><i class="fa-solid fa-camera" style="font-size:13px"></i></button>
+      </div>
+    </div>
+
+    <div class="field"><label class="label">Page Name</label><input class="input" placeholder="e.g. Aroma Coffee House"></div>
+
+    <div class="field"><label class="label">Category</label>
+      <select class="input">
+        <option selected disabled>Select a category</option>
+        <option>Café · Restaurant</option><option>Shopping · Retail</option><option>Technology</option>
+        <option>Fashion &amp; Beauty</option><option>Health &amp; Fitness</option><option>Education</option>
+        <option>Entertainment</option><option>Services</option><option>Other</option>
+      </select>
+    </div>
+
+    <div class="field"><label class="label">Description</label><textarea class="input" placeholder="Tell people what your page is about…"></textarea></div>
+
+    <div class="section-title" style="margin:6px 2px 10px">Contact Info</div>
+    <div class="field"><label class="label">Phone</label><input class="input" type="tel" placeholder="+234 800 000 0000"></div>
+    <div class="field"><label class="label">Email</label><input class="input" type="email" placeholder="hello@yourpage.com"></div>
+    <div class="field" style="margin-bottom:18px"><label class="label">Website</label><input class="input" type="url" placeholder="https://yourpage.com"></div>
+
+    <button class="btn btn-primary" onclick="App.toast('Page created 🎉');App.go('scr-page')"><i class="fa-solid fa-flag"></i> Create Page</button>
+  </div>
+</section>

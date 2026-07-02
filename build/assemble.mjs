@@ -10,8 +10,8 @@ const BUILD = join(ROOT, 'build');
 // order in which screen modules are injected
 const SCREEN_MODULES = [
   'home-extra', 'discover', 'notifications', 'profile', 'friends', 'messages',
-  'new-message', 'marketplace', 'wallet', 'egifts-verify', 'ads', 'groups',
-  'polls-events', 'blogs-videos',
+  'new-message', 'marketplace', 'wallet', 'egifts-verify', 'membership', 'ads', 'groups',
+  'polls-events', 'blogs-videos', 'pages', 'legal',
 ];
 
 async function readIf(p) { return existsSync(p) ? await readFile(p, 'utf8') : ''; }
@@ -31,10 +31,14 @@ for (const m of SCREEN_MODULES) {
 const drawer = (await readIf(join(BUILD, '_drawer.html'))).trim();
 const sheets = (await readIf(join(BUILD, '_sheets.html'))).trim();
 
+// NOTE: use FUNCTION replacements — the injected HTML contains '$' sequences
+// (e.g. money values like "$5", or "return '$'+n" in scripts). A string
+// replacement would interpret "$'", "$&", "$$" etc. as special patterns and
+// corrupt the output. Function replacements are inserted verbatim.
 let out = shell
-  .replace('<!-- @@SCREENS@@  (feature modules injected here) -->', screens)
-  .replace('<div id="drawer"></div>', '<div id="drawer">\n' + drawer + '\n</div>')
-  .replace('<div id="sheetRoot"></div>', '<div id="sheetRoot">\n' + sheets + '\n</div>');
+  .replace('<!-- @@SCREENS@@  (feature modules injected here) -->', () => screens)
+  .replace('<div id="drawer"></div>', () => '<div id="drawer">\n' + drawer + '\n</div>')
+  .replace('<div id="sheetRoot"></div>', () => '<div id="sheetRoot">\n' + sheets + '\n</div>');
 
 await writeFile(join(ROOT, 'index.html'), out, 'utf8');
 

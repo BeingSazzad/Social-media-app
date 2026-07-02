@@ -18,9 +18,9 @@
         </div>
         <div style="flex:1;min-width:0">
           <div class="h3" style="line-height:1.4">Which design tool do you use daily?</div>
-          <div class="t-sm" style="margin-top:4px">Created 2 days ago · 312 votes</div>
+          <div class="t-sm" style="margin-top:4px">312 votes · <i class="fa-regular fa-clock"></i> 3 days left</div>
         </div>
-        <span class="badge badge-ok" style="background:#DCFCE7;color:#16A34A">Opened</span>
+        <span class="badge badge-ok" style="background:#DCFCE7;color:#16A34A">Open</span>
       </div>
     </div>
 
@@ -32,9 +32,9 @@
         </div>
         <div style="flex:1;min-width:0">
           <div class="h3" style="line-height:1.4">Best venue for the Lagos meetup?</div>
-          <div class="t-sm" style="margin-top:4px">Created 2 days ago · 198 votes</div>
+          <div class="t-sm" style="margin-top:4px">198 votes · <i class="fa-regular fa-clock"></i> 18 hours left</div>
         </div>
-        <span class="badge badge-ok" style="background:#DCFCE7;color:#16A34A">Opened</span>
+        <span class="badge badge-ok" style="background:#DCFCE7;color:#16A34A">Open</span>
       </div>
     </div>
 
@@ -46,7 +46,7 @@
         </div>
         <div style="flex:1;min-width:0">
           <div class="h3" style="line-height:1.4">Should we host a weekend hackathon?</div>
-          <div class="t-sm" style="margin-top:4px">Created 2 days ago · 540 votes</div>
+          <div class="t-sm" style="margin-top:4px">540 votes · <i class="fa-regular fa-clock"></i> Ended</div>
         </div>
         <span class="badge badge-gray">Closed</span>
       </div>
@@ -60,7 +60,7 @@
         </div>
         <div style="flex:1;min-width:0">
           <div class="h3" style="line-height:1.4">Favourite jollof: party or home style?</div>
-          <div class="t-sm" style="margin-top:4px">Created 2 days ago · 1,024 votes</div>
+          <div class="t-sm" style="margin-top:4px">1,024 votes · <i class="fa-regular fa-clock"></i> Ended</div>
         </div>
         <span class="badge badge-gray">Closed</span>
       </div>
@@ -81,9 +81,9 @@
     <div class="card card-p">
       <div style="font-size:20px;font-weight:700;letter-spacing:-.01em;line-height:1.3;color:var(--ink)">Which design tool do you use daily?</div>
       <div style="display:flex;align-items:center;gap:10px;margin-top:14px">
-        <img class="ava" src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=120&q=80" style="width:36px;height:36px">
+        <img class="ava" src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=120&q=80" style="width:36px;height:36px">
         <div style="flex:1;min-width:0">
-          <div style="font-weight:700;font-size:13px">Rakib Hasan <i class="fa-solid fa-circle-check verified" style="font-size:11px"></i></div>
+          <div style="font-weight:700;font-size:13px">You</div>
           <div class="t-sm">Created 2 days ago</div>
         </div>
         <span class="badge badge-ok" style="background:#DCFCE7;color:#16A34A">Open</span>
@@ -93,20 +93,20 @@
     <!-- results -->
     <div class="card card-p">
       <div class="section-title" style="margin-bottom:12px">Live Results</div>
-      <div class="stack">
+      <div class="stack" id="poll-opts">
         <!-- option: Figma (leading) -->
-        <div onclick="App.toast('Vote counted')" style="position:relative;border:1.5px solid var(--brand);border-radius:14px;padding:13px 14px;overflow:hidden;cursor:pointer">
-          <div style="position:absolute;inset:0;width:58%;background:rgba(255,106,1,.16)"></div>
+        <div data-voted="0" onclick="pollVote(this)" style="position:relative;border:1px solid var(--line);border-radius:14px;padding:13px 14px;overflow:hidden;cursor:pointer">
+          <div style="position:absolute;inset:0;width:58%;background:rgba(255,106,1,.10)"></div>
           <div style="position:relative;display:flex;align-items:center;gap:10px">
-            <i class="fa-solid fa-circle-check" style="color:var(--brand)"></i>
-            <span style="flex:1;font-weight:700;font-size:14px">Figma</span>
+            <i class="fa-regular fa-circle" style="color:var(--ink-3)"></i>
+            <span style="flex:1;font-weight:600;font-size:14px">Figma</span>
             <span class="t-sm" style="margin-right:2px">181 votes</span>
-            <span style="font-weight:700;font-size:15px;width:42px;text-align:right">58%</span>
+            <span style="font-weight:700;font-size:15px;width:42px;text-align:right;color:var(--ink-2)">58%</span>
           </div>
         </div>
 
         <!-- option: Sketch -->
-        <div onclick="App.toast('Vote counted')" style="position:relative;border:1px solid var(--line);border-radius:14px;padding:13px 14px;overflow:hidden;cursor:pointer">
+        <div data-voted="0" onclick="pollVote(this)" style="position:relative;border:1px solid var(--line);border-radius:14px;padding:13px 14px;overflow:hidden;cursor:pointer">
           <div style="position:absolute;inset:0;width:21%;background:rgba(255,106,1,.10)"></div>
           <div style="position:relative;display:flex;align-items:center;gap:10px">
             <i class="fa-regular fa-circle" style="color:var(--ink-3)"></i>
@@ -117,7 +117,7 @@
         </div>
 
         <!-- option: Adobe XD -->
-        <div onclick="App.toast('Vote counted')" style="position:relative;border:1px solid var(--line);border-radius:14px;padding:13px 14px;overflow:hidden;cursor:pointer">
+        <div data-voted="0" onclick="pollVote(this)" style="position:relative;border:1px solid var(--line);border-radius:14px;padding:13px 14px;overflow:hidden;cursor:pointer">
           <div style="position:absolute;inset:0;width:14%;background:rgba(255,106,1,.10)"></div>
           <div style="position:relative;display:flex;align-items:center;gap:10px">
             <i class="fa-regular fa-circle" style="color:var(--ink-3)"></i>
@@ -128,7 +128,7 @@
         </div>
 
         <!-- option: Penpot -->
-        <div onclick="App.toast('Vote counted')" style="position:relative;border:1px solid var(--line);border-radius:14px;padding:13px 14px;overflow:hidden;cursor:pointer">
+        <div data-voted="0" onclick="pollVote(this)" style="position:relative;border:1px solid var(--line);border-radius:14px;padding:13px 14px;overflow:hidden;cursor:pointer">
           <div style="position:absolute;inset:0;width:7%;background:rgba(255,106,1,.10)"></div>
           <div style="position:relative;display:flex;align-items:center;gap:10px">
             <i class="fa-regular fa-circle" style="color:var(--ink-3)"></i>
@@ -146,7 +146,94 @@
       </div>
     </div>
 
+    <!-- Creator tools (you created this poll) -->
+    <div class="card">
+      <div class="list-row" style="cursor:pointer" onclick="App.go('scr-edit-poll')">
+        <i class="fa-solid fa-pen" style="color:var(--brand);width:20px;text-align:center"></i>
+        <div style="flex:1"><div class="h3" style="font-size:14px">Edit poll</div><div class="t-sm">Question, options &amp; duration</div></div>
+        <i class="fa-solid fa-chevron-right chev"></i>
+      </div>
+      <div class="divider"></div>
+      <div class="list-row" style="cursor:pointer" onclick="App.toast('Poll closed — voting has ended')">
+        <i class="fa-solid fa-lock" style="color:var(--ink-2);width:20px;text-align:center"></i>
+        <div style="flex:1"><div class="h3" style="font-size:14px">Close poll now</div></div>
+      </div>
+      <div class="divider"></div>
+      <div class="list-row" style="cursor:pointer" onclick="App.confirm('Delete poll?','This poll and all its votes will be removed. This can\'t be undone.',function(){App.toast('Poll deleted');App.go('scr-polls')},'Delete')">
+        <i class="fa-solid fa-trash" style="color:#DC2626;width:20px;text-align:center"></i>
+        <div style="flex:1"><div class="h3" style="font-size:14px;color:#DC2626">Delete poll</div></div>
+      </div>
+    </div>
+
     <button class="btn btn-dark" onclick="App.toast('Poll link copied')"><i class="fa-solid fa-share-nodes"></i> Share Poll</button>
+  </div>
+  <div style="height:20px"></div>
+
+  <script>
+    function pollVote(opt){
+      var box = document.getElementById('poll-opts');
+      var already = opt.dataset.voted === '1';
+      box.querySelectorAll('[data-voted]').forEach(function(o){
+        o.dataset.voted='0';
+        o.style.border='1px solid var(--line)';
+        var ic=o.querySelector('i');
+        ic.className='fa-regular fa-circle';
+        ic.style.color='var(--ink-3)';
+        o.querySelector('span').style.fontWeight='600';
+      });
+      if(already){ App.toast('Vote removed'); return; }
+      opt.dataset.voted='1';
+      opt.style.border='1.5px solid var(--brand)';
+      var ic=opt.querySelector('i');
+      ic.className='fa-solid fa-circle-check';
+      ic.style.color='var(--brand)';
+      opt.querySelector('span').style.fontWeight='700';
+      App.toast('Vote counted ✓');
+    }
+  </script>
+</section>
+
+
+<!-- Create Poll lives in home-extra.html (scr-poll-composer). Helper kept here for Edit Poll. -->
+<script>
+  function pollAddOpt(boxId){
+    var box=document.getElementById(boxId);
+    if(!box) return;
+    var n=box.querySelectorAll('input').length+1;
+    var i=document.createElement('input');
+    i.className='input'; i.placeholder='Option '+n;
+    box.appendChild(i);
+  }
+</script>
+
+
+<!-- ===================== EDIT POLL ===================== -->
+<section class="screen" id="scr-edit-poll" data-topbar="back" data-nav="hide" data-title="Edit Poll">
+  <div class="pad">
+    <div class="field">
+      <label class="label">Question</label>
+      <input class="input" value="Which design tool do you use daily?">
+    </div>
+
+    <div class="field">
+      <label class="label">Options</label>
+      <div class="stack" id="ep-opts">
+        <input class="input" value="Figma">
+        <input class="input" value="Sketch">
+        <input class="input" value="Adobe XD">
+        <input class="input" value="Penpot">
+      </div>
+      <button class="btn btn-soft" style="width:100%;margin-top:10px" onclick="pollAddOpt('ep-opts')"><i class="fa-solid fa-plus"></i> Add option</button>
+    </div>
+
+    <div class="field">
+      <label class="label">Poll duration</label>
+      <select class="input">
+        <option>1 day</option><option selected>3 days</option><option>1 week</option><option>2 weeks</option>
+      </select>
+    </div>
+
+    <button class="btn btn-primary" onclick="App.toast('Poll updated ✓');App.back()">Save Changes</button>
   </div>
   <div style="height:20px"></div>
 </section>
@@ -232,6 +319,7 @@
     <img src="https://images.unsplash.com/photo-1540039155733-5bb30b53aa14?w=800&auto=format&fit=crop&q=70" style="width:100%;height:100%;object-fit:cover">
     <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(28,25,23,0),rgba(28,25,23,.55))"></div>
     <span style="position:absolute;top:14px;left:14px;background:rgba(255,106,1,.95);color:#fff;font-size:11px;font-weight:800;padding:6px 12px;border-radius:8px;letter-spacing:.04em">DESIGN · LAGOS</span>
+    <button onclick="App.openSheet('sheet-event-owner')" aria-label="Manage event" style="position:absolute;top:12px;right:12px;width:38px;height:38px;border-radius:50%;background:rgba(0,0,0,.45);color:#fff;border:none;cursor:pointer"><i class="fa-solid fa-ellipsis"></i></button>
   </div>
 
   <div class="pad stack">
@@ -256,6 +344,16 @@
         </div>
         <button class="btn-sm btn-soft" onclick="App.toast('Opening map…')">Map</button>
       </div>
+      <div style="display:flex;align-items:center;gap:12px;margin-top:12px">
+        <div style="width:40px;height:40px;border-radius:12px;background:var(--brand-50,#FFF3EA);display:flex;align-items:center;justify-content:center;flex:none">
+          <i class="fa-solid fa-ticket" style="color:var(--brand);font-size:17px"></i>
+        </div>
+        <div style="flex:1">
+          <div style="font-weight:700;font-size:14px">$2.50 · General Admission</div>
+          <div class="t-sm">Free for EviEarner members</div>
+        </div>
+        <button class="btn-sm btn-soft" onclick="App.toast('Ticket reserved 🎟️')">Get</button>
+      </div>
     </div>
 
     <!-- organizer -->
@@ -267,7 +365,7 @@
           <div style="font-weight:700;font-size:14px">Nusrat Jahan <i class="fa-solid fa-circle-check verified" style="font-size:11px"></i></div>
           <div class="t-sm">EVINIE Design Community · 4.2k members</div>
         </div>
-        <button class="btn-sm btn-soft" onclick="event.stopPropagation();this.textContent='Following'">Follow</button>
+        <button class="btn-sm btn-soft" onclick="event.stopPropagation();this.textContent='Requested';App.toast('Friend request sent to Nusrat Jahan')">Add Friend</button>
       </div>
     </div>
 
@@ -305,6 +403,33 @@
     </div>
 
     <button class="btn btn-dark" onclick="App.toast('Event link copied')"><i class="fa-solid fa-share-nodes"></i> Share Event</button>
+
+    <!-- Discussion -->
+    <div class="section-title" style="margin-top:6px">Discussion</div>
+    <div class="card card-p stack cmt-list" style="padding:14px">
+      <div style="display:flex;gap:10px">
+        <img class="ava" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=120&q=80" style="width:36px;height:36px" onclick="App.go('scr-user-profile')">
+        <div style="flex:1;min-width:0">
+          <div style="background:var(--bg);border-radius:14px;padding:9px 12px">
+            <div style="font-weight:700;font-size:13px">Tunde Bakare</div>
+            <div class="cmt-text" style="font-size:13px;line-height:1.5;margin-top:1px">Is there parking at the venue? Bringing a few teammates 🙌</div>
+          </div>
+          <div class="t-sm cmt-foot" style="display:flex;gap:14px;align-items:center;padding:6px 12px 0">
+            <button class="cmt-like" onclick="reactOpen(this)" style="background:none;border:none;font:inherit;color:var(--ink-2);font-weight:700;cursor:pointer">Like</button>
+            <button onclick="cmtReplyTo(this,'Tunde Bakare')" style="background:none;border:none;font:inherit;color:var(--ink-2);font-weight:700;cursor:pointer">Reply</button>
+            <span>2h</span>
+            <span class="cmt-rx" style="display:none;align-items:center;gap:3px"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div style="display:flex;align-items:center;gap:10px">
+      <img class="ava" src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=120&q=80" style="width:34px;height:34px">
+      <div style="flex:1;display:flex;align-items:center;background:var(--bg);border-radius:999px;padding:0 14px">
+        <input class="cmt-input" placeholder="Ask a question…" style="flex:1;border:none;background:none;outline:none;font-family:inherit;font-size:14px;height:42px;color:var(--ink)">
+      </div>
+      <button onclick="postCmt(this)" aria-label="Send" style="width:42px;height:42px;border-radius:50%;background:var(--brand-grad);color:#fff;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;flex:none"><i class="fa-solid fa-paper-plane" style="font-size:15px"></i></button>
+    </div>
   </div>
   <div style="height:20px"></div>
 </section>
@@ -370,6 +495,18 @@
     </div>
 
     <div class="field">
+      <label class="label">Ticket</label>
+      <div class="seg" style="margin-bottom:10px">
+        <button class="active" onclick="this.parentElement.querySelectorAll('button').forEach(b=>b.classList.remove('active'));this.classList.add('active');document.getElementById('evt-price').style.display='none'">Free</button>
+        <button onclick="this.parentElement.querySelectorAll('button').forEach(b=>b.classList.remove('active'));this.classList.add('active');document.getElementById('evt-price').style.display=''">Paid</button>
+      </div>
+      <div class="input-group" id="evt-price" style="display:none">
+        <input class="input" type="number" placeholder="Ticket price" value="2500">
+        <span class="input-icon" style="display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--brand)">$</span>
+      </div>
+    </div>
+
+    <div class="field">
       <label class="label">Privacy</label>
       <div class="seg">
         <button class="active" onclick="this.parentElement.querySelectorAll('button').forEach(b=>b.classList.remove('active'));this.classList.add('active')">Public</button>
@@ -381,3 +518,97 @@
   </div>
   <div style="height:20px"></div>
 </section>
+
+
+<!-- ===================== EDIT EVENT (owner) ===================== -->
+<section class="screen" id="scr-edit-event" data-topbar="back" data-nav="hide" data-title="Edit Event">
+  <div class="pad">
+    <div class="field">
+      <label class="label">Event Name</label>
+      <input class="input" type="text" value="Lagos Designers Meetup 2026">
+    </div>
+
+    <div class="field">
+      <label class="label">Description</label>
+      <textarea class="input">Join 140+ product designers and engineers for an evening of talks, portfolio reviews, and warm jollof. Bring your laptop and your questions — drinks are on us! 🎨</textarea>
+    </div>
+
+    <div class="field">
+      <label class="label">Cover Image</label>
+      <div onclick="App.toast('Choose a cover photo')" style="position:relative;border-radius:14px;overflow:hidden;cursor:pointer">
+        <img src="https://images.unsplash.com/photo-1540039155733-5bb30b53aa14?w=600&q=80" style="width:100%;height:120px;object-fit:cover">
+        <div style="position:absolute;inset:0;background:rgba(0,0,0,.3);display:flex;align-items:center;justify-content:center;color:#fff;gap:8px;font-weight:600;font-size:13px"><i class="fa-solid fa-camera"></i> Change cover</div>
+      </div>
+    </div>
+
+    <div class="field">
+      <label class="label">Date</label>
+      <input class="input" type="date" value="2026-06-28">
+    </div>
+
+    <div style="display:flex;gap:12px">
+      <div class="field" style="flex:1">
+        <label class="label">Start Time</label>
+        <input class="input" type="time" value="18:00">
+      </div>
+      <div class="field" style="flex:1">
+        <label class="label">End Time</label>
+        <input class="input" type="time" value="21:30">
+      </div>
+    </div>
+
+    <div class="field">
+      <label class="label">Location</label>
+      <div class="input-group">
+        <input class="input" type="text" value="The Zone, Gbagada, Lagos">
+        <span class="input-icon" style="display:flex;align-items:center;justify-content:center"><i class="fa-solid fa-location-dot" style="color:var(--brand)"></i></span>
+      </div>
+    </div>
+
+    <div class="field">
+      <label class="label">Privacy</label>
+      <div class="seg">
+        <button class="active" onclick="this.parentElement.querySelectorAll('button').forEach(b=>b.classList.remove('active'));this.classList.add('active')">Public</button>
+        <button onclick="this.parentElement.querySelectorAll('button').forEach(b=>b.classList.remove('active'));this.classList.add('active')">Private</button>
+      </div>
+    </div>
+
+    <button class="btn btn-primary" onclick="App.toast('Event updated ✓');App.back()">Save Changes</button>
+
+    <button class="btn btn-outline" style="color:#DC2626;border-color:#FCA5A5;margin-top:12px" onclick="App.confirm('Cancel this event?','Attendees will be notified and the event will be removed.',function(){App.toast('Event cancelled');App.go('scr-events')},'Cancel event')"><i class="fa-solid fa-trash"></i> Cancel Event</button>
+  </div>
+  <div style="height:20px"></div>
+</section>
+
+
+<!-- ============ SHEET — Event owner options ============ -->
+<div class="sheet" id="sheet-event-owner">
+  <div class="sheet-grip"></div>
+  <div class="pad">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
+      <div class="h2" style="font-weight:800;font-size:18px">Manage event</div>
+      <button class="icon-btn" onclick="App.closeSheet()"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <div class="card">
+      <div class="list-row" onclick="App.closeSheet();App.go('scr-edit-event')">
+        <i class="fa-solid fa-pen" style="color:var(--brand);width:20px;text-align:center"></i>
+        <div style="flex:1"><div class="h3">Edit event</div><div class="t-sm">Name, date, location &amp; cover</div></div>
+      </div>
+      <div class="divider"></div>
+      <div class="list-row" onclick="App.closeSheet();App.toast('143 attendees')">
+        <i class="fa-solid fa-user-group" style="color:var(--ink-2);width:20px;text-align:center"></i>
+        <div style="flex:1"><div class="h3">Manage attendees</div></div>
+      </div>
+      <div class="divider"></div>
+      <div class="list-row" onclick="App.closeSheet();App.toast('Invites sent')">
+        <i class="fa-solid fa-paper-plane" style="color:var(--ink-2);width:20px;text-align:center"></i>
+        <div style="flex:1"><div class="h3">Invite people</div></div>
+      </div>
+      <div class="divider"></div>
+      <div class="list-row" onclick="App.closeSheet();App.confirm('Cancel this event?','Attendees will be notified and the event will be removed.',function(){App.toast('Event cancelled');App.go('scr-events')},'Cancel event')">
+        <i class="fa-solid fa-ban" style="color:#DC2626;width:20px;text-align:center"></i>
+        <div style="flex:1"><div class="h3" style="color:#DC2626">Cancel event</div></div>
+      </div>
+    </div>
+  </div>
+</div>

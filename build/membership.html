@@ -1,0 +1,169 @@
+<!-- membership module -->
+
+<!-- ===================== MEMBERSHIP STATUS / UPGRADE ===================== -->
+<section class="screen" id="scr-membership" data-topbar="back" data-nav="hide" data-title="Membership">
+  <div class="pad stack" style="padding-bottom:40px">
+
+    <!-- Current tier hero (innerHTML painted by Membership.paint) -->
+    <div id="memHero" style="border-radius:18px;padding:20px;color:#fff;box-shadow:var(--shadow)"></div>
+
+    <!-- ============ EviMember view: what you unlock + how to qualify ============ -->
+    <div id="memUpgradeCard">
+
+      <!-- EviMember vs EviEarner comparison -->
+      <div class="card card-p" style="margin-bottom:12px">
+        <div class="section-title" style="margin-bottom:12px">EviMember vs EviEarner</div>
+
+        <div style="display:flex;align-items:center;font-size:12px;font-weight:700;color:var(--ink-3);padding-bottom:8px">
+          <span style="flex:1">Feature</span>
+          <span style="width:74px;text-align:center">Member</span>
+          <span style="width:74px;text-align:center;color:var(--brand)">Earner</span>
+        </div>
+        <div class="divider"></div>
+
+        <div style="display:flex;align-items:center;font-size:13px;padding:10px 0">
+          <span style="flex:1;font-weight:600">Feed, posts & chat</span>
+          <span style="width:74px;text-align:center"><i class="fa-solid fa-check" style="color:var(--ok)"></i></span>
+          <span style="width:74px;text-align:center"><i class="fa-solid fa-check" style="color:var(--ok)"></i></span>
+        </div>
+        <div class="divider"></div>
+        <div style="display:flex;align-items:center;font-size:13px;padding:10px 0">
+          <span style="flex:1;font-weight:600">Earn User Points</span>
+          <span style="width:74px;text-align:center"><i class="fa-solid fa-check" style="color:var(--ok)"></i></span>
+          <span style="width:74px;text-align:center"><i class="fa-solid fa-check" style="color:var(--ok)"></i></span>
+        </div>
+        <div class="divider"></div>
+        <div style="display:flex;align-items:center;font-size:13px;padding:10px 0">
+          <span style="flex:1;font-weight:600">Marketplace</span>
+          <span style="width:74px;text-align:center"><i class="fa-solid fa-xmark" style="color:var(--ink-3)"></i></span>
+          <span style="width:74px;text-align:center"><i class="fa-solid fa-check" style="color:var(--ok)"></i></span>
+        </div>
+        <div class="divider"></div>
+        <div style="display:flex;align-items:center;font-size:13px;padding:10px 0">
+          <span style="flex:1;font-weight:600">Cashout to bank</span>
+          <span style="width:74px;text-align:center"><i class="fa-solid fa-xmark" style="color:var(--ink-3)"></i></span>
+          <span style="width:74px;text-align:center"><i class="fa-solid fa-check" style="color:var(--ok)"></i></span>
+        </div>
+        <div class="divider"></div>
+        <div style="display:flex;align-items:center;font-size:13px;padding:10px 0">
+          <span style="flex:1;font-weight:600">Monthly EviEarner payouts</span>
+          <span style="width:74px;text-align:center"><i class="fa-solid fa-xmark" style="color:var(--ink-3)"></i></span>
+          <span style="width:74px;text-align:center"><i class="fa-solid fa-check" style="color:var(--ok)"></i></span>
+        </div>
+      </div>
+
+      <!-- What you unlock -->
+      <div class="card card-p">
+        <div class="section-title" style="margin-bottom:14px">Unlock as an EviEarner</div>
+
+        <div style="display:flex;align-items:center;gap:13px">
+          <span style="width:42px;height:42px;border-radius:12px;background:var(--brand-50,#FFF3EA);display:flex;align-items:center;justify-content:center;flex:none"><i class="fa-solid fa-store" style="color:var(--brand)"></i></span>
+          <div style="flex:1"><div class="h3" style="font-size:14px">Marketplace</div><div class="t-sm">Buy &amp; sell products and services</div></div>
+        </div>
+        <div class="divider" style="margin:13px 0"></div>
+        <div style="display:flex;align-items:center;gap:13px">
+          <span style="width:42px;height:42px;border-radius:12px;background:var(--brand-50,#FFF3EA);display:flex;align-items:center;justify-content:center;flex:none"><i class="fa-solid fa-money-bill-transfer" style="color:var(--brand)"></i></span>
+          <div style="flex:1"><div class="h3" style="font-size:14px">Cashout</div><div class="t-sm">Withdraw User Points &amp; eGifts to cash</div></div>
+        </div>
+        <div class="divider" style="margin:13px 0"></div>
+        <div style="display:flex;align-items:center;gap:13px">
+          <span style="width:42px;height:42px;border-radius:12px;background:var(--brand-50,#FFF3EA);display:flex;align-items:center;justify-content:center;flex:none"><i class="fa-solid fa-arrow-trend-up" style="color:var(--brand)"></i></span>
+          <div style="flex:1"><div class="h3" style="font-size:14px">More rewards</div><div class="t-sm">The more you engage, the more you earn</div></div>
+        </div>
+      </div>
+
+      <!-- How to qualify + CTA -->
+      <div class="card card-p" style="margin-top:12px">
+        <div class="section-title" style="margin-bottom:12px">How to qualify</div>
+        <div style="display:flex;flex-direction:column;gap:11px">
+          <div style="display:flex;gap:10px;align-items:center"><i class="fa-solid fa-circle-check" style="color:#16A34A"></i><span style="font-size:14px;font-weight:600">Be active and consistent</span></div>
+          <div style="display:flex;gap:10px;align-items:center"><i class="fa-solid fa-circle-check" style="color:#16A34A"></i><span style="font-size:14px;font-weight:600">Create quality content</span></div>
+          <div style="display:flex;gap:10px;align-items:center"><i class="fa-solid fa-circle-check" style="color:#16A34A"></i><span style="font-size:14px;font-weight:600">Earn User Points &amp; receive eGifts</span></div>
+        </div>
+        <div class="badge badge-ok" style="margin-top:14px"><i class="fa-solid fa-circle-check"></i> You meet all requirements</div>
+
+        <!-- Pricing strip -->
+        <div class="divider" style="margin:14px 0"></div>
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <div>
+            <div class="h3" style="font-size:15px">EviEarner membership</div>
+            <div class="t-sm">Billed yearly · cancel anytime</div>
+          </div>
+          <div style="text-align:right">
+            <div style="font-weight:800;font-size:20px;color:var(--brand)">$3<span class="t-sm" style="font-weight:500">/yr</span></div>
+            <div class="t-sm">One payment a year · USD</div>
+          </div>
+        </div>
+
+        <!-- User Points reset warning -->
+        <div style="display:flex;gap:10px;align-items:flex-start;background:#FEF3C7;border:1px solid #FDE68A;border-radius:12px;padding:11px 12px;margin-top:14px">
+          <i class="fa-solid fa-triangle-exclamation" style="color:#D97706;margin-top:2px"></i>
+          <div class="t-sm" style="color:#92400E;line-height:1.5">When you upgrade, your current <b>User Points reset to 0</b>. You then earn fresh points as an EviEarner and can cash them out.</div>
+        </div>
+
+        <button class="btn btn-primary" style="margin-top:14px" onclick="Membership.upgrade()"><i class="fa-solid fa-star"></i> Become an EviEarner</button>
+        <p class="t-sm" style="text-align:center;margin-top:10px;line-height:1.5">Unlocks Marketplace & Cashout, plus monthly payouts of <b>your earnings</b>. Subscription billed <b>once a year</b> from your wallet.</p>
+      </div>
+
+    </div>
+
+    <!-- ============ EviEarner view: features active ============ -->
+    <div id="memEarnerCard" style="display:none">
+
+      <!-- Monthly EviEarner earnings payout summary (money you RECEIVE) -->
+      <div class="card card-p stack" style="gap:10px;margin-bottom:12px">
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <span class="section-title">Your earnings payout</span>
+          <span class="badge badge-ok"><i class="fa-solid fa-arrow-down"></i> Paid monthly</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <div><div class="t-sm">Next payout · 30 Jun 2026</div><div style="font-weight:800;font-size:22px;color:var(--ok)">$4.25</div></div>
+          <span style="width:46px;height:46px;border-radius:12px;background:#DCFCE7;display:flex;align-items:center;justify-content:center;flex:none"><i class="fa-solid fa-money-bill-trend-up" style="color:var(--ok);font-size:18px"></i></span>
+        </div>
+        <div class="divider"></div>
+        <div style="display:flex;justify-content:space-between;font-size:13px"><span class="t-sm" style="font-size:13px">Last payout · 31 May 2026</span><span style="font-weight:600">$3.80</span></div>
+      </div>
+
+      <div class="card card-p">
+        <div class="section-title" style="margin-bottom:14px">Your EviEarner features</div>
+        <button class="btn btn-success" style="margin-bottom:10px" onclick="App.go('scr-marketplace')"><i class="fa-solid fa-store"></i> Open Marketplace</button>
+        <button class="btn btn-outline" onclick="App.go('scr-cashout')"><i class="fa-solid fa-arrow-up-from-bracket"></i> Cashout earnings</button>
+      </div>
+    </div>
+
+    <!-- demo helper: revert tier (EviEarners only) -->
+    <button id="memDemoSwitch" style="display:none;background:none;border:none;color:var(--ink-3);font-size:12px;font-weight:600;text-decoration:underline;cursor:pointer;margin:2px auto 0;padding:6px" onclick="Membership.reset()">Switch back to EviMember (demo)</button>
+
+  </div>
+</section>
+
+
+<!-- ===================== LOCKED FEATURE (EviEarner gate) ===================== -->
+<section class="screen" id="scr-locked" data-topbar="back" data-nav="hide" data-title="EviEarners Only">
+  <div class="pad" style="display:flex;flex-direction:column;gap:16px;min-height:100%">
+
+    <div style="text-align:center;padding:26px 10px 6px">
+      <div style="width:92px;height:92px;border-radius:50%;background:var(--brand-50,#FFF3EA);display:inline-flex;align-items:center;justify-content:center;position:relative;margin-bottom:14px">
+        <i id="lockIcon" class="fa-solid fa-store" style="font-size:38px;color:var(--brand)"></i>
+        <span style="position:absolute;right:2px;bottom:2px;width:30px;height:30px;border-radius:50%;background:var(--ink);color:#fff;display:flex;align-items:center;justify-content:center;border:3px solid var(--bg);font-size:12px"><i class="fa-solid fa-lock"></i></span>
+      </div>
+      <div class="h1" id="lockTitle">Marketplace</div>
+      <p class="t-body" id="lockDesc" style="margin:8px auto 0;max-width:320px">This is an EviEarner feature.</p>
+    </div>
+
+    <div class="card card-p">
+      <div class="section-title" style="margin-bottom:8px">EviEarners unlock</div>
+      <div class="list-row" style="padding:8px 0"><i class="fa-solid fa-store" style="color:var(--brand);width:20px;text-align:center"></i><div style="flex:1"><div class="h3" style="font-size:14px">Buy &amp; sell on Marketplace</div></div></div>
+      <div class="divider"></div>
+      <div class="list-row" style="padding:8px 0"><i class="fa-solid fa-money-bill-transfer" style="color:var(--brand);width:20px;text-align:center"></i><div style="flex:1"><div class="h3" style="font-size:14px">Cashout User Points &amp; eGifts</div></div></div>
+      <div class="divider"></div>
+      <div class="list-row" style="padding:8px 0"><i class="fa-solid fa-arrow-trend-up" style="color:var(--brand);width:20px;text-align:center"></i><div style="flex:1"><div class="h3" style="font-size:14px">More activity, more rewards</div></div></div>
+    </div>
+
+    <div style="margin-top:auto;display:flex;flex-direction:column;gap:10px;padding-bottom:8px">
+      <button class="btn btn-primary" onclick="App.go('scr-membership')"><i class="fa-solid fa-star"></i> Become an EviEarner</button>
+      <button class="btn btn-ghost" onclick="App.back()">Not now</button>
+    </div>
+
+  </div>
+</section>

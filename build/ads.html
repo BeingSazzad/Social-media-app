@@ -10,7 +10,7 @@
 
     <div style="display:flex;justify-content:space-between;align-items:center;margin-top:6px">
       <span class="section-title">Campaigns</span>
-      <span class="t-sm">3 active campaigns</span>
+      <span class="t-sm">3 campaigns · 1 active</span>
     </div>
 
     <!-- Campaign 1 — Active -->
@@ -27,7 +27,7 @@
       <div class="divider" style="margin:12px 0"></div>
       <div style="display:flex;gap:18px">
         <div style="flex:1">
-          <div style="font-weight:700;font-size:15px">₦4,200</div>
+          <div style="font-weight:700;font-size:15px">$4.20</div>
           <div class="t-sm">spent</div>
         </div>
         <div style="flex:1">
@@ -52,7 +52,7 @@
       <div class="divider" style="margin:12px 0"></div>
       <div style="display:flex;gap:18px">
         <div style="flex:1">
-          <div style="font-weight:700;font-size:15px">₦12,750</div>
+          <div style="font-weight:700;font-size:15px">$12.75</div>
           <div class="t-sm">spent</div>
         </div>
         <div style="flex:1">
@@ -77,7 +77,7 @@
       <div class="divider" style="margin:12px 0"></div>
       <div style="display:flex;gap:18px">
         <div style="flex:1">
-          <div style="font-weight:700;font-size:15px">₦8,000</div>
+          <div style="font-weight:700;font-size:15px">$8</div>
           <div class="t-sm">spent</div>
         </div>
         <div style="flex:1">
@@ -104,9 +104,9 @@
     <div class="field">
       <label class="label">Ad Type</label>
       <div class="seg">
-        <button class="active" onclick="App.toast('Image ad selected')">Image</button>
-        <button onclick="App.toast('Video ad selected')">Video</button>
-        <button onclick="App.toast('Post boost selected')">Post Boost</button>
+        <button class="active" onclick="this.parentElement.querySelectorAll('button').forEach(b=>b.classList.remove('active'));this.classList.add('active')">Image</button>
+        <button onclick="this.parentElement.querySelectorAll('button').forEach(b=>b.classList.remove('active'));this.classList.add('active')">Video</button>
+        <button onclick="this.parentElement.querySelectorAll('button').forEach(b=>b.classList.remove('active'));this.classList.add('active')">Post Boost</button>
       </div>
     </div>
 
@@ -137,18 +137,18 @@
     <div class="field">
       <label class="label">Interests</label>
       <div class="chip-row">
-        <span class="chip active" onclick="App.toast('Fashion added')">Fashion</span>
-        <span class="chip active" onclick="App.toast('Shopping added')">Shopping</span>
-        <span class="chip" onclick="App.toast('Tech added')">Tech</span>
-        <span class="chip" onclick="App.toast('Sports added')">Sports</span>
-        <span class="chip" onclick="App.toast('Beauty added')">Beauty</span>
-        <span class="chip" onclick="App.toast('Travel added')">Travel</span>
+        <span class="chip active" onclick="this.classList.toggle('active')">Fashion</span>
+        <span class="chip active" onclick="this.classList.toggle('active')">Shopping</span>
+        <span class="chip" onclick="this.classList.toggle('active')">Tech</span>
+        <span class="chip" onclick="this.classList.toggle('active')">Sports</span>
+        <span class="chip" onclick="this.classList.toggle('active')">Beauty</span>
+        <span class="chip" onclick="this.classList.toggle('active')">Travel</span>
       </div>
     </div>
 
     <div class="field">
-      <label class="label">Budget (₦ per day)</label>
-      <input class="input" type="number" value="1000" placeholder="1000">
+      <label class="label">Budget ($ per day)</label>
+      <input class="input" type="number" value="1" placeholder="1">
     </div>
 
     <div style="display:flex;gap:12px">
@@ -182,10 +182,10 @@
       <div style="display:flex;justify-content:space-between;align-items:center">
         <div>
           <div class="t-sm" style="color:#C9C4BD">Total Cost</div>
-          <div style="font-weight:700;font-size:22px">₦7,000</div>
+          <div style="font-weight:700;font-size:22px">$7</div>
         </div>
         <div style="text-align:right">
-          <div class="t-sm" style="color:#C9C4BD">₦1,000 / day</div>
+          <div class="t-sm" style="color:#C9C4BD">$1 / day</div>
           <div class="t-sm" style="color:#C9C4BD">× 7 days</div>
         </div>
       </div>
@@ -193,10 +193,11 @@
 
     <div style="display:flex;justify-content:space-between;align-items:center;padding:0 4px">
       <span class="t-sm"><i class="fa-solid fa-wallet" style="color:var(--brand)"></i>&nbsp; Wallet balance</span>
-      <span style="font-weight:700;font-size:13px">₦42,500</span>
+      <span style="font-weight:700;font-size:13px">$42.50</span>
     </div>
 
-    <button class="btn btn-primary" onclick="App.toast('Campaign launched! 🚀')">Launch Campaign</button>
+    <button class="btn btn-primary" onclick="App.toast('Campaign launched! 🚀');App.go('scr-my-ads')">Launch Campaign</button>
+    <button class="btn btn-outline" onclick="App.toast('Saved to drafts');App.back()"><i class="fa-regular fa-floppy-disk"></i> Save as Draft</button>
 
   </div>
 </section>
@@ -213,7 +214,7 @@
         <div class="h3">Eid Fashion Sale 2026</div>
         <div class="t-sm">Image Ad · started Jun 19</div>
       </div>
-      <span class="badge badge-ok">Active</span>
+      <span class="badge badge-ok" id="aa-status">Active</span>
     </div>
 
     <!-- 2x2 stat grid -->
@@ -235,8 +236,8 @@
       </div>
       <div class="card card-p">
         <div class="t-sm">Spend</div>
-        <div style="font-weight:700;font-size:21px;margin-top:3px">₦4,200</div>
-        <div class="t-sm" style="color:var(--ink-3)">of ₦7,000</div>
+        <div style="font-weight:700;font-size:21px;margin-top:3px">$4.20</div>
+        <div class="t-sm" style="color:var(--ink-3)">of $7</div>
       </div>
     </div>
 
@@ -300,7 +301,7 @@
           <div class="h3">Pause Campaign</div>
           <div class="t-sm">Stop spending without ending the ad</div>
         </div>
-        <label class="switch"><input type="checkbox" onclick="App.toast('Campaign paused')"><span></span></label>
+        <label class="switch"><input type="checkbox" onclick="(function(c){var s=document.getElementById('aa-status');if(c.checked){s.textContent='Paused';s.className='badge badge-gray';App.toast('Campaign paused');}else{s.textContent='Active';s.className='badge badge-ok';App.toast('Campaign resumed');}})(this)"><span></span></label>
       </div>
     </div>
 
@@ -336,17 +337,17 @@
     </article>
 
     <div class="field">
-      <label class="label">Budget (₦ per day)</label>
-      <input class="input" type="number" value="1000" placeholder="1000">
+      <label class="label">Budget ($ per day)</label>
+      <input class="input" type="number" value="1" placeholder="1">
     </div>
 
     <div class="field">
       <label class="label">Duration</label>
       <div class="chip-row">
-        <span class="chip" onclick="App.toast('1 day selected')">1 day</span>
-        <span class="chip" onclick="App.toast('3 days selected')">3 days</span>
-        <span class="chip active" onclick="App.toast('7 days selected')">7 days</span>
-        <span class="chip" onclick="App.toast('14 days selected')">14 days</span>
+        <span class="chip" onclick="this.parentElement.querySelectorAll('.chip').forEach(c=>c.classList.remove('active'));this.classList.add('active')">1 day</span>
+        <span class="chip" onclick="this.parentElement.querySelectorAll('.chip').forEach(c=>c.classList.remove('active'));this.classList.add('active')">3 days</span>
+        <span class="chip active" onclick="this.parentElement.querySelectorAll('.chip').forEach(c=>c.classList.remove('active'));this.classList.add('active')">7 days</span>
+        <span class="chip" onclick="this.parentElement.querySelectorAll('.chip').forEach(c=>c.classList.remove('active'));this.classList.add('active')">14 days</span>
       </div>
     </div>
 
@@ -364,15 +365,15 @@
 
     <div style="display:flex;justify-content:space-between;align-items:center;padding:0 4px">
       <span class="t-sm">Total cost</span>
-      <span style="font-weight:700;font-size:18px">₦7,000</span>
+      <span style="font-weight:700;font-size:18px">$7</span>
     </div>
 
     <div style="display:flex;justify-content:space-between;align-items:center;padding:0 4px">
       <span class="t-sm"><i class="fa-solid fa-wallet" style="color:var(--brand)"></i>&nbsp; Wallet balance</span>
-      <span style="font-weight:700;font-size:13px">₦42,500</span>
+      <span style="font-weight:700;font-size:13px">$42.50</span>
     </div>
 
-    <button class="btn btn-primary" onclick="App.toast('Post boosted! 🚀')">Boost Now</button>
+    <button class="btn btn-primary" onclick="App.toast('Post boosted! 🚀');App.go('scr-my-ads')">Boost Now</button>
 
   </div>
 </section>

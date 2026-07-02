@@ -5,71 +5,35 @@
 <!-- ===================================================== -->
 <section class="screen" id="scr-discover" data-topbar="app" data-nav="show" data-tab="discover">
 
-  <!-- Sticky search -->
-  <div style="position:sticky;top:0;z-index:6;background:var(--bg);padding:14px 16px 10px">
-    <div class="input-group" onclick="App.toast('Search is mocked in this prototype')" style="cursor:text">
-      <input class="input" placeholder="Search people, groups, posts..." style="padding-left:42px">
+  <!-- Sticky search — the single discovery entry point -->
+  <div style="position:sticky;top:0;z-index:6;background:var(--bg);padding:14px 16px 12px">
+    <div class="input-group" onclick="App.go('scr-search')" style="cursor:text">
+      <input class="input" placeholder="Search people, groups, posts..." style="padding-left:42px" readonly>
       <i class="fa-solid fa-magnifying-glass" style="position:absolute;left:16px;top:50%;transform:translateY(-50%);color:var(--ink-3);font-size:15px"></i>
-      <button class="input-icon" onclick="event.stopPropagation();App.toast('Listening...')" aria-label="Voice search"><i class="fa-solid fa-microphone"></i></button>
-    </div>
-    <!-- Filter chips -->
-    <div class="chip-row" style="margin-top:12px">
-      <span class="chip active" onclick="App.toast('Showing: All')">All</span>
-      <span class="chip" onclick="App.go('scr-contacts')">People</span>
-      <span class="chip" onclick="App.go('scr-groups')">Groups</span>
-      <span class="chip" onclick="App.toast('Filter: Pages')">Pages</span>
-      <span class="chip" onclick="App.go('scr-blogs')">Blogs</span>
-      <span class="chip" onclick="App.go('scr-videos')">Videos</span>
-      <span class="chip" onclick="App.go('scr-events')">Events</span>
-      <span class="chip" onclick="App.toast('Filter: Countries')">Countries</span>
-    </div>
-  </div>
-
-  <!-- Quick-access strip -->
-  <div class="pad" style="padding-top:8px;padding-bottom:0">
-    <div style="display:flex;gap:10px">
-      <button onclick="App.go('scr-online')" style="flex:1;background:#fff;border:1px solid var(--line);border-radius:14px;padding:12px 8px;display:flex;flex-direction:column;align-items:center;gap:6px;cursor:pointer;box-shadow:var(--shadow-sm)">
-        <i class="fa-solid fa-circle-user" style="color:var(--ok);font-size:15px"></i>
-        <span style="font-size:12px;font-weight:700;color:var(--ink)">Online Now</span>
-        <span class="t-sm">42 friends</span>
-      </button>
-      <button onclick="App.go('scr-profile-views')" style="flex:1;background:#fff;border:1px solid var(--line);border-radius:14px;padding:12px 8px;display:flex;flex-direction:column;align-items:center;gap:6px;cursor:pointer;box-shadow:var(--shadow-sm)">
-        <i class="fa-solid fa-eye" style="color:var(--brand);font-size:15px"></i>
-        <span style="font-size:12px;font-weight:700;color:var(--ink)">Profile Views</span>
-        <span class="t-sm">128 this week</span>
-      </button>
-      <button onclick="App.go('scr-contacts')" style="flex:1;background:#fff;border:1px solid var(--line);border-radius:14px;padding:12px 8px;display:flex;flex-direction:column;align-items:center;gap:6px;cursor:pointer;box-shadow:var(--shadow-sm)">
-        <i class="fa-solid fa-user-plus" style="color:var(--info);font-size:15px"></i>
-        <span style="font-size:12px;font-weight:700;color:var(--ink)">Find People</span>
-        <span class="t-sm">You may know</span>
-      </button>
     </div>
   </div>
 
   <!-- Trending hashtags -->
   <div class="pad" style="padding-bottom:0">
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
-      <span class="section-title">Trending Now</span>
+      <span class="section-title">Trending now</span>
       <button onclick="App.go('scr-hashtag')" style="background:none;border:none;color:var(--brand);font-weight:700;font-size:12px;cursor:pointer">See all</button>
     </div>
     <div style="display:flex;flex-wrap:wrap;gap:8px">
       <button onclick="App.go('scr-hashtag')" style="background:#fff;border:1px solid var(--line);border-radius:999px;padding:9px 14px;cursor:pointer;display:flex;align-items:center;gap:8px;box-shadow:var(--shadow-sm)">
-        <span style="font-weight:700;font-size:13px;color:var(--brand)">#design</span><span class="t-sm">2,481 posts</span>
+        <span style="font-weight:700;font-size:13px;color:var(--brand)">#NaijaTech</span><span class="t-sm">1,344 posts</span>
       </button>
       <button onclick="App.go('scr-hashtag')" style="background:#fff;border:1px solid var(--line);border-radius:999px;padding:9px 14px;cursor:pointer;display:flex;align-items:center;gap:8px;box-shadow:var(--shadow-sm)">
         <span style="font-weight:700;font-size:13px;color:var(--brand)">#EviEarner</span><span class="t-sm">1,902 posts</span>
       </button>
       <button onclick="App.go('scr-hashtag')" style="background:#fff;border:1px solid var(--line);border-radius:999px;padding:9px 14px;cursor:pointer;display:flex;align-items:center;gap:8px;box-shadow:var(--shadow-sm)">
-        <span style="font-weight:700;font-size:13px;color:var(--brand)">#NaijaTech</span><span class="t-sm">1,344 posts</span>
+        <span style="font-weight:700;font-size:13px;color:var(--brand)">#Lagos</span><span class="t-sm">631 posts</span>
       </button>
       <button onclick="App.go('scr-hashtag')" style="background:#fff;border:1px solid var(--line);border-radius:999px;padding:9px 14px;cursor:pointer;display:flex;align-items:center;gap:8px;box-shadow:var(--shadow-sm)">
-        <span style="font-weight:700;font-size:13px;color:var(--brand)">#DhakaLife</span><span class="t-sm">986 posts</span>
+        <span style="font-weight:700;font-size:13px;color:var(--brand)">#design</span><span class="t-sm">2,481 posts</span>
       </button>
       <button onclick="App.go('scr-hashtag')" style="background:#fff;border:1px solid var(--line);border-radius:999px;padding:9px 14px;cursor:pointer;display:flex;align-items:center;gap:8px;box-shadow:var(--shadow-sm)">
         <span style="font-weight:700;font-size:13px;color:var(--brand)">#startup</span><span class="t-sm">742 posts</span>
-      </button>
-      <button onclick="App.go('scr-hashtag')" style="background:#fff;border:1px solid var(--line);border-radius:999px;padding:9px 14px;cursor:pointer;display:flex;align-items:center;gap:8px;box-shadow:var(--shadow-sm)">
-        <span style="font-weight:700;font-size:13px;color:var(--brand)">#Lagos</span><span class="t-sm">631 posts</span>
       </button>
     </div>
   </div>
@@ -77,7 +41,7 @@
   <!-- Suggested People -->
   <div class="pad" style="padding-bottom:0">
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
-      <span class="section-title">Suggested People</span>
+      <span class="section-title">People to discover</span>
       <button onclick="App.go('scr-contacts')" style="background:none;border:none;color:var(--brand);font-weight:700;font-size:12px;cursor:pointer">See all</button>
     </div>
   </div>
@@ -111,11 +75,11 @@
   <!-- Active Groups -->
   <div class="pad" style="padding-bottom:0">
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
-      <span class="section-title">Active Groups</span>
+      <span class="section-title">Groups for you</span>
       <button onclick="App.go('scr-groups')" style="background:none;border:none;color:var(--brand);font-weight:700;font-size:12px;cursor:pointer">See all</button>
     </div>
     <div class="card stack" style="padding:4px 0">
-      <div class="list-row" style="cursor:pointer" onclick="App.go('scr-group-page')">
+      <div class="list-row" style="cursor:pointer" onclick="App.go('scr-group-page-member')">
         <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=200&q=80" style="width:48px;height:48px;border-radius:13px;object-fit:cover;flex:none">
         <div style="flex:1;min-width:0">
           <div class="h3">UI/UX Bangladesh</div>
@@ -124,7 +88,7 @@
         <i class="fa-solid fa-chevron-right chev"></i>
       </div>
       <div class="divider"></div>
-      <div class="list-row" style="cursor:pointer" onclick="App.go('scr-group-page')">
+      <div class="list-row" style="cursor:pointer" onclick="App.go('scr-group-page-member')">
         <img src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=200&q=80" style="width:48px;height:48px;border-radius:13px;object-fit:cover;flex:none">
         <div style="flex:1;min-width:0">
           <div class="h3">Lagos Founders Hub</div>
@@ -133,7 +97,7 @@
         <i class="fa-solid fa-chevron-right chev"></i>
       </div>
       <div class="divider"></div>
-      <div class="list-row" style="cursor:pointer" onclick="App.go('scr-group-page')">
+      <div class="list-row" style="cursor:pointer" onclick="App.go('scr-group-page-member')">
         <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=200&q=80" style="width:48px;height:48px;border-radius:13px;object-fit:cover;flex:none">
         <div style="flex:1;min-width:0">
           <div class="h3">Dhaka Photographers</div>
@@ -144,60 +108,6 @@
     </div>
   </div>
 
-  <!-- Upcoming Events -->
-  <div class="pad">
-    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
-      <span class="section-title">Upcoming Events</span>
-      <button onclick="App.go('scr-events')" style="background:none;border:none;color:var(--brand);font-weight:700;font-size:12px;cursor:pointer">See all</button>
-    </div>
-    <div class="stack">
-      <div class="card" style="overflow:hidden;cursor:pointer" onclick="App.go('scr-event-detail')">
-        <div style="position:relative;height:128px">
-          <img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=600&q=80" style="width:100%;height:100%;object-fit:cover">
-          <div style="position:absolute;top:10px;left:10px;background:#fff;border-radius:12px;padding:6px 10px;text-align:center;box-shadow:var(--shadow-sm)">
-            <div style="font-size:16px;font-weight:800;line-height:1;color:var(--brand)">12</div>
-            <div class="t-sm" style="font-weight:700">JUL</div>
-          </div>
-          <span class="badge badge-brand" style="position:absolute;top:10px;right:10px">Free</span>
-        </div>
-        <div class="card-p">
-          <div class="h3">EVINIE Creators Meetup 2026</div>
-          <div class="t-sm" style="margin:4px 0 8px"><i class="fa-solid fa-location-dot"></i> Banani, Dhaka · 4:00 PM</div>
-          <div style="display:flex;align-items:center;justify-content:space-between">
-            <div style="display:flex;align-items:center">
-              <img class="ava" src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=80&q=80" style="width:26px;height:26px;border:2px solid #fff">
-              <img class="ava" src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=80&q=80" style="width:26px;height:26px;border:2px solid #fff;margin-left:-10px">
-              <img class="ava" src="https://images.unsplash.com/photo-1531123897727-8f129e1688ce?w=80&q=80" style="width:26px;height:26px;border:2px solid #fff;margin-left:-10px">
-              <span class="t-sm" style="margin-left:8px">+212 going</span>
-            </div>
-            <span style="color:var(--brand);font-weight:700;font-size:13px">Details →</span>
-          </div>
-        </div>
-      </div>
-      <div class="card" style="overflow:hidden;cursor:pointer" onclick="App.go('scr-event-detail')">
-        <div style="position:relative;height:128px">
-          <img src="https://images.unsplash.com/photo-1531058020387-3be344556be6?w=600&q=80" style="width:100%;height:100%;object-fit:cover">
-          <div style="position:absolute;top:10px;left:10px;background:#fff;border-radius:12px;padding:6px 10px;text-align:center;box-shadow:var(--shadow-sm)">
-            <div style="font-size:16px;font-weight:800;line-height:1;color:var(--brand)">19</div>
-            <div class="t-sm" style="font-weight:700">JUL</div>
-          </div>
-          <span class="badge badge-warn" style="position:absolute;top:10px;right:10px">₦5,000</span>
-        </div>
-        <div class="card-p">
-          <div class="h3">Lagos Tech Founders Night</div>
-          <div class="t-sm" style="margin:4px 0 8px"><i class="fa-solid fa-location-dot"></i> Victoria Island, Lagos · 6:30 PM</div>
-          <div style="display:flex;align-items:center;justify-content:space-between">
-            <div style="display:flex;align-items:center">
-              <img class="ava" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=80&q=80" style="width:26px;height:26px;border:2px solid #fff">
-              <img class="ava" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=80&q=80" style="width:26px;height:26px;border:2px solid #fff;margin-left:-10px">
-              <span class="t-sm" style="margin-left:8px">+98 going</span>
-            </div>
-            <span style="color:var(--brand);font-weight:700;font-size:13px">Details →</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
   <div style="height:20px"></div>
 </section>
 
@@ -214,9 +124,9 @@
       </div>
       <div style="flex:1;min-width:0">
         <div class="h2">#design</div>
-        <div class="t-sm">2,481 posts · 14.2k followers</div>
+        <div class="t-sm">2,481 posts · trending in Lagos</div>
       </div>
-      <button class="btn-sm btn-soft" onclick="this.textContent='Following';this.classList.add('btn-ghost')">Follow</button>
+      <button class="btn-sm btn-soft" onclick="this.textContent='Saved';this.classList.add('btn-ghost')">Save</button>
     </div>
   </div>
 
@@ -240,7 +150,7 @@
       <div class="post-actions">
         <button onclick="likeBtn(this)"><i class="fa-regular fa-heart"></i> Like</button>
         <button onclick="App.go('scr-post-detail')"><i class="fa-regular fa-comment"></i> Comment</button>
-        <button onclick="App.toast('Shared to your timeline')"><i class="fa-solid fa-share"></i> Share</button>
+        <button onclick="App.go('scr-share-post')"><i class="fa-solid fa-share"></i> Share</button>
       </div>
     </article>
 
@@ -263,7 +173,7 @@
       <div class="post-actions">
         <button onclick="likeBtn(this)"><i class="fa-regular fa-heart"></i> Like</button>
         <button onclick="App.go('scr-post-detail')"><i class="fa-regular fa-comment"></i> Comment</button>
-        <button onclick="App.toast('Shared to your timeline')"><i class="fa-solid fa-share"></i> Share</button>
+        <button onclick="App.go('scr-share-post')"><i class="fa-solid fa-share"></i> Share</button>
       </div>
     </article>
 
@@ -279,7 +189,7 @@
       <div class="post-actions">
         <button onclick="likeBtn(this)"><i class="fa-regular fa-heart"></i> Like</button>
         <button onclick="App.go('scr-post-detail')"><i class="fa-regular fa-comment"></i> Comment</button>
-        <button onclick="App.toast('Shared to your timeline')"><i class="fa-solid fa-share"></i> Share</button>
+        <button onclick="App.go('scr-share-post')"><i class="fa-solid fa-share"></i> Share</button>
       </div>
     </article>
   </div>
@@ -475,7 +385,41 @@
     </div>
   </div>
 
-  <div class="pad" style="padding-top:14px">
+  <!-- Mini stats row -->
+  <div class="pad" style="padding-bottom:0;padding-top:12px;display:flex;gap:10px">
+    <div class="card card-p" style="flex:1;text-align:center">
+      <div style="font-size:18px;font-weight:800;color:var(--ink)">512</div>
+      <div class="t-sm">Last 90 days</div>
+    </div>
+    <div class="card card-p" style="flex:1;text-align:center">
+      <div style="font-size:18px;font-weight:800;color:var(--ink)">63%</div>
+      <div class="t-sm">From Lagos</div>
+    </div>
+    <div class="card card-p" style="flex:1;text-align:center">
+      <div style="font-size:18px;font-weight:800;color:var(--ink)">41</div>
+      <div class="t-sm">New viewers</div>
+    </div>
+  </div>
+
+  <!-- EviEarner upsell -->
+  <div class="pad" style="padding-bottom:0;padding-top:12px">
+    <div class="card card-p" style="background:var(--brand-50,#FFF3EA);border:1px solid var(--line);display:flex;align-items:center;gap:12px">
+      <div style="width:40px;height:40px;border-radius:12px;background:var(--brand-grad);display:flex;align-items:center;justify-content:center;color:#fff;font-size:16px;flex:none">
+        <i class="fa-solid fa-bolt"></i>
+      </div>
+      <div style="flex:1;min-width:0">
+        <div class="h3">See everyone who viewed you</div>
+        <div class="t-sm">Upgrade to EviEarner to unlock the full 90-day viewer history.</div>
+      </div>
+      <button class="btn-sm btn-primary" style="flex:none" onclick="App.go('scr-membership')">Upgrade</button>
+    </div>
+  </div>
+
+  <div class="pad" style="padding-bottom:0;padding-top:14px">
+    <span class="section-title">Recent viewers</span>
+  </div>
+
+  <div class="pad" style="padding-top:10px">
     <div class="card" style="padding:4px 0">
 
       <div class="list-row">
@@ -536,8 +480,215 @@
         </div>
         <button class="btn-sm btn-soft" onclick="this.textContent='Requested';this.classList.add('btn-ghost')">Add Friend</button>
       </div>
+      <div class="divider"></div>
+
+      <!-- locked viewers (EviEarner) -->
+      <div class="list-row" style="cursor:pointer" onclick="App.go('scr-membership')">
+        <img class="ava" src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=120&q=80" style="width:46px;height:46px;filter:blur(5px)">
+        <div style="flex:1;min-width:0">
+          <div class="h3" style="filter:blur(4px)">Hidden viewer</div>
+          <div class="t-sm">4 days ago</div>
+        </div>
+        <i class="fa-solid fa-lock" style="color:var(--ink-3)"></i>
+      </div>
+      <div class="divider"></div>
+      <div class="list-row" style="cursor:pointer" onclick="App.go('scr-membership')">
+        <img class="ava" src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=120&q=80" style="width:46px;height:46px;filter:blur(5px)">
+        <div style="flex:1;min-width:0">
+          <div class="h3" style="filter:blur(4px)">Hidden viewer</div>
+          <div class="t-sm">5 days ago</div>
+        </div>
+        <i class="fa-solid fa-lock" style="color:var(--ink-3)"></i>
+      </div>
 
     </div>
   </div>
+  <div class="pad" style="padding-top:0">
+    <button class="btn btn-outline" style="width:100%" onclick="App.go('scr-membership')"><i class="fa-solid fa-bolt"></i> Unlock 7 more viewers with EviEarner</button>
+  </div>
   <div style="height:20px"></div>
+</section>
+
+
+<!-- ===================================================== -->
+<!-- SCREEN — Search (results + recent + trending)         -->
+<!-- ===================================================== -->
+<section class="screen" id="scr-search" data-topbar="back" data-nav="hide" data-title="Search">
+
+  <!-- Search field -->
+  <div style="position:sticky;top:0;z-index:6;background:var(--bg);padding:12px 16px 10px">
+    <div class="input-group" style="cursor:text">
+      <input id="searchField" class="input" placeholder="Search people, groups, posts..." style="padding-left:42px"
+             oninput="searchRun(this.value)" onkeydown="if(event.key==='Enter'){searchRun(this.value);this.blur();}">
+      <i class="fa-solid fa-magnifying-glass" style="position:absolute;left:16px;top:50%;transform:translateY(-50%);color:var(--ink-3);font-size:15px"></i>
+      <button class="input-icon" onclick="document.getElementById('searchField').value='';searchRun('')" aria-label="Clear"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+  </div>
+
+  <!-- EMPTY STATE: recent + trending (default) -->
+  <div id="searchEmpty">
+    <div class="pad" style="padding-bottom:0">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+        <span class="section-title">Recent</span>
+        <button onclick="App.toast('Recent searches cleared')" style="background:none;border:none;color:var(--brand);font-weight:700;font-size:12px;cursor:pointer">Clear</button>
+      </div>
+      <div class="card" style="padding:4px 0">
+        <div class="list-row" style="cursor:pointer" onclick="searchSeed('Chioma Okafor')">
+          <i class="fa-regular fa-clock" style="color:var(--ink-3);width:20px;text-align:center"></i>
+          <div style="flex:1">Chioma Okafor</div>
+          <i class="fa-solid fa-arrow-up" style="color:var(--ink-3);transform:rotate(45deg)"></i>
+        </div>
+        <div class="divider"></div>
+        <div class="list-row" style="cursor:pointer" onclick="searchSeed('#NaijaTech')">
+          <i class="fa-regular fa-clock" style="color:var(--ink-3);width:20px;text-align:center"></i>
+          <div style="flex:1">#NaijaTech</div>
+          <i class="fa-solid fa-arrow-up" style="color:var(--ink-3);transform:rotate(45deg)"></i>
+        </div>
+        <div class="divider"></div>
+        <div class="list-row" style="cursor:pointer" onclick="searchSeed('Lagos Founders Hub')">
+          <i class="fa-regular fa-clock" style="color:var(--ink-3);width:20px;text-align:center"></i>
+          <div style="flex:1">Lagos Founders Hub</div>
+          <i class="fa-solid fa-arrow-up" style="color:var(--ink-3);transform:rotate(45deg)"></i>
+        </div>
+        <div class="divider"></div>
+        <div class="list-row" style="cursor:pointer" onclick="searchSeed('Ankara dress')">
+          <i class="fa-regular fa-clock" style="color:var(--ink-3);width:20px;text-align:center"></i>
+          <div style="flex:1">Ankara dress</div>
+          <i class="fa-solid fa-arrow-up" style="color:var(--ink-3);transform:rotate(45deg)"></i>
+        </div>
+      </div>
+    </div>
+
+    <div class="pad">
+      <div class="section-title" style="margin-bottom:10px">Trending searches</div>
+      <div class="card" style="padding:4px 0">
+        <div class="list-row" style="cursor:pointer" onclick="searchSeed('#EviEarner')">
+          <span style="width:30px;height:30px;border-radius:9px;background:var(--brand-50,#FFF3EA);display:flex;align-items:center;justify-content:center;color:var(--brand);font-weight:800;flex:none">1</span>
+          <div style="flex:1;min-width:0"><div class="h3">#EviEarner</div><div class="t-sm">1,902 posts · trending in Nigeria</div></div>
+          <i class="fa-solid fa-arrow-trend-up" style="color:var(--ok)"></i>
+        </div>
+        <div class="divider"></div>
+        <div class="list-row" style="cursor:pointer" onclick="searchSeed('#DhakaLife')">
+          <span style="width:30px;height:30px;border-radius:9px;background:var(--brand-50,#FFF3EA);display:flex;align-items:center;justify-content:center;color:var(--brand);font-weight:800;flex:none">2</span>
+          <div style="flex:1;min-width:0"><div class="h3">#DhakaLife</div><div class="t-sm">986 posts · trending in Bangladesh</div></div>
+          <i class="fa-solid fa-arrow-trend-up" style="color:var(--ok)"></i>
+        </div>
+        <div class="divider"></div>
+        <div class="list-row" style="cursor:pointer" onclick="searchSeed('#NaijaTech')">
+          <span style="width:30px;height:30px;border-radius:9px;background:var(--brand-50,#FFF3EA);display:flex;align-items:center;justify-content:center;color:var(--brand);font-weight:800;flex:none">3</span>
+          <div style="flex:1;min-width:0"><div class="h3">#NaijaTech</div><div class="t-sm">1,344 posts</div></div>
+          <i class="fa-solid fa-arrow-trend-up" style="color:var(--ok)"></i>
+        </div>
+        <div class="divider"></div>
+        <div class="list-row" style="cursor:pointer" onclick="searchSeed('Eid Fashion Sale')">
+          <span style="width:30px;height:30px;border-radius:9px;background:var(--brand-50,#FFF3EA);display:flex;align-items:center;justify-content:center;color:var(--brand);font-weight:800;flex:none">4</span>
+          <div style="flex:1;min-width:0"><div class="h3">Eid Fashion Sale 2026</div><div class="t-sm">Marketplace · 5.2k shopping</div></div>
+          <i class="fa-solid fa-fire" style="color:#EF4444"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- RESULTS STATE (hidden until typing) -->
+  <div id="searchResults" style="display:none">
+    <!-- result sub-filter -->
+    <div class="chip-row pad" style="padding-top:4px;padding-bottom:6px">
+      <span class="chip active">Top</span>
+      <span class="chip" onclick="App.go('scr-contacts')">People</span>
+      <span class="chip" onclick="App.go('scr-groups')">Groups</span>
+      <span class="chip" onclick="App.go('scr-hashtag')">Tags</span>
+      <span class="chip" onclick="App.go('scr-videos')">Videos</span>
+    </div>
+
+    <!-- People -->
+    <div class="pad" style="padding-top:6px;padding-bottom:0"><span class="section-title">People</span></div>
+    <div class="pad" style="padding-top:8px;padding-bottom:0">
+      <div class="card" style="padding:4px 0">
+        <div class="list-row" style="cursor:pointer" onclick="App.go('scr-user-profile')">
+          <img class="ava" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=120&q=80" style="width:44px;height:44px">
+          <div style="flex:1;min-width:0"><div class="h3">Chioma Okafor <i class="fa-solid fa-circle-check verified" style="font-size:11px"></i></div><div class="t-sm">@chiomawrites · 7 mutual friends</div></div>
+          <button class="btn-sm btn-soft" onclick="event.stopPropagation();this.textContent='Requested';this.classList.add('btn-ghost')">Add</button>
+        </div>
+        <div class="divider"></div>
+        <div class="list-row" style="cursor:pointer" onclick="App.go('scr-user-profile')">
+          <img class="ava" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=120&q=80" style="width:44px;height:44px">
+          <div style="flex:1;min-width:0"><div class="h3">Tanvir Ahmed <i class="fa-solid fa-circle-check verified" style="font-size:11px"></i></div><div class="t-sm">@tanvir.codes · Dhaka</div></div>
+          <button class="btn-sm btn-soft" onclick="event.stopPropagation();this.textContent='Requested';this.classList.add('btn-ghost')">Add</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Groups -->
+    <div class="pad" style="padding-top:14px;padding-bottom:0"><span class="section-title">Groups</span></div>
+    <div class="pad" style="padding-top:8px;padding-bottom:0">
+      <div class="card" style="padding:4px 0">
+        <div class="list-row" style="cursor:pointer" onclick="App.go('scr-group-page-member')">
+          <img src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=200&q=80" style="width:44px;height:44px;border-radius:12px;object-fit:cover;flex:none">
+          <div style="flex:1;min-width:0"><div class="h3">Lagos Founders Hub</div><div class="t-sm">11.8k members · Public group</div></div>
+          <button class="btn-sm btn-soft" onclick="event.stopPropagation();this.textContent='Joined';this.classList.add('btn-ghost')">Join</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Hashtags -->
+    <div class="pad" style="padding-top:14px;padding-bottom:0"><span class="section-title">Hashtags</span></div>
+    <div class="pad" style="padding-top:8px;padding-bottom:0">
+      <div class="card" style="padding:4px 0">
+        <div class="list-row" style="cursor:pointer" onclick="App.go('scr-hashtag')">
+          <span style="width:44px;height:44px;border-radius:12px;background:var(--brand-50,#FFF3EA);display:flex;align-items:center;justify-content:center;color:var(--brand);font-size:18px;flex:none"><i class="fa-solid fa-hashtag"></i></span>
+          <div style="flex:1;min-width:0"><div class="h3">#NaijaTech</div><div class="t-sm">1,344 posts</div></div>
+          <i class="fa-solid fa-chevron-right chev"></i>
+        </div>
+      </div>
+    </div>
+
+    <!-- Posts -->
+    <div class="pad" style="padding-top:14px;padding-bottom:0"><span class="section-title">Posts</span></div>
+    <div class="pad stack" style="padding-top:8px">
+      <article class="post" style="cursor:pointer" onclick="App.go('scr-post-detail')">
+        <div style="display:flex;align-items:center;gap:11px;padding:13px 14px">
+          <img class="ava" src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=120&q=80" style="width:38px;height:38px">
+          <div style="flex:1;min-width:0"><div style="font-weight:700;font-size:14px">Rakib Hasan</div><div class="t-sm">2 hrs ago</div></div>
+        </div>
+        <p style="padding:0 14px 12px;font-size:14px;line-height:1.55">Building my first product on EVINIE and the response has been incredible. <span class="text-brand">#NaijaTech #startup</span></p>
+        <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?w=800&q=70" style="width:100%;height:180px;object-fit:cover">
+      </article>
+    </div>
+  </div>
+
+  <!-- NO RESULTS STATE (hidden) -->
+  <div id="searchNone" style="display:none">
+    <div class="pad" style="text-align:center;padding-top:48px">
+      <div style="width:72px;height:72px;border-radius:50%;background:var(--brand-50,#FFF3EA);display:flex;align-items:center;justify-content:center;margin:0 auto 14px;color:var(--brand);font-size:28px">
+        <i class="fa-solid fa-magnifying-glass"></i>
+      </div>
+      <div class="h2" id="searchNoneTitle">No results</div>
+      <div class="t-sm" style="margin-top:6px">Try a different name, hashtag or keyword.</div>
+    </div>
+  </div>
+
+  <div style="height:20px"></div>
+
+  <script>
+    function searchSeed(q){
+      var f=document.getElementById('searchField');
+      if(f){ f.value=q; }
+      searchRun(q);
+    }
+    function searchRun(q){
+      q=(q||'').trim();
+      var empty=document.getElementById('searchEmpty'),
+          res=document.getElementById('searchResults'),
+          none=document.getElementById('searchNone');
+      if(!q){ empty.style.display=''; res.style.display='none'; none.style.display='none'; return; }
+      empty.style.display='none';
+      // "zzz" style gibberish -> no results, otherwise show designed results
+      if(/^[zqxjkw]{4,}$/i.test(q)){
+        res.style.display='none'; none.style.display='';
+        document.getElementById('searchNoneTitle').textContent='No results for "'+q+'"';
+      }else{
+        res.style.display=''; none.style.display='none';
+      }
+    }
+  </script>
 </section>

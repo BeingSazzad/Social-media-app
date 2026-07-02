@@ -1,6 +1,126 @@
 <!-- module: home-extra -->
 
 <!-- ===================================================== -->
+<!-- SCREEN — Saved (posts, videos, products, articles)    -->
+<!-- ===================================================== -->
+<section class="screen" id="scr-saved" data-topbar="back" data-nav="hide" data-title="Saved">
+  <div class="pad" style="padding-bottom:0">
+    <div class="chip-row" id="sv-chips">
+      <span class="chip active" onclick="savedFilter(this,'all')">All</span>
+      <span class="chip" onclick="savedFilter(this,'post')">Posts</span>
+      <span class="chip" onclick="savedFilter(this,'video')">Videos</span>
+      <span class="chip" onclick="savedFilter(this,'product')">Products</span>
+      <span class="chip" onclick="savedFilter(this,'article')">Articles</span>
+    </div>
+  </div>
+
+  <div class="pad stack" id="sv-list" style="padding-top:12px">
+
+    <!-- Post -->
+    <div class="card card-p sv-item" data-type="post" style="display:flex;gap:12px;align-items:center;cursor:pointer" onclick="App.go('scr-post-detail')">
+      <div style="width:56px;height:56px;border-radius:12px;background:var(--brand-50,#FFF3EA);display:flex;align-items:center;justify-content:center;flex:none"><i class="fa-solid fa-newspaper" style="color:var(--brand)"></i></div>
+      <div style="flex:1;min-width:0">
+        <div class="h3" style="font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Rakib Hasan's post</div>
+        <div class="t-sm" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Just shipped a new design system…</div>
+        <div class="t-sm" style="margin-top:2px"><i class="fa-solid fa-bookmark" style="font-size:10px;color:var(--brand)"></i> Post · 2d ago</div>
+      </div>
+      <button class="icon-btn" onclick="event.stopPropagation();savedRemove(this)" aria-label="Remove" style="flex:none"><i class="fa-solid fa-bookmark" style="color:var(--brand)"></i></button>
+    </div>
+
+    <!-- Video -->
+    <div class="card card-p sv-item" data-type="video" style="display:flex;gap:12px;align-items:center;cursor:pointer" onclick="App.go('scr-video-player')">
+      <div style="position:relative;flex:none">
+        <img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=160&q=80" style="width:56px;height:56px;border-radius:12px;object-fit:cover">
+        <span style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:#fff;font-size:18px"><i class="fa-solid fa-circle-play"></i></span>
+      </div>
+      <div style="flex:1;min-width:0">
+        <div class="h3" style="font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Latte art class</div>
+        <div class="t-sm">Aroma Coffee House · 1.2k views</div>
+        <div class="t-sm" style="margin-top:2px"><i class="fa-solid fa-bookmark" style="font-size:10px;color:var(--brand)"></i> Video · 4d ago</div>
+      </div>
+      <button class="icon-btn" onclick="event.stopPropagation();savedRemove(this)" aria-label="Remove" style="flex:none"><i class="fa-solid fa-bookmark" style="color:var(--brand)"></i></button>
+    </div>
+
+    <!-- Product -->
+    <div class="card card-p sv-item" data-type="product" style="display:flex;gap:12px;align-items:center;cursor:pointer" onclick="App.go('scr-product')">
+      <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=160&q=80" style="width:56px;height:56px;border-radius:12px;object-fit:cover;flex:none">
+      <div style="flex:1;min-width:0">
+        <div class="h3" style="font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Nike Air Max 270</div>
+        <div style="font-weight:800;color:var(--brand);font-size:14px">$58</div>
+        <div class="t-sm" style="margin-top:2px"><i class="fa-solid fa-bookmark" style="font-size:10px;color:var(--brand)"></i> Product · 5d ago</div>
+      </div>
+      <button class="icon-btn" onclick="event.stopPropagation();savedRemove(this)" aria-label="Remove" style="flex:none"><i class="fa-solid fa-bookmark" style="color:var(--brand)"></i></button>
+    </div>
+
+    <!-- Article / Blog -->
+    <div class="card card-p sv-item" data-type="article" style="display:flex;gap:12px;align-items:center;cursor:pointer" onclick="App.go('scr-blogs')">
+      <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=160&q=80" style="width:56px;height:56px;border-radius:12px;object-fit:cover;flex:none">
+      <div style="flex:1;min-width:0">
+        <div class="h3" style="font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">How Creators in Lagos Earn $100+</div>
+        <div class="t-sm">EVINIE Blog · 6 min read</div>
+        <div class="t-sm" style="margin-top:2px"><i class="fa-solid fa-bookmark" style="font-size:10px;color:var(--brand)"></i> Article · 1w ago</div>
+      </div>
+      <button class="icon-btn" onclick="event.stopPropagation();savedRemove(this)" aria-label="Remove" style="flex:none"><i class="fa-solid fa-bookmark" style="color:var(--brand)"></i></button>
+    </div>
+
+    <!-- Video 2 -->
+    <div class="card card-p sv-item" data-type="video" style="display:flex;gap:12px;align-items:center;cursor:pointer" onclick="App.go('scr-video-player')">
+      <div style="position:relative;flex:none">
+        <img src="https://images.unsplash.com/photo-1442512595331-e89e73853f31?w=160&q=80" style="width:56px;height:56px;border-radius:12px;object-fit:cover">
+        <span style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:#fff;font-size:18px"><i class="fa-solid fa-circle-play"></i></span>
+      </div>
+      <div style="flex:1;min-width:0">
+        <div class="h3" style="font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Bean to cup tour</div>
+        <div class="t-sm">Aroma Coffee House · 3.4k views</div>
+        <div class="t-sm" style="margin-top:2px"><i class="fa-solid fa-bookmark" style="font-size:10px;color:var(--brand)"></i> Video · 1w ago</div>
+      </div>
+      <button class="icon-btn" onclick="event.stopPropagation();savedRemove(this)" aria-label="Remove" style="flex:none"><i class="fa-solid fa-bookmark" style="color:var(--brand)"></i></button>
+    </div>
+
+    <!-- Product 2 -->
+    <div class="card card-p sv-item" data-type="product" style="display:flex;gap:12px;align-items:center;cursor:pointer" onclick="App.go('scr-product')">
+      <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=160&q=80" style="width:56px;height:56px;border-radius:12px;object-fit:cover;flex:none">
+      <div style="flex:1;min-width:0">
+        <div class="h3" style="font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Sony WH-1000XM4</div>
+        <div style="font-weight:800;color:var(--brand);font-size:14px">$190</div>
+        <div class="t-sm" style="margin-top:2px"><i class="fa-solid fa-bookmark" style="font-size:10px;color:var(--brand)"></i> Product · 2w ago</div>
+      </div>
+      <button class="icon-btn" onclick="event.stopPropagation();savedRemove(this)" aria-label="Remove" style="flex:none"><i class="fa-solid fa-bookmark" style="color:var(--brand)"></i></button>
+    </div>
+
+  </div>
+
+  <!-- Empty state -->
+  <div class="pad" id="sv-empty" style="display:none;text-align:center;padding-top:40px">
+    <div style="width:72px;height:72px;border-radius:50%;background:var(--brand-50,#FFF3EA);display:flex;align-items:center;justify-content:center;margin:0 auto 14px;color:var(--brand);font-size:28px"><i class="fa-regular fa-bookmark"></i></div>
+    <div class="h2">Nothing saved here yet</div>
+    <div class="t-sm" style="margin-top:6px">Tap the bookmark on any post, video or product to save it for later.</div>
+  </div>
+
+  <div style="height:20px"></div>
+
+  <script>
+    function savedFilter(el,which){
+      document.querySelectorAll('#sv-chips .chip').forEach(function(c){ c.classList.remove('active'); });
+      el.classList.add('active');
+      var shown=0;
+      document.querySelectorAll('#sv-list .sv-item').forEach(function(c){
+        var m=(which==='all'||c.dataset.type===which) && !c.dataset.removed;
+        c.style.display=m?'':'none'; if(m) shown++;
+      });
+      var e=document.getElementById('sv-empty'); if(e) e.style.display=shown?'none':'';
+    }
+    function savedRemove(btn){
+      var c=btn.closest('.sv-item'); if(!c) return;
+      c.dataset.removed='1'; c.style.display='none';
+      App.toast('Removed from Saved');
+      var anyVisible=[].some.call(document.querySelectorAll('#sv-list .sv-item'),function(x){ return x.style.display!=='none' && !x.dataset.removed; });
+      var e=document.getElementById('sv-empty'); if(e) e.style.display=anyVisible?'none':'';
+    }
+  </script>
+</section>
+
+<!-- ===================================================== -->
 <!-- SCREEN — Composer (Create Post)                        -->
 <!-- ===================================================== -->
 <section class="screen" id="scr-composer" data-topbar="none" data-nav="hide" style="background:#fff">
@@ -25,18 +145,40 @@
     <div style="display:flex;gap:12px;align-items:flex-start">
       <img class="ava" src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=120&q=80" style="width:44px;height:44px">
       <div style="flex:1;min-width:0">
-        <div style="font-weight:700;font-size:14px">Sohag Rahman</div>
-        <div class="t-sm" style="margin-top:2px">Sharing a public post</div>
+        <div style="font-weight:700;font-size:14px">Sohag Rahman<span id="composerWith" style="font-weight:500;color:var(--ink-2)"></span><span id="composerAt" style="font-weight:500;color:var(--ink-2)"></span></div>
+        <div class="t-sm" id="composerPrivacyByline" style="margin-top:2px">Sharing a public post</div>
       </div>
     </div>
-    <textarea class="input" placeholder="What is on your mind?"
-      oninput="this.style.height='auto';this.style.height=this.scrollHeight+'px'"
-      style="border:none;background:none;box-shadow:none;padding:12px 2px;min-height:110px;font-size:15px;line-height:1.55"></textarea>
 
-    <!-- Media preview -->
-    <div style="position:relative;border-radius:16px;overflow:hidden;border:1px solid var(--line)">
+    <!-- Tagged friends (populated from Tag People) -->
+    <div id="composerTags" style="display:none;flex-wrap:wrap;gap:7px;margin-top:12px"></div>
+
+    <!-- Checked-in location (populated from Check in) -->
+    <div id="composerLoc" style="display:none;margin-top:10px"></div>
+
+    <!-- Text canvas — takes a colored background (Facebook-style) -->
+    <div id="composerCanvas" style="border-radius:14px;transition:background .2s">
+      <textarea id="composerText" class="input" placeholder="What is on your mind?"
+        oninput="this.style.height='auto';this.style.height=this.scrollHeight+'px'"
+        style="border:none;background:none;box-shadow:none;padding:12px 2px;min-height:110px;font-size:15px;line-height:1.55;width:100%;resize:none"></textarea>
+    </div>
+
+    <!-- Background colour picker (like Facebook) -->
+    <div class="chip-row" id="composerBgRow" style="gap:9px;margin-top:10px;padding:3px 2px">
+      <button type="button" data-bg="none" onclick="setPostBg('none')" title="No background"
+        style="width:40px;height:40px;border-radius:11px;flex:none;cursor:pointer;border:1.5px solid var(--line);background:#fff;font-weight:800;color:var(--ink);outline:3px solid var(--ink);outline-offset:1px">Aa</button>
+      <button type="button" data-bg="sunset" onclick="setPostBg('sunset')" style="width:40px;height:40px;border-radius:11px;flex:none;cursor:pointer;border:none;background:linear-gradient(135deg,#FF8A2B,#FF6A01)"></button>
+      <button type="button" data-bg="ocean" onclick="setPostBg('ocean')" style="width:40px;height:40px;border-radius:11px;flex:none;cursor:pointer;border:none;background:linear-gradient(135deg,#38BDF8,#2563EB)"></button>
+      <button type="button" data-bg="grape" onclick="setPostBg('grape')" style="width:40px;height:40px;border-radius:11px;flex:none;cursor:pointer;border:none;background:linear-gradient(135deg,#C084FC,#7C3AED)"></button>
+      <button type="button" data-bg="forest" onclick="setPostBg('forest')" style="width:40px;height:40px;border-radius:11px;flex:none;cursor:pointer;border:none;background:linear-gradient(135deg,#34D399,#15803D)"></button>
+      <button type="button" data-bg="rose" onclick="setPostBg('rose')" style="width:40px;height:40px;border-radius:11px;flex:none;cursor:pointer;border:none;background:linear-gradient(135deg,#FB7185,#E11D48)"></button>
+      <button type="button" data-bg="night" onclick="setPostBg('night')" style="width:40px;height:40px;border-radius:11px;flex:none;cursor:pointer;border:none;background:linear-gradient(135deg,#475569,#0F172A)"></button>
+    </div>
+
+    <!-- Media preview — appears after you add a photo/video -->
+    <div id="composerMedia" style="display:none;position:relative;border-radius:16px;overflow:hidden;border:1px solid var(--line);margin-top:12px">
       <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=800&auto=format&fit=crop&q=70" style="width:100%;height:230px;object-fit:cover">
-      <button onclick="this.parentElement.remove()" aria-label="Remove media"
+      <button onclick="composerRemoveMedia()" aria-label="Remove media"
         style="position:absolute;top:10px;right:10px;width:32px;height:32px;border-radius:50%;background:rgba(12,10,9,.65);color:#fff;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center">
         <i class="fa-solid fa-xmark"></i>
       </button>
@@ -47,8 +189,48 @@
   <div class="pad" style="padding-top:4px;padding-bottom:10px">
     <div class="card" onclick="App.openSheet('sheet-privacy')" style="cursor:pointer">
       <div class="list-row">
-        <i class="fa-solid fa-earth-asia" style="color:var(--brand)"></i>
-        <div style="flex:1"><div class="h3">Who can see this?</div><div class="t-sm">Public · Anyone on EVINIE</div></div>
+        <i id="composerPrivacyIcon" class="fa-solid fa-earth-asia" style="color:var(--brand)"></i>
+        <div style="flex:1"><div class="h3">Who can see this?</div><div class="t-sm" id="composerPrivacyText">Public · Anyone on EVINIE</div></div>
+        <i class="fa-solid fa-chevron-right chev"></i>
+      </div>
+    </div>
+  </div>
+
+  <!-- Add to your post -->
+  <div class="pad" style="padding-top:0;padding-bottom:10px">
+    <div class="section-title" style="margin-bottom:8px">Add to your post</div>
+    <div class="card">
+      <div class="list-row" onclick="composerAddMedia()" style="cursor:pointer">
+        <i class="fa-solid fa-image" style="color:var(--ok);width:22px;text-align:center"></i>
+        <div style="flex:1"><div class="h3">Photo / Video</div></div>
+      </div>
+      <div class="divider"></div>
+      <div class="list-row" onclick="App.go('scr-tag-people')" style="cursor:pointer">
+        <i class="fa-solid fa-user-tag" style="color:#0EA5E9;width:22px;text-align:center"></i>
+        <div style="flex:1"><div class="h3">Tag People</div></div>
+        <i class="fa-solid fa-chevron-right chev"></i>
+      </div>
+      <div class="divider"></div>
+      <div class="list-row" onclick="App.toast('How are you feeling? 😊')" style="cursor:pointer">
+        <i class="fa-solid fa-face-smile" style="color:#F59E0B;width:22px;text-align:center"></i>
+        <div style="flex:1"><div class="h3">Feeling / Activity</div></div>
+        <i class="fa-solid fa-chevron-right chev"></i>
+      </div>
+      <div class="divider"></div>
+      <div class="list-row" onclick="App.go('scr-checkin')" style="cursor:pointer">
+        <i class="fa-solid fa-location-dot" style="color:#EF4444;width:22px;text-align:center"></i>
+        <div style="flex:1"><div class="h3">Check in</div><div class="t-sm">Lagos, Nigeria · Dhaka, Bangladesh</div></div>
+        <i class="fa-solid fa-chevron-right chev"></i>
+      </div>
+      <div class="divider"></div>
+      <div class="list-row" onclick="App.toast('Search GIPHY for a GIF')" style="cursor:pointer">
+        <span style="width:22px;text-align:center;color:#8B5CF6;font-weight:800;font-size:12px">GIF</span>
+        <div style="flex:1"><div class="h3">Add a GIF</div></div>
+      </div>
+      <div class="divider"></div>
+      <div class="list-row" onclick="App.go('scr-poll-composer')" style="cursor:pointer">
+        <i class="fa-solid fa-square-poll-vertical" style="color:var(--brand);width:22px;text-align:center"></i>
+        <div style="flex:1"><div class="h3">Poll</div></div>
         <i class="fa-solid fa-chevron-right chev"></i>
       </div>
     </div>
@@ -56,12 +238,153 @@
 
   <!-- Bottom action bar -->
   <div style="position:sticky;bottom:0;background:#fff;border-top:1px solid var(--line);padding:10px 6px;display:flex;justify-content:space-around;align-items:center">
-    <button class="icon-btn" onclick="App.go('scr-contacts')" aria-label="Tag Friends" style="color:#0EA5E9"><i class="fa-solid fa-user-group"></i></button>
-    <button class="icon-btn" onclick="App.toast('Add location')" aria-label="Location" style="color:#EF4444"><i class="fa-solid fa-location-dot"></i></button>
-    <button class="icon-btn" onclick="App.toast('Open gallery')" aria-label="Photo/Video" style="color:var(--ok)"><i class="fa-solid fa-image"></i></button>
-    <button class="icon-btn" onclick="App.toast('Pick an emoji')" aria-label="Emoji" style="color:#F59E0B"><i class="fa-regular fa-face-smile"></i></button>
-    <button class="icon-btn" onclick="App.toast('Draw on photo')" aria-label="Draw" style="color:#8B5CF6"><i class="fa-solid fa-pen"></i></button>
+    <button class="icon-btn" onclick="App.go('scr-tag-people')" aria-label="Tag People" style="color:#0EA5E9"><i class="fa-solid fa-user-group"></i></button>
+    <button class="icon-btn" onclick="App.go('scr-checkin')" aria-label="Location" style="color:#EF4444"><i class="fa-solid fa-location-dot"></i></button>
+    <button class="icon-btn" onclick="composerAddMedia()" aria-label="Photo/Video" style="color:var(--ok)"><i class="fa-solid fa-image"></i></button>
+    <button class="icon-btn" onclick="openEmoji('composerText')" aria-label="Emoji" style="color:#F59E0B"><i class="fa-regular fa-face-smile"></i></button>
+    <button class="icon-btn" onclick="App.toast('Search GIPHY for a GIF')" aria-label="GIF" style="color:#8B5CF6;font-weight:800;font-size:11px">GIF</button>
     <button class="icon-btn" onclick="App.toast('Record voice note')" aria-label="Voice" style="color:var(--brand)"><i class="fa-solid fa-microphone"></i></button>
+  </div>
+</section>
+
+
+<!-- ===================================================== -->
+<!-- SCREEN — Tag People (pick friends to tag in a post)    -->
+<!-- ===================================================== -->
+<section class="screen" id="scr-tag-people" data-topbar="back" data-nav="hide" data-title="Tag People" style="background:var(--bg)">
+  <!-- Search -->
+  <div style="position:sticky;top:0;background:var(--bg);padding:14px 16px 8px;z-index:5">
+    <div class="input-group">
+      <input class="input" placeholder="Search friends" onkeyup="tagFilter(this.value)">
+      <span class="input-icon" style="pointer-events:none"><i class="fa-solid fa-magnifying-glass"></i></span>
+    </div>
+    <div class="t-sm" style="margin:8px 2px 0">Tap a friend to tag them in your post.</div>
+  </div>
+
+  <div class="pad stack" id="tagList" style="padding-top:4px;padding-bottom:88px">
+    <div class="card card-p tag-row" data-name="Nusrat Jahan" onclick="tagToggle(this)" style="display:flex;align-items:center;gap:11px;cursor:pointer;border:1.5px solid var(--line)">
+      <img class="ava" src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=120&q=80" style="width:44px;height:44px;flex:none">
+      <div style="flex:1;min-width:0"><div style="font-weight:700;font-size:14px">Nusrat Jahan</div><div class="t-sm">8 mutual friends</div></div>
+      <span class="tag-check" style="width:24px;height:24px;border-radius:50%;border:2px solid var(--line);flex:none;display:flex;align-items:center;justify-content:center;color:#fff;font-size:11px"></span>
+    </div>
+    <div class="card card-p tag-row" data-name="Rakib Hasan" onclick="tagToggle(this)" style="display:flex;align-items:center;gap:11px;cursor:pointer;border:1.5px solid var(--line)">
+      <img class="ava" src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=120&q=80" style="width:44px;height:44px;flex:none">
+      <div style="flex:1;min-width:0"><div style="font-weight:700;font-size:14px">Rakib Hasan <i class="fa-solid fa-circle-check verified" style="font-size:11px"></i></div><div class="t-sm">23 mutual friends</div></div>
+      <span class="tag-check" style="width:24px;height:24px;border-radius:50%;border:2px solid var(--line);flex:none;display:flex;align-items:center;justify-content:center;color:#fff;font-size:11px"></span>
+    </div>
+    <div class="card card-p tag-row" data-name="Tanvir Ahmed" onclick="tagToggle(this)" style="display:flex;align-items:center;gap:11px;cursor:pointer;border:1.5px solid var(--line)">
+      <img class="ava" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=120&q=80" style="width:44px;height:44px;flex:none">
+      <div style="flex:1;min-width:0"><div style="font-weight:700;font-size:14px">Tanvir Ahmed</div><div class="t-sm">4 mutual friends</div></div>
+      <span class="tag-check" style="width:24px;height:24px;border-radius:50%;border:2px solid var(--line);flex:none;display:flex;align-items:center;justify-content:center;color:#fff;font-size:11px"></span>
+    </div>
+    <div class="card card-p tag-row" data-name="Mitu Rahman" onclick="tagToggle(this)" style="display:flex;align-items:center;gap:11px;cursor:pointer;border:1.5px solid var(--line)">
+      <img class="ava" src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=120&q=80" style="width:44px;height:44px;flex:none">
+      <div style="flex:1;min-width:0"><div style="font-weight:700;font-size:14px">Mitu Rahman</div><div class="t-sm">12 mutual friends</div></div>
+      <span class="tag-check" style="width:24px;height:24px;border-radius:50%;border:2px solid var(--line);flex:none;display:flex;align-items:center;justify-content:center;color:#fff;font-size:11px"></span>
+    </div>
+    <div class="card card-p tag-row" data-name="Sadia Islam" onclick="tagToggle(this)" style="display:flex;align-items:center;gap:11px;cursor:pointer;border:1.5px solid var(--line)">
+      <img class="ava" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=120&q=80" style="width:44px;height:44px;flex:none">
+      <div style="flex:1;min-width:0"><div style="font-weight:700;font-size:14px">Sadia Islam</div><div class="t-sm">2 mutual friends</div></div>
+      <span class="tag-check" style="width:24px;height:24px;border-radius:50%;border:2px solid var(--line);flex:none;display:flex;align-items:center;justify-content:center;color:#fff;font-size:11px"></span>
+    </div>
+    <div class="card card-p tag-row" data-name="Arif Hossain" onclick="tagToggle(this)" style="display:flex;align-items:center;gap:11px;cursor:pointer;border:1.5px solid var(--line)">
+      <img class="ava" src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=120&q=80" style="width:44px;height:44px;flex:none">
+      <div style="flex:1;min-width:0"><div style="font-weight:700;font-size:14px">Arif Hossain</div><div class="t-sm">5 mutual friends</div></div>
+      <span class="tag-check" style="width:24px;height:24px;border-radius:50%;border:2px solid var(--line);flex:none;display:flex;align-items:center;justify-content:center;color:#fff;font-size:11px"></span>
+    </div>
+    <div class="card card-p tag-row" data-name="Aisha Bello" onclick="tagToggle(this)" style="display:flex;align-items:center;gap:11px;cursor:pointer;border:1.5px solid var(--line)">
+      <img class="ava" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=120&q=80" style="width:44px;height:44px;flex:none">
+      <div style="flex:1;min-width:0"><div style="font-weight:700;font-size:14px">Aisha Bello <i class="fa-solid fa-circle-check verified" style="font-size:11px"></i></div><div class="t-sm">31 mutual friends · Lagos</div></div>
+      <span class="tag-check" style="width:24px;height:24px;border-radius:50%;border:2px solid var(--line);flex:none;display:flex;align-items:center;justify-content:center;color:#fff;font-size:11px"></span>
+    </div>
+    <div class="card card-p tag-row" data-name="Tunde Okafor" onclick="tagToggle(this)" style="display:flex;align-items:center;gap:11px;cursor:pointer;border:1.5px solid var(--line)">
+      <img class="ava" src="https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?w=120&q=80" style="width:44px;height:44px;flex:none">
+      <div style="flex:1;min-width:0"><div style="font-weight:700;font-size:14px">Tunde Okafor</div><div class="t-sm">9 mutual friends · Ibadan</div></div>
+      <span class="tag-check" style="width:24px;height:24px;border-radius:50%;border:2px solid var(--line);flex:none;display:flex;align-items:center;justify-content:center;color:#fff;font-size:11px"></span>
+    </div>
+    <div class="card card-p tag-row" data-name="Amara Nwosu" onclick="tagToggle(this)" style="display:flex;align-items:center;gap:11px;cursor:pointer;border:1.5px solid var(--line)">
+      <img class="ava" src="https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=120&q=80" style="width:44px;height:44px;flex:none">
+      <div style="flex:1;min-width:0"><div style="font-weight:700;font-size:14px">Amara Nwosu</div><div class="t-sm">17 mutual friends · Enugu</div></div>
+      <span class="tag-check" style="width:24px;height:24px;border-radius:50%;border:2px solid var(--line);flex:none;display:flex;align-items:center;justify-content:center;color:#fff;font-size:11px"></span>
+    </div>
+    <div class="card card-p tag-row" data-name="Sumaiya Akhtar" onclick="tagToggle(this)" style="display:flex;align-items:center;gap:11px;cursor:pointer;border:1.5px solid var(--line)">
+      <img class="ava" src="https://images.unsplash.com/photo-1554151228-14d9def656e4?w=120&q=80" style="width:44px;height:44px;flex:none">
+      <div style="flex:1;min-width:0"><div style="font-weight:700;font-size:14px">Sumaiya Akhtar</div><div class="t-sm">6 mutual friends · Dhaka</div></div>
+      <span class="tag-check" style="width:24px;height:24px;border-radius:50%;border:2px solid var(--line);flex:none;display:flex;align-items:center;justify-content:center;color:#fff;font-size:11px"></span>
+    </div>
+    <div id="tagEmpty" class="empty" style="display:none"><i class="fa-regular fa-face-frown"></i><div class="h3" style="color:var(--ink-2)">No friends found</div></div>
+  </div>
+
+  <!-- Sticky confirm bar -->
+  <div style="position:absolute;left:0;right:0;bottom:0;background:#fff;border-top:1px solid var(--line);padding:12px 16px;z-index:6">
+    <button class="btn btn-primary" id="tagDoneBtn" onclick="tagDone()">Done</button>
+  </div>
+</section>
+
+
+<!-- ===================================================== -->
+<!-- SCREEN — Check in (pick a location for a post)         -->
+<!-- ===================================================== -->
+<section class="screen" id="scr-checkin" data-topbar="back" data-nav="hide" data-title="Search for location" style="background:#fff">
+  <!-- Search -->
+  <div style="position:sticky;top:0;background:#fff;padding:14px 16px 10px;z-index:5">
+    <div class="input-group">
+      <input class="input" style="background:var(--bg);border-color:transparent;border-radius:999px" placeholder="Where are you?" onkeyup="checkinFilter(this.value)">
+      <span class="input-icon" style="pointer-events:none"><i class="fa-solid fa-magnifying-glass"></i></span>
+    </div>
+  </div>
+
+  <div id="checkinList" style="padding-bottom:24px">
+
+    <!-- Use current location -->
+    <div class="chk-row" data-name="Use current location" onclick="checkinSelect('Current location')" style="display:flex;align-items:center;gap:14px;padding:10px 16px;cursor:pointer">
+      <span style="width:46px;height:46px;border-radius:50%;background:var(--brand-50,#FFF3EA);display:flex;align-items:center;justify-content:center;flex:none"><i class="fa-solid fa-location-crosshairs" style="color:var(--brand);font-size:17px"></i></span>
+      <div style="flex:1;min-width:0"><div style="font-weight:700;font-size:15px;color:var(--brand)">Use current location</div></div>
+    </div>
+
+    <div class="section-title" style="margin:10px 16px 4px">Suggested</div>
+
+    <div class="chk-row" data-name="Civic Towers Victoria Island" onclick="checkinSelect('Civic Towers')" style="display:flex;align-items:center;gap:14px;padding:10px 16px;cursor:pointer">
+      <span style="width:46px;height:46px;border-radius:50%;background:var(--bg-2);display:flex;align-items:center;justify-content:center;flex:none"><i class="fa-solid fa-location-dot" style="color:var(--ink-3);font-size:17px"></i></span>
+      <div style="flex:1;min-width:0"><div style="font-weight:700;font-size:15px">Civic Towers</div><div class="t-sm" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Ozumba Mbadiwe Ave, Victoria Island, Lagos</div></div>
+    </div>
+
+    <div class="chk-row" data-name="Lagos" onclick="checkinSelect('Lagos')" style="display:flex;align-items:center;gap:14px;padding:10px 16px;cursor:pointer">
+      <span style="width:46px;height:46px;border-radius:50%;background:var(--bg-2);display:flex;align-items:center;justify-content:center;flex:none"><i class="fa-solid fa-location-dot" style="color:var(--ink-3);font-size:17px"></i></span>
+      <div style="flex:1;min-width:0"><div style="font-weight:700;font-size:15px">Lagos</div></div>
+    </div>
+
+    <div class="chk-row" data-name="Balogun Market Lagos Island" onclick="checkinSelect('Balogun Market, Lagos Island')" style="display:flex;align-items:center;gap:14px;padding:10px 16px;cursor:pointer">
+      <span style="width:46px;height:46px;border-radius:50%;background:var(--bg-2);display:flex;align-items:center;justify-content:center;flex:none"><i class="fa-solid fa-location-dot" style="color:var(--ink-3);font-size:17px"></i></span>
+      <div style="flex:1;min-width:0"><div style="font-weight:700;font-size:15px">Balogun Market, Lagos Island</div></div>
+    </div>
+
+    <div class="chk-row" data-name="Cafe Neo Victoria Island Branch" onclick="checkinSelect('Cafe Neo (Victoria Island)')" style="display:flex;align-items:center;gap:14px;padding:10px 16px;cursor:pointer">
+      <span style="width:46px;height:46px;border-radius:50%;background:var(--bg-2);display:flex;align-items:center;justify-content:center;flex:none"><i class="fa-solid fa-mug-saucer" style="color:var(--ink-3);font-size:16px"></i></span>
+      <div style="flex:1;min-width:0"><div style="font-weight:700;font-size:15px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Cafe Neo (Victoria Island)</div><div class="t-sm" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Plot 1234, Adeola Odeku St, Victoria Island, Lagos</div></div>
+    </div>
+
+    <div class="chk-row" data-name="Lekki" onclick="checkinSelect('Lekki')" style="display:flex;align-items:center;gap:14px;padding:10px 16px;cursor:pointer">
+      <span style="width:46px;height:46px;border-radius:50%;background:var(--bg-2);display:flex;align-items:center;justify-content:center;flex:none"><i class="fa-solid fa-location-dot" style="color:var(--ink-3);font-size:17px"></i></span>
+      <div style="flex:1;min-width:0"><div style="font-weight:700;font-size:15px">Lekki</div></div>
+    </div>
+
+    <div class="chk-row" data-name="Eko Hotels and Suites" onclick="checkinSelect('Eko Hotels &amp; Suites')" style="display:flex;align-items:center;gap:14px;padding:10px 16px;cursor:pointer">
+      <span style="width:46px;height:46px;border-radius:50%;background:var(--bg-2);display:flex;align-items:center;justify-content:center;flex:none"><i class="fa-solid fa-location-dot" style="color:var(--ink-3);font-size:17px"></i></span>
+      <div style="flex:1;min-width:0"><div style="font-weight:700;font-size:15px">Eko Hotels &amp; Suites</div><div class="t-sm" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis">1415 Adetokunbo Ademola St, Victoria Island, Lagos</div></div>
+    </div>
+
+    <div class="chk-row" data-name="The Palms Shopping Mall Lekki" onclick="checkinSelect('The Palms Shopping Mall')" style="display:flex;align-items:center;gap:14px;padding:10px 16px;cursor:pointer">
+      <span style="width:46px;height:46px;border-radius:50%;background:var(--bg-2);display:flex;align-items:center;justify-content:center;flex:none"><i class="fa-solid fa-location-dot" style="color:var(--ink-3);font-size:17px"></i></span>
+      <div style="flex:1;min-width:0"><div style="font-weight:700;font-size:15px">The Palms Shopping Mall</div><div class="t-sm" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis">BIS Way, Lekki, Lagos</div></div>
+    </div>
+
+    <div class="chk-row" data-name="Tarkwa Bay Beach" onclick="checkinSelect('Tarkwa Bay Beach')" style="display:flex;align-items:center;gap:14px;padding:10px 16px;cursor:pointer">
+      <span style="width:46px;height:46px;border-radius:50%;background:var(--bg-2);display:flex;align-items:center;justify-content:center;flex:none"><i class="fa-solid fa-location-dot" style="color:var(--ink-3);font-size:17px"></i></span>
+      <div style="flex:1;min-width:0"><div style="font-weight:700;font-size:15px">Tarkwa Bay Beach</div><div class="t-sm" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Lagos, Nigeria</div></div>
+    </div>
+
+    <div id="checkinEmpty" class="empty" style="display:none"><i class="fa-regular fa-face-frown"></i><div class="h3" style="color:var(--ink-2)">No places found</div></div>
   </div>
 </section>
 
@@ -88,8 +411,8 @@
       </div>
     </div>
 
-    <button class="btn btn-soft" style="margin-bottom:6px"
-      onclick="App.toast('Add an option (max 6)')">
+    <button id="pollAddBtn" class="btn btn-soft" style="margin-bottom:6px"
+      onclick="pollAddOption()">
       <i class="fa-solid fa-plus"></i> Add Option
     </button>
     <p class="t-sm" style="margin:4px 0 22px">You can add up to 6 options.</p>
@@ -110,6 +433,45 @@
     <button class="btn btn-primary" onclick="App.toast('Poll published 📊');App.tab('scr-home')">Post Poll</button>
   </div>
 </section>
+
+<script>
+/* ============ Poll composer: add / remove options (max 6) ============ */
+const POLL_MAX = 6;
+function pollAddOption(){
+  const box=document.getElementById('pollOptions');
+  if(!box) return;
+  if(box.children.length>=POLL_MAX){ App.toast('Maximum '+POLL_MAX+' options'); return; }
+  const n=box.children.length+1;
+  const row=document.createElement('div');
+  row.style.position='relative';
+  row.innerHTML=
+    '<input class="input" placeholder="Option '+n+'" style="padding-right:42px">'+
+    '<button onclick="pollRemoveOption(this)" aria-label="Remove option" '+
+      'style="position:absolute;top:50%;right:9px;transform:translateY(-50%);width:27px;height:27px;border-radius:50%;background:var(--bg);border:none;color:var(--ink-2);cursor:pointer;display:flex;align-items:center;justify-content:center">'+
+      '<i class="fa-solid fa-xmark" style="font-size:13px"></i></button>';
+  box.appendChild(row);
+  row.querySelector('input').focus();
+  pollSyncAddBtn();
+}
+function pollRemoveOption(btn){
+  const row=btn.closest('div'); if(row) row.remove();
+  pollRenumber(); pollSyncAddBtn();
+}
+function pollRenumber(){
+  const box=document.getElementById('pollOptions'); if(!box) return;
+  Array.from(box.children).forEach((row,i)=>{
+    const inp=row.querySelector('input'); if(inp) inp.placeholder='Option '+(i+1);
+  });
+}
+function pollSyncAddBtn(){
+  const box=document.getElementById('pollOptions'), b=document.getElementById('pollAddBtn');
+  if(!box||!b) return;
+  const full=box.children.length>=POLL_MAX;
+  b.disabled=full;
+  b.style.opacity=full?'.5':'';
+  b.style.cursor=full?'not-allowed':'';
+}
+</script>
 
 
 <!-- ===================================================== -->
@@ -144,8 +506,8 @@
       <div class="divider"></div>
       <div class="post-actions">
         <button onclick="likeBtn(this)"><i class="fa-regular fa-heart"></i> Like</button>
-        <button onclick="App.toast('Jump to comments')"><i class="fa-regular fa-comment"></i> Comment</button>
-        <button onclick="App.toast('Shared to your timeline')"><i class="fa-solid fa-share"></i> Share</button>
+        <button onclick="var c=document.getElementById('pdCommentInput');if(c){c.scrollIntoView({behavior:'smooth'});c.focus();}"><i class="fa-regular fa-comment"></i> Comment</button>
+        <button onclick="App.go('scr-share-post')"><i class="fa-solid fa-share"></i> Share</button>
       </div>
     </article>
 
@@ -155,94 +517,84 @@
       <button onclick="App.toast('Sorted by Most relevant')" style="background:none;border:none;color:var(--ink-2);font-weight:700;font-size:12px;cursor:pointer">Most relevant <i class="fa-solid fa-chevron-down" style="font-size:9px"></i></button>
     </div>
 
-    <div class="card card-p stack" style="padding:14px">
-      <!-- comment 1 -->
+    <div class="card card-p stack cmt-list" id="pdComments" style="padding:14px">
+      <!-- comment 1 (has a Love reaction) -->
       <div style="display:flex;gap:10px">
         <img class="ava" src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=120&q=80" style="width:36px;height:36px" onclick="App.go('scr-user-profile')">
         <div style="flex:1;min-width:0">
           <div style="background:var(--bg);border-radius:14px;padding:9px 12px">
             <div style="font-weight:700;font-size:13px">Nusrat Jahan</div>
-            <div style="font-size:13px;line-height:1.5;margin-top:1px">This is gorgeous 😍 the spacing feels so calm. What did you use for the type scale?</div>
+            <div class="cmt-text" style="font-size:13px;line-height:1.5;margin-top:1px">This is gorgeous 😍 the spacing feels so calm. What did you use for the type scale?</div>
           </div>
-          <div class="t-sm" style="display:flex;gap:14px;padding:6px 12px 0">
-            <button onclick="App.toast('Liked comment')" style="background:none;border:none;font:inherit;color:var(--brand);font-weight:700;cursor:pointer">Like</button>
-            <button onclick="App.toast('Reply to Nusrat')" style="background:none;border:none;font:inherit;color:var(--ink-2);font-weight:700;cursor:pointer">Reply</button>
+          <div class="t-sm cmt-foot" style="display:flex;gap:14px;align-items:center;padding:6px 12px 0">
+            <button class="cmt-like" onclick="reactOpen(this)" style="background:none;border:none;font:inherit;color:#EF4444;font-weight:700;cursor:pointer">Love</button>
+            <button onclick="cmtReplyTo(this,'Nusrat Jahan')" style="background:none;border:none;font:inherit;color:var(--ink-2);font-weight:700;cursor:pointer">Reply</button>
             <span>3m</span>
+            <span class="cmt-rx" style="display:inline-flex;align-items:center;gap:3px"><span style="font-size:11px">❤️</span> 24</span>
           </div>
         </div>
       </div>
-      <!-- comment 2 -->
+      <!-- comment 2 (Author reply, flat) -->
       <div style="display:flex;gap:10px">
-        <img class="ava" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=120&q=80" style="width:36px;height:36px" onclick="App.go('scr-user-profile')">
+        <img class="ava" src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=120&q=80" style="width:36px;height:36px" onclick="App.go('scr-user-profile')">
         <div style="flex:1;min-width:0">
           <div style="background:var(--bg);border-radius:14px;padding:9px 12px">
-            <div style="font-weight:700;font-size:13px">Tanvir Ahmed</div>
-            <div style="font-size:13px;line-height:1.5;margin-top:1px">Clean work bro 🔥 Are you open-sourcing the components?</div>
+            <div style="font-weight:700;font-size:13px">Rakib Hasan <i class="fa-solid fa-circle-check verified" style="font-size:10px"></i> <span class="t-sm" style="font-weight:600">· Author</span></div>
+            <div class="cmt-text" style="font-size:13px;line-height:1.5;margin-top:1px"><span class="text-brand">@Nusrat</span> thank you 🙏 it's a modular type scale at 1.2 ratio, base 14.</div>
           </div>
-          <div class="t-sm" style="display:flex;gap:14px;padding:6px 12px 0">
-            <button onclick="App.toast('Liked comment')" style="background:none;border:none;font:inherit;color:var(--ink-2);font-weight:700;cursor:pointer">Like</button>
-            <button onclick="App.toast('Reply to Tanvir')" style="background:none;border:none;font:inherit;color:var(--ink-2);font-weight:700;cursor:pointer">Reply</button>
-            <span>12m</span>
+          <div class="t-sm cmt-foot" style="display:flex;gap:14px;align-items:center;padding:6px 12px 0">
+            <button class="cmt-like" onclick="reactOpen(this)" style="background:none;border:none;font:inherit;color:var(--ink-2);font-weight:700;cursor:pointer">Like</button>
+            <button onclick="cmtReplyTo(this,'Rakib Hasan')" style="background:none;border:none;font:inherit;color:var(--ink-2);font-weight:700;cursor:pointer">Reply</button>
+            <span>1m</span>
+            <span class="cmt-rx" style="display:none;align-items:center;gap:3px"></span>
           </div>
         </div>
       </div>
       <!-- comment 3 -->
       <div style="display:flex;gap:10px">
-        <img class="ava" src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=120&q=80" style="width:36px;height:36px" onclick="App.go('scr-user-profile')">
+        <img class="ava" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=120&q=80" style="width:36px;height:36px" onclick="App.go('scr-user-profile')">
         <div style="flex:1;min-width:0">
           <div style="background:var(--bg);border-radius:14px;padding:9px 12px">
-            <div style="font-weight:700;font-size:13px">Mitu Rahman</div>
-            <div style="font-size:13px;line-height:1.5;margin-top:1px">Bookmarking this for our next sprint. The warm amber accent is 👌</div>
+            <div style="font-weight:700;font-size:13px">Tanvir Ahmed</div>
+            <div class="cmt-text" style="font-size:13px;line-height:1.5;margin-top:1px">Clean work bro 🔥 Are you open-sourcing the components?</div>
           </div>
-          <div class="t-sm" style="display:flex;gap:14px;padding:6px 12px 0">
-            <button onclick="App.toast('Liked comment')" style="background:none;border:none;font:inherit;color:var(--ink-2);font-weight:700;cursor:pointer">Like</button>
-            <button onclick="App.toast('Reply to Mitu')" style="background:none;border:none;font:inherit;color:var(--ink-2);font-weight:700;cursor:pointer">Reply</button>
-            <span>28m</span>
+          <div class="t-sm cmt-foot" style="display:flex;gap:14px;align-items:center;padding:6px 12px 0">
+            <button class="cmt-like" onclick="reactOpen(this)" style="background:none;border:none;font:inherit;color:var(--ink-2);font-weight:700;cursor:pointer">Like</button>
+            <button onclick="cmtReplyTo(this,'Tanvir Ahmed')" style="background:none;border:none;font:inherit;color:var(--ink-2);font-weight:700;cursor:pointer">Reply</button>
+            <span>12m</span>
+            <span class="cmt-rx" style="display:none;align-items:center;gap:3px"></span>
           </div>
         </div>
       </div>
       <!-- comment 4 -->
       <div style="display:flex;gap:10px">
-        <img class="ava" src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=120&q=80" style="width:36px;height:36px" onclick="App.go('scr-user-profile')">
+        <img class="ava" src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=120&q=80" style="width:36px;height:36px" onclick="App.go('scr-user-profile')">
         <div style="flex:1;min-width:0">
           <div style="background:var(--bg);border-radius:14px;padding:9px 12px">
-            <div style="font-weight:700;font-size:13px">Arif Hossain</div>
-            <div style="font-size:13px;line-height:1.5;margin-top:1px">Sent you a DM about a freelance collab on this 🙌</div>
+            <div style="font-weight:700;font-size:13px">Mitu Rahman</div>
+            <div class="cmt-text" style="font-size:13px;line-height:1.5;margin-top:1px">Bookmarking this for our next sprint. The warm amber accent is 👌</div>
           </div>
-          <div class="t-sm" style="display:flex;gap:14px;padding:6px 12px 0">
-            <button onclick="App.toast('Liked comment')" style="background:none;border:none;font:inherit;color:var(--ink-2);font-weight:700;cursor:pointer">Like</button>
-            <button onclick="App.toast('Reply to Arif')" style="background:none;border:none;font:inherit;color:var(--ink-2);font-weight:700;cursor:pointer">Reply</button>
-            <span>1h</span>
+          <div class="t-sm cmt-foot" style="display:flex;gap:14px;align-items:center;padding:6px 12px 0">
+            <button class="cmt-like" onclick="reactOpen(this)" style="background:none;border:none;font:inherit;color:var(--ink-2);font-weight:700;cursor:pointer">Like</button>
+            <button onclick="cmtReplyTo(this,'Mitu Rahman')" style="background:none;border:none;font:inherit;color:var(--ink-2);font-weight:700;cursor:pointer">Reply</button>
+            <span>28m</span>
+            <span class="cmt-rx" style="display:none;align-items:center;gap:3px"></span>
           </div>
         </div>
       </div>
       <!-- comment 5 -->
       <div style="display:flex;gap:10px">
-        <img class="ava" src="https://images.unsplash.com/photo-1531123897727-8f129e1688ce?w=120&q=80" style="width:36px;height:36px" onclick="App.go('scr-user-profile')">
+        <img class="ava" src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=120&q=80" style="width:36px;height:36px" onclick="App.go('scr-user-profile')">
         <div style="flex:1;min-width:0">
           <div style="background:var(--bg);border-radius:14px;padding:9px 12px">
-            <div style="font-weight:700;font-size:13px">Chidi Okeke</div>
-            <div style="font-size:13px;line-height:1.5;margin-top:1px">We'd pay ₦25,000 for a license of this kit. Serious 👀</div>
+            <div style="font-weight:700;font-size:13px">Arif Hossain</div>
+            <div class="cmt-text" style="font-size:13px;line-height:1.5;margin-top:1px">Sent you a DM about a freelance collab on this 🙌</div>
           </div>
-          <div class="t-sm" style="display:flex;gap:14px;padding:6px 12px 0">
-            <button onclick="App.toast('Liked comment')" style="background:none;border:none;font:inherit;color:var(--ink-2);font-weight:700;cursor:pointer">Like</button>
-            <button onclick="App.toast('Reply to Chidi')" style="background:none;border:none;font:inherit;color:var(--ink-2);font-weight:700;cursor:pointer">Reply</button>
-            <span>2h</span>
-          </div>
-        </div>
-      </div>
-      <!-- comment 6 -->
-      <div style="display:flex;gap:10px">
-        <img class="ava" src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?w=120&q=80" style="width:36px;height:36px" onclick="App.go('scr-user-profile')">
-        <div style="flex:1;min-width:0">
-          <div style="background:var(--bg);border-radius:14px;padding:9px 12px">
-            <div style="font-weight:700;font-size:13px">Amina Bello</div>
-            <div style="font-size:13px;line-height:1.5;margin-top:1px">Following for the open-source drop 🚀</div>
-          </div>
-          <div class="t-sm" style="display:flex;gap:14px;padding:6px 12px 0">
-            <button onclick="App.toast('Liked comment')" style="background:none;border:none;font:inherit;color:var(--ink-2);font-weight:700;cursor:pointer">Like</button>
-            <button onclick="App.toast('Reply to Amina')" style="background:none;border:none;font:inherit;color:var(--ink-2);font-weight:700;cursor:pointer">Reply</button>
-            <span>3h</span>
+          <div class="t-sm cmt-foot" style="display:flex;gap:14px;align-items:center;padding:6px 12px 0">
+            <button class="cmt-like" onclick="reactOpen(this)" style="background:none;border:none;font:inherit;color:var(--ink-2);font-weight:700;cursor:pointer">Like</button>
+            <button onclick="cmtReplyTo(this,'Arif Hossain')" style="background:none;border:none;font:inherit;color:var(--ink-2);font-weight:700;cursor:pointer">Reply</button>
+            <span>1h</span>
+            <span class="cmt-rx" style="display:none;align-items:center;gap:3px"></span>
           </div>
         </div>
       </div>
@@ -253,15 +605,16 @@
   <div style="position:sticky;bottom:0;background:#fff;border-top:1px solid var(--line);padding:10px 12px;display:flex;align-items:center;gap:10px">
     <img class="ava" src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=120&q=80" style="width:34px;height:34px">
     <div style="flex:1;display:flex;align-items:center;gap:6px;background:var(--bg);border-radius:999px;padding:0 6px 0 14px">
-      <input placeholder="Write a comment..." style="flex:1;border:none;background:none;outline:none;font-family:inherit;font-size:14px;height:42px;color:var(--ink)">
+      <input id="pdCommentInput" class="cmt-input" placeholder="Write a comment..." style="flex:1;border:none;background:none;outline:none;font-family:inherit;font-size:14px;height:42px;color:var(--ink)">
       <button class="icon-btn" onclick="App.toast('Pick a GIF')" aria-label="GIF" style="width:30px;height:30px;font-size:11px;font-weight:800;color:var(--ink-2)">GIF</button>
-      <button class="icon-btn" onclick="App.toast('Pick an emoji')" aria-label="Emoji" style="width:30px;height:30px;font-size:15px;color:#F59E0B"><i class="fa-regular fa-face-smile"></i></button>
+      <button class="icon-btn" onclick="openEmoji('pdCommentInput')" aria-label="Emoji" style="width:30px;height:30px;font-size:15px;color:#F59E0B"><i class="fa-regular fa-face-smile"></i></button>
     </div>
-    <button onclick="App.toast('Comment posted')" aria-label="Send"
+    <button onclick="postCmt(this)" aria-label="Send"
       style="width:42px;height:42px;border-radius:50%;background:var(--brand-grad);color:#fff;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;flex:none">
       <i class="fa-solid fa-paper-plane" style="font-size:15px"></i>
     </button>
   </div>
+
 </section>
 
 
@@ -276,6 +629,10 @@
     <div style="position:absolute;top:0;left:0;right:0;height:160px;background:linear-gradient(180deg,rgba(0,0,0,.55),transparent);pointer-events:none"></div>
     <!-- bottom gradient -->
     <div style="position:absolute;bottom:0;left:0;right:0;height:160px;background:linear-gradient(0deg,rgba(0,0,0,.55),transparent);pointer-events:none"></div>
+
+    <!-- Tap zones: left = previous, right = next -->
+    <button onclick="App.toast('Previous story')" aria-label="Previous" style="position:absolute;top:64px;bottom:84px;left:0;width:32%;background:none;border:none;cursor:pointer;z-index:2"></button>
+    <button onclick="App.toast('Next story')" aria-label="Next" style="position:absolute;top:64px;bottom:84px;right:0;width:38%;background:none;border:none;cursor:pointer;z-index:2"></button>
 
     <!-- Segmented progress bars -->
     <div style="position:absolute;top:14px;left:12px;right:12px;display:flex;gap:5px;z-index:3">
@@ -416,7 +773,7 @@
 
     <div class="field">
       <label class="label">Add details <span class="t-sm" style="font-weight:500">(optional)</span></label>
-      <textarea id="reportDetails" class="input" rows="3" maxlength="300" placeholder="Anything that helps us understand the issue…"></textarea>
+      <textarea class="input rep-details" rows="3" maxlength="300" placeholder="Anything that helps us understand the issue…"></textarea>
     </div>
 
     <div style="height:8px"></div>
@@ -425,6 +782,238 @@
 
   <!-- Primary CTA -->
   <div class="pad" style="position:sticky;bottom:0;background:linear-gradient(to top,var(--bg) 88%,transparent);padding-top:14px">
-    <button id="reportSubmit" class="btn btn-primary" disabled style="opacity:.5" onclick="submitReport()">Submit Report</button>
+    <button class="btn btn-primary rep-submit" disabled style="opacity:.5" onclick="submitReport(this)">Submit Report</button>
   </div>
+</section>
+
+
+<!-- ===================================================== -->
+<!-- SCREEN — Report Conversation (chat)                    -->
+<!-- ===================================================== -->
+<section class="screen" id="scr-report-chat" data-topbar="back" data-nav="hide" data-title="Report Conversation">
+  <div class="pad stack">
+
+    <!-- Conversation being reported -->
+    <div class="card card-p" style="display:flex;align-items:center;gap:11px">
+      <img class="ava" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=120&q=80" style="width:42px;height:42px;flex:none">
+      <div style="flex:1;min-width:0">
+        <div style="font-weight:700;font-size:14px">Kabir Hassan</div>
+        <div class="t-sm">Reporting this conversation</div>
+      </div>
+    </div>
+
+    <p class="t-sm" style="line-height:1.5">Your report is <b>anonymous</b> — Kabir won't be told. We'll review this conversation against our Community Guidelines. You can also block them to stop all messages.</p>
+
+    <div class="section-title">Why are you reporting this?</div>
+
+    <div class="stack" style="gap:10px">
+
+      <button type="button" class="rep-opt" onclick="reportPick(this)" style="width:100%;text-align:left;background:var(--surface);border:1.5px solid var(--line);border-radius:14px;padding:13px 14px;display:flex;align-items:center;gap:12px;cursor:pointer">
+        <span class="rep-radio" style="width:20px;height:20px;border-radius:50%;border:2px solid var(--ink-3);flex:none;display:flex;align-items:center;justify-content:center"></span>
+        <span style="flex:1;min-width:0"><span style="display:block;font-weight:700;font-size:14px;color:var(--ink)">Spam or unwanted messages</span><span class="t-sm">Repetitive, promotional or unwanted texts</span></span>
+      </button>
+
+      <button type="button" class="rep-opt" onclick="reportPick(this)" style="width:100%;text-align:left;background:var(--surface);border:1.5px solid var(--line);border-radius:14px;padding:13px 14px;display:flex;align-items:center;gap:12px;cursor:pointer">
+        <span class="rep-radio" style="width:20px;height:20px;border-radius:50%;border:2px solid var(--ink-3);flex:none;display:flex;align-items:center;justify-content:center"></span>
+        <span style="flex:1;min-width:0"><span style="display:block;font-weight:700;font-size:14px;color:var(--ink)">Scam or fraud</span><span class="t-sm">Fake offers, phishing or payment scams</span></span>
+      </button>
+
+      <button type="button" class="rep-opt" onclick="reportPick(this)" style="width:100%;text-align:left;background:var(--surface);border:1.5px solid var(--line);border-radius:14px;padding:13px 14px;display:flex;align-items:center;gap:12px;cursor:pointer">
+        <span class="rep-radio" style="width:20px;height:20px;border-radius:50%;border:2px solid var(--ink-3);flex:none;display:flex;align-items:center;justify-content:center"></span>
+        <span style="flex:1;min-width:0"><span style="display:block;font-weight:700;font-size:14px;color:var(--ink)">Harassment or bullying</span><span class="t-sm">Threatening, abusive or intimidating you</span></span>
+      </button>
+
+      <button type="button" class="rep-opt" onclick="reportPick(this)" style="width:100%;text-align:left;background:var(--surface);border:1.5px solid var(--line);border-radius:14px;padding:13px 14px;display:flex;align-items:center;gap:12px;cursor:pointer">
+        <span class="rep-radio" style="width:20px;height:20px;border-radius:50%;border:2px solid var(--ink-3);flex:none;display:flex;align-items:center;justify-content:center"></span>
+        <span style="flex:1;min-width:0"><span style="display:block;font-weight:700;font-size:14px;color:var(--ink)">Nudity or sexual content</span><span class="t-sm">Explicit messages or images</span></span>
+      </button>
+
+      <button type="button" class="rep-opt" onclick="reportPick(this)" style="width:100%;text-align:left;background:var(--surface);border:1.5px solid var(--line);border-radius:14px;padding:13px 14px;display:flex;align-items:center;gap:12px;cursor:pointer">
+        <span class="rep-radio" style="width:20px;height:20px;border-radius:50%;border:2px solid var(--ink-3);flex:none;display:flex;align-items:center;justify-content:center"></span>
+        <span style="flex:1;min-width:0"><span style="display:block;font-weight:700;font-size:14px;color:var(--ink)">Hate speech</span><span class="t-sm">Attacks on people or protected groups</span></span>
+      </button>
+
+      <button type="button" class="rep-opt" onclick="reportPick(this)" style="width:100%;text-align:left;background:var(--surface);border:1.5px solid var(--line);border-radius:14px;padding:13px 14px;display:flex;align-items:center;gap:12px;cursor:pointer">
+        <span class="rep-radio" style="width:20px;height:20px;border-radius:50%;border:2px solid var(--ink-3);flex:none;display:flex;align-items:center;justify-content:center"></span>
+        <span style="flex:1;min-width:0"><span style="display:block;font-weight:700;font-size:14px;color:var(--ink)">Impersonation or fake account</span><span class="t-sm">Pretending to be someone else</span></span>
+      </button>
+
+      <button type="button" class="rep-opt" onclick="reportPick(this)" style="width:100%;text-align:left;background:var(--surface);border:1.5px solid var(--line);border-radius:14px;padding:13px 14px;display:flex;align-items:center;gap:12px;cursor:pointer">
+        <span class="rep-radio" style="width:20px;height:20px;border-radius:50%;border:2px solid var(--ink-3);flex:none;display:flex;align-items:center;justify-content:center"></span>
+        <span style="flex:1;min-width:0"><span style="display:block;font-weight:700;font-size:14px;color:var(--ink)">Something else</span><span class="t-sm">Tell us more below</span></span>
+      </button>
+
+    </div>
+
+    <div class="field">
+      <label class="label">Add details <span class="t-sm" style="font-weight:500">(optional)</span></label>
+      <textarea class="input rep-details" rows="3" maxlength="300" placeholder="Anything that helps us understand the issue…"></textarea>
+    </div>
+
+    <!-- Also block -->
+    <label class="list-row" style="padding:0;gap:11px;cursor:pointer;align-items:center">
+      <input type="checkbox" style="accent-color:var(--brand);width:18px;height:18px">
+      <div class="t-sm" style="color:var(--ink-2)">Also block this person so they can't message you</div>
+    </label>
+
+    <div style="height:8px"></div>
+
+  </div>
+
+  <div class="pad" style="position:sticky;bottom:0;background:linear-gradient(to top,var(--bg) 88%,transparent);padding-top:14px">
+    <button class="btn btn-primary rep-submit" disabled style="opacity:.5" onclick="submitReport(this)">Submit Report</button>
+  </div>
+</section>
+
+
+<!-- ===================================================== -->
+<!-- SCREEN — Share a post (Newsfeed / Friend / Group)     -->
+<!-- ===================================================== -->
+<section class="screen" id="scr-share-post" data-topbar="back" data-nav="hide" data-title="Share">
+  <div class="pad stack" style="padding-bottom:90px">
+
+    <!-- Post being shared (preview) -->
+    <div class="card" style="overflow:hidden">
+      <div style="display:flex;align-items:center;gap:11px;padding:12px 14px 8px">
+        <img class="ava" src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=120&q=80" style="width:38px;height:38px">
+        <div style="flex:1;min-width:0"><div style="font-weight:700;font-size:13px">Rakib Hasan <i class="fa-solid fa-circle-check verified" style="font-size:10px"></i></div><div class="t-sm">Original post</div></div>
+      </div>
+      <p style="padding:0 14px 12px;font-size:13px;line-height:1.5;color:var(--ink-2)">Just shipped a new design system for our community app — warm, human and fast. 🚀</p>
+    </div>
+
+    <!-- Destination type -->
+    <div class="field" style="margin-bottom:0">
+      <label class="label">Share to</label>
+      <div class="seg">
+        <button class="active" onclick="shareType(this,'newsfeed')">Newsfeed</button>
+        <button onclick="shareType(this,'friend')">Friend</button>
+        <button onclick="shareType(this,'group')">Group</button>
+      </div>
+    </div>
+
+    <!-- ===== NEWSFEED pane (default) ===== -->
+    <div class="share-pane" data-pane="newsfeed">
+      <div class="card card-p" style="display:flex;align-items:center;gap:11px">
+        <img class="ava" src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=120&q=80" style="width:42px;height:42px">
+        <div style="flex:1;min-width:0">
+          <div class="h3" style="font-size:14px">Sohag Rahman</div>
+          <span class="badge badge-gray" id="shareAud" data-i="0" onclick="shareAudToggle()" style="cursor:pointer"><i class="fa-solid fa-earth-africa"></i> Public</span>
+        </div>
+      </div>
+      <textarea class="input share-msg" rows="3" placeholder="Say something about this…" style="margin-top:12px;resize:none"></textarea>
+    </div>
+
+    <!-- ===== FRIEND pane ===== -->
+    <div class="share-pane" data-pane="friend" style="display:none">
+      <div class="input-group">
+        <input class="input" placeholder="Search friends" onkeyup="shareFilter(this.value)">
+        <span class="input-icon" style="pointer-events:none"><i class="fa-solid fa-magnifying-glass"></i></span>
+      </div>
+      <div class="t-sm" style="margin:10px 2px 6px">Share to a friend's profile</div>
+      <div class="card" id="shareFriendList">
+        <div class="list-row share-pick" data-n="nusrat jahan" style="cursor:pointer" onclick="sharePick(this,'Nusrat Jahan')">
+          <img class="ava" src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=120&q=80" style="width:42px;height:42px">
+          <div style="flex:1;min-width:0"><div class="h3" style="font-size:14px">Nusrat Jahan</div><div class="t-sm">@nusrat_j</div></div>
+          <i class="fa-solid fa-circle-check share-chk" style="color:var(--brand);visibility:hidden"></i>
+        </div>
+        <div class="divider"></div>
+        <div class="list-row share-pick" data-n="rakib hasan" style="cursor:pointer" onclick="sharePick(this,'Rakib Hasan')">
+          <img class="ava" src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=120&q=80" style="width:42px;height:42px">
+          <div style="flex:1;min-width:0"><div class="h3" style="font-size:14px">Rakib Hasan</div><div class="t-sm">@rakib_h</div></div>
+          <i class="fa-solid fa-circle-check share-chk" style="color:var(--brand);visibility:hidden"></i>
+        </div>
+        <div class="divider"></div>
+        <div class="list-row share-pick" data-n="tanvir ahmed" style="cursor:pointer" onclick="sharePick(this,'Tanvir Ahmed')">
+          <img class="ava" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=120&q=80" style="width:42px;height:42px">
+          <div style="flex:1;min-width:0"><div class="h3" style="font-size:14px">Tanvir Ahmed</div><div class="t-sm">@tanvir</div></div>
+          <i class="fa-solid fa-circle-check share-chk" style="color:var(--brand);visibility:hidden"></i>
+        </div>
+        <div class="divider"></div>
+        <div class="list-row share-pick" data-n="aisha bello" style="cursor:pointer" onclick="sharePick(this,'Aisha Bello')">
+          <img class="ava" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=120&q=80" style="width:42px;height:42px">
+          <div style="flex:1;min-width:0"><div class="h3" style="font-size:14px">Aisha Bello</div><div class="t-sm">@aisha_b</div></div>
+          <i class="fa-solid fa-circle-check share-chk" style="color:var(--brand);visibility:hidden"></i>
+        </div>
+      </div>
+      <textarea class="input share-msg" rows="2" placeholder="Add a note (optional)…" style="margin-top:12px;resize:none"></textarea>
+    </div>
+
+    <!-- ===== GROUP pane ===== -->
+    <div class="share-pane" data-pane="group" style="display:none">
+      <div class="t-sm" style="margin:0 2px 6px">Share to one of your groups</div>
+      <div class="card" id="shareGroupList">
+        <div class="list-row share-pick" style="cursor:pointer" onclick="sharePick(this,'Dhaka Tech Hub')">
+          <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=120&q=80" style="width:42px;height:42px;border-radius:12px;object-fit:cover;flex:none">
+          <div style="flex:1;min-width:0"><div class="h3" style="font-size:14px">Dhaka Tech Hub</div><div class="t-sm">12,800 members</div></div>
+          <i class="fa-solid fa-circle-check share-chk" style="color:var(--brand);visibility:hidden"></i>
+        </div>
+        <div class="divider"></div>
+        <div class="list-row share-pick" style="cursor:pointer" onclick="sharePick(this,'Lagos Founders Circle')">
+          <img src="https://images.unsplash.com/photo-1517048676732-d65bc937f952?w=120&q=80" style="width:42px;height:42px;border-radius:12px;object-fit:cover;flex:none">
+          <div style="flex:1;min-width:0"><div class="h3" style="font-size:14px">Lagos Founders Circle</div><div class="t-sm">8,420 members</div></div>
+          <i class="fa-solid fa-circle-check share-chk" style="color:var(--brand);visibility:hidden"></i>
+        </div>
+        <div class="divider"></div>
+        <div class="list-row share-pick" style="cursor:pointer" onclick="sharePick(this,'Naija Foodies')">
+          <img src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=120&q=80" style="width:42px;height:42px;border-radius:12px;object-fit:cover;flex:none">
+          <div style="flex:1;min-width:0"><div class="h3" style="font-size:14px">Naija Foodies</div><div class="t-sm">24,310 members</div></div>
+          <i class="fa-solid fa-circle-check share-chk" style="color:var(--brand);visibility:hidden"></i>
+        </div>
+      </div>
+      <textarea class="input share-msg" rows="2" placeholder="Add a note (optional)…" style="margin-top:12px;resize:none"></textarea>
+    </div>
+
+  </div>
+
+  <!-- Sticky CTA -->
+  <div class="pad" style="position:sticky;bottom:0;background:linear-gradient(to top,var(--bg) 88%,transparent);padding-top:14px;display:flex;gap:10px">
+    <button class="btn btn-soft" style="flex:1" onclick="App.back()">Cancel</button>
+    <button class="btn btn-primary" style="flex:1.4" onclick="shareSubmit()">Share</button>
+  </div>
+
+  <script>
+    var _shareMode='newsfeed', _shareDest='';
+    function shareType(btn,which){
+      btn.parentElement.querySelectorAll('button').forEach(function(b){ b.classList.remove('active'); });
+      btn.classList.add('active');
+      var scr=btn.closest('.screen');
+      scr.querySelectorAll('.share-pane').forEach(function(p){ p.style.display = p.dataset.pane===which ? '' : 'none'; });
+      _shareMode=which; _shareDest='';
+      scr.querySelectorAll('.share-pick').forEach(function(r){ r.style.background=''; var c=r.querySelector('.share-chk'); if(c) c.style.visibility='hidden'; });
+    }
+    function sharePick(row,name){
+      var list=row.closest('.card');
+      list.querySelectorAll('.share-pick').forEach(function(r){ r.style.background=''; var c=r.querySelector('.share-chk'); if(c) c.style.visibility='hidden'; });
+      row.style.background='var(--brand-50,#FFF3EA)';
+      var c=row.querySelector('.share-chk'); if(c) c.style.visibility='visible';
+      _shareDest=name;
+    }
+    function shareFilter(q){
+      q=(q||'').toLowerCase().trim();
+      document.querySelectorAll('#shareFriendList .share-pick').forEach(function(r){
+        var m=(r.dataset.n||'').includes(q); r.style.display=m?'':'none';
+        var d=r.nextElementSibling; if(d&&d.classList.contains('divider')) d.style.display=m?'':'none';
+      });
+    }
+    function shareAudToggle(){
+      var el=document.getElementById('shareAud'); if(!el) return;
+      var s=[['fa-earth-africa','Public'],['fa-user-group','Friends'],['fa-lock','Only me']];
+      var i=(parseInt(el.dataset.i||'0')+1)%3; el.dataset.i=i;
+      el.innerHTML='<i class="fa-solid '+s[i][0]+'"></i> '+s[i][1];
+    }
+    function shareSubmit(){
+      if(_shareMode==='friend' && !_shareDest){ App.toast('Choose a friend to share to'); return; }
+      if(_shareMode==='group'  && !_shareDest){ App.toast('Choose a group to share to'); return; }
+      App.back();
+      if(_shareMode==='newsfeed')   App.toast('Shared to your news feed ✓');
+      else if(_shareMode==='friend') App.toast('Shared to '+_shareDest+"'s profile ✓");
+      else                           App.toast('Shared to '+_shareDest+' ✓');
+      // reset for next time
+      _shareMode='newsfeed'; _shareDest='';
+      document.querySelectorAll('#scr-share-post .share-msg').forEach(function(t){ t.value=''; });
+      var seg=document.querySelector('#scr-share-post .seg'); if(seg){ seg.querySelectorAll('button').forEach(function(b,idx){ b.classList.toggle('active',idx===0); }); }
+      document.querySelectorAll('#scr-share-post .share-pane').forEach(function(p){ p.style.display = p.dataset.pane==='newsfeed'?'':'none'; });
+      document.querySelectorAll('#scr-share-post .share-pick').forEach(function(r){ r.style.background=''; var c=r.querySelector('.share-chk'); if(c) c.style.visibility='hidden'; });
+    }
+  </script>
 </section>

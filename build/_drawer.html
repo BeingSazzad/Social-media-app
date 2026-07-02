@@ -8,8 +8,11 @@
   <img class="ava" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&q=80" style="width:60px;height:60px;border:2.5px solid rgba(255,255,255,.55);margin-bottom:12px">
   <div style="font-weight:800;font-size:18px;line-height:1.2">Sohag Ahmed</div>
   <div style="font-size:13px;opacity:.92;margin-top:2px">@sohag</div>
-  <div style="display:inline-flex;align-items:center;gap:5px;margin-top:11px;background:rgba(255,255,255,.2);padding:5px 11px;border-radius:999px;font-size:12px;font-weight:700">
-    <i class="fa-solid fa-star" style="color:#FDE68A"></i> 4.9
+  <div style="margin-top:11px;display:flex;align-items:center;gap:8px">
+    <span style="display:inline-flex;align-items:center;gap:5px;background:rgba(255,255,255,.2);padding:5px 11px;border-radius:999px;font-size:12px;font-weight:700">
+      <i class="fa-solid fa-star" style="color:#FDE68A"></i> 4.9
+    </span>
+    <span class="badge badge-gray" data-tier-badge onclick="App.closeDrawer();App.go('scr-membership')" style="cursor:pointer"><i class="fa-regular fa-user"></i> EviMember</span>
   </div>
 </div>
 
@@ -36,16 +39,68 @@
       <i class="fa-solid fa-chevron-right chev"></i>
     </div>
     <div class="divider"></div>
-    <div class="list-row" onclick="App.closeDrawer();App.tab('scr-notifications')">
-      <i class="fa-solid fa-bell" style="color:var(--brand);width:20px;text-align:center"></i>
-      <div style="flex:1"><div class="h3">Notifications</div></div>
-      <span class="badge badge-brand">5</span>
+    <div class="list-row" onclick="App.closeDrawer();App.go('scr-saved')">
+      <i class="fa-solid fa-bookmark" style="color:var(--brand);width:20px;text-align:center"></i>
+      <div style="flex:1"><div class="h3">Saved</div><div class="t-sm">Posts, videos &amp; products</div></div>
+      <i class="fa-solid fa-chevron-right chev"></i>
+    </div>
+  </div>
+
+  <!-- EXPLORE -->
+  <div class="section-title" style="margin:18px 4px 8px">Explore</div>
+  <div class="card">
+    <div class="list-row" onclick="App.closeDrawer();App.go('scr-marketplace')">
+      <i class="fa-solid fa-store" style="color:var(--brand);width:20px;text-align:center"></i>
+      <div style="flex:1"><div class="h3">Marketplace</div></div>
+      <i class="fa-solid fa-chevron-right chev"></i>
     </div>
     <div class="divider"></div>
-    <div class="list-row" onclick="App.closeDrawer();App.go('scr-messages')">
-      <i class="fa-solid fa-comment-dots" style="color:var(--brand);width:20px;text-align:center"></i>
-      <div style="flex:1"><div class="h3">Messages</div></div>
-      <span class="badge badge-brand">3</span>
+    <div class="list-row" onclick="App.closeDrawer();App.go('scr-pages')">
+      <i class="fa-solid fa-flag" style="color:var(--brand);width:20px;text-align:center"></i>
+      <div style="flex:1"><div class="h3">Business Pages</div></div>
+      <i class="fa-solid fa-chevron-right chev"></i>
+    </div>
+    <div class="divider"></div>
+    <div class="list-row" onclick="App.closeDrawer();App.go('scr-groups')">
+      <i class="fa-solid fa-users-rectangle" style="color:var(--brand);width:20px;text-align:center"></i>
+      <div style="flex:1"><div class="h3">Groups</div></div>
+      <i class="fa-solid fa-chevron-right chev"></i>
+    </div>
+    <div class="divider"></div>
+    <div class="list-row" onclick="App.closeDrawer();App.go('scr-events')">
+      <i class="fa-solid fa-calendar-day" style="color:var(--brand);width:20px;text-align:center"></i>
+      <div style="flex:1"><div class="h3">Events</div></div>
+      <i class="fa-solid fa-chevron-right chev"></i>
+    </div>
+    <div class="divider"></div>
+    <div class="list-row" onclick="App.closeDrawer();App.go('scr-polls')">
+      <i class="fa-solid fa-square-poll-vertical" style="color:var(--brand);width:20px;text-align:center"></i>
+      <div style="flex:1"><div class="h3">Polls</div></div>
+      <i class="fa-solid fa-chevron-right chev"></i>
+    </div>
+    <div class="divider"></div>
+    <div class="list-row" onclick="App.closeDrawer();App.go('scr-blogs')">
+      <i class="fa-solid fa-feather-pointed" style="color:var(--brand);width:20px;text-align:center"></i>
+      <div style="flex:1"><div class="h3">Blogs</div></div>
+      <i class="fa-solid fa-chevron-right chev"></i>
+    </div>
+    <div class="divider"></div>
+    <div class="list-row" onclick="App.closeDrawer();App.go('scr-videos')">
+      <i class="fa-solid fa-clapperboard" style="color:var(--brand);width:20px;text-align:center"></i>
+      <div style="flex:1"><div class="h3">Videos</div></div>
+      <i class="fa-solid fa-chevron-right chev"></i>
+    </div>
+    <div class="divider"></div>
+    <div class="list-row" onclick="App.closeDrawer();App.go('scr-my-ads')">
+      <i class="fa-solid fa-rectangle-ad" style="color:var(--brand);width:20px;text-align:center"></i>
+      <div style="flex:1"><div class="h3">Ads</div></div>
+      <i class="fa-solid fa-chevron-right chev"></i>
+    </div>
+    <div class="divider"></div>
+    <div class="list-row" onclick="App.closeDrawer();App.go('scr-verify')">
+      <i class="fa-solid fa-circle-check" style="color:var(--brand);width:20px;text-align:center"></i>
+      <div style="flex:1"><div class="h3">Get Verified</div></div>
+      <span class="badge badge-warn">New</span>
     </div>
   </div>
 
@@ -82,7 +137,13 @@
   <div class="card">
     <div class="list-row" onclick="App.closeDrawer();App.go('scr-wallet')">
       <i class="fa-solid fa-wallet" style="color:var(--brand);width:20px;text-align:center"></i>
-      <div style="flex:1"><div class="h3">Wallet</div><div class="t-sm">₦184,500 balance</div></div>
+      <div style="flex:1"><div class="h3">Wallet</div><div class="t-sm">$184.50 balance</div></div>
+      <i class="fa-solid fa-chevron-right chev"></i>
+    </div>
+    <div class="divider"></div>
+    <div class="list-row" onclick="App.closeDrawer();App.go('scr-userpoints')">
+      <i class="fa-solid fa-coins" style="color:var(--brand);width:20px;text-align:center"></i>
+      <div style="flex:1"><div class="h3">UserPoints</div><div class="t-sm" id="drawerPts">750 pts</div></div>
       <i class="fa-solid fa-chevron-right chev"></i>
     </div>
     <div class="divider"></div>
@@ -92,68 +153,32 @@
       <i class="fa-solid fa-chevron-right chev"></i>
     </div>
     <div class="divider"></div>
-    <div class="list-row" onclick="App.closeDrawer();App.go('scr-userpoints')">
-      <i class="fa-solid fa-coins" style="color:var(--brand);width:20px;text-align:center"></i>
-      <div style="flex:1"><div class="h3">UserPoints</div><div class="t-sm">2,340 pts</div></div>
-      <i class="fa-solid fa-chevron-right chev"></i>
-    </div>
-    <div class="divider"></div>
     <div class="list-row" onclick="App.closeDrawer();App.go('scr-egifts')">
       <i class="fa-solid fa-gift" style="color:var(--brand);width:20px;text-align:center"></i>
       <div style="flex:1"><div class="h3">eGifts</div></div>
       <i class="fa-solid fa-chevron-right chev"></i>
     </div>
+    <div class="divider"></div>
+    <div class="list-row" onclick="App.closeDrawer();App.go('scr-membership')">
+      <i class="fa-solid fa-id-badge" style="color:var(--brand);width:20px;text-align:center"></i>
+      <div style="flex:1"><div class="h3">Membership</div></div>
+      <span class="badge badge-gray" data-tier-badge><i class="fa-regular fa-user"></i> EviMember</span>
+    </div>
   </div>
 
-  <!-- EXPLORE -->
-  <div class="section-title" style="margin:18px 4px 8px">Explore</div>
+  <!-- SETTINGS -->
+  <div class="section-title" style="margin:18px 4px 8px">Settings &amp; Support</div>
   <div class="card">
-    <div class="list-row" onclick="App.closeDrawer();App.go('scr-groups')">
-      <i class="fa-solid fa-users-rectangle" style="color:var(--brand);width:20px;text-align:center"></i>
-      <div style="flex:1"><div class="h3">Groups</div></div>
+    <div class="list-row" onclick="App.closeDrawer();App.go('scr-settings')">
+      <i class="fa-solid fa-gear" style="color:var(--brand);width:20px;text-align:center"></i>
+      <div style="flex:1"><div class="h3">Settings</div><div class="t-sm">Account, privacy, security</div></div>
       <i class="fa-solid fa-chevron-right chev"></i>
     </div>
     <div class="divider"></div>
-    <div class="list-row" onclick="App.closeDrawer();App.go('scr-polls')">
-      <i class="fa-solid fa-square-poll-vertical" style="color:var(--brand);width:20px;text-align:center"></i>
-      <div style="flex:1"><div class="h3">Polls</div></div>
+    <div class="list-row" onclick="App.closeDrawer();App.go('scr-help')">
+      <i class="fa-solid fa-circle-question" style="color:var(--brand);width:20px;text-align:center"></i>
+      <div style="flex:1"><div class="h3">Help &amp; Support</div></div>
       <i class="fa-solid fa-chevron-right chev"></i>
-    </div>
-    <div class="divider"></div>
-    <div class="list-row" onclick="App.closeDrawer();App.go('scr-marketplace')">
-      <i class="fa-solid fa-store" style="color:var(--brand);width:20px;text-align:center"></i>
-      <div style="flex:1"><div class="h3">Marketplace</div></div>
-      <i class="fa-solid fa-chevron-right chev"></i>
-    </div>
-    <div class="divider"></div>
-    <div class="list-row" onclick="App.closeDrawer();App.go('scr-blogs')">
-      <i class="fa-solid fa-feather-pointed" style="color:var(--brand);width:20px;text-align:center"></i>
-      <div style="flex:1"><div class="h3">Blogs</div></div>
-      <i class="fa-solid fa-chevron-right chev"></i>
-    </div>
-    <div class="divider"></div>
-    <div class="list-row" onclick="App.closeDrawer();App.go('scr-videos')">
-      <i class="fa-solid fa-clapperboard" style="color:var(--brand);width:20px;text-align:center"></i>
-      <div style="flex:1"><div class="h3">Videos</div></div>
-      <i class="fa-solid fa-chevron-right chev"></i>
-    </div>
-    <div class="divider"></div>
-    <div class="list-row" onclick="App.closeDrawer();App.go('scr-events')">
-      <i class="fa-solid fa-calendar-day" style="color:var(--brand);width:20px;text-align:center"></i>
-      <div style="flex:1"><div class="h3">Events</div></div>
-      <i class="fa-solid fa-chevron-right chev"></i>
-    </div>
-    <div class="divider"></div>
-    <div class="list-row" onclick="App.closeDrawer();App.go('scr-my-ads')">
-      <i class="fa-solid fa-rectangle-ad" style="color:var(--brand);width:20px;text-align:center"></i>
-      <div style="flex:1"><div class="h3">Ads</div></div>
-      <i class="fa-solid fa-chevron-right chev"></i>
-    </div>
-    <div class="divider"></div>
-    <div class="list-row" onclick="App.closeDrawer();App.go('scr-verify')">
-      <i class="fa-solid fa-circle-check" style="color:var(--brand);width:20px;text-align:center"></i>
-      <div style="flex:1"><div class="h3">Get Verified</div></div>
-      <span class="badge badge-warn">New</span>
     </div>
   </div>
 

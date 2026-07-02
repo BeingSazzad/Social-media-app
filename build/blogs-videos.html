@@ -8,80 +8,15 @@
 
     <!-- Segmented filter -->
     <div class="seg">
-      <button class="active" onclick="this.parentElement.querySelectorAll('button').forEach(b=>b.classList.remove('active'));this.classList.add('active')">All Blogs</button>
-      <button onclick="this.parentElement.querySelectorAll('button').forEach(b=>b.classList.remove('active'));this.classList.add('active');App.toast('Showing your blogs')">My Blogs</button>
+      <button class="active" onclick="Blog.filter('all', this)">All Blogs</button>
+      <button onclick="Blog.filter('mine', this)">My Blogs</button>
     </div>
 
     <!-- Add blog CTA -->
     <button class="btn btn-primary" onclick="App.go('scr-add-blog')"><i class="fa-solid fa-pen-nib"></i> Add Blog</button>
 
-    <!-- Blog 1 -->
-    <div class="card" style="overflow:hidden;cursor:pointer" onclick="App.go('scr-blog-reader')">
-      <img src="https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?w=600&q=80" style="width:100%;height:172px;object-fit:cover">
-      <div class="card-p">
-        <span class="badge badge-brand">Design</span>
-        <div class="h3" style="margin:9px 0 6px;line-height:1.3">Building a Warm Design System for African Apps</div>
-        <div style="display:flex;align-items:center;gap:9px">
-          <img class="ava" src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=120&q=80" style="width:30px;height:30px">
-          <div style="flex:1;min-width:0">
-            <div style="font-size:13px;font-weight:700">Rakib Hasan</div>
-            <div class="t-sm">Jun 22, 2026 · 5 min read</div>
-          </div>
-          <i class="fa-solid fa-chevron-right chev"></i>
-        </div>
-      </div>
-    </div>
-
-    <!-- Blog 2 -->
-    <div class="card" style="overflow:hidden;cursor:pointer" onclick="App.go('scr-blog-reader')">
-      <img src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=600&q=80" style="width:100%;height:172px;object-fit:cover">
-      <div class="card-p">
-        <span class="badge badge-brand">Business</span>
-        <div class="h3" style="margin:9px 0 6px;line-height:1.3">How I Grew My Lagos Side Hustle to ₦2M / Month</div>
-        <div style="display:flex;align-items:center;gap:9px">
-          <img class="ava" src="https://images.unsplash.com/photo-1531123897727-8f129e1688ce?w=120&q=80" style="width:30px;height:30px">
-          <div style="flex:1;min-width:0">
-            <div style="font-size:13px;font-weight:700">Chidinma Okafor</div>
-            <div class="t-sm">Jun 19, 2026 · 5 min read</div>
-          </div>
-          <i class="fa-solid fa-chevron-right chev"></i>
-        </div>
-      </div>
-    </div>
-
-    <!-- Blog 3 -->
-    <div class="card" style="overflow:hidden;cursor:pointer" onclick="App.go('scr-blog-reader')">
-      <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=600&q=80" style="width:100%;height:172px;object-fit:cover">
-      <div class="card-p">
-        <span class="badge badge-brand">Tech</span>
-        <div class="h3" style="margin:9px 0 6px;line-height:1.3">10 Productivity Tools Every Dhaka Developer Needs</div>
-        <div style="display:flex;align-items:center;gap:9px">
-          <img class="ava" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=120&q=80" style="width:30px;height:30px">
-          <div style="flex:1;min-width:0">
-            <div style="font-size:13px;font-weight:700">Tanvir Ahmed</div>
-            <div class="t-sm">Jun 15, 2026 · 5 min read</div>
-          </div>
-          <i class="fa-solid fa-chevron-right chev"></i>
-        </div>
-      </div>
-    </div>
-
-    <!-- Blog 4 -->
-    <div class="card" style="overflow:hidden;cursor:pointer" onclick="App.go('scr-blog-reader')">
-      <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=600&q=80" style="width:100%;height:172px;object-fit:cover">
-      <div class="card-p">
-        <span class="badge badge-brand">Food</span>
-        <div class="h3" style="margin:9px 0 6px;line-height:1.3">5 Jollof Rice Secrets From My Grandmother's Kitchen</div>
-        <div style="display:flex;align-items:center;gap:9px">
-          <img class="ava" src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=120&q=80" style="width:30px;height:30px">
-          <div style="flex:1;min-width:0">
-            <div style="font-size:13px;font-weight:700">Nusrat Jahan</div>
-            <div class="t-sm">Jun 11, 2026 · 5 min read</div>
-          </div>
-          <i class="fa-solid fa-chevron-right chev"></i>
-        </div>
-      </div>
-    </div>
+    <!-- Dynamic Blog List Container -->
+    <div id="blogList" class="stack"></div>
 
     <div style="height:8px"></div>
   </div>
@@ -96,7 +31,7 @@
 
     <div class="field">
       <label class="label">Blog Title</label>
-      <input class="input" placeholder="Give your story a headline...">
+      <input id="blog-in-title" class="input" placeholder="Give your story a headline...">
     </div>
 
     <!-- Cover image upload -->
@@ -120,14 +55,14 @@
         <button class="icon-btn" style="width:38px;height:38px;font-size:15px" onclick="App.toast('Insert image')"><i class="fa-solid fa-image"></i></button>
         <button class="icon-btn" style="width:38px;height:38px;font-size:15px" onclick="App.toast('Bullet list')"><i class="fa-solid fa-list-ul"></i></button>
       </div>
-      <textarea class="input" style="border:none;border-radius:0;min-height:180px;box-shadow:none" placeholder="Write your story here..."></textarea>
+      <textarea id="blog-in-content" class="input" style="border:none;border-radius:0;min-height:180px;box-shadow:none" placeholder="Write your story here..."></textarea>
     </div>
 
     <div style="height:16px"></div>
 
     <div class="field">
       <label class="label">Category</label>
-      <select class="input">
+      <select id="blog-in-category" class="input">
         <option>Design</option>
         <option>Business</option>
         <option>Technology</option>
@@ -146,7 +81,8 @@
     </div>
     <input class="input" placeholder="Add a tag and press enter..." style="margin-bottom:22px">
 
-    <button class="btn btn-primary" onclick="App.toast('Blog published! 🎉');App.back()"><i class="fa-solid fa-paper-plane"></i> Publish Blog</button>
+    <button id="blog-publish-btn" class="btn btn-primary" onclick="Blog.publish()"><i class="fa-solid fa-paper-plane"></i> Publish Blog</button>
+    <button class="btn btn-outline" style="margin-top:10px" onclick="App.toast('Saved to drafts');App.back()"><i class="fa-regular fa-floppy-disk"></i> Save as Draft</button>
     <div style="height:8px"></div>
   </div>
 </section>
@@ -156,54 +92,8 @@
 <!-- SCREEN — Blog Reader                                  -->
 <!-- ===================================================== -->
 <section class="screen" id="scr-blog-reader" data-topbar="back" data-nav="hide" data-title="Blog">
-  <!-- Full-width cover -->
-  <img src="https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?w=800&q=80" style="width:100%;height:230px;object-fit:cover">
-
-  <div class="pad">
-    <span class="badge badge-brand">Design</span>
-    <h1 class="h1" style="margin:12px 0 16px;line-height:1.2">Building a Warm Design System for African Apps</h1>
-
-    <!-- Author card -->
-    <div class="card card-p" style="display:flex;align-items:center;gap:12px;margin-bottom:20px">
-      <img class="ava" src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=120&q=80" style="width:46px;height:46px">
-      <div style="flex:1;min-width:0">
-        <div style="font-weight:700;font-size:14px">Rakib Hasan <i class="fa-solid fa-circle-check verified" style="font-size:12px"></i></div>
-        <div class="t-sm">Jun 22, 2026 · 5 min read</div>
-      </div>
-      <button class="btn-sm btn-soft" onclick="App.toast('Following Rakib Hasan')">Follow</button>
-    </div>
-
-    <!-- Body -->
-    <p class="t-body" style="margin-bottom:14px">When we set out to design EVINIE, we wanted a product that felt warm and human rather than cold and corporate. Most social platforms lean on stark blues and harsh whites. We chose a soft amber palette inspired by the golden hour light you see across Lagos and Dhaka rooftops at dusk.</p>
-
-    <p class="t-body" style="margin-bottom:18px">The goal was simple: every screen should feel like an invitation, not an interface. That meant generous spacing, gentle hairlines, and a single accent colour used sparingly.</p>
-
-    <h2 class="h2" style="margin-bottom:10px">Why amber over blue?</h2>
-    <p class="t-body" style="margin-bottom:14px">Amber carries connotations of energy, optimism, and craft. In a region where mobile commerce is exploding, we wanted a colour that signals trust without feeling sterile. Blue is safe — amber is memorable.</p>
-
-    <p class="t-body" style="margin-bottom:18px">We restricted the gradient to primary actions only. Buttons, active states, and brand moments glow amber, while everything else stays calm on a near-white canvas. The result is a hierarchy your thumb can read instantly.</p>
-
-    <h2 class="h2" style="margin-bottom:10px">Thumb-first from day one</h2>
-    <p class="t-body" style="margin-bottom:14px">Every primary action lives within reach of the thumb at the bottom of the screen. Navigation never demands a stretch. This single constraint shaped dozens of layout decisions and made the whole product feel effortless.</p>
-
-    <p class="t-body" style="margin-bottom:8px">Design systems are never finished — they grow with the community that uses them. We can't wait to see what you build on top of EVINIE.</p>
-
-    <div class="divider" style="margin:20px 0"></div>
-
-    <!-- Action row -->
-    <div style="display:flex;align-items:center;justify-content:space-around;text-align:center">
-      <button onclick="likeBtn(this)" style="background:none;border:none;cursor:pointer;color:var(--ink-2);font-size:13px;font-weight:600;display:flex;flex-direction:column;align-items:center;gap:6px;flex:1">
-        <i class="fa-regular fa-heart" style="font-size:20px"></i> 1.2k
-      </button>
-      <button onclick="App.toast('Comments opening...')" style="background:none;border:none;cursor:pointer;color:var(--ink-2);font-size:13px;font-weight:600;display:flex;flex-direction:column;align-items:center;gap:6px;flex:1">
-        <i class="fa-regular fa-comment" style="font-size:20px"></i> 48
-      </button>
-      <button onclick="App.toast('Link copied to clipboard')" style="background:none;border:none;cursor:pointer;color:var(--ink-2);font-size:13px;font-weight:600;display:flex;flex-direction:column;align-items:center;gap:6px;flex:1">
-        <i class="fa-solid fa-share" style="font-size:20px"></i> Share
-      </button>
-    </div>
-    <div style="height:8px"></div>
-  </div>
+  <!-- Dynamic Blog Content Container -->
+  <div id="blogReaderContent"></div>
 </section>
 
 
@@ -236,7 +126,10 @@
       <div class="card-p">
         <div class="h3" style="line-height:1.3">Designing the EVINIE Onboarding — Full Walkthrough</div>
         <p class="t-sm" style="margin:6px 0 8px;color:var(--ink-2);line-height:1.5;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden">A step-by-step breakdown of how we crafted the first-run experience, from splash to home feed, with every micro-interaction explained.</p>
-        <div class="t-sm">2 weeks ago · 12k views</div>
+        <div style="display:flex;align-items:center;gap:8px">
+          <img class="ava" src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=120&q=80" style="width:24px;height:24px">
+          <div class="t-sm">Rakib Studio <i class="fa-solid fa-circle-check verified" style="font-size:10px"></i> · 12k views · 2 weeks ago</div>
+        </div>
       </div>
     </div>
 
@@ -254,7 +147,10 @@
       <div class="card-p">
         <div class="h3" style="line-height:1.3">How I Cook the Perfect Jollof Rice — Lagos Style</div>
         <p class="t-sm" style="margin:6px 0 8px;color:var(--ink-2);line-height:1.5;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden">Grandma's recipe, fully unlocked. We cover the smoky base, the right tomato ratio, and the trick to that signature party flavour.</p>
-        <div class="t-sm">3 weeks ago · 48k views</div>
+        <div style="display:flex;align-items:center;gap:8px">
+          <img class="ava" src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=120&q=80" style="width:24px;height:24px">
+          <div class="t-sm">Nusrat's Kitchen · 48k views · 3 weeks ago</div>
+        </div>
       </div>
     </div>
 
@@ -272,7 +168,10 @@
       <div class="card-p">
         <div class="h3" style="line-height:1.3">React Native Crash Course for Dhaka Developers</div>
         <p class="t-sm" style="margin:6px 0 8px;color:var(--ink-2);line-height:1.5;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden">Build your first mobile app in under 30 minutes. No prior experience needed — just bring your laptop and a cup of cha.</p>
-        <div class="t-sm">1 month ago · 31k views</div>
+        <div style="display:flex;align-items:center;gap:8px">
+          <img class="ava" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=120&q=80" style="width:24px;height:24px">
+          <div class="t-sm">Tanvir Codes <i class="fa-solid fa-circle-check verified" style="font-size:10px"></i> · 31k views · 1 month ago</div>
+        </div>
       </div>
     </div>
 
@@ -288,9 +187,12 @@
         <span style="position:absolute;bottom:8px;right:8px;background:rgba(12,10,9,.78);color:#fff;font-size:11px;font-weight:700;padding:3px 7px;border-radius:6px">6:47</span>
       </div>
       <div class="card-p">
-        <div class="h3" style="line-height:1.3">48 Hours in Cape Town on a ₦300k Budget</div>
-        <p class="t-sm" style="margin:6px 0 8px;color:var(--ink-2);line-height:1.5;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden">Beaches, street food, and Table Mountain without breaking the bank. Here's exactly how we spent every naira.</p>
-        <div class="t-sm">1 month ago · 19k views</div>
+        <div class="h3" style="line-height:1.3">48 Hours in Cape Town on a $300 Budget</div>
+        <p class="t-sm" style="margin:6px 0 8px;color:var(--ink-2);line-height:1.5;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden">Beaches, street food, and Table Mountain without breaking the bank. Here's exactly how we spent every dollars.</p>
+        <div style="display:flex;align-items:center;gap:8px">
+          <img class="ava" src="https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=120&q=80" style="width:24px;height:24px">
+          <div class="t-sm">Chidinma Travels · 19k views · 1 month ago</div>
+        </div>
       </div>
     </div>
 
@@ -346,9 +248,9 @@
       <img class="ava" src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=120&q=80" style="width:46px;height:46px">
       <div style="flex:1;min-width:0">
         <div style="font-weight:700;font-size:14px">Rakib Studio <i class="fa-solid fa-circle-check verified" style="font-size:12px"></i></div>
-        <div class="t-sm">84.2k subscribers</div>
+        <div class="t-sm">84.2k friends</div>
       </div>
-      <button class="btn-sm btn-dark" style="width:auto" onclick="this.textContent='Subscribed';App.toast('Subscribed to Rakib Studio')">Subscribe</button>
+      <button class="btn-sm btn-dark" style="width:auto" onclick="this.textContent='Requested';App.toast('Friend request sent to Rakib Studio')">Add Friend</button>
     </div>
 
     <!-- Action row -->
@@ -356,7 +258,7 @@
       <button onclick="likeBtn(this)" style="background:none;border:none;cursor:pointer;color:var(--ink-2);font-size:12px;font-weight:600;display:flex;flex-direction:column;align-items:center;gap:5px;flex:1">
         <i class="fa-regular fa-heart" style="font-size:19px"></i> 3.4k
       </button>
-      <button onclick="App.toast('Comments below')" style="background:none;border:none;cursor:pointer;color:var(--ink-2);font-size:12px;font-weight:600;display:flex;flex-direction:column;align-items:center;gap:5px;flex:1">
+      <button onclick="var s=this.closest('.screen'),i=s&&s.querySelector('.cmt-input');if(i){i.scrollIntoView({behavior:'smooth',block:'center'});i.focus();}" style="background:none;border:none;cursor:pointer;color:var(--ink-2);font-size:12px;font-weight:600;display:flex;flex-direction:column;align-items:center;gap:5px;flex:1">
         <i class="fa-regular fa-comment" style="font-size:19px"></i> 212
       </button>
       <button onclick="App.toast('Link copied')" style="background:none;border:none;cursor:pointer;color:var(--ink-2);font-size:12px;font-weight:600;display:flex;flex-direction:column;align-items:center;gap:5px;flex:1">
@@ -370,25 +272,86 @@
     <!-- Comments -->
     <div class="section-title" style="margin-bottom:12px">Comments · 212</div>
 
-    <div style="display:flex;gap:10px;margin-bottom:16px">
-      <img class="ava" src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=120&q=80" style="width:36px;height:36px">
-      <div style="flex:1;min-width:0">
-        <div style="font-size:13px;font-weight:700">Nusrat Jahan <span class="t-sm" style="font-weight:500">· 3d</span></div>
-        <p style="font-size:13px;line-height:1.5;margin:3px 0 5px">This walkthrough is gold. The OTP auto-advance detail saved me hours 🙏</p>
-        <div class="t-sm"><span onclick="likeBtn(this)" style="cursor:pointer"><i class="fa-regular fa-heart"></i> 42</span> · <span onclick="App.toast('Replying to Nusrat Jahan')" style="font-weight:700;color:var(--ink-2);cursor:pointer">Reply</span></div>
+    <div class="card card-p stack cmt-list" style="padding:14px;margin-bottom:12px">
+      <div style="display:flex;gap:10px">
+        <img class="ava" src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=120&q=80" style="width:36px;height:36px" onclick="App.go('scr-user-profile')">
+        <div style="flex:1;min-width:0">
+          <div style="background:var(--bg);border-radius:14px;padding:9px 12px">
+            <div style="font-weight:700;font-size:13px">Nusrat Jahan</div>
+            <div class="cmt-text" style="font-size:13px;line-height:1.5;margin-top:1px">This walkthrough is gold. The OTP auto-advance detail saved me hours 🙏</div>
+          </div>
+          <div class="t-sm cmt-foot" style="display:flex;gap:14px;align-items:center;padding:6px 12px 0">
+            <button class="cmt-like" onclick="reactOpen(this)" style="background:none;border:none;font:inherit;color:var(--ink-2);font-weight:700;cursor:pointer">Like</button>
+            <button onclick="cmtReplyTo(this,'Nusrat Jahan')" style="background:none;border:none;font:inherit;color:var(--ink-2);font-weight:700;cursor:pointer">Reply</button>
+            <span>3d</span>
+            <span class="cmt-rx" style="display:inline-flex;align-items:center;gap:3px"><span style="font-size:11px">👍</span> 42</span>
+          </div>
+        </div>
+      </div>
+      <div style="display:flex;gap:10px">
+        <img class="ava" src="https://images.unsplash.com/photo-1531123897727-8f129e1688ce?w=120&q=80" style="width:36px;height:36px" onclick="App.go('scr-user-profile')">
+        <div style="flex:1;min-width:0">
+          <div style="background:var(--bg);border-radius:14px;padding:9px 12px">
+            <div style="font-weight:700;font-size:13px">Chidinma Okafor</div>
+            <div class="cmt-text" style="font-size:13px;line-height:1.5;margin-top:1px">Please do a part 2 on the wallet flow! The amber palette looks incredible.</div>
+          </div>
+          <div class="t-sm cmt-foot" style="display:flex;gap:14px;align-items:center;padding:6px 12px 0">
+            <button class="cmt-like" onclick="reactOpen(this)" style="background:none;border:none;font:inherit;color:var(--ink-2);font-weight:700;cursor:pointer">Like</button>
+            <button onclick="cmtReplyTo(this,'Chidinma Okafor')" style="background:none;border:none;font:inherit;color:var(--ink-2);font-weight:700;cursor:pointer">Reply</button>
+            <span>5d</span>
+            <span class="cmt-rx" style="display:none;align-items:center;gap:3px"></span>
+          </div>
+        </div>
       </div>
     </div>
 
-    <div style="display:flex;gap:10px;margin-bottom:8px">
-      <img class="ava" src="https://images.unsplash.com/photo-1531123897727-8f129e1688ce?w=120&q=80" style="width:36px;height:36px">
-      <div style="flex:1;min-width:0">
-        <div style="font-size:13px;font-weight:700">Chidinma Okafor <span class="t-sm" style="font-weight:500">· 5d</span></div>
-        <p style="font-size:13px;line-height:1.5;margin:3px 0 5px">Please do a part 2 on the wallet flow! The amber palette looks incredible.</p>
-        <div class="t-sm"><span onclick="likeBtn(this)" style="cursor:pointer"><i class="fa-regular fa-heart"></i> 28</span> · <span onclick="App.toast('Replying to Chidinma Okafor')" style="font-weight:700;color:var(--ink-2);cursor:pointer">Reply</span></div>
+    <!-- comment input -->
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px">
+      <img class="ava" src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=120&q=80" style="width:34px;height:34px">
+      <div style="flex:1;display:flex;align-items:center;background:var(--bg);border-radius:999px;padding:0 14px">
+        <input class="cmt-input" placeholder="Write a comment..." style="flex:1;border:none;background:none;outline:none;font-family:inherit;font-size:14px;height:42px;color:var(--ink)">
+      </div>
+      <button onclick="postCmt(this)" aria-label="Send" style="width:42px;height:42px;border-radius:50%;background:var(--brand-grad);color:#fff;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;flex:none"><i class="fa-solid fa-paper-plane" style="font-size:15px"></i></button>
+    </div>
+
+    <div class="divider" style="margin:18px 0"></div>
+
+    <!-- Up next -->
+    <div class="section-title" style="margin-bottom:12px">Up Next</div>
+
+    <div class="card" style="overflow:hidden;cursor:pointer;display:flex;gap:0;margin-bottom:12px" onclick="App.go('scr-video-player')">
+      <div style="position:relative;flex:none">
+        <img src="https://images.unsplash.com/photo-1535016120720-40c646be5580?w=300&q=80" style="width:148px;height:84px;object-fit:cover;display:block">
+        <span style="position:absolute;bottom:5px;right:5px;background:rgba(12,10,9,.78);color:#fff;font-size:10px;font-weight:700;padding:2px 5px;border-radius:5px">14:05</span>
+      </div>
+      <div class="card-p" style="flex:1;min-width:0;padding:8px 10px">
+        <div style="font-size:13px;font-weight:700;line-height:1.3;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden">How I Cook the Perfect Jollof Rice — Lagos Style</div>
+        <div class="t-sm" style="margin-top:4px">Nusrat's Kitchen · 48k views</div>
       </div>
     </div>
 
-    <button class="btn btn-outline" onclick="App.toast('Add a comment')" style="margin-top:8px">Add a comment</button>
+    <div class="card" style="overflow:hidden;cursor:pointer;display:flex;gap:0;margin-bottom:12px" onclick="App.go('scr-video-player')">
+      <div style="position:relative;flex:none">
+        <img src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=300&q=80" style="width:148px;height:84px;object-fit:cover;display:block">
+        <span style="position:absolute;bottom:5px;right:5px;background:rgba(12,10,9,.78);color:#fff;font-size:10px;font-weight:700;padding:2px 5px;border-radius:5px">22:11</span>
+      </div>
+      <div class="card-p" style="flex:1;min-width:0;padding:8px 10px">
+        <div style="font-size:13px;font-weight:700;line-height:1.3;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden">React Native Crash Course for Dhaka Developers</div>
+        <div class="t-sm" style="margin-top:4px">Tanvir Codes · 31k views</div>
+      </div>
+    </div>
+
+    <div class="card" style="overflow:hidden;cursor:pointer;display:flex;gap:0" onclick="App.go('scr-video-player')">
+      <div style="position:relative;flex:none">
+        <img src="https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=300&q=80" style="width:148px;height:84px;object-fit:cover;display:block">
+        <span style="position:absolute;bottom:5px;right:5px;background:rgba(12,10,9,.78);color:#fff;font-size:10px;font-weight:700;padding:2px 5px;border-radius:5px">6:47</span>
+      </div>
+      <div class="card-p" style="flex:1;min-width:0;padding:8px 10px">
+        <div style="font-size:13px;font-weight:700;line-height:1.3;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden">48 Hours in Cape Town on a $300 Budget</div>
+        <div class="t-sm" style="margin-top:4px">Chidinma Travels · 19k views</div>
+      </div>
+    </div>
+
     <div style="height:8px"></div>
   </div>
 </section>
@@ -400,13 +363,33 @@
 <section class="screen" id="scr-add-video" data-topbar="back" data-nav="hide" data-title="Add Video">
   <div class="pad">
 
-    <!-- Video upload box -->
-    <div onclick="App.toast('Opening gallery / camera')" style="border:1.5px dashed var(--line);border-radius:16px;background:#fff;padding:34px 16px;text-align:center;cursor:pointer;margin-bottom:18px">
+    <!-- Video source — two distinct actions: Record OR Upload -->
+    <div id="av-drop" style="border:1.5px dashed var(--line);border-radius:16px;background:#fff;padding:24px 16px;text-align:center;margin-bottom:18px">
       <div style="width:60px;height:60px;border-radius:18px;background:var(--brand-50,#FFF3EA);display:flex;align-items:center;justify-content:center;margin:0 auto 12px">
         <i class="fa-solid fa-video" style="font-size:24px;color:var(--brand)"></i>
       </div>
-      <div class="h3">Upload from gallery or record</div>
-      <p class="t-sm" style="margin-top:3px">MP4 or MOV · Up to 10 minutes</p>
+      <div class="h3">Add your video</div>
+      <p class="t-sm" style="margin-top:3px;margin-bottom:15px">MP4 or MOV · Up to 10 minutes</p>
+      <div style="display:flex;gap:10px">
+        <button class="btn btn-primary btn-sm" style="flex:1" onclick="App.go('scr-record-video')"><i class="fa-solid fa-circle-dot"></i>&nbsp; Record</button>
+        <button class="btn btn-soft btn-sm" style="flex:1" onclick="App.go('scr-pick-video')"><i class="fa-solid fa-photo-film"></i>&nbsp; Upload</button>
+      </div>
+    </div>
+
+    <!-- Selected video preview (revealed after Record/Upload) -->
+    <div id="av-selected" style="display:none;margin-bottom:18px">
+      <div class="card card-p" style="display:flex;align-items:center;gap:12px">
+        <div style="position:relative;width:62px;height:62px;border-radius:12px;overflow:hidden;flex:none;background:#000">
+          <img id="av-thumb" src="https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=200&q=80" style="width:100%;height:100%;object-fit:cover;opacity:.85">
+          <span style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:#fff"><i class="fa-solid fa-play"></i></span>
+          <span id="av-dur" style="position:absolute;bottom:3px;right:4px;background:rgba(0,0,0,.72);color:#fff;font-size:10px;font-weight:700;padding:1px 5px;border-radius:5px">0:42</span>
+        </div>
+        <div style="flex:1;min-width:0">
+          <div class="h3" id="av-name" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis">my-video.mp4</div>
+          <p class="t-sm" id="av-srcnote">Ready to upload</p>
+        </div>
+        <button class="icon-btn" onclick="Vid.clear()" aria-label="Remove video"><i class="fa-solid fa-xmark"></i></button>
+      </div>
     </div>
 
     <div class="field">
@@ -452,7 +435,9 @@
       <button onclick="this.parentElement.querySelectorAll('button').forEach(b=>b.classList.remove('active'));this.classList.add('active')">Only Me</button>
     </div>
 
-    <button class="btn btn-primary" onclick="App.toast('Uploading your video...');document.getElementById('av-progress').style.display='block'"><i class="fa-solid fa-cloud-arrow-up"></i> Upload Video</button>
+    <!-- Stays disabled (grey) until a video is selected; turns brand-orange when ready -->
+    <button id="av-submit" class="btn" disabled style="background:var(--line);color:var(--ink-3);cursor:not-allowed" onclick="App.toast('Uploading your video...');document.getElementById('av-progress').style.display='block'"><i class="fa-solid fa-cloud-arrow-up"></i> Upload Video</button>
+    <p id="av-hint" class="t-sm" style="text-align:center;margin-top:8px">Record or upload a video to continue</p>
 
     <!-- Upload progress (revealed on submit) -->
     <div id="av-progress" style="display:none;margin-top:16px">
@@ -465,3 +450,468 @@
     <div style="height:8px"></div>
   </div>
 </section>
+
+
+<!-- ===================================================== -->
+<!-- SCREEN — Record Video (camera)                        -->
+<!-- ===================================================== -->
+<section class="screen" id="scr-record-video" data-topbar="none" data-nav="hide" style="background:#000">
+  <div style="position:relative;height:100%;width:100%;background:linear-gradient(160deg,#1f2a33 0%,#141a1f 45%,#000 100%);display:flex;flex-direction:column">
+    <!-- Viewfinder hint -->
+    <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;color:rgba(255,255,255,.5);gap:12px">
+      <i class="fa-solid fa-video" style="font-size:46px"></i>
+      <div style="font-size:13px;font-weight:600">Point at your subject and tap record</div>
+    </div>
+
+    <!-- Top bar: close + REC timer + flip -->
+    <div style="position:absolute;top:14px;left:8px;right:8px;display:flex;align-items:center;justify-content:space-between;z-index:3">
+      <button class="icon-btn" onclick="App.back()" style="color:#fff" aria-label="Close"><i class="fa-solid fa-xmark" style="font-size:22px"></i></button>
+      <div id="rv-timer" style="display:none;align-items:center;gap:7px;background:rgba(0,0,0,.45);padding:6px 12px;border-radius:20px">
+        <span style="width:9px;height:9px;border-radius:50%;background:#EF4444"></span>
+        <span id="rv-time" style="color:#fff;font-weight:700;font-size:13px;letter-spacing:.04em">0:00</span>
+      </div>
+      <button onclick="App.toast('Camera flipped')" aria-label="Flip Camera" style="width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,.14);color:#fff;border:none;cursor:pointer;font-size:18px"><i class="fa-solid fa-camera-rotate"></i></button>
+    </div>
+
+    <!-- Bottom controls -->
+    <div style="position:absolute;bottom:104px;left:0;right:0;display:flex;align-items:center;justify-content:space-around;z-index:3;padding:0 28px">
+      <!-- gallery shortcut -->
+      <button onclick="App.go('scr-pick-video')" aria-label="Gallery" style="width:48px;height:48px;border-radius:12px;border:2px solid rgba(255,255,255,.7);overflow:hidden;cursor:pointer;padding:0;background:none">
+        <img src="https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=120&q=80" style="width:100%;height:100%;object-fit:cover">
+      </button>
+      <!-- record / stop button -->
+      <button id="rv-rec" data-rec="0" onclick="Vid.toggleRec(this)" aria-label="Record" style="width:78px;height:78px;border-radius:50%;background:none;border:5px solid #fff;cursor:pointer;display:flex;align-items:center;justify-content:center">
+        <span style="width:60px;height:60px;border-radius:50%;background:#EF4444"></span>
+      </button>
+      <!-- spacer to balance layout -->
+      <span style="width:48px;height:48px"></span>
+    </div>
+
+    <!-- Use video (revealed after stopping) -->
+    <div id="rv-use" style="display:none;position:absolute;bottom:24px;left:16px;right:16px;z-index:3">
+      <button class="btn btn-primary" onclick="Vid.useRecording()"><i class="fa-solid fa-check"></i> Use this video</button>
+    </div>
+  </div>
+</section>
+
+
+<!-- ===================================================== -->
+<!-- SCREEN — Pick Video (gallery)                         -->
+<!-- ===================================================== -->
+<section class="screen" id="scr-pick-video" data-topbar="back" data-nav="hide" data-title="Choose a video">
+  <div class="pad">
+    <p class="t-sm" style="margin:2px 0 14px">Tap a clip from your gallery to upload</p>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px">
+
+      <div onclick="Vid.select('Lagos_sunset.mp4','0:42','https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=300&q=80','From gallery')" style="position:relative;aspect-ratio:1;border-radius:12px;overflow:hidden;cursor:pointer;background:#000">
+        <img src="https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=300&q=80" style="width:100%;height:100%;object-fit:cover">
+        <span style="position:absolute;bottom:4px;right:5px;background:rgba(0,0,0,.72);color:#fff;font-size:10px;font-weight:700;padding:1px 5px;border-radius:5px">0:42</span>
+      </div>
+      <div onclick="Vid.select('cooking_jollof.mp4','1:18','https://images.unsplash.com/photo-1556910103-1c02745aae4d?w=300&q=80','From gallery')" style="position:relative;aspect-ratio:1;border-radius:12px;overflow:hidden;cursor:pointer;background:#000">
+        <img src="https://images.unsplash.com/photo-1556910103-1c02745aae4d?w=300&q=80" style="width:100%;height:100%;object-fit:cover">
+        <span style="position:absolute;bottom:4px;right:5px;background:rgba(0,0,0,.72);color:#fff;font-size:10px;font-weight:700;padding:1px 5px;border-radius:5px">1:18</span>
+      </div>
+      <div onclick="Vid.select('city_walk.mp4','2:05','https://images.unsplash.com/photo-1449824913935-59a10b8d2000?w=300&q=80','From gallery')" style="position:relative;aspect-ratio:1;border-radius:12px;overflow:hidden;cursor:pointer;background:#000">
+        <img src="https://images.unsplash.com/photo-1449824913935-59a10b8d2000?w=300&q=80" style="width:100%;height:100%;object-fit:cover">
+        <span style="position:absolute;bottom:4px;right:5px;background:rgba(0,0,0,.72);color:#fff;font-size:10px;font-weight:700;padding:1px 5px;border-radius:5px">2:05</span>
+      </div>
+      <div onclick="Vid.select('tech_review.mp4','3:40','https://images.unsplash.com/photo-1518770660439-4636190af475?w=300&q=80','From gallery')" style="position:relative;aspect-ratio:1;border-radius:12px;overflow:hidden;cursor:pointer;background:#000">
+        <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=300&q=80" style="width:100%;height:100%;object-fit:cover">
+        <span style="position:absolute;bottom:4px;right:5px;background:rgba(0,0,0,.72);color:#fff;font-size:10px;font-weight:700;padding:1px 5px;border-radius:5px">3:40</span>
+      </div>
+      <div onclick="Vid.select('beach_trip.mp4','0:58','https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=300&q=80','From gallery')" style="position:relative;aspect-ratio:1;border-radius:12px;overflow:hidden;cursor:pointer;background:#000">
+        <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=300&q=80" style="width:100%;height:100%;object-fit:cover">
+        <span style="position:absolute;bottom:4px;right:5px;background:rgba(0,0,0,.72);color:#fff;font-size:10px;font-weight:700;padding:1px 5px;border-radius:5px">0:58</span>
+      </div>
+      <div onclick="Vid.select('market_vlog.mp4','4:12','https://images.unsplash.com/photo-1488459716781-31db52582fe9?w=300&q=80','From gallery')" style="position:relative;aspect-ratio:1;border-radius:12px;overflow:hidden;cursor:pointer;background:#000">
+        <img src="https://images.unsplash.com/photo-1488459716781-31db52582fe9?w=300&q=80" style="width:100%;height:100%;object-fit:cover">
+        <span style="position:absolute;bottom:4px;right:5px;background:rgba(0,0,0,.72);color:#fff;font-size:10px;font-weight:700;padding:1px 5px;border-radius:5px">4:12</span>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<script>
+/* ============ Add-Video: record / upload source ============ */
+const Vid = (function(){
+  const $ = id => document.getElementById(id);
+  let recTimer = null, recSec = 0;
+
+  function fmt(s){ const m=Math.floor(s/60), ss=s%60; return m+':'+(ss<10?'0':'')+ss; }
+
+  // Enable/disable the Upload Video button + colour change.
+  function setSubmit(on){
+    const b=$('av-submit'), h=$('av-hint');
+    if(b){
+      b.disabled = !on;
+      b.className = on ? 'btn btn-primary' : 'btn';
+      b.style.cssText = on ? '' : 'background:var(--line);color:var(--ink-3);cursor:not-allowed';
+    }
+    if(h) h.style.display = on ? 'none' : '';
+  }
+
+  // Mark a video as chosen on the Add Video form, then return to it.
+  function select(name, dur, thumb, note){
+    if($('av-drop'))     $('av-drop').style.display='none';
+    if($('av-selected')) $('av-selected').style.display='';
+    if($('av-name'))     $('av-name').textContent = name;
+    if($('av-dur'))      $('av-dur').textContent = dur;
+    if($('av-thumb') && thumb) $('av-thumb').src = thumb;
+    if($('av-srcnote'))  $('av-srcnote').textContent = note || 'Ready to upload';
+    setSubmit(true);
+    App.go('scr-add-video');
+    App.toast('Video added');
+  }
+
+  function clear(){
+    if($('av-drop'))     $('av-drop').style.display='';
+    if($('av-selected')) $('av-selected').style.display='none';
+    setSubmit(false);
+  }
+
+  // Camera recorder: toggle start/stop with a live timer.
+  function toggleRec(btn){
+    const recording = btn.dataset.rec==='1';
+    if(!recording){
+      btn.dataset.rec='1';
+      btn.innerHTML='<span style="width:26px;height:26px;border-radius:6px;background:#EF4444"></span>';
+      recSec=0; if($('rv-time')) $('rv-time').textContent='0:00';
+      if($('rv-timer')) $('rv-timer').style.display='flex';
+      if($('rv-use'))   $('rv-use').style.display='none';
+      recTimer=setInterval(()=>{ recSec++; if($('rv-time')) $('rv-time').textContent=fmt(recSec); }, 1000);
+    } else {
+      btn.dataset.rec='0';
+      btn.innerHTML='<span style="width:60px;height:60px;border-radius:50%;background:#EF4444"></span>';
+      clearInterval(recTimer); recTimer=null;
+      if($('rv-use')) $('rv-use').style.display='';
+    }
+  }
+
+  function useRecording(){
+    const dur = recSec>0 ? fmt(recSec) : '0:15';
+    if(recTimer){ clearInterval(recTimer); recTimer=null; }
+    select('My recording.mp4', dur, 'https://images.unsplash.com/photo-1492724441997-5dc865305da7?w=200&q=80', 'Recorded just now');
+  }
+
+  return { select, clear, toggleRec, useRecording };
+})();
+
+/* ============ Blog: Dynamic Blog controller ============ */
+const Blog = (function(){
+  const $ = id => document.getElementById(id);
+  
+  const BLOGS = [
+    {
+      id: 'blog-1',
+      title: 'Building a Warm Design System for African Apps',
+      category: 'Design',
+      img: 'https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?w=600&q=80',
+      desc: 'Why we chose a soft amber palette over corporate blue, and how thumb-first layout shaped every screen of EVINIE.',
+      author: 'Rakib Hasan',
+      handle: '@rakib_h',
+      ava: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=120&q=80',
+      date: 'Jun 22, 2026',
+      readTime: '5 min read',
+      likes: '1.2k',
+      comments: '48',
+      content: `<p class="t-body" style="margin-bottom:14px">When we set out to design EVINIE, we wanted a product that felt warm and human rather than cold and corporate. Most social platforms lean on stark blues and harsh whites. We chose a soft amber palette inspired by the golden hour light you see across Lagos and Dhaka rooftops at dusk.</p>
+      <p class="t-body" style="margin-bottom:18px">The goal was simple: every screen should feel like an invitation, not an interface. That meant generous spacing, gentle hairlines, and a single accent colour used sparingly.</p>
+      <h2 class="h2" style="margin-bottom:10px">Why amber over blue?</h2>
+      <p class="t-body" style="margin-bottom:14px">Amber carries connotations of energy, optimism, and craft. In a region where mobile commerce is exploding, we wanted a colour that signals trust without feeling sterile. Blue is safe — amber is memorable.</p>`,
+      tags: ['design', 'ux', 'africa', 'amber']
+    },
+    {
+      id: 'blog-2',
+      title: 'How I Grew My Lagos Side Hustle to $2,000 / Month',
+      category: 'Business',
+      img: 'https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=600&q=80',
+      desc: 'From selling thrift on WhatsApp to a registered brand — the exact playbook, mistakes, and numbers behind the growth.',
+      author: 'Chidinma Okafor',
+      handle: '@chidi_o',
+      ava: 'https://images.unsplash.com/photo-1531123897727-8f129e1688ce?w=120&q=80',
+      date: 'Jun 19, 2026',
+      readTime: '5 min read',
+      likes: '3.7k',
+      comments: '156',
+      content: `<p class="t-body" style="margin-bottom:14px">Thrift clothing is a massive industry in Lagos. I started with just 20,000 Naira and a WhatsApp group of my college friends. Today we process over 500 orders a month.</p>
+      <h2 class="h2" style="margin-bottom:10px">The Secret of Consistency</h2>
+      <p class="t-body" style="margin-bottom:14px">You need to show up every day. I posted pictures at exactly 7 PM every single day. People started looking forward to it. It built trust and predictability.</p>`,
+      tags: ['business', 'hustle', 'lagos']
+    },
+    {
+      id: 'blog-3',
+      title: '10 Productivity Tools Every Dhaka Developer Needs',
+      category: 'Technology',
+      img: 'https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=600&q=80',
+      desc: 'A no-fluff stack for shipping faster — from free editors to the local apps that keep me focused through Dhaka load-shedding.',
+      author: 'Tanvir Ahmed',
+      handle: '@tanvir',
+      ava: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=120&q=80',
+      date: 'Jun 15, 2026',
+      readTime: '5 min read',
+      likes: '892',
+      comments: '73',
+      content: `<p class="t-body" style="margin-bottom:14px">Dhaka is a fast-paced city, but it has its challenges like power outages. Here is my list of tools that help me stay productive no matter what.</p>
+      <h2 class="h2" style="margin-bottom:10px">Local Caching & Offline Docs</h2>
+      <p class="t-body" style="margin-bottom:14px">I use Dash for offline documentation. When the internet goes down, I still have everything I need to write code. It is an absolute life-saver.</p>`,
+      tags: ['tech', 'dhaka', 'developer', 'productivity']
+    },
+    {
+      id: 'blog-4',
+      title: '5 Jollof Rice Secrets From My Grandmother\'s Kitchen',
+      category: 'Food',
+      img: 'https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=600&q=80',
+      desc: 'The smoky party-jollof flavour everyone asks about — and the four steps most people skip. Saved straight from Mama\'s notebook.',
+      author: 'Nusrat Jahan',
+      handle: '@nusrat_j',
+      ava: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=120&q=80',
+      date: 'Jun 11, 2026',
+      readTime: '5 min read',
+      likes: '5.1k',
+      comments: '204',
+      content: `<p class="t-body" style="margin-bottom:14px">Smoky Jollof rice is not just a dish, it is a cultural treasure. The key is in the steam, not the fire. Let the rice steam on low heat with foil covering the pot.</p>
+      <h2 class="h2" style="margin-bottom:10px">The Smoky Base</h2>
+      <p class="t-body" style="margin-bottom:14px">You need to let the bottom burn slightly at the very end. That is where that beautiful, rich woodsmoke flavor comes from.</p>`,
+      tags: ['food', 'cooking', 'jollof', 'nigerian']
+    }
+  ];
+
+  let currentFilter = 'all';
+  let editingBlogId = null;
+
+  function renderList() {
+    const list = $('blogList');
+    if (!list) return;
+
+    let filtered = BLOGS;
+    if (currentFilter === 'mine') {
+      filtered = BLOGS.filter(b => b.handle === '@sohag');
+    }
+
+    if (filtered.length === 0) {
+      list.innerHTML = `
+        <div class="card card-p" style="text-align:center;padding:32px 16px;color:var(--ink-3)">
+          <i class="fa-solid fa-feather-pointed" style="font-size:36px;margin-bottom:12px;color:var(--line)"></i>
+          <div class="h3">No blogs found</div>
+          <p class="t-sm" style="margin-top:6px">Start writing and publishing your stories on EVINIE.</p>
+        </div>
+      `;
+      return;
+    }
+
+    list.innerHTML = filtered.map(b => `
+      <div class="card" style="overflow:hidden;cursor:pointer" onclick="Blog.openReader('${b.id}')">
+        <img src="${b.img}" style="width:100%;height:172px;object-fit:cover">
+        <div class="card-p">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:9px">
+            <span class="badge badge-brand">${b.category}</span>
+            ${b.handle === '@sohag' ? '<span class="badge badge-ok"><i class="fa-solid fa-user"></i> Mine</span>' : ''}
+          </div>
+          <div class="h3" style="margin:0 0 6px;line-height:1.3">${b.title}</div>
+          <p class="t-sm" style="margin-bottom:10px;color:var(--ink-2);line-height:1.5;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden">${b.desc}</p>
+          <div style="display:flex;align-items:center;gap:9px">
+            <img class="ava" src="${b.ava}" style="width:30px;height:30px">
+            <div style="flex:1;min-width:0">
+              <div style="font-size:13px;font-weight:700">${b.author}</div>
+              <div class="t-sm">${b.date} · ${b.readTime}</div>
+            </div>
+          </div>
+          <div class="divider" style="margin:10px 0"></div>
+          <div class="t-sm" style="display:flex;gap:16px">
+            <span><i class="fa-regular fa-heart"></i> ${b.likes}</span>
+            <span><i class="fa-regular fa-comment"></i> ${b.comments}</span>
+          </div>
+        </div>
+      </div>
+    `).join('');
+  }
+
+  function filter(type, btn) {
+    currentFilter = type;
+    if (btn) {
+      btn.parentElement.querySelectorAll('button').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+    }
+    renderList();
+  }
+
+  function openReader(id) {
+    const b = BLOGS.find(x => x.id === id);
+    if (!b) return;
+
+    const content = $('blogReaderContent');
+    if (!content) return;
+
+    const isOwn = b.handle === '@sohag';
+
+    content.innerHTML = `
+      <img src="${b.img}" style="width:100%;height:230px;object-fit:cover">
+      <div class="pad">
+        <span class="badge badge-brand">${b.category}</span>
+        <h1 class="h1" style="margin:12px 0 16px;line-height:1.2">${b.title}</h1>
+
+        <!-- Author card -->
+        <div class="card card-p" style="display:flex;align-items:center;gap:12px;margin-bottom:20px">
+          <img class="ava" src="${b.ava}" style="width:46px;height:46px">
+          <div style="flex:1;min-width:0">
+            <div style="font-weight:700;font-size:14px">${b.author} ${isOwn ? '' : '<i class="fa-solid fa-circle-check verified" style="font-size:12px"></i>'}</div>
+            <div class="t-sm">${b.date} · ${b.readTime}</div>
+          </div>
+          ${isOwn ? `
+            <div style="display:flex;gap:8px">
+              <button class="btn-sm btn-soft" style="padding:0 12px;background:var(--brand-50);color:var(--brand)" onclick="Blog.openEdit('${b.id}')"><i class="fa-solid fa-pen"></i> Edit</button>
+              <button class="btn-sm btn-ghost" style="padding:0 12px;background:#FEE2E2;color:#DC2626" onclick="Blog.deleteBlog('${b.id}')"><i class="fa-solid fa-trash-can"></i> Delete</button>
+            </div>
+          ` : `
+            <button class="btn-sm btn-soft" onclick="this.textContent='Requested';App.toast('Friend request sent to ${b.author}')">Add Friend</button>
+          `}
+        </div>
+
+        <!-- Body -->
+        <div class="t-body" style="line-height:1.6;margin-bottom:18px">${b.content}</div>
+
+        <!-- Tags -->
+        <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:18px">
+          ${b.tags.map(t => `<span class="chip" onclick="App.toast('Showing #${t}')">#${t}</span>`).join('')}
+        </div>
+
+        <div class="divider" style="margin:20px 0"></div>
+
+        <!-- Action row -->
+        <div style="display:flex;align-items:center;justify-content:space-around;text-align:center">
+          <button onclick="likeBtn(this)" style="background:none;border:none;cursor:pointer;color:var(--ink-2);font-size:13px;font-weight:600;display:flex;flex-direction:column;align-items:center;gap:6px;flex:1">
+            <i class="fa-regular fa-heart" style="font-size:20px"></i> ${b.likes}
+          </button>
+          <button onclick="App.toast('Comments opening...')" style="background:none;border:none;cursor:pointer;color:var(--ink-2);font-size:13px;font-weight:600;display:flex;flex-direction:column;align-items:center;gap:6px;flex:1">
+            <i class="fa-regular fa-comment" style="font-size:20px"></i> ${b.comments}
+          </button>
+          <button onclick="App.toast('Link copied to clipboard')" style="background:none;border:none;cursor:pointer;color:var(--ink-2);font-size:13px;font-weight:600;display:flex;flex-direction:column;align-items:center;gap:6px;flex:1">
+            <i class="fa-solid fa-share" style="font-size:20px"></i> Share
+          </button>
+        </div>
+
+        <div class="divider" style="margin:20px 0"></div>
+
+        <!-- Related posts -->
+        <div class="section-title" style="margin-bottom:12px">Related Posts</div>
+        <div id="blogRelatedPosts"></div>
+      </div>
+    `;
+
+    // Render related posts
+    const related = $('blogRelatedPosts');
+    if (related) {
+      const others = BLOGS.filter(x => x.id !== id).slice(0, 2);
+      related.innerHTML = others.map(o => `
+        <div class="card" style="overflow:hidden;cursor:pointer;display:flex;gap:0;margin-bottom:12px" onclick="Blog.openReader('${o.id}')">
+          <img src="${o.img}" style="width:96px;height:96px;object-fit:cover;flex:none">
+          <div class="card-p" style="flex:1;min-width:0">
+            <span class="badge badge-brand">${o.category}</span>
+            <div class="h3" style="margin:6px 0 4px;line-height:1.3;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden">${o.title}</div>
+            <div class="t-sm">${o.author} · ${o.readTime}</div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    App.go('scr-blog-reader');
+  }
+
+  function openEdit(id) {
+    const b = BLOGS.find(x => x.id === id);
+    if (!b) return;
+
+    editingBlogId = id;
+    
+    // Fill inputs
+    $('blog-in-title').value = b.title;
+    $('blog-in-content').value = b.content.replace(/<[^>]*>/g, '').trim();
+    $('blog-in-category').value = b.category;
+    
+    $('blog-publish-btn').innerHTML = '<i class="fa-solid fa-check"></i> Save Changes';
+    
+    const formScreen = $('scr-add-blog');
+    if (formScreen) formScreen.setAttribute('data-title', 'Edit Blog');
+
+    App.go('scr-add-blog');
+  }
+
+  function publish() {
+    const title = $('blog-in-title').value.trim();
+    const contentText = $('blog-in-content').value.trim();
+    const category = $('blog-in-category').value;
+
+    if (!title || !contentText) {
+      App.toast('Please fill in title and content');
+      return;
+    }
+
+    if (editingBlogId) {
+      const b = BLOGS.find(x => x.id === editingBlogId);
+      if (b) {
+        b.title = title;
+        b.content = `<p class="t-body" style="margin-bottom:14px">${contentText}</p>`;
+        b.category = category;
+        b.desc = contentText.substring(0, 120) + '...';
+        App.toast('Blog updated successfully! 🎉');
+      }
+      editingBlogId = null;
+    } else {
+      const newBlog = {
+        id: 'blog-user-' + Date.now(),
+        title: title,
+        category: category,
+        img: 'https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=600&q=80',
+        desc: contentText.substring(0, 120) + '...',
+        author: 'Sohag Ahmed',
+        handle: '@sohag',
+        ava: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=120&q=80',
+        date: 'Today',
+        readTime: '3 min read',
+        likes: '0',
+        comments: '0',
+        content: `<p class="t-body" style="margin-bottom:14px">${contentText}</p>`,
+        tags: [category.toLowerCase(), 'new']
+      };
+      BLOGS.unshift(newBlog);
+      App.toast('Blog published! 🎉');
+    }
+
+    // Reset form
+    $('blog-in-title').value = '';
+    $('blog-in-content').value = '';
+    $('blog-publish-btn').innerHTML = '<i class="fa-solid fa-paper-plane"></i> Publish Blog';
+    
+    const formScreen = $('scr-add-blog');
+    if (formScreen) formScreen.setAttribute('data-title', 'Add Blog');
+
+    renderList();
+    App.back();
+  }
+
+  function deleteBlog(id) {
+    App.confirm(
+      'Delete Blog Post?',
+      'Are you sure you want to permanently delete this blog post? This action cannot be undone.',
+      function() {
+        const idx = BLOGS.findIndex(x => x.id === id);
+        if (idx !== -1) {
+          BLOGS.splice(idx, 1);
+          App.toast('Blog post deleted');
+          renderList();
+          App.back();
+        }
+      },
+      'Delete'
+    );
+  }
+
+  return { BLOGS, renderList, filter, openReader, openEdit, publish, deleteBlog };
+})();
+
+// Auto-run list render on window load
+window.addEventListener('load', () => {
+  Blog.renderList();
+});
+

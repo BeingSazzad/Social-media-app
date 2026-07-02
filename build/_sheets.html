@@ -1,5 +1,101 @@
 <!-- _sheets -->
 
+<!-- ============ CONFIRM (reusable) ============ -->
+<div class="sheet" id="sheet-confirm">
+  <div class="sheet-grip"></div>
+  <div class="pad">
+    <div class="h2" id="cfTitle" style="font-weight:800;font-size:18px;margin-bottom:6px">Are you sure?</div>
+    <p class="t-sm" id="cfMsg" style="margin-bottom:18px;line-height:1.5">This action can't be undone.</p>
+    <div style="display:flex;gap:10px">
+      <button class="btn btn-soft" style="flex:1" onclick="App.closeSheet()">Cancel</button>
+      <button class="btn btn-primary" id="cfYes" style="flex:1" onclick="App.confirmYes()">Confirm</button>
+    </div>
+  </div>
+</div>
+
+<!-- ============ ALBUM OPTIONS ============ -->
+<div class="sheet" id="sheet-album-options">
+  <div class="sheet-grip"></div>
+  <div class="pad">
+    <div class="card">
+      <div class="list-row" onclick="App.closeSheet();albumEdit()">
+        <i class="fa-solid fa-pen" style="color:var(--ink-2);width:20px;text-align:center"></i>
+        <div style="flex:1"><div class="h3">Edit album</div><div class="t-sm">Rename &amp; change privacy</div></div>
+      </div>
+      <div class="divider"></div>
+      <div class="list-row" onclick="App.closeSheet();App.toast('Choose a new cover')">
+        <i class="fa-solid fa-image" style="color:var(--ink-2);width:20px;text-align:center"></i>
+        <div style="flex:1"><div class="h3">Change cover</div></div>
+      </div>
+      <div class="divider"></div>
+      <div class="list-row" onclick="App.closeSheet();App.confirm('Delete album?','The album and its photos will be removed. This can\'t be undone.',function(){albumDelete()},'Delete')">
+        <i class="fa-solid fa-trash" style="color:#DC2626;width:20px;text-align:center"></i>
+        <div style="flex:1"><div class="h3" style="color:#DC2626">Delete album</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ CHAT OPTIONS (1:1) ============ -->
+<div class="sheet" id="sheet-chat-options">
+  <div class="sheet-grip"></div>
+  <div class="pad">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
+      <div class="h2" style="font-weight:800;font-size:18px">Kabir Hassan</div>
+      <button class="icon-btn" onclick="App.closeSheet()"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <div class="card">
+      <div class="list-row" onclick="App.closeSheet();App.toast('Conversation muted')">
+        <i class="fa-solid fa-bell-slash" style="color:var(--ink-2);width:20px;text-align:center"></i>
+        <div style="flex:1"><div class="h3">Mute notifications</div><div class="t-sm">Stop alerts from this chat</div></div>
+      </div>
+      <div class="divider"></div>
+      <div class="list-row" onclick="App.closeSheet();App.confirm('Block Kabir Hassan?','They won\'t be able to message you or see your posts. They won\'t be notified.',function(){App.toast('Kabir Hassan blocked')},'Block')">
+        <i class="fa-solid fa-ban" style="color:#DC2626;width:20px;text-align:center"></i>
+        <div style="flex:1"><div class="h3" style="color:#DC2626">Block</div></div>
+      </div>
+      <div class="divider"></div>
+      <div class="list-row" onclick="App.closeSheet();App.confirm('Delete conversation?','This chat will be removed from your inbox.',function(){App.toast('Conversation deleted');App.go('scr-messages')},'Delete')">
+        <i class="fa-solid fa-trash" style="color:#DC2626;width:20px;text-align:center"></i>
+        <div style="flex:1"><div class="h3" style="color:#DC2626">Delete conversation</div></div>
+      </div>
+      <div class="divider"></div>
+      <div class="list-row" onclick="App.closeSheet();App.go('scr-report-chat')">
+        <i class="fa-solid fa-flag" style="color:var(--ink-2);width:20px;text-align:center"></i>
+        <div style="flex:1"><div class="h3">Report</div><div class="t-sm">Tell us what's wrong</div></div>
+        <i class="fa-solid fa-chevron-right chev"></i>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ GROUP CHAT OPTIONS ============ -->
+<div class="sheet" id="sheet-groupchat-options">
+  <div class="sheet-grip"></div>
+  <div class="pad">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
+      <div class="h2" style="font-weight:800;font-size:18px">Lagos Hustlers 🚀</div>
+      <button class="icon-btn" onclick="App.closeSheet()"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <div class="card">
+      <div class="list-row" onclick="App.closeSheet();App.toast('Group muted')">
+        <i class="fa-solid fa-bell-slash" style="color:var(--ink-2);width:20px;text-align:center"></i>
+        <div style="flex:1"><div class="h3">Mute notifications</div></div>
+      </div>
+      <div class="divider"></div>
+      <div class="list-row" onclick="App.closeSheet();App.go('scr-group-page')">
+        <i class="fa-solid fa-circle-info" style="color:var(--ink-2);width:20px;text-align:center"></i>
+        <div style="flex:1"><div class="h3">Group info</div></div>
+      </div>
+      <div class="divider"></div>
+      <div class="list-row" onclick="App.closeSheet();App.confirm('Leave Lagos Hustlers?','You\'ll stop receiving messages from this group.',function(){App.toast('You left the group');App.go('scr-messages')},'Leave')">
+        <i class="fa-solid fa-right-from-bracket" style="color:#DC2626;width:20px;text-align:center"></i>
+        <div style="flex:1"><div class="h3" style="color:#DC2626">Leave group</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <!-- ============ CREATE ============ -->
 <div class="sheet" id="sheet-create">
   <div class="sheet-grip"></div>
@@ -41,7 +137,7 @@
         <div style="font-weight:700;font-size:14px">Product</div>
       </div>
 
-      <div onclick="App.closeSheet();App.toast('Page builder coming soon')" style="display:flex;align-items:center;gap:12px;padding:14px;background:var(--surface);border:1px solid var(--line);border-radius:16px;cursor:pointer">
+      <div onclick="App.closeSheet();App.go('scr-create-group')" style="display:flex;align-items:center;gap:12px;padding:14px;background:var(--surface);border:1px solid var(--line);border-radius:16px;cursor:pointer">
         <div style="width:42px;height:42px;border-radius:12px;background:rgba(255,106,1,.12);display:flex;align-items:center;justify-content:center"><i class="fa-solid fa-flag" style="color:var(--brand)"></i></div>
         <div style="font-weight:700;font-size:14px">Page</div>
       </div>
@@ -79,31 +175,16 @@
       <button class="icon-btn" onclick="App.closeSheet()"><i class="fa-solid fa-xmark"></i></button>
     </div>
 
-    <div class="card">
+    <!-- Owner actions -->
+    <div class="card" style="margin-bottom:12px">
       <div class="list-row" onclick="App.closeSheet();App.toast('Editing post')">
         <i class="fa-solid fa-pen" style="color:var(--ink-2);width:20px;text-align:center"></i>
         <div style="flex:1"><div class="h3">Edit Post</div></div>
       </div>
       <div class="divider"></div>
-      <div class="list-row" onclick="App.closeSheet();App.toast('Post deleted')">
-        <i class="fa-solid fa-trash-can" style="color:var(--danger);width:20px;text-align:center"></i>
-        <div style="flex:1"><div class="h3" style="color:var(--danger)">Delete Post</div></div>
-      </div>
-      <div class="divider"></div>
-      <div class="list-row" onclick="App.closeSheet();App.go('scr-report-post')">
-        <i class="fa-solid fa-flag" style="color:var(--ink-2);width:20px;text-align:center"></i>
-        <div style="flex:1"><div class="h3">Report Post</div></div>
-        <i class="fa-solid fa-chevron-right chev"></i>
-      </div>
-      <div class="divider"></div>
-      <div class="list-row" onclick="App.closeSheet();App.toast('Post hidden')">
-        <i class="fa-solid fa-eye-slash" style="color:var(--ink-2);width:20px;text-align:center"></i>
-        <div style="flex:1"><div class="h3">Hide Post</div></div>
-      </div>
-      <div class="divider"></div>
-      <div class="list-row" onclick="App.closeSheet();App.toast('Link copied')">
-        <i class="fa-solid fa-link" style="color:var(--ink-2);width:20px;text-align:center"></i>
-        <div style="flex:1"><div class="h3">Copy Link</div></div>
+      <div class="list-row" onclick="App.closeSheet();App.toast('Pinned to your profile 📌')">
+        <i class="fa-solid fa-thumbtack" style="color:var(--ink-2);width:20px;text-align:center"></i>
+        <div style="flex:1"><div class="h3">Pin Post</div><div class="t-sm">Show at the top of your profile</div></div>
       </div>
       <div class="divider"></div>
       <div class="list-row" onclick="App.closeSheet();App.go('scr-boost-post')">
@@ -112,9 +193,53 @@
         <i class="fa-solid fa-chevron-right chev"></i>
       </div>
       <div class="divider"></div>
+      <div class="list-row" onclick="App.closeSheet();App.toast('Post deleted')">
+        <i class="fa-solid fa-trash-can" style="color:var(--danger);width:20px;text-align:center"></i>
+        <div style="flex:1"><div class="h3" style="color:var(--danger)">Delete Post</div></div>
+      </div>
+    </div>
+
+    <!-- General actions -->
+    <div class="card">
+      <div class="list-row" onclick="App.closeSheet();App.toast('Saved to your collection 🔖')">
+        <i class="fa-regular fa-bookmark" style="color:var(--ink-2);width:20px;text-align:center"></i>
+        <div style="flex:1"><div class="h3">Save Post</div><div class="t-sm">Add to your saved items</div></div>
+      </div>
+      <div class="divider"></div>
+      <div class="list-row" onclick="App.closeSheet();App.toast('Notifications on for this post 🔔')">
+        <i class="fa-regular fa-bell" style="color:var(--ink-2);width:20px;text-align:center"></i>
+        <div style="flex:1"><div class="h3">Turn on Notifications</div><div class="t-sm">Get alerts for new activity</div></div>
+      </div>
+      <div class="divider"></div>
+      <div class="list-row" onclick="App.closeSheet();App.toast('Link copied')">
+        <i class="fa-solid fa-link" style="color:var(--ink-2);width:20px;text-align:center"></i>
+        <div style="flex:1"><div class="h3">Copy Link</div></div>
+      </div>
+      <div class="divider"></div>
       <div class="list-row" onclick="App.closeSheet();App.toast('Share sheet opened')">
         <i class="fa-solid fa-share-nodes" style="color:var(--ink-2);width:20px;text-align:center"></i>
         <div style="flex:1"><div class="h3">Share to...</div></div>
+      </div>
+      <div class="divider"></div>
+      <div class="list-row" onclick="App.closeSheet();App.toast('Post hidden — you\'ll see less like this')">
+        <i class="fa-solid fa-eye-slash" style="color:var(--ink-2);width:20px;text-align:center"></i>
+        <div style="flex:1"><div class="h3">Hide Post</div><div class="t-sm">See fewer posts like this</div></div>
+      </div>
+      <div class="divider"></div>
+      <div class="list-row" onclick="App.closeSheet();App.toast('Unfriended Rakib Hasan')">
+        <i class="fa-solid fa-user-minus" style="color:var(--ink-2);width:20px;text-align:center"></i>
+        <div style="flex:1"><div class="h3">Unfriend Rakib Hasan</div><div class="t-sm">Remove from your friends</div></div>
+      </div>
+      <div class="divider"></div>
+      <div class="list-row" onclick="App.closeSheet();App.go('scr-report-post')">
+        <i class="fa-solid fa-flag" style="color:var(--ink-2);width:20px;text-align:center"></i>
+        <div style="flex:1"><div class="h3">Report Post</div></div>
+        <i class="fa-solid fa-chevron-right chev"></i>
+      </div>
+      <div class="divider"></div>
+      <div class="list-row" onclick="App.closeSheet();App.toast('Rakib Hasan blocked')">
+        <i class="fa-solid fa-ban" style="color:var(--danger);width:20px;text-align:center"></i>
+        <div style="flex:1"><div class="h3" style="color:var(--danger)">Block Rakib Hasan</div><div class="t-sm">They won't be able to find or message you</div></div>
       </div>
     </div>
   </div>
@@ -130,19 +255,31 @@
     </div>
 
     <div class="stack">
-      <label style="display:flex;align-items:center;gap:13px;padding:14px;background:var(--surface);border:2px solid var(--brand);border-radius:16px;cursor:pointer">
+      <label data-priv="public" onclick="setPostPrivacy('public')" style="display:flex;align-items:center;gap:13px;padding:14px;background:var(--surface);border:2px solid var(--brand);border-radius:16px;cursor:pointer">
         <span style="font-size:20px">🌐</span>
         <div style="flex:1"><div class="h3">Public</div><div class="t-sm">Anyone on EVINIE</div></div>
         <input type="radio" name="privacy" checked style="accent-color:var(--brand);width:20px;height:20px">
       </label>
 
-      <label style="display:flex;align-items:center;gap:13px;padding:14px;background:var(--surface);border:1px solid var(--line);border-radius:16px;cursor:pointer">
+      <label data-priv="friends" onclick="setPostPrivacy('friends')" style="display:flex;align-items:center;gap:13px;padding:14px;background:var(--surface);border:1px solid var(--line);border-radius:16px;cursor:pointer">
         <span style="font-size:20px">👥</span>
         <div style="flex:1"><div class="h3">Friends</div><div class="t-sm">Your friends only</div></div>
         <input type="radio" name="privacy" style="accent-color:var(--brand);width:20px;height:20px">
       </label>
 
-      <label style="display:flex;align-items:center;gap:13px;padding:14px;background:var(--surface);border:1px solid var(--line);border-radius:16px;cursor:pointer">
+      <label data-priv="except" onclick="setPostPrivacy('except')" style="display:flex;align-items:center;gap:13px;padding:14px;background:var(--surface);border:1px solid var(--line);border-radius:16px;cursor:pointer">
+        <span style="font-size:20px">🚫</span>
+        <div style="flex:1"><div class="h3">Friends except…</div><div class="t-sm">Don't show to some friends</div></div>
+        <input type="radio" name="privacy" style="accent-color:var(--brand);width:20px;height:20px">
+      </label>
+
+      <label data-priv="specific" onclick="setPostPrivacy('specific')" style="display:flex;align-items:center;gap:13px;padding:14px;background:var(--surface);border:1px solid var(--line);border-radius:16px;cursor:pointer">
+        <span style="font-size:20px">✅</span>
+        <div style="flex:1"><div class="h3">Specific friends</div><div class="t-sm">Only show to some friends</div></div>
+        <input type="radio" name="privacy" style="accent-color:var(--brand);width:20px;height:20px">
+      </label>
+
+      <label data-priv="onlyme" onclick="setPostPrivacy('onlyme')" style="display:flex;align-items:center;gap:13px;padding:14px;background:var(--surface);border:1px solid var(--line);border-radius:16px;cursor:pointer">
         <span style="font-size:20px">🔒</span>
         <div style="flex:1"><div class="h3">Only Me</div><div class="t-sm">Private to you</div></div>
         <input type="radio" name="privacy" style="accent-color:var(--brand);width:20px;height:20px">
@@ -150,5 +287,48 @@
     </div>
 
     <button class="btn btn-primary" style="margin-top:18px" onclick="App.closeSheet()">Done</button>
+  </div>
+</div>
+
+<!-- Emoji picker -->
+<div class="sheet" id="sheet-emoji">
+  <div class="sheet-grip"></div>
+  <div class="pad" style="padding-top:4px">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px">
+      <div class="h2" style="font-weight:800;font-size:18px">Emoji</div>
+      <button class="icon-btn" onclick="App.closeSheet()"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+
+    <div class="section-title" style="margin:8px 2px 4px">Smileys</div>
+    <div style="display:flex;flex-wrap:wrap">
+      <button class="emo" onclick="insertEmoji('😀')">😀</button><button class="emo" onclick="insertEmoji('😃')">😃</button><button class="emo" onclick="insertEmoji('😄')">😄</button><button class="emo" onclick="insertEmoji('😁')">😁</button><button class="emo" onclick="insertEmoji('😅')">😅</button><button class="emo" onclick="insertEmoji('😂')">😂</button><button class="emo" onclick="insertEmoji('🤣')">🤣</button><button class="emo" onclick="insertEmoji('😊')">😊</button><button class="emo" onclick="insertEmoji('😇')">😇</button><button class="emo" onclick="insertEmoji('🙂')">🙂</button><button class="emo" onclick="insertEmoji('😉')">😉</button><button class="emo" onclick="insertEmoji('😍')">😍</button><button class="emo" onclick="insertEmoji('🥰')">🥰</button><button class="emo" onclick="insertEmoji('😘')">😘</button><button class="emo" onclick="insertEmoji('😎')">😎</button><button class="emo" onclick="insertEmoji('🤩')">🤩</button><button class="emo" onclick="insertEmoji('🥳')">🥳</button><button class="emo" onclick="insertEmoji('🤔')">🤔</button><button class="emo" onclick="insertEmoji('😴')">😴</button><button class="emo" onclick="insertEmoji('😢')">😢</button><button class="emo" onclick="insertEmoji('😭')">😭</button><button class="emo" onclick="insertEmoji('😡')">😡</button><button class="emo" onclick="insertEmoji('🥺')">🥺</button><button class="emo" onclick="insertEmoji('😱')">😱</button>
+    </div>
+
+    <div class="section-title" style="margin:10px 2px 4px">Gestures</div>
+    <div style="display:flex;flex-wrap:wrap">
+      <button class="emo" onclick="insertEmoji('👍')">👍</button><button class="emo" onclick="insertEmoji('👎')">👎</button><button class="emo" onclick="insertEmoji('👏')">👏</button><button class="emo" onclick="insertEmoji('🙌')">🙌</button><button class="emo" onclick="insertEmoji('🙏')">🙏</button><button class="emo" onclick="insertEmoji('👌')">👌</button><button class="emo" onclick="insertEmoji('✌️')">✌️</button><button class="emo" onclick="insertEmoji('🤞')">🤞</button><button class="emo" onclick="insertEmoji('🤝')">🤝</button><button class="emo" onclick="insertEmoji('💪')">💪</button><button class="emo" onclick="insertEmoji('👋')">👋</button><button class="emo" onclick="insertEmoji('🤙')">🤙</button>
+    </div>
+
+    <div class="section-title" style="margin:10px 2px 4px">Hearts</div>
+    <div style="display:flex;flex-wrap:wrap">
+      <button class="emo" onclick="insertEmoji('❤️')">❤️</button><button class="emo" onclick="insertEmoji('🧡')">🧡</button><button class="emo" onclick="insertEmoji('💛')">💛</button><button class="emo" onclick="insertEmoji('💚')">💚</button><button class="emo" onclick="insertEmoji('💙')">💙</button><button class="emo" onclick="insertEmoji('💜')">💜</button><button class="emo" onclick="insertEmoji('🖤')">🖤</button><button class="emo" onclick="insertEmoji('🤍')">🤍</button><button class="emo" onclick="insertEmoji('💕')">💕</button><button class="emo" onclick="insertEmoji('💖')">💖</button><button class="emo" onclick="insertEmoji('💯')">💯</button><button class="emo" onclick="insertEmoji('✨')">✨</button>
+    </div>
+
+    <div class="section-title" style="margin:10px 2px 4px">Animals &amp; Nature</div>
+    <div style="display:flex;flex-wrap:wrap">
+      <button class="emo" onclick="insertEmoji('🐶')">🐶</button><button class="emo" onclick="insertEmoji('🐱')">🐱</button><button class="emo" onclick="insertEmoji('🦊')">🦊</button><button class="emo" onclick="insertEmoji('🐻')">🐻</button><button class="emo" onclick="insertEmoji('🦁')">🦁</button><button class="emo" onclick="insertEmoji('🌸')">🌸</button><button class="emo" onclick="insertEmoji('🌹')">🌹</button><button class="emo" onclick="insertEmoji('🌟')">🌟</button><button class="emo" onclick="insertEmoji('🔥')">🔥</button><button class="emo" onclick="insertEmoji('🌈')">🌈</button><button class="emo" onclick="insertEmoji('🌍')">🌍</button><button class="emo" onclick="insertEmoji('☀️')">☀️</button>
+    </div>
+
+    <div class="section-title" style="margin:10px 2px 4px">Food &amp; Drink</div>
+    <div style="display:flex;flex-wrap:wrap">
+      <button class="emo" onclick="insertEmoji('☕')">☕</button><button class="emo" onclick="insertEmoji('🍕')">🍕</button><button class="emo" onclick="insertEmoji('🍔')">🍔</button><button class="emo" onclick="insertEmoji('🍟')">🍟</button><button class="emo" onclick="insertEmoji('🍰')">🍰</button><button class="emo" onclick="insertEmoji('🎂')">🎂</button><button class="emo" onclick="insertEmoji('🍩')">🍩</button><button class="emo" onclick="insertEmoji('🍓')">🍓</button><button class="emo" onclick="insertEmoji('🍜')">🍜</button><button class="emo" onclick="insertEmoji('🍻')">🍻</button>
+    </div>
+
+    <div class="section-title" style="margin:10px 2px 4px">Activities &amp; Objects</div>
+    <div style="display:flex;flex-wrap:wrap">
+      <button class="emo" onclick="insertEmoji('🎉')">🎉</button><button class="emo" onclick="insertEmoji('🎊')">🎊</button><button class="emo" onclick="insertEmoji('🎁')">🎁</button><button class="emo" onclick="insertEmoji('🚀')">🚀</button><button class="emo" onclick="insertEmoji('⚽')">⚽</button><button class="emo" onclick="insertEmoji('🏆')">🏆</button><button class="emo" onclick="insertEmoji('🎵')">🎵</button><button class="emo" onclick="insertEmoji('📸')">📸</button><button class="emo" onclick="insertEmoji('💰')">💰</button><button class="emo" onclick="insertEmoji('✅')">✅</button>
+    </div>
+
+    <button class="btn btn-primary" style="margin:16px 0 4px" onclick="App.closeSheet()">Done</button>
   </div>
 </div>

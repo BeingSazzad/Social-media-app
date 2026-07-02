@@ -27,7 +27,7 @@
         </div>
       </div>
 
-      <div class="card" style="overflow:hidden;padding:0;cursor:pointer" onclick="App.go('scr-group-page')">
+      <div class="card" style="overflow:hidden;padding:0;cursor:pointer" onclick="App.go('scr-group-page-member')">
         <img src="https://images.unsplash.com/photo-1517048676732-d65bc937f952?w=400&q=80" style="width:100%;height:120px;object-fit:cover">
         <div style="display:flex;align-items:center;gap:11px;padding:12px 14px">
           <div style="flex:1;min-width:0">
@@ -38,7 +38,7 @@
         </div>
       </div>
 
-      <div class="card" style="overflow:hidden;padding:0;cursor:pointer" onclick="App.go('scr-group-page')">
+      <div class="card" style="overflow:hidden;padding:0;cursor:pointer" onclick="App.go('scr-group-page-member')">
         <img src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=400&q=80" style="width:100%;height:120px;object-fit:cover">
         <div style="display:flex;align-items:center;gap:11px;padding:12px 14px">
           <div style="flex:1;min-width:0">
@@ -54,36 +54,36 @@
     <!-- ALL GROUPS -->
     <div id="grp-all" class="stack" style="display:none">
 
-      <div class="card" style="overflow:hidden;padding:0;cursor:pointer" onclick="App.go('scr-group-page')">
+      <div class="card" style="overflow:hidden;padding:0;cursor:pointer" onclick="App.go('scr-group-page-member')">
         <img src="https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=400&q=80" style="width:100%;height:120px;object-fit:cover">
         <div style="display:flex;align-items:center;gap:11px;padding:12px 14px">
           <div style="flex:1;min-width:0">
             <div class="h3" style="margin-bottom:2px">Abuja Photographers</div>
-            <div class="t-sm"><i class="fa-solid fa-user-group" style="color:var(--ink-3)"></i> 5,640 members</div>
+            <div class="t-sm"><i class="fa-solid fa-user-group" style="color:var(--ink-3)"></i> 5,640 members · <i class="fa-solid fa-earth-africa" style="color:var(--ink-3)"></i> Public</div>
           </div>
-          <button class="btn-sm btn-soft" onclick="event.stopPropagation();App.toast('Request sent to join')">Join</button>
+          <button class="btn-sm btn-soft" onclick="event.stopPropagation();grpJoinBtn(this,'public')">Join</button>
         </div>
       </div>
 
-      <div class="card" style="overflow:hidden;padding:0;cursor:pointer" onclick="App.go('scr-group-page')">
+      <div class="card" style="overflow:hidden;padding:0;cursor:pointer" onclick="App.go('scr-group-page-member')">
         <img src="https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=400&q=80" style="width:100%;height:120px;object-fit:cover">
         <div style="display:flex;align-items:center;gap:11px;padding:12px 14px">
           <div style="flex:1;min-width:0">
             <div class="h3" style="margin-bottom:2px">Chittagong Travelers</div>
-            <div class="t-sm"><i class="fa-solid fa-user-group" style="color:var(--ink-3)"></i> 9,180 members</div>
+            <div class="t-sm"><i class="fa-solid fa-user-group" style="color:var(--ink-3)"></i> 9,180 members · <i class="fa-solid fa-lock" style="color:var(--ink-3)"></i> Private</div>
           </div>
-          <button class="btn-sm btn-soft" onclick="event.stopPropagation();App.toast('Request sent to join')">Join</button>
+          <button class="btn-sm btn-soft" onclick="event.stopPropagation();grpJoinBtn(this,'private')">Request</button>
         </div>
       </div>
 
-      <div class="card" style="overflow:hidden;padding:0;cursor:pointer" onclick="App.go('scr-group-page')">
+      <div class="card" style="overflow:hidden;padding:0;cursor:pointer" onclick="App.go('scr-group-page-member')">
         <img src="https://images.unsplash.com/photo-1531482615713-2afd69097998?w=400&q=80" style="width:100%;height:120px;object-fit:cover">
         <div style="display:flex;align-items:center;gap:11px;padding:12px 14px">
           <div style="flex:1;min-width:0">
             <div class="h3" style="margin-bottom:2px">Naija Crypto &amp; Web3</div>
-            <div class="t-sm"><i class="fa-solid fa-user-group" style="color:var(--ink-3)"></i> 17,950 members</div>
+            <div class="t-sm"><i class="fa-solid fa-user-group" style="color:var(--ink-3)"></i> 17,950 members · <i class="fa-solid fa-earth-africa" style="color:var(--ink-3)"></i> Public</div>
           </div>
-          <button class="btn-sm btn-soft" onclick="event.stopPropagation();App.toast('Request sent to join')">Join</button>
+          <button class="btn-sm btn-soft" onclick="event.stopPropagation();grpJoinBtn(this,'public')">Join</button>
         </div>
       </div>
 
@@ -95,6 +95,24 @@
         btn.classList.add('active');
         document.getElementById('grp-mine').style.display = (id==='grp-mine')?'':'none';
         document.getElementById('grp-all').style.display  = (id==='grp-all')?'':'none';
+      }
+      function grpJoinBtn(btn,priv){
+        if(btn.dataset.on==='1'){
+          btn.dataset.on='0';
+          btn.className='btn-sm btn-soft';
+          btn.textContent = priv==='private' ? 'Request' : 'Join';
+          App.toast(priv==='private' ? 'Request cancelled' : 'Left group');
+        } else {
+          btn.dataset.on='1';
+          btn.className='btn-sm btn-outline';
+          if(priv==='private'){
+            btn.innerHTML='<i class="fa-solid fa-clock"></i> Requested';
+            App.toast('Request sent — an admin will approve you');
+          } else {
+            btn.innerHTML='<i class="fa-solid fa-check"></i> Joined';
+            App.toast('You joined the group 🎉');
+          }
+        }
       }
     </script>
   </div>
@@ -191,13 +209,58 @@
         <i class="fa-solid fa-user-plus" style="color:var(--brand)"></i>
       </button>
     </div>
+
+    <!-- Admin tools (you are an admin of this group) -->
+    <div class="card" style="margin-top:16px">
+      <div class="list-row" style="cursor:pointer" onclick="App.go('scr-edit-group')">
+        <span style="width:38px;height:38px;border-radius:11px;background:var(--brand-50,#FFF3EA);display:flex;align-items:center;justify-content:center;flex:none"><i class="fa-solid fa-pen" style="color:var(--brand)"></i></span>
+        <div style="flex:1"><div class="h3" style="font-size:14px">Edit Group Info</div><div class="t-sm">Name, description, privacy &amp; cover</div></div>
+        <i class="fa-solid fa-chevron-right chev"></i>
+      </div>
+      <div class="divider"></div>
+      <div class="list-row" style="cursor:pointer" onclick="App.go('scr-group-requests')">
+        <span style="width:38px;height:38px;border-radius:11px;background:var(--brand-50,#FFF3EA);display:flex;align-items:center;justify-content:center;flex:none"><i class="fa-solid fa-user-clock" style="color:var(--brand)"></i></span>
+        <div style="flex:1"><div class="h3" style="font-size:14px">Join Requests</div><div class="t-sm">People waiting for approval</div></div>
+        <span class="badge badge-brand">5</span>
+        <i class="fa-solid fa-chevron-right chev"></i>
+      </div>
+      <div class="divider"></div>
+      <div class="list-row" style="cursor:pointer" onclick="App.go('scr-group-members')">
+        <span style="width:38px;height:38px;border-radius:11px;background:var(--brand-50,#FFF3EA);display:flex;align-items:center;justify-content:center;flex:none"><i class="fa-solid fa-users-gear" style="color:var(--brand)"></i></span>
+        <div style="flex:1"><div class="h3" style="font-size:14px">Manage Members</div><div class="t-sm">Remove, ban or promote members</div></div>
+        <i class="fa-solid fa-chevron-right chev"></i>
+      </div>
+    </div>
+    <div class="t-sm" style="margin-top:8px;color:var(--ink-3)"><i class="fa-solid fa-shield-halved" style="color:var(--brand)"></i> You're an admin of this group</div>
+
+    <!-- About -->
+    <p class="t-sm" style="margin-top:16px;line-height:1.6;color:var(--ink-2)">
+      The largest community of developers, designers and founders in Bangladesh. We host weekly meetups, free workshops and a jobs board. Be kind, share knowledge, no spam. 🚀
+    </p>
+
+    <!-- Members preview + created by -->
+    <div class="list-row" style="margin-top:14px;cursor:pointer" onclick="App.go('scr-group-members')">
+      <div style="display:flex">
+        <img class="ava" src="https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=120&q=80" style="width:34px;height:34px;border:2px solid #fff">
+        <img class="ava" src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=120&q=80" style="width:34px;height:34px;border:2px solid #fff;margin-left:-11px">
+        <img class="ava" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=120&q=80" style="width:34px;height:34px;border:2px solid #fff;margin-left:-11px">
+        <img class="ava" src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=120&q=80" style="width:34px;height:34px;border:2px solid #fff;margin-left:-11px">
+      </div>
+      <div style="flex:1;min-width:0;margin-left:10px">
+        <div class="t-sm"><b>Rahim, Tanvir, Mitu</b> and 12,797 others are members</div>
+      </div>
+      <i class="fa-solid fa-chevron-right chev"></i>
+    </div>
+
+    <div class="t-sm" style="margin-top:10px;color:var(--ink-3)">
+      <i class="fa-solid fa-crown" style="color:var(--brand)"></i> Created by <b style="color:var(--ink-2)">Rakib Hasan</b> · Jan 2023
+    </div>
   </div>
 
   <!-- Tab chip row -->
   <div class="chip-row" style="padding:10px 16px 12px">
     <span class="chip brand active" onclick="grpTab(this)">Posts</span>
-    <span class="chip" onclick="grpTab(this);App.go('scr-group-chat')">Chat</span>
-    <span class="chip" onclick="grpTab(this);App.toast('Members')">Members</span>
+    <span class="chip" onclick="App.go('scr-group-members')">Members</span>
     <span class="chip" onclick="grpTab(this);App.go('scr-events')">Events</span>
     <span class="chip" onclick="grpTab(this);App.toast('Media gallery')">Media</span>
   </div>
@@ -246,7 +309,7 @@
         </div>
         <button class="icon-btn" onclick="App.openSheet('sheet-post-options')"><i class="fa-solid fa-ellipsis"></i></button>
       </div>
-      <p style="padding:0 14px 12px;font-size:14px;line-height:1.55">We just crossed ₦2,400,000 in community grants for member-led projects this quarter. Proud of everyone shipping! Applications for round 4 are open. 💛</p>
+      <p style="padding:0 14px 12px;font-size:14px;line-height:1.55">We just crossed $2,400 in community grants for member-led projects this quarter. Proud of everyone shipping! Applications for round 4 are open. 💛</p>
       <div style="padding:10px 14px;display:flex;justify-content:space-between" class="t-sm"><span><i class="fa-solid fa-heart" style="color:#EF4444"></i> 1.5k</span><span>214 comments</span></div>
       <div class="divider"></div>
       <div class="post-actions">
@@ -270,11 +333,336 @@
         btn.innerHTML='<i class="fa-solid fa-check"></i>&nbsp; Joined';
         App.toast('Joined group');
       } else {
-        btn.dataset.joined='0';
-        btn.className='btn btn-primary';
-        btn.innerHTML='<i class="fa-solid fa-plus"></i>&nbsp; Join Group';
-        App.toast('Left group');
+        App.confirm('Leave this group?','You will stop seeing its posts. You can rejoin later.',function(){
+          btn.dataset.joined='0';
+          btn.className='btn btn-primary';
+          btn.innerHTML='<i class="fa-solid fa-plus"></i>&nbsp; Join Group';
+          App.toast('You left the group');
+        },'Leave');
       }
     }
   </script>
+</section>
+
+
+<!-- ============ SCREEN — Group Members ============ -->
+<section class="screen" id="scr-group-members" data-topbar="back" data-nav="hide" data-title="Members">
+  <div class="pad stack" style="padding-bottom:24px">
+
+    <div class="input-group" style="margin-bottom:2px">
+      <input class="input" placeholder="Search members" onkeyup="gmSearch(this.value)">
+      <span class="input-icon" style="pointer-events:none"><i class="fa-solid fa-magnifying-glass" style="color:var(--ink-3)"></i></span>
+    </div>
+
+    <div class="section-title">Admins · 2</div>
+    <div class="card">
+      <div class="list-row">
+        <img class="ava" src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=120&q=80" style="width:42px;height:42px">
+        <div style="flex:1;min-width:0"><div class="h3" style="font-size:14px">Rakib Hasan <i class="fa-solid fa-circle-check verified" style="font-size:11px"></i></div><div class="t-sm">@rakib_h · Created the group</div></div>
+        <span class="badge badge-brand"><i class="fa-solid fa-crown" style="font-size:9px"></i> Creator</span>
+      </div>
+      <div class="divider"></div>
+      <div class="list-row">
+        <img class="ava" src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=120&q=80" style="width:42px;height:42px">
+        <div style="flex:1;min-width:0"><div class="h3" style="font-size:14px">You</div><div class="t-sm">@sohag_rahman · Admin</div></div>
+        <span class="badge badge-ok">Admin</span>
+      </div>
+    </div>
+
+    <div class="section-title">Members · 12,798</div>
+    <div class="card" id="gm-list">
+      <div class="list-row gm-row" data-n="aisha bello">
+        <img class="ava" src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=120&q=80" style="width:42px;height:42px">
+        <div style="flex:1;min-width:0"><div class="h3" style="font-size:14px">Aisha Bello</div><div class="t-sm">@aisha_b · joined Mar 2024</div></div>
+        <button class="icon-btn" onclick="grpMemberMenu(this,'Aisha Bello')" aria-label="Manage"><i class="fa-solid fa-ellipsis-vertical" style="color:var(--ink-3)"></i></button>
+      </div>
+      <div class="divider"></div>
+      <div class="list-row gm-row" data-n="tanvir ahmed">
+        <img class="ava" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=120&q=80" style="width:42px;height:42px">
+        <div style="flex:1;min-width:0"><div class="h3" style="font-size:14px">Tanvir Ahmed <i class="fa-solid fa-circle-check verified" style="font-size:11px"></i></div><div class="t-sm">@tanvir · joined Jan 2024</div></div>
+        <button class="icon-btn" onclick="grpMemberMenu(this,'Tanvir Ahmed')" aria-label="Manage"><i class="fa-solid fa-ellipsis-vertical" style="color:var(--ink-3)"></i></button>
+      </div>
+      <div class="divider"></div>
+      <div class="list-row gm-row" data-n="mitu rahman">
+        <img class="ava" src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=120&q=80" style="width:42px;height:42px">
+        <div style="flex:1;min-width:0"><div class="h3" style="font-size:14px">Mitu Rahman</div><div class="t-sm">@mitu_r · joined Feb 2024</div></div>
+        <button class="icon-btn" onclick="grpMemberMenu(this,'Mitu Rahman')" aria-label="Manage"><i class="fa-solid fa-ellipsis-vertical" style="color:var(--ink-3)"></i></button>
+      </div>
+      <div class="divider"></div>
+      <div class="list-row gm-row" data-n="emeka obi">
+        <img class="ava" src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=120&q=80" style="width:42px;height:42px">
+        <div style="flex:1;min-width:0"><div class="h3" style="font-size:14px">Emeka Obi</div><div class="t-sm">@emeka.dev · joined Dec 2023</div></div>
+        <button class="icon-btn" onclick="grpMemberMenu(this,'Emeka Obi')" aria-label="Manage"><i class="fa-solid fa-ellipsis-vertical" style="color:var(--ink-3)"></i></button>
+      </div>
+    </div>
+    <div id="gm-empty" class="empty" style="display:none"><i class="fa-regular fa-face-frown"></i><div class="h3" style="color:var(--ink-2)">No members found</div></div>
+
+    <button class="btn btn-outline" style="color:#DC2626;border-color:#FCA5A5;margin-top:4px" onclick="grpLeaveFromMembers()"><i class="fa-solid fa-right-from-bracket"></i> Leave Group</button>
+  </div>
+</section>
+
+
+<!-- ============ SCREEN — Join Requests (admin) ============ -->
+<section class="screen" id="scr-group-requests" data-topbar="back" data-nav="hide" data-title="Join Requests">
+  <div class="pad stack" style="padding-bottom:24px">
+    <div class="t-sm" style="margin:0 2px">Approve people who want to join <b style="color:var(--ink)">Dhaka Tech Hub</b>. Approved members can see and post in the group.</div>
+
+    <div id="gr-list" class="stack">
+      <div class="card card-p req-row">
+        <div style="display:flex;align-items:center;gap:11px">
+          <img class="ava" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=120&q=80" style="width:44px;height:44px">
+          <div style="flex:1;min-width:0"><div class="h3" style="font-size:14px">Nusrat Jahan</div><div class="t-sm">8 mutual members · 2h ago</div></div>
+        </div>
+        <div style="display:flex;gap:8px;margin-top:11px">
+          <button class="btn-sm btn-primary" style="flex:1" onclick="grpApprove(this,'Nusrat Jahan')"><i class="fa-solid fa-check"></i> Approve</button>
+          <button class="btn-sm btn-soft" style="flex:1" onclick="grpReject(this,'Nusrat Jahan')">Reject</button>
+        </div>
+      </div>
+
+      <div class="card card-p req-row">
+        <div style="display:flex;align-items:center;gap:11px">
+          <img class="ava" src="https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?w=120&q=80" style="width:44px;height:44px">
+          <div style="flex:1;min-width:0"><div class="h3" style="font-size:14px">Chidi Okonkwo</div><div class="t-sm">3 mutual members · 5h ago</div></div>
+        </div>
+        <div style="display:flex;gap:8px;margin-top:11px">
+          <button class="btn-sm btn-primary" style="flex:1" onclick="grpApprove(this,'Chidi Okonkwo')"><i class="fa-solid fa-check"></i> Approve</button>
+          <button class="btn-sm btn-soft" style="flex:1" onclick="grpReject(this,'Chidi Okonkwo')">Reject</button>
+        </div>
+      </div>
+
+      <div class="card card-p req-row">
+        <div style="display:flex;align-items:center;gap:11px">
+          <img class="ava" src="https://images.unsplash.com/photo-1531123897727-8f129e1688ce?w=120&q=80" style="width:44px;height:44px">
+          <div style="flex:1;min-width:0"><div class="h3" style="font-size:14px">Sadia Islam</div><div class="t-sm">1 mutual member · 1d ago</div></div>
+        </div>
+        <div style="display:flex;gap:8px;margin-top:11px">
+          <button class="btn-sm btn-primary" style="flex:1" onclick="grpApprove(this,'Sadia Islam')"><i class="fa-solid fa-check"></i> Approve</button>
+          <button class="btn-sm btn-soft" style="flex:1" onclick="grpReject(this,'Sadia Islam')">Reject</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="gr-empty" class="empty" style="display:none"><i class="fa-regular fa-circle-check"></i><div class="h3" style="color:var(--ink-2)">All caught up</div><div class="t-sm">No pending requests right now.</div></div>
+  </div>
+</section>
+
+
+<!-- ============ SHEET — Member options (admin) ============ -->
+<div class="sheet" id="sheet-member">
+  <div class="sheet-grip"></div>
+  <div class="pad">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
+      <div class="h2" id="memName" style="font-weight:800;font-size:18px">Member</div>
+      <button class="icon-btn" onclick="App.closeSheet()"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <div class="card">
+      <div class="list-row" onclick="App.closeSheet();App.go('scr-user-profile')">
+        <i class="fa-solid fa-user" style="color:var(--ink-2);width:20px;text-align:center"></i>
+        <div style="flex:1"><div class="h3">View profile</div></div>
+      </div>
+      <div class="divider"></div>
+      <div class="list-row" onclick="grpMakeAdmin()">
+        <i class="fa-solid fa-shield-halved" style="color:var(--brand);width:20px;text-align:center"></i>
+        <div style="flex:1"><div class="h3">Make admin</div></div>
+      </div>
+      <div class="divider"></div>
+      <div class="list-row" onclick="grpRemove()">
+        <i class="fa-solid fa-user-minus" style="color:#DC2626;width:20px;text-align:center"></i>
+        <div style="flex:1"><div class="h3" style="color:#DC2626">Remove from group</div></div>
+      </div>
+      <div class="divider"></div>
+      <div class="list-row" onclick="grpBan()">
+        <i class="fa-solid fa-ban" style="color:#DC2626;width:20px;text-align:center"></i>
+        <div style="flex:1"><div class="h3" style="color:#DC2626">Ban from group</div><div class="t-sm">Removed and blocked from rejoining</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  var _gmRow=null, _gmName='';
+  function grpMemberMenu(btn,name){ _gmRow=btn.closest('.gm-row'); _gmName=name; var el=document.getElementById('memName'); if(el) el.textContent=name; App.openSheet('sheet-member'); }
+  function grpMakeAdmin(){ App.closeSheet(); App.toast(_gmName+' is now an admin'); }
+  function grpRemove(){ App.closeSheet(); var n=_gmName, row=_gmRow; App.confirm('Remove '+n+'?','They will be removed from the group but can request to join again later.',function(){ if(row){var d=row.nextElementSibling; row.remove(); if(d&&d.classList.contains('divider'))d.remove();} App.toast(n+' removed from group'); },'Remove'); }
+  function grpBan(){ App.closeSheet(); var n=_gmName, row=_gmRow; App.confirm('Ban '+n+'?','They will be removed and blocked from rejoining this group.',function(){ if(row){var d=row.nextElementSibling; row.remove(); if(d&&d.classList.contains('divider'))d.remove();} App.toast(n+' banned'); },'Ban'); }
+  function grpLeaveFromMembers(){ App.confirm('Leave this group?','You will stop seeing its posts. You can rejoin later.',function(){ App.toast('You left the group'); App.go('scr-groups'); },'Leave'); }
+  function gmSearch(q){ q=(q||'').toLowerCase().trim(); var shown=0; document.querySelectorAll('#gm-list .gm-row').forEach(function(r){ var d=r.nextElementSibling; var m=(r.dataset.n||'').includes(q); r.style.display=m?'':'none'; if(d&&d.classList.contains('divider'))d.style.display=m?'':'none'; if(m)shown++; }); var e=document.getElementById('gm-empty'); if(e)e.style.display=shown?'none':''; }
+  function grpApprove(btn,name){ var r=btn.closest('.req-row'); if(r){ r.innerHTML='<div style="padding:6px 2px;color:var(--ok);font-weight:600;font-size:13px"><i class="fa-solid fa-check"></i> '+name+' is now a member</div>'; } App.toast(name+' approved'); grpReqCheck(); }
+  function grpReject(btn,name){ var r=btn.closest('.req-row'); if(r) r.remove(); App.toast('Declined '+name); grpReqCheck(); }
+  function grpReqCheck(){ var any=document.querySelector('#gr-list .req-row button'); var e=document.getElementById('gr-empty'); if(e) e.style.display=any?'none':'block'; }
+</script>
+
+
+<!-- ============ SCREEN — Group Page (MEMBER view, not admin) ============ -->
+<section class="screen" id="scr-group-page-member" data-topbar="back" data-nav="hide" data-title="Lagos Founders Circle">
+
+  <!-- Cover banner + overlapping avatar -->
+  <div style="position:relative">
+    <img src="https://images.unsplash.com/photo-1517048676732-d65bc937f952?w=600&q=80" style="width:100%;height:160px;object-fit:cover">
+    <img class="ava" src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=200&q=80" style="width:84px;height:84px;border:4px solid #fff;position:absolute;left:18px;bottom:-40px;box-shadow:0 4px 14px rgba(0,0,0,.12)">
+  </div>
+
+  <div class="pad" style="padding:52px 16px 8px">
+    <div class="h2" style="font-weight:700">Lagos Founders Circle</div>
+    <div class="t-sm" style="margin-top:4px;color:var(--ink-2)">
+      <i class="fa-solid fa-user-group" style="color:var(--ink-3)"></i> 8,420 members
+      · <i class="fa-solid fa-earth-africa" style="color:var(--ink-3)"></i> Public
+    </div>
+
+    <!-- Member actions: Joined + Notifications + Invite (NO admin tools) -->
+    <div style="display:flex;gap:10px;margin-top:16px">
+      <button class="btn btn-soft" data-joined="1" style="flex:1" onclick="grpLeave(this)">
+        <i class="fa-solid fa-check"></i>&nbsp; Joined
+      </button>
+      <button class="icon-btn" style="width:48px;height:48px;border:1px solid var(--line);border-radius:14px;background:var(--surface)" onclick="grpBell(this)" aria-label="Notifications">
+        <i class="fa-solid fa-bell" style="color:var(--brand)"></i>
+      </button>
+      <button class="icon-btn" style="width:48px;height:48px;border:1px solid var(--line);border-radius:14px;background:var(--surface)" onclick="App.toast('Invite link copied')" aria-label="Invite">
+        <i class="fa-solid fa-user-plus" style="color:var(--brand)"></i>
+      </button>
+    </div>
+
+    <!-- About -->
+    <p class="t-sm" style="margin-top:16px;line-height:1.6;color:var(--ink-2)">
+      A community of founders and operators building startups across Lagos and West Africa. Monthly dinners, warm intros and a member-only deal-flow board. Be helpful, no spam. 🤝
+    </p>
+
+    <!-- Members preview -->
+    <div class="list-row" style="margin-top:14px;cursor:pointer" onclick="App.go('scr-group-members')">
+      <div style="display:flex">
+        <img class="ava" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=120&q=80" style="width:34px;height:34px;border:2px solid #fff">
+        <img class="ava" src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=120&q=80" style="width:34px;height:34px;border:2px solid #fff;margin-left:-11px">
+        <img class="ava" src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=120&q=80" style="width:34px;height:34px;border:2px solid #fff;margin-left:-11px">
+      </div>
+      <div style="flex:1;min-width:0;margin-left:10px">
+        <div class="t-sm"><b>Tunde, Aisha, Chidi</b> and 8,417 others are members</div>
+      </div>
+      <i class="fa-solid fa-chevron-right chev"></i>
+    </div>
+
+    <!-- Admin (someone else, not you) -->
+    <div class="t-sm" style="margin-top:10px;color:var(--ink-3)">
+      <i class="fa-solid fa-crown" style="color:var(--brand)"></i> Admin <b style="color:var(--ink-2)">Bisi Adediran</b> · Created Mar 2022
+    </div>
+  </div>
+
+  <!-- Tab chip row (no Chat, no admin tools) -->
+  <div class="chip-row" style="padding:10px 16px 12px">
+    <span class="chip brand active" onclick="grpTab(this)">Posts</span>
+    <span class="chip" onclick="App.go('scr-group-members')">Members</span>
+    <span class="chip" onclick="grpTab(this);App.go('scr-events')">Events</span>
+    <span class="chip" onclick="grpTab(this);App.toast('Media gallery')">Media</span>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- Posts -->
+  <div class="pad" style="padding:14px 16px 28px">
+
+    <!-- Composer (members can post) -->
+    <div class="card card-p" style="display:flex;align-items:center;gap:11px;margin-bottom:14px;cursor:pointer" onclick="App.go('scr-composer')">
+      <img class="ava" src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=120&q=80" style="width:40px;height:40px">
+      <div style="flex:1;color:var(--ink-3);font-size:14px">Share something with the group…</div>
+      <i class="fa-solid fa-image" style="color:var(--brand)"></i>
+    </div>
+
+    <article class="post" style="margin-bottom:14px">
+      <div style="display:flex;align-items:center;gap:11px;padding:13px 14px">
+        <img class="ava" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=120&q=80" style="width:42px;height:42px" onclick="App.go('scr-user-profile')">
+        <div style="flex:1;min-width:0">
+          <div style="font-weight:700;font-size:14px">Tunde Bakare <i class="fa-solid fa-circle-check verified" style="font-size:12px"></i></div>
+          <div class="t-sm">3 hours ago · <i class="fa-solid fa-earth-africa"></i></div>
+        </div>
+        <button class="icon-btn" onclick="App.openSheet('sheet-post-options')"><i class="fa-solid fa-ellipsis"></i></button>
+      </div>
+      <p style="padding:0 14px 12px;font-size:14px;line-height:1.55">Founders dinner #14 is on for next Friday at Ikoyi. 20 seats — comment to grab one. Bring one problem you're stuck on. 🍽️</p>
+      <div style="padding:10px 14px;display:flex;justify-content:space-between" class="t-sm"><span><i class="fa-solid fa-heart" style="color:#EF4444"></i> 318</span><span>54 comments</span></div>
+      <div class="divider"></div>
+      <div class="post-actions">
+        <button onclick="App.toast('Liked')"><i class="fa-regular fa-heart"></i> Like</button>
+        <button onclick="App.go('scr-post-detail')"><i class="fa-regular fa-comment"></i> Comment</button>
+        <button onclick="App.toast('Shared')"><i class="fa-solid fa-share"></i> Share</button>
+      </div>
+    </article>
+
+    <article class="post">
+      <div style="display:flex;align-items:center;gap:11px;padding:13px 14px">
+        <img class="ava" src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=120&q=80" style="width:42px;height:42px" onclick="App.go('scr-user-profile')">
+        <div style="flex:1;min-width:0">
+          <div style="font-weight:700;font-size:14px">Aisha Bello</div>
+          <div class="t-sm">Yesterday · <i class="fa-solid fa-earth-africa"></i></div>
+        </div>
+        <button class="icon-btn" onclick="App.openSheet('sheet-post-options')"><i class="fa-solid fa-ellipsis"></i></button>
+      </div>
+      <p style="padding:0 14px 12px;font-size:14px;line-height:1.55">Looking for a technical co-founder (fintech, Lagos). DM me if that's you or you know someone great. 🙏</p>
+      <div style="padding:10px 14px;display:flex;justify-content:space-between" class="t-sm"><span><i class="fa-solid fa-heart" style="color:#EF4444"></i> 192</span><span>37 comments</span></div>
+      <div class="divider"></div>
+      <div class="post-actions">
+        <button onclick="App.toast('Liked')"><i class="fa-regular fa-heart"></i> Like</button>
+        <button onclick="App.go('scr-post-detail')"><i class="fa-regular fa-comment"></i> Comment</button>
+        <button onclick="App.toast('Shared')"><i class="fa-solid fa-share"></i> Share</button>
+      </div>
+    </article>
+
+  </div>
+
+  <script>
+    function grpBell(btn){
+      var i=btn.querySelector('i'); var on=i.classList.contains('fa-bell');
+      if(on){ i.className='fa-solid fa-bell-slash'; App.toast('Group notifications muted'); }
+      else  { i.className='fa-solid fa-bell'; App.toast('Group notifications on'); }
+    }
+  </script>
+</section>
+
+
+<!-- ============ SCREEN — Edit Group (admin) ============ -->
+<section class="screen" id="scr-edit-group" data-topbar="back" data-nav="hide" data-title="Edit Group">
+  <div class="pad" style="padding:18px 18px 36px">
+
+    <!-- Cover -->
+    <div class="field">
+      <label class="label">Cover Photo</label>
+      <div onclick="App.toast('Choose a cover photo')" style="position:relative;border-radius:16px;overflow:hidden;cursor:pointer">
+        <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=600&q=80" style="width:100%;height:120px;object-fit:cover">
+        <div style="position:absolute;inset:0;background:rgba(0,0,0,.3);display:flex;align-items:center;justify-content:center;color:#fff;gap:8px;font-weight:600;font-size:13px"><i class="fa-solid fa-camera"></i> Change cover</div>
+      </div>
+    </div>
+
+    <div class="field">
+      <label class="label">Group Name</label>
+      <input class="input" value="Dhaka Tech Hub">
+    </div>
+
+    <div class="field">
+      <label class="label">Description</label>
+      <textarea class="input" rows="4">The largest community of developers, designers and founders in Bangladesh. We host weekly meetups, free workshops and a jobs board. Be kind, share knowledge, no spam. 🚀</textarea>
+    </div>
+
+    <div class="field">
+      <label class="label">Category</label>
+      <select class="input">
+        <option selected>Technology</option>
+        <option>Business &amp; Startups</option>
+        <option>Food &amp; Cooking</option>
+        <option>Travel</option>
+        <option>Photography</option>
+        <option>Crypto &amp; Web3</option>
+        <option>Sports</option>
+      </select>
+    </div>
+
+    <div class="field">
+      <label class="label">Privacy</label>
+      <div class="seg">
+        <button class="active" onclick="segPick(this)">Public</button>
+        <button onclick="segPick(this)">Private</button>
+        <button onclick="segPick(this)">Secret</button>
+      </div>
+    </div>
+
+    <button class="btn btn-primary" style="margin-top:22px" onclick="App.toast('Group updated ✓');App.back()">Save Changes</button>
+
+    <button class="btn btn-outline" style="color:#DC2626;border-color:#FCA5A5;margin-top:12px" onclick="App.confirm('Delete this group?','The group and all its posts will be permanently removed. This can\'t be undone.',function(){App.toast('Group deleted');App.go('scr-groups')},'Delete')"><i class="fa-solid fa-trash"></i> Delete Group</button>
+  </div>
 </section>

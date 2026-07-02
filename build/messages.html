@@ -2,52 +2,54 @@
 
 <!-- ============================ SCR-MESSAGES ============================ -->
 <section class="screen" id="scr-messages"
-         data-topbar="back" data-nav="hide" data-title="Messages">
+         data-topbar="none" data-nav="hide" data-title="Messages">
+
+  <!-- Custom header: title + a single Marketplace/Chats toggle pill (top-right) -->
+  <div style="height:56px;display:flex;align-items:center;gap:10px;padding:0 12px;background:#fff;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:6">
+    <button class="icon-btn" onclick="App.back()" aria-label="Back"><i class="fa-solid fa-arrow-left"></i></button>
+    <div id="msgTitle" style="font-size:17px;font-weight:800;letter-spacing:-.01em;flex:1">Messages</div>
+    <button id="msgModeBtn" onclick="msgToggleMode()" style="display:flex;align-items:center;gap:7px;background:#fff;border:1px solid var(--line);border-radius:999px;padding:7px 12px 7px 13px;cursor:pointer;box-shadow:var(--shadow-sm)">
+      <i class="fa-solid fa-store" style="color:var(--brand);font-size:13px"></i>
+      <span style="font-weight:700;font-size:13px;color:var(--ink)">Marketplace</span>
+      <span style="display:inline-flex;min-width:18px;height:18px;padding:0 5px;border-radius:9px;background:var(--brand);color:#fff;font-size:10px;font-weight:700;align-items:center;justify-content:center">2</span>
+    </button>
+  </div>
+
   <div class="pad stack">
 
     <!-- search + New -->
     <div style="display:flex;align-items:center;gap:10px">
       <div style="flex:1;position:relative">
-        <i class="fa-solid fa-magnifying-glass"
-           style="position:absolute;left:14px;top:50%;transform:translateY(-50%);color:var(--ink-3);font-size:13px"></i>
-        <input class="input" type="text" placeholder="Search conversations"
-               style="padding-left:38px"
-               oninput="App.toast('Searching…')">
+        <i class="fa-solid fa-magnifying-glass" style="position:absolute;left:14px;top:50%;transform:translateY(-50%);color:var(--ink-3);font-size:13px"></i>
+        <input id="msgSearchInput" class="input" type="text" placeholder="Search conversations" style="padding-left:38px" oninput="msgSearch(this.value)">
       </div>
-      <button class="btn-sm"
-              onclick="App.go('scr-new-message')"
-              style="background:var(--brand-grad);color:#fff;border:none;height:42px;padding:0 16px;border-radius:14px;font-weight:700;font-size:13px;display:flex;align-items:center;gap:6px;cursor:pointer;white-space:nowrap">
-        <i class="fa-solid fa-pen-to-square"></i> New
-      </button>
+      <button class="btn-sm" onclick="App.go('scr-new-message')" style="background:var(--brand-grad);color:#fff;border:none;height:42px;padding:0 16px;border-radius:14px;font-weight:700;font-size:13px;display:flex;align-items:center;gap:6px;cursor:pointer;white-space:nowrap"><i class="fa-solid fa-pen-to-square"></i> New</button>
     </div>
 
-    <!-- conversation list -->
-    <div class="card">
+    <!-- Read / Unread filter (applies to the active inbox) -->
+    <div class="chip-row" id="msgFilters" style="margin-top:-2px">
+      <span class="chip active" data-f="all" onclick="msgFilter(this,'all')">All</span>
+      <span class="chip" data-f="unread" onclick="msgFilter(this,'unread')"><i class="fa-solid fa-circle" style="font-size:7px;color:var(--brand);vertical-align:middle;margin-right:4px"></i>Unread</span>
+    </div>
 
-      <!-- row 1: online + unread -->
-      <div class="list-row" onclick="App.go('scr-chat')" style="cursor:pointer">
-        <div style="position:relative;flex-shrink:0">
-          <img class="ava" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&q=80" style="width:48px;height:48px">
-          <span style="position:absolute;right:1px;bottom:1px;width:12px;height:12px;border-radius:50%;background:var(--ok);border:2px solid #fff"></span>
-        </div>
-        <div style="flex:1;min-width:0">
-          <div style="display:flex;justify-content:space-between;align-items:center;gap:8px">
-            <div class="h3" style="font-size:14px">Aisha Bello</div>
-            <div class="t-sm" style="font-size:11px;color:var(--brand)">2 min</div>
-          </div>
-          <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;margin-top:2px">
-            <div class="t-sm" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-weight:600;color:var(--ink-2)">Did you see the new listing? 😍</div>
-            <span style="flex-shrink:0;min-width:20px;height:20px;padding:0 6px;border-radius:10px;background:var(--brand-grad);color:#fff;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center">3</span>
-          </div>
-        </div>
+    <!-- empty state for search -->
+    <div id="msgEmpty" class="empty" style="display:none"><i class="fa-regular fa-comment-dots"></i><div class="h3" style="color:var(--ink-2)">No conversations found</div></div>
+
+    <!-- =================== PANE: CHATS (people & groups) =================== -->
+    <div id="pane-chats">
+
+      <!-- message requests (personal) -->
+      <div class="card card-p" style="display:flex;align-items:center;gap:12px;cursor:pointer" onclick="App.go('scr-message-requests')">
+        <div style="width:44px;height:44px;border-radius:14px;background:var(--brand-50,#FFF3EA);display:flex;align-items:center;justify-content:center;flex:none"><i class="fa-solid fa-inbox" style="color:var(--brand);font-size:16px"></i></div>
+        <div style="flex:1;min-width:0"><div class="h3" style="font-size:14px">Message Requests</div><div class="t-sm">3 people you may know want to chat</div></div>
+        <span class="badge badge-brand" style="flex:none">3</span>
+        <i class="fa-solid fa-chevron-right chev" style="flex:none"></i>
       </div>
-      <div class="divider"></div>
 
-      <!-- row 2: online + unread -->
-      <div class="list-row" onclick="App.go('scr-chat')" style="cursor:pointer">
+      <div class="card" id="chatsList">
+      <div class="list-row mrow" data-n="tunde okafor" data-unread="1" onclick="App.go('scr-chat')" style="cursor:pointer">
         <div style="position:relative;flex-shrink:0">
-          <img class="ava" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&q=80" style="width:48px;height:48px">
-          <span style="position:absolute;right:1px;bottom:1px;width:12px;height:12px;border-radius:50%;background:var(--ok);border:2px solid #fff"></span>
+          <img class="ava" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&q=80" style="width:48px;height:48px"><span style="position:absolute;right:1px;bottom:1px;width:12px;height:12px;border-radius:50%;background:var(--ok);border:2px solid #fff"></span>
         </div>
         <div style="flex:1;min-width:0">
           <div style="display:flex;justify-content:space-between;align-items:center;gap:8px">
@@ -61,11 +63,9 @@
         </div>
       </div>
       <div class="divider"></div>
-
-      <!-- row 3: read, no badge -->
-      <div class="list-row" onclick="App.go('scr-chat')" style="cursor:pointer">
+      <div class="list-row mrow" data-n="fatima rahman" data-unread="0" onclick="App.go('scr-chat')" style="cursor:pointer">
         <div style="position:relative;flex-shrink:0">
-          <img class="ava" src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&q=80" style="width:48px;height:48px">
+          <img class="ava" src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&q=80" style="width:48px;height:48px"><span style="position:absolute;right:1px;bottom:1px;width:12px;height:12px;border-radius:50%;background:var(--ok);border:2px solid #fff"></span>
         </div>
         <div style="flex:1;min-width:0">
           <div style="display:flex;justify-content:space-between;align-items:center;gap:8px">
@@ -73,14 +73,13 @@
             <div class="t-sm" style="font-size:11px">1 hr</div>
           </div>
           <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;margin-top:2px">
-            <div class="t-sm" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis"><i class="fa-solid fa-check-double" style="color:var(--info);font-size:11px"></i> Sounds good, see you then!</div>
+            <div class="t-sm" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis;"><span style="color:var(--ok);font-weight:600;font-style:italic">typing…</span></div>
+            
           </div>
         </div>
       </div>
       <div class="divider"></div>
-
-      <!-- row 4: group convo with unread -->
-      <div class="list-row" onclick="App.go('scr-group-chat')" style="cursor:pointer">
+      <div class="list-row mrow" data-n="lagos hustlers" data-unread="1" onclick="App.go('scr-group-chat')" style="cursor:pointer">
         <div style="position:relative;flex-shrink:0">
           <img class="ava" src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=400&q=80" style="width:48px;height:48px">
         </div>
@@ -96,12 +95,25 @@
         </div>
       </div>
       <div class="divider"></div>
-
-      <!-- row 5: read, online -->
-      <div class="list-row" onclick="App.go('scr-chat')" style="cursor:pointer">
+      <div class="list-row mrow" data-n="dhaka foodies" data-unread="0" onclick="App.go('scr-group-chat')" style="cursor:pointer">
         <div style="position:relative;flex-shrink:0">
-          <img class="ava" src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&q=80" style="width:48px;height:48px">
-          <span style="position:absolute;right:1px;bottom:1px;width:12px;height:12px;border-radius:50%;background:var(--ok);border:2px solid #fff"></span>
+          <img class="ava" src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=400&q=80" style="width:48px;height:48px">
+        </div>
+        <div style="flex:1;min-width:0">
+          <div style="display:flex;justify-content:space-between;align-items:center;gap:8px">
+            <div class="h3" style="font-size:14px">Dhaka Foodies 🍲</div>
+            <div class="t-sm" style="font-size:11px">5 hr</div>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;margin-top:2px">
+            <div class="t-sm" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis;"><b>Sumaiya:</b> The biryani spot in Dhanmondi 🔥</div>
+            
+          </div>
+        </div>
+      </div>
+      <div class="divider"></div>
+      <div class="list-row mrow" data-n="kabir hassan" data-unread="0" onclick="App.go('scr-chat')" style="cursor:pointer">
+        <div style="position:relative;flex-shrink:0">
+          <img class="ava" src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&q=80" style="width:48px;height:48px"><span style="position:absolute;right:1px;bottom:1px;width:12px;height:12px;border-radius:50%;background:var(--ok);border:2px solid #fff"></span>
         </div>
         <div style="flex:1;min-width:0">
           <div style="display:flex;justify-content:space-between;align-items:center;gap:8px">
@@ -109,14 +121,13 @@
             <div class="t-sm" style="font-size:11px">Yesterday</div>
           </div>
           <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;margin-top:2px">
-            <div class="t-sm" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis"><i class="fa-solid fa-check-double" style="color:var(--info);font-size:11px"></i> I'll send the ₦25,000 now</div>
+            <div class="t-sm" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis;"><i class="fa-solid fa-check-double" style="color:var(--info);font-size:11px"></i> See you at the meetup tomorrow 👍</div>
+            
           </div>
         </div>
       </div>
       <div class="divider"></div>
-
-      <!-- row 6: read, no badge -->
-      <div class="list-row" onclick="App.go('scr-chat')" style="cursor:pointer">
+      <div class="list-row mrow" data-n="nadia islam" data-unread="0" onclick="App.go('scr-chat')" style="cursor:pointer">
         <div style="position:relative;flex-shrink:0">
           <img class="ava" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&q=80" style="width:48px;height:48px">
         </div>
@@ -126,13 +137,218 @@
             <div class="t-sm" style="font-size:11px">Mon</div>
           </div>
           <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;margin-top:2px">
-            <div class="t-sm" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis"><i class="fa-solid fa-image" style="font-size:11px"></i> Photo</div>
+            <div class="t-sm" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis;"><i class="fa-solid fa-image" style="font-size:11px"></i> Photo</div>
+            
+          </div>
+        </div>
+      </div>
+      <div class="divider"></div>
+      <div class="list-row mrow" data-n="emeka obi" data-unread="0" onclick="App.go('scr-chat')" style="cursor:pointer">
+        <div style="position:relative;flex-shrink:0">
+          <img class="ava" src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=400&q=80" style="width:48px;height:48px">
+        </div>
+        <div style="flex:1;min-width:0">
+          <div style="display:flex;justify-content:space-between;align-items:center;gap:8px">
+            <div class="h3" style="font-size:14px">Emeka Obi</div>
+            <div class="t-sm" style="font-size:11px">Sun</div>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;margin-top:2px">
+            <div class="t-sm" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Thanks for the referral, bro 🙏</div>
+            
+          </div>
+        </div>
+      </div>
+      </div>
+    </div>
+
+    <!-- =================== PANE: MARKETPLACE (buying & selling) =================== -->
+    <div id="pane-shop" style="display:none">
+      <div class="t-sm" style="margin:2px 2px 8px;display:flex;align-items:center;gap:6px"><i class="fa-solid fa-shield-halved" style="color:var(--brand)"></i> Your buying &amp; selling chats · pay safely with EVINIE Wallet</div>
+      <div class="card" id="shopList">
+      <div class="list-row mrow" data-n="aisha bello" data-unread="1" onclick="App.go('scr-mkt-chat')" style="cursor:pointer">
+        <div style="position:relative;flex-shrink:0">
+          <img class="ava" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&q=80" style="width:48px;height:48px">
+          <span style="position:absolute;right:-2px;bottom:-2px;width:20px;height:20px;border-radius:50%;background:var(--brand-grad);border:2px solid #fff;display:flex;align-items:center;justify-content:center"><i class="fa-solid fa-bag-shopping" style="color:#fff;font-size:9px"></i></span>
+        </div>
+        <div style="flex:1;min-width:0">
+          <div style="display:flex;justify-content:space-between;align-items:center;gap:8px">
+            <div class="h3" style="font-size:14px">Aisha Bello</div>
+            <div class="t-sm" style="font-size:11px;color:var(--brand)">2 min</div>
+          </div>
+          <div class="t-sm" style="display:flex;align-items:center;gap:5px;color:var(--brand-700,#C24F00);font-weight:700;margin-top:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis"><i class="fa-solid fa-tag" style="font-size:9px"></i> Air Force Sneakers · $58</div>
+          <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;margin-top:1px">
+            <div class="t-sm" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-weight:600;color:var(--ink-2)">Can you do $54? 🙏</div>
+            <span style="flex-shrink:0;min-width:20px;height:20px;padding:0 6px;border-radius:10px;background:var(--brand-grad);color:#fff;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center">2</span>
+          </div>
+        </div>
+        <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=160&q=80" style="width:46px;height:46px;border-radius:11px;object-fit:cover;flex:none">
+      </div>
+      <div class="divider"></div>
+      <div class="list-row mrow" data-n="tunde adeyemi" data-unread="1" onclick="App.go('scr-mkt-chat')" style="cursor:pointer">
+        <div style="position:relative;flex-shrink:0">
+          <img class="ava" src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=400&q=80" style="width:48px;height:48px">
+          <span style="position:absolute;right:-2px;bottom:-2px;width:20px;height:20px;border-radius:50%;background:var(--brand-grad);border:2px solid #fff;display:flex;align-items:center;justify-content:center"><i class="fa-solid fa-bag-shopping" style="color:#fff;font-size:9px"></i></span>
+        </div>
+        <div style="flex:1;min-width:0">
+          <div style="display:flex;justify-content:space-between;align-items:center;gap:8px">
+            <div class="h3" style="font-size:14px">Tunde Adeyemi</div>
+            <div class="t-sm" style="font-size:11px;color:var(--brand)">25 min</div>
+          </div>
+          <div class="t-sm" style="display:flex;align-items:center;gap:5px;color:var(--brand-700,#C24F00);font-weight:700;margin-top:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis"><i class="fa-solid fa-tag" style="font-size:9px"></i> Sony WH-1000XM4 · $190</div>
+          <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;margin-top:1px">
+            <div class="t-sm" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-weight:600;color:var(--ink-2)">Yes, still available. When can you pick up?</div>
+            <span style="flex-shrink:0;min-width:20px;height:20px;padding:0 6px;border-radius:10px;background:var(--brand-grad);color:#fff;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center">1</span>
+          </div>
+        </div>
+        <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=160&q=80" style="width:46px;height:46px;border-radius:11px;object-fit:cover;flex:none">
+      </div>
+      <div class="divider"></div>
+      <div class="list-row mrow" data-n="fatima okafor" data-unread="0" onclick="App.go('scr-mkt-chat')" style="cursor:pointer">
+        <div style="position:relative;flex-shrink:0">
+          <img class="ava" src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=400&q=80" style="width:48px;height:48px">
+          <span style="position:absolute;right:-2px;bottom:-2px;width:20px;height:20px;border-radius:50%;background:var(--brand-grad);border:2px solid #fff;display:flex;align-items:center;justify-content:center"><i class="fa-solid fa-bag-shopping" style="color:#fff;font-size:9px"></i></span>
+        </div>
+        <div style="flex:1;min-width:0">
+          <div style="display:flex;justify-content:space-between;align-items:center;gap:8px">
+            <div class="h3" style="font-size:14px">Fatima Okafor</div>
+            <div class="t-sm" style="font-size:11px">1 h</div>
+          </div>
+          <div class="t-sm" style="display:flex;align-items:center;gap:5px;color:var(--brand-700,#C24F00);font-weight:700;margin-top:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis"><i class="fa-solid fa-tag" style="font-size:9px"></i> Jollof Combo Pack · $5</div>
+          <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;margin-top:1px">
+            <div class="t-sm" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Order delivered — enjoy! ⭐ <i class="fa-solid fa-check-double" style="color:var(--brand);font-size:11px"></i></div>
+            
+          </div>
+        </div>
+        <img src="https://images.unsplash.com/photo-1556910103-1c02745aae4d?w=160&q=80" style="width:46px;height:46px;border-radius:11px;object-fit:cover;flex:none">
+      </div>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    var MSG_PILL = {
+      // pill shows the OTHER inbox you can switch to
+      shop: '<i class="fa-solid fa-store" style="color:var(--brand);font-size:13px"></i>'
+          + '<span style="font-weight:700;font-size:13px;color:var(--ink)">Marketplace</span>'
+          + '<span style="display:inline-flex;min-width:18px;height:18px;padding:0 5px;border-radius:9px;background:var(--brand);color:#fff;font-size:10px;font-weight:700;align-items:center;justify-content:center">2</span>',
+      chats: '<i class="fa-solid fa-comments" style="color:var(--info,#0EA5E9);font-size:13px"></i>'
+          + '<span style="font-weight:700;font-size:13px;color:var(--ink)">Chats</span>'
+          + '<span style="display:inline-flex;min-width:18px;height:18px;padding:0 5px;border-radius:9px;background:var(--info,#0EA5E9);color:#fff;font-size:10px;font-weight:700;align-items:center;justify-content:center">2</span>'
+    };
+    function msgSetMode(mode){
+      var onShop = mode==='shop';
+      document.getElementById('pane-chats').style.display = onShop?'none':'';
+      document.getElementById('pane-shop').style.display  = onShop?'':'none';
+      var title=document.getElementById('msgTitle'); if(title) title.textContent = onShop?'Marketplace':'Messages';
+      var btn=document.getElementById('msgModeBtn'); if(btn) btn.innerHTML = onShop?MSG_PILL.chats:MSG_PILL.shop;
+      var s=document.getElementById('msgSearchInput'); if(s) s.value='';
+      document.querySelectorAll('#scr-messages .mrow').forEach(function(r){ r.style.display=''; var d=r.nextElementSibling; if(d&&d.classList.contains('divider')) d.style.display=''; });
+      var e=document.getElementById('msgEmpty'); if(e) e.style.display='none';
+      // reset Read/Unread filter back to "All" on mode switch
+      document.querySelectorAll('#msgFilters .chip').forEach(function(c,i){ c.classList.toggle('active', i===0); });
+    }
+    function msgToggleMode(){
+      var shopOpen=document.getElementById('pane-shop').style.display!=='none';
+      msgSetMode(shopOpen?'chats':'shop');
+    }
+    function msgFilter(chip,which){
+      document.querySelectorAll('#msgFilters .chip').forEach(function(c){ c.classList.remove('active'); });
+      chip.classList.add('active');
+      var onShop=document.getElementById('pane-shop').style.display!=='none';
+      var sel=(onShop?'#shopList':'#chatsList')+' .mrow', shown=0;
+      document.querySelectorAll(sel).forEach(function(r){
+        var ok=(which==='all')||(r.dataset.unread==='1');
+        r.style.display=ok?'':'none';
+        var d=r.nextElementSibling; if(d&&d.classList.contains('divider')) d.style.display=ok?'':'none';
+        if(ok) shown++;
+      });
+      var e=document.getElementById('msgEmpty'); if(e) e.style.display=shown?'none':'';
+    }
+    function msgSearch(q){
+      q=(q||'').toLowerCase().trim();
+      var shopOpen=document.getElementById('pane-shop').style.display!=='none';
+      var sel=(shopOpen?'#shopList':'#chatsList')+' .mrow', shown=0;
+      document.querySelectorAll(sel).forEach(function(r){
+        var div=r.nextElementSibling; var m=(r.dataset.n||'').includes(q);
+        r.style.display=m?'':'none';
+        if(div&&div.classList.contains('divider')) div.style.display=m?'':'none';
+        if(m) shown++;
+      });
+      var e=document.getElementById('msgEmpty'); if(e) e.style.display=shown?'none':'';
+    }
+  </script>
+</section>
+
+
+<!-- ====================== SCR-MESSAGE-REQUESTS ====================== -->
+<section class="screen" id="scr-message-requests"
+         data-topbar="back" data-nav="hide" data-title="Message Requests">
+  <div class="pad stack">
+    <div class="t-sm" style="margin-top:-2px">These people aren't in your friends list. Accept to start chatting, or decline to remove the request.</div>
+
+    <div class="card" id="reqList">
+
+      <div class="list-row mreq-row" style="align-items:flex-start">
+        <img class="ava" src="https://images.unsplash.com/photo-1547425260-76bcadfb4f2c?w=400&q=80" style="width:46px;height:46px;flex:none" onclick="App.go('scr-user-profile')">
+        <div style="flex:1;min-width:0">
+          <div class="h3" style="font-size:14px">Yusuf Adeyemi</div>
+          <div class="t-sm" style="margin:2px 0 8px">Hi, I saw your ankara fabric post — is the blue bundle still available? 🙏</div>
+          <div style="display:flex;gap:8px">
+            <button class="btn-sm btn-primary" onclick="msgReqAccept(this,'Yusuf')">Accept</button>
+            <button class="btn-sm btn-ghost" onclick="msgReqDecline(this)">Decline</button>
+          </div>
+        </div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="list-row mreq-row" style="align-items:flex-start">
+        <img class="ava" src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=400&q=80" style="width:46px;height:46px;flex:none" onclick="App.go('scr-user-profile')">
+        <div style="flex:1;min-width:0">
+          <div class="h3" style="font-size:14px">Tasnim Akter</div>
+          <div class="t-sm" style="margin:2px 0 8px">Assalamu alaikum! A friend in Dhaka recommended your store. Do you ship to Chittagong?</div>
+          <div style="display:flex;gap:8px">
+            <button class="btn-sm btn-primary" onclick="msgReqAccept(this,'Tasnim')">Accept</button>
+            <button class="btn-sm btn-ghost" onclick="msgReqDecline(this)">Decline</button>
+          </div>
+        </div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="list-row mreq-row" style="align-items:flex-start">
+        <img class="ava" src="https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?w=400&q=80" style="width:46px;height:46px;flex:none" onclick="App.go('scr-user-profile')">
+        <div style="flex:1;min-width:0">
+          <div class="h3" style="font-size:14px">Chioma Nwankwo</div>
+          <div class="t-sm" style="margin:2px 0 8px">Hello! Are you the organiser of the Abuja vendors meetup? 😊</div>
+          <div style="display:flex;gap:8px">
+            <button class="btn-sm btn-primary" onclick="msgReqAccept(this,'Chioma')">Accept</button>
+            <button class="btn-sm btn-ghost" onclick="msgReqDecline(this)">Decline</button>
           </div>
         </div>
       </div>
 
     </div>
+
+    <div id="msgReqEmpty" class="empty" style="display:none"><i class="fa-regular fa-circle-check"></i><div class="h3" style="color:var(--ink-2)">No pending requests</div></div>
   </div>
+
+  <script>
+    function msgReqCheckEmpty(){
+      var any=document.querySelectorAll('#reqList .mreq-row').length;
+      var e=document.getElementById('msgReqEmpty'); if(e) e.style.display=any?'none':'';
+      var l=document.getElementById('reqList'); if(l) l.style.display=any?'':'none';
+    }
+    function msgReqAccept(btn,name){
+      var r=btn.closest('.mreq-row'); var d=r&&r.nextElementSibling;
+      if(r) r.remove(); if(d&&d.classList.contains('divider')) d.remove();
+      App.toast('Accepted '+name+' — opening chat'); msgReqCheckEmpty(); App.go('scr-chat');
+    }
+    function msgReqDecline(btn){
+      var r=btn.closest('.mreq-row'); var d=r&&r.nextElementSibling;
+      if(r) r.remove(); if(d&&d.classList.contains('divider')) d.remove();
+      App.toast('Request declined'); msgReqCheckEmpty();
+    }
+  </script>
 </section>
 
 
@@ -141,17 +357,19 @@
          data-topbar="none" data-nav="hide" data-title="Chat">
 
   <!-- custom sticky header -->
-  <div style="height:60px;display:flex;align-items:center;gap:10px;padding:0 10px;background:#fff;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:5">
+  <div style="height:60px;display:flex;align-items:center;gap:8px;padding:0 10px;background:#fff;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:5">
     <button class="icon-btn" onclick="App.back()"><i class="fa-solid fa-arrow-left"></i></button>
-    <img class="ava" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&q=80" style="width:40px;height:40px" onclick="App.go('scr-user-profile')">
-    <div style="flex:1;min-width:0" onclick="App.go('scr-user-profile')">
-      <div style="font-weight:700;font-size:15px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Aisha Bello</div>
-      <div style="font-size:12px;color:var(--ok);font-weight:600;display:flex;align-items:center;gap:5px">
-        <span style="width:7px;height:7px;border-radius:50%;background:var(--ok);display:inline-block"></span>Online
+    <img class="ava" src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&q=80" style="width:40px;height:40px" onclick="App.go('scr-user-profile')">
+    <div style="flex:1;min-width:0;cursor:pointer" onclick="App.go('scr-user-profile')">
+      <div style="font-weight:700;font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Kabir Hassan</div>
+      <div style="font-size:11px;color:var(--ok);font-weight:600;display:flex;align-items:center;gap:4px">
+        <span style="width:6px;height:6px;border-radius:50%;background:var(--ok);display:inline-block"></span>Online
       </div>
     </div>
-    <button class="icon-btn" onclick="App.toast('Calling Aisha…')"><i class="fa-solid fa-phone" style="color:var(--brand)"></i></button>
-    <button class="icon-btn" onclick="App.toast('Starting video call…')"><i class="fa-solid fa-video" style="color:var(--brand)"></i></button>
+    <!-- CALL BUTTONS -->
+    <button class="icon-btn" onclick="ChatCall.start('audio', 'Kabir Hassan', 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&q=80')" aria-label="Audio call"><i class="fa-solid fa-phone" style="color:var(--brand);font-size:16px"></i></button>
+    <button class="icon-btn" onclick="ChatCall.start('video', 'Kabir Hassan', 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&q=80')" aria-label="Video call"><i class="fa-solid fa-video" style="color:var(--brand);font-size:16px"></i></button>
+    <button class="icon-btn" onclick="App.openSheet('sheet-chat-options')" aria-label="Chat options"><i class="fa-solid fa-ellipsis-vertical" style="color:var(--brand);font-size:16px"></i></button>
   </div>
 
   <!-- thread -->
@@ -159,13 +377,37 @@
 
     <!-- date pill -->
     <div style="text-align:center;margin:2px 0 6px">
+      <span class="t-sm" style="background:#fff;padding:4px 12px;border-radius:12px;font-size:11px;box-shadow:0 1px 2px rgba(0,0,0,.04)">Yesterday</span>
+    </div>
+
+    <!-- received -->
+    <div style="align-self:flex-start;max-width:78%">
+      <div style="background:#fff;padding:10px 13px;border-radius:16px 16px 16px 4px;box-shadow:0 1px 2px rgba(0,0,0,.05);font-size:14px;line-height:1.5">
+        Bro, are we still on for Saturday? 🏏
+      </div>
+      <div class="t-sm" style="font-size:10px;margin:3px 0 0 6px">6:48 PM</div>
+    </div>
+
+    <!-- sent -->
+    <div style="align-self:flex-end;max-width:78%">
+      <div style="background:var(--brand-grad);color:#fff;padding:10px 13px;border-radius:16px 16px 4px 16px;font-size:14px;line-height:1.5;box-shadow:0 2px 6px rgba(187,128,19,.25)">
+        Yeah! Cricket at 4, then food after 😄
+      </div>
+      <div style="display:flex;align-items:center;gap:4px;justify-content:flex-end;margin:3px 6px 0 0">
+        <span class="t-sm" style="font-size:10px">6:50 PM</span>
+        <i class="fa-solid fa-check-double" style="font-size:11px;color:var(--info)"></i>
+      </div>
+    </div>
+
+    <!-- date pill -->
+    <div style="text-align:center;margin:8px 0 6px">
       <span class="t-sm" style="background:#fff;padding:4px 12px;border-radius:12px;font-size:11px;box-shadow:0 1px 2px rgba(0,0,0,.04)">Today</span>
     </div>
 
     <!-- received -->
     <div style="align-self:flex-start;max-width:78%">
       <div style="background:#fff;padding:10px 13px;border-radius:16px 16px 16px 4px;box-shadow:0 1px 2px rgba(0,0,0,.05);font-size:14px;line-height:1.5">
-        Hey! Are you still selling the Ankara fabric bundle? 👗
+        Perfect. My cousin's joining too — hope that's cool
       </div>
       <div class="t-sm" style="font-size:10px;margin:3px 0 0 6px">9:24 AM</div>
     </div>
@@ -173,7 +415,7 @@
     <!-- sent -->
     <div style="align-self:flex-end;max-width:78%">
       <div style="background:var(--brand-grad);color:#fff;padding:10px 13px;border-radius:16px 16px 4px 16px;font-size:14px;line-height:1.5;box-shadow:0 2px 6px rgba(187,128,19,.25)">
-        Yes! Still available — ₦12,500 for the full bundle of 6 yards.
+        Of course, more the merrier! 🙌
       </div>
       <div style="display:flex;align-items:center;gap:4px;justify-content:flex-end;margin:3px 6px 0 0">
         <span class="t-sm" style="font-size:10px">9:25 AM</span>
@@ -194,7 +436,7 @@
     <!-- received -->
     <div style="align-self:flex-start;max-width:78%">
       <div style="background:#fff;padding:10px 13px;border-radius:16px 16px 16px 4px;box-shadow:0 1px 2px rgba(0,0,0,.05);font-size:14px;line-height:1.5">
-        Love these colours! Can you do ₦11,000? 🙏
+        Found a great spot for after — their grilled fish is unreal 🐟
       </div>
       <div class="t-sm" style="font-size:10px;margin:3px 0 0 6px">9:26 AM</div>
     </div>
@@ -227,7 +469,7 @@
     <!-- sent -->
     <div style="align-self:flex-end;max-width:78%">
       <div style="background:var(--brand-grad);color:#fff;padding:10px 13px;border-radius:16px 16px 4px 16px;font-size:14px;line-height:1.5;box-shadow:0 2px 6px rgba(187,128,19,.25)">
-        Let's meet at ₦11,800 and I'll throw in free delivery within Lagos 😊
+        Booked a table for 6. See you Saturday! 🎉
       </div>
       <div style="display:flex;align-items:center;gap:4px;justify-content:flex-end;margin:3px 6px 0 0">
         <span class="t-sm" style="font-size:10px">9:27 AM</span>
@@ -248,19 +490,28 @@
 
   <!-- sticky bottom input bar -->
   <div style="position:sticky;bottom:0;left:0;right:0;background:#fff;border-top:1px solid var(--line);padding:8px 10px;display:flex;align-items:center;gap:8px;z-index:5">
-    <button class="icon-btn" onclick="App.openSheet('sheet-create')"><i class="fa-solid fa-plus" style="color:var(--brand)"></i></button>
+    <button class="icon-btn" onclick="App.openSheet('sheet-chat-attach')"><i class="fa-solid fa-plus" style="color:var(--brand)"></i></button>
     <div style="flex:1;display:flex;align-items:center;background:var(--bg);border-radius:22px;padding:0 12px;height:42px;gap:8px">
       <input type="text" placeholder="Type a message…"
              style="flex:1;border:none;background:transparent;outline:none;font-size:14px;font-family:inherit;color:var(--ink)"
-             oninput="App.toast('Typing…')">
+             onkeydown="if(event.key==='Enter'){chatSend(this)}">
       <button class="icon-btn" style="width:auto;height:auto" onclick="App.toast('Emoji picker')"><i class="fa-regular fa-face-smile" style="color:var(--ink-3)"></i></button>
-      <button class="icon-btn" style="width:auto;height:auto" onclick="App.toast('Hold to record')"><i class="fa-solid fa-microphone" style="color:var(--ink-3)"></i></button>
+      <button class="icon-btn" style="width:auto;height:auto" onclick="App.toast('Hold to record a voice note')"><i class="fa-solid fa-microphone" style="color:var(--ink-3)"></i></button>
     </div>
-    <button onclick="App.toast('Message sent')"
+    <button onclick="chatSend(this.previousElementSibling.querySelector('input'))"
             style="width:42px;height:42px;border-radius:50%;background:var(--brand-grad);border:none;color:#fff;cursor:pointer;flex-shrink:0;box-shadow:0 2px 8px rgba(187,128,19,.3);display:flex;align-items:center;justify-content:center">
       <i class="fa-solid fa-paper-plane" style="font-size:15px"></i>
     </button>
   </div>
+
+  <script>
+    function chatSend(input){
+      if(!input) return;
+      var t=(input.value||'').trim();
+      if(!t){ App.toast('Type a message first'); return; }
+      input.value=''; App.toast('Message sent');
+    }
+  </script>
 </section>
 
 
@@ -269,14 +520,17 @@
          data-topbar="none" data-nav="hide" data-title="Group Chat">
 
   <!-- custom sticky header -->
-  <div style="height:60px;display:flex;align-items:center;gap:10px;padding:0 10px;background:#fff;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:5">
+  <div style="height:60px;display:flex;align-items:center;gap:8px;padding:0 10px;background:#fff;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:5">
     <button class="icon-btn" onclick="App.back()"><i class="fa-solid fa-arrow-left"></i></button>
-    <img class="ava" src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=400&q=80" style="width:40px;height:40px" onclick="App.go('scr-group-page')">
-    <div style="flex:1;min-width:0" onclick="App.go('scr-group-page')">
-      <div style="font-weight:700;font-size:15px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Lagos Hustlers 🚀</div>
-      <div style="font-size:12px;color:var(--ink-2);font-weight:600">12 members</div>
+    <img class="ava" src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=400&q=80" style="width:40px;height:40px" onclick="App.go('scr-group-page-member')">
+    <div style="flex:1;min-width:0;cursor:pointer" onclick="App.go('scr-group-page-member')">
+      <div style="font-weight:700;font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Lagos Hustlers 🚀</div>
+      <div style="font-size:11px;color:var(--ink-2);font-weight:600">12 members · 3 online</div>
     </div>
-    <button class="btn-sm btn-soft" onclick="App.toast('Opening group info')" style="height:34px;padding:0 12px;font-size:12px">Group Info</button>
+    <!-- CALL BUTTONS -->
+    <button class="icon-btn" onclick="ChatCall.start('audio', 'Lagos Hustlers 🚀', 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=400&q=80')" aria-label="Audio call"><i class="fa-solid fa-phone" style="color:var(--brand);font-size:16px"></i></button>
+    <button class="icon-btn" onclick="ChatCall.start('video', 'Lagos Hustlers 🚀', 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=400&q=80')" aria-label="Video call"><i class="fa-solid fa-video" style="color:var(--brand);font-size:16px"></i></button>
+    <button class="icon-btn" onclick="App.openSheet('sheet-groupchat-options')" aria-label="Group options"><i class="fa-solid fa-ellipsis-vertical" style="color:var(--brand);font-size:16px"></i></button>
   </div>
 
   <!-- thread -->
@@ -351,17 +605,226 @@
 
   <!-- sticky bottom input bar -->
   <div style="position:sticky;bottom:0;left:0;right:0;background:#fff;border-top:1px solid var(--line);padding:8px 10px;display:flex;align-items:center;gap:8px;z-index:5">
-    <button class="icon-btn" onclick="App.openSheet('sheet-create')"><i class="fa-solid fa-plus" style="color:var(--brand)"></i></button>
+    <button class="icon-btn" onclick="App.openSheet('sheet-chat-attach')"><i class="fa-solid fa-plus" style="color:var(--brand)"></i></button>
     <div style="flex:1;display:flex;align-items:center;background:var(--bg);border-radius:22px;padding:0 12px;height:42px;gap:8px">
-      <input type="text" placeholder="Type a message…"
+      <input type="text" placeholder="Message Lagos Hustlers…"
              style="flex:1;border:none;background:transparent;outline:none;font-size:14px;font-family:inherit;color:var(--ink)"
-             oninput="App.toast('Typing…')">
+             onkeydown="if(event.key==='Enter'){chatSend(this)}">
       <button class="icon-btn" style="width:auto;height:auto" onclick="App.toast('Emoji picker')"><i class="fa-regular fa-face-smile" style="color:var(--ink-3)"></i></button>
-      <button class="icon-btn" style="width:auto;height:auto" onclick="App.toast('Hold to record')"><i class="fa-solid fa-microphone" style="color:var(--ink-3)"></i></button>
+      <button class="icon-btn" style="width:auto;height:auto" onclick="App.toast('Hold to record a voice note')"><i class="fa-solid fa-microphone" style="color:var(--ink-3)"></i></button>
     </div>
-    <button onclick="App.toast('Message sent')"
+    <button onclick="chatSend(this.previousElementSibling.querySelector('input'))"
             style="width:42px;height:42px;border-radius:50%;background:var(--brand-grad);border:none;color:#fff;cursor:pointer;flex-shrink:0;box-shadow:0 2px 8px rgba(187,128,19,.3);display:flex;align-items:center;justify-content:center">
       <i class="fa-solid fa-paper-plane" style="font-size:15px"></i>
     </button>
   </div>
 </section>
+
+
+<!-- ====================== SHEET-CHAT-ATTACH ====================== -->
+<div class="sheet" id="sheet-chat-attach">
+  <div class="sheet-grip"></div>
+  <div class="pad">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px">
+      <div class="h2" style="font-weight:800;font-size:18px">Attach</div>
+      <button class="icon-btn" onclick="App.closeSheet()"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+
+      <div onclick="App.closeSheet();App.toast('Opening gallery…')" style="display:flex;align-items:center;gap:12px;padding:14px;background:var(--surface);border:1px solid var(--line);border-radius:16px;cursor:pointer">
+        <div style="width:42px;height:42px;border-radius:12px;background:rgba(255,106,1,.12);display:flex;align-items:center;justify-content:center"><i class="fa-solid fa-image" style="color:var(--brand)"></i></div>
+        <div style="font-weight:700;font-size:14px">Photo</div>
+      </div>
+
+      <div onclick="App.closeSheet();App.toast('Opening camera…')" style="display:flex;align-items:center;gap:12px;padding:14px;background:var(--surface);border:1px solid var(--line);border-radius:16px;cursor:pointer">
+        <div style="width:42px;height:42px;border-radius:12px;background:rgba(255,106,1,.12);display:flex;align-items:center;justify-content:center"><i class="fa-solid fa-camera" style="color:var(--brand)"></i></div>
+        <div style="font-weight:700;font-size:14px">Camera</div>
+      </div>
+
+      <div onclick="App.closeSheet();App.toast('Pick a file to send')" style="display:flex;align-items:center;gap:12px;padding:14px;background:var(--surface);border:1px solid var(--line);border-radius:16px;cursor:pointer">
+        <div style="width:42px;height:42px;border-radius:12px;background:rgba(255,106,1,.12);display:flex;align-items:center;justify-content:center"><i class="fa-solid fa-file-lines" style="color:var(--brand)"></i></div>
+        <div style="font-weight:700;font-size:14px">Document</div>
+      </div>
+
+      <div onclick="App.closeSheet();App.toast('Sharing live location…')" style="display:flex;align-items:center;gap:12px;padding:14px;background:var(--surface);border:1px solid var(--line);border-radius:16px;cursor:pointer">
+        <div style="width:42px;height:42px;border-radius:12px;background:rgba(255,106,1,.12);display:flex;align-items:center;justify-content:center"><i class="fa-solid fa-location-dot" style="color:var(--brand)"></i></div>
+        <div style="font-weight:700;font-size:14px">Location</div>
+      </div>
+
+      <div onclick="App.closeSheet();App.go('scr-wallet')" style="display:flex;align-items:center;gap:12px;padding:14px;background:var(--surface);border:1px solid var(--line);border-radius:16px;cursor:pointer">
+        <div style="width:42px;height:42px;border-radius:12px;background:rgba(255,106,1,.12);display:flex;align-items:center;justify-content:center"><i class="fa-solid fa-dollars-sign" style="color:var(--brand)"></i></div>
+        <div style="font-weight:700;font-size:14px">Send Money</div>
+      </div>
+
+      <div onclick="App.closeSheet();App.go('scr-egifts')" style="display:flex;align-items:center;gap:12px;padding:14px;background:var(--surface);border:1px solid var(--line);border-radius:16px;cursor:pointer">
+        <div style="width:42px;height:42px;border-radius:12px;background:rgba(255,106,1,.12);display:flex;align-items:center;justify-content:center"><i class="fa-solid fa-gift" style="color:var(--brand)"></i></div>
+        <div style="font-weight:700;font-size:14px">eGift</div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ============================== SCR-CALLING ============================== -->
+<section class="screen" id="scr-calling" data-topbar="none" data-nav="hide" style="background:#0C0A09;color:#fff;overflow:hidden">
+  <div style="height:100%;width:100%;position:relative;display:flex;flex-direction:column;justify-content:space-between;padding:48px 24px 60px">
+    
+    <!-- Video background (only visible on video calls when answered) -->
+    <div id="call-video-bg" style="position:absolute;inset:0;background:#000;display:none;z-index:1">
+      <img id="call-video-stream" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=800&q=80" style="width:100%;height:100%;object-fit:cover;opacity:0.9">
+      <!-- Local preview floating container -->
+      <div style="position:absolute;top:70px;right:20px;width:100px;height:150px;border-radius:12px;border:2.5px solid #fff;overflow:hidden;box-shadow:var(--shadow-lg)">
+        <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=200&q=80" style="width:100%;height:100%;object-fit:cover">
+      </div>
+    </div>
+
+    <!-- Audio background blur pattern (only on audio calls) -->
+    <div id="call-audio-bg" style="position:absolute;inset:0;background-image:radial-gradient(circle at 50% 30%,rgba(255,106,1,0.18) 0%,rgba(12,10,9,1) 80%);z-index:1"></div>
+
+    <!-- Top metadata: caller status -->
+    <div style="position:relative;z-index:2;text-align:center;margin-top:20px">
+      <div id="call-type-badge" class="badge" style="background:rgba(255,255,255,0.15);color:#fff;margin-bottom:14px;font-size:11px;letter-spacing:0.05em;text-transform:uppercase">Audio Call</div>
+      <h2 id="call-name" class="h1" style="color:#fff;font-size:26px;margin:0 0 6px">Kabir Hassan</h2>
+      <div id="call-status" style="font-size:14px;color:rgba(255,255,255,0.65);font-weight:600">Ringing...</div>
+    </div>
+
+    <!-- Middle: Avatar with pulsing rings (on audio / ringing video) -->
+    <div id="call-avatar-wrap" style="position:relative;z-index:2;display:flex;align-items:center;justify-content:center;margin:auto 0">
+      <div class="pulse-ring" style="position:absolute;width:160px;height:160px;border-radius:50%;border:2px solid rgba(255,106,1,0.4);animation: pulseRing 2s infinite ease-in-out"></div>
+      <div class="pulse-ring-2" style="position:absolute;width:210px;height:210px;border-radius:50%;border:2.5px solid rgba(255,106,1,0.25);animation: pulseRing2 2s infinite ease-in-out"></div>
+      <img id="call-avatar" class="ava" src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&q=80" style="width:120px;height:120px;border:3px solid #fff;position:relative;z-index:3;box-shadow:var(--shadow-lg)">
+    </div>
+
+    <!-- Bottom: Controls row -->
+    <div style="position:relative;z-index:2;display:flex;flex-direction:column;gap:36px;align-items:center;width:100%">
+      <!-- Controls buttons -->
+      <div style="display:flex;justify-content:space-around;width:100%;max-width:280px">
+        <!-- Mic mute button -->
+        <button class="icon-btn" onclick="ChatCall.toggleMic(this)" style="width:52px;height:52px;background:rgba(255,255,255,0.15);color:#fff;font-size:18px"><i class="fa-solid fa-microphone"></i></button>
+        <!-- Speaker button -->
+        <button class="icon-btn" onclick="ChatCall.toggleSpeaker(this)" style="width:52px;height:52px;background:rgba(255,255,255,0.15);color:#fff;font-size:18px"><i class="fa-solid fa-volume-high"></i></button>
+        <!-- Video toggle button -->
+        <button id="call-btn-cam" class="icon-btn" onclick="ChatCall.toggleCam(this)" style="width:52px;height:52px;background:rgba(255,255,255,0.15);color:#fff;font-size:18px"><i class="fa-solid fa-video"></i></button>
+      </div>
+
+      <!-- Hang up button -->
+      <button onclick="ChatCall.end()" style="width:68px;height:68px;border-radius:50%;background:#EF4444;color:#fff;border:none;cursor:pointer;font-size:24px;display:flex;align-items:center;justify-content:center;box-shadow:0 12px 28px rgba(239,68,68,0.45);transition:transform 0.12s" onmousedown="this.style.transform='scale(0.92)'" onmouseup="this.style.transform='scale(1)'">
+        <i class="fa-solid fa-phone-slash"></i>
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- Pulse animations -->
+<style>
+@keyframes pulseRing {
+  0% { transform: scale(0.95); opacity: 0.8; }
+  50% { opacity: 0.3; }
+  100% { transform: scale(1.3); opacity: 0; }
+}
+@keyframes pulseRing2 {
+  0% { transform: scale(0.95); opacity: 0.6; }
+  50% { opacity: 0.2; }
+  100% { transform: scale(1.45); opacity: 0; }
+}
+</style>
+
+<script>
+/* ============ ChatCall: Audio/Video Call controller ============ */
+const ChatCall = (function(){
+  const $ = id => document.getElementById(id);
+  let callTimer = null;
+  let callSeconds = 0;
+  let currentType = 'audio'; // 'audio' or 'video'
+  let ringTimeout = null;
+
+  function fmt(s){ 
+    const m = Math.floor(s/60), ss = s%60; 
+    return m + ':' + (ss < 10 ? '0' : '') + ss; 
+  }
+
+  function start(type, name, ava) {
+    currentType = type;
+    callSeconds = 0;
+    
+    if ($('call-name')) $('call-name').textContent = name;
+    if ($('call-avatar')) $('call-avatar').src = ava || 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&q=80';
+    if ($('call-type-badge')) $('call-type-badge').textContent = type === 'video' ? 'Video Call' : 'Audio Call';
+    
+    // Set UI states
+    if ($('call-status')) $('call-status').textContent = 'Ringing...';
+    if ($('call-video-bg')) $('call-video-bg').style.display = 'none';
+    if ($('call-audio-bg')) $('call-audio-bg').style.display = '';
+    if ($('call-avatar-wrap')) $('call-avatar-wrap').style.display = '';
+    
+    // Camera toggle button state
+    const camBtn = $('call-btn-cam');
+    if (camBtn) {
+      camBtn.disabled = type !== 'video';
+      camBtn.style.opacity = type === 'video' ? '1' : '0.4';
+    }
+
+    App.go('scr-calling');
+    App.toast('Calling ' + name + '...');
+
+    // Auto-answer after 2.2 seconds to make the prototype interactive!
+    ringTimeout = setTimeout(() => {
+      answer();
+    }, 2200);
+  }
+
+  function answer() {
+    if ($('call-status')) $('call-status').textContent = 'Connected (0:00)';
+    
+    if (currentType === 'video') {
+      if ($('call-video-bg')) $('call-video-bg').style.display = 'block';
+      if ($('call-avatar-wrap')) $('call-avatar-wrap').style.display = 'none';
+    }
+
+    callSeconds = 0;
+    callTimer = setInterval(() => {
+      callSeconds++;
+      if ($('call-status')) $('call-status').textContent = 'Connected (' + fmt(callSeconds) + ')';
+    }, 1000);
+
+    App.toast('Call Answered');
+  }
+
+  function toggleMic(btn) {
+    const active = btn.classList.toggle('active');
+    btn.style.background = active ? '#EF4444' : 'rgba(255,255,255,0.15)';
+    App.toast(active ? 'Microphone Muted' : 'Microphone Active');
+  }
+
+  function toggleSpeaker(btn) {
+    const active = btn.classList.toggle('active');
+    btn.style.background = active ? 'var(--brand)' : 'rgba(255,255,255,0.15)';
+    App.toast(active ? 'Speakerphone On' : 'Speakerphone Off');
+  }
+
+  function toggleCam(btn) {
+    if (currentType !== 'video') return;
+    const active = btn.classList.toggle('active');
+    btn.style.background = active ? '#EF4444' : 'rgba(255,255,255,0.15)';
+    if ($('call-video-bg')) {
+      $('call-video-bg').style.display = active ? 'none' : 'block';
+    }
+    if ($('call-avatar-wrap')) {
+      $('call-avatar-wrap').style.display = active ? 'flex' : 'none';
+    }
+    App.toast(active ? 'Camera Disabled' : 'Camera Enabled');
+  }
+
+  function end() {
+    if (ringTimeout) { clearTimeout(ringTimeout); ringTimeout = null; }
+    if (callTimer) { clearInterval(callTimer); callTimer = null; }
+    
+    App.toast('Call Ended');
+    App.back();
+  }
+
+  return { start, answer, end, toggleMic, toggleSpeaker, toggleCam };
+})();
+</script>
+

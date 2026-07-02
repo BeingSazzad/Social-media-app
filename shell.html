@@ -150,6 +150,9 @@
     .input{ width:100%; height:48px; padding:0 16px; border-radius:14px; border:1.5px solid var(--line);
       background:#fff; font-size:14px; font-family:inherit; color:var(--ink); outline:none; transition:border .15s,box-shadow .15s; }
     .input::placeholder{ color:var(--ink-3); }
+    textarea.canvas-on::placeholder{ color:rgba(255,255,255,.9); text-align:center; }
+    .emo{ width:12.5%; aspect-ratio:1; border:none; background:none; cursor:pointer; font-size:23px; border-radius:10px; line-height:1; padding:0; }
+    .emo:hover{ background:var(--bg-2); }
     .input:focus{ border-color:var(--brand); box-shadow:0 0 0 3px rgba(255,106,1,.12); }
     textarea.input{ height:auto; min-height:96px; padding:12px 16px; resize:none; line-height:1.5; }
     .input-group{ position:relative; }
@@ -171,6 +174,8 @@
     .t-sm{ font-size:12px; color:var(--ink-3); }
     .section-title{ font-size:11px; font-weight:800; text-transform:uppercase; letter-spacing:.09em; color:var(--ink-3); }
     .muted{ color:var(--ink-3); }
+    .legal-sec{ margin-top:18px; }
+    .legal-h{ font-size:15px; font-weight:800; margin:0 0 5px; color:var(--ink); }
 
     /* ============== CHIPS / SEGMENTED ============== */
     .chip-row{ display:flex; gap:8px; overflow-x:auto; padding:2px; }
@@ -276,7 +281,7 @@
       <div class="tb-app" id="tbApp">
         <button class="icon-btn" onclick="App.openDrawer()" aria-label="Menu"><i class="fa-solid fa-bars"></i></button>
         <div class="tb-logo">EVINIE</div>
-        <div style="display:flex;gap:2px">
+        <div id="tbAppActions" style="display:flex;gap:2px">
           <button class="icon-btn" style="position:relative" onclick="App.go('scr-discover')"><i class="fa-solid fa-magnifying-glass"></i></button>
           <button class="icon-btn" style="position:relative" onclick="App.go('scr-messages')"><i class="fa-regular fa-comment-dots"></i><span class="dot"></span></button>
         </div>
@@ -344,75 +349,99 @@
           </div>
           <div class="field">
             <label class="label">Email or Username</label>
-            <input class="input" placeholder="Email or username" id="lgUser">
+            <input class="input" placeholder="you@email.com or @username" id="lgUser">
           </div>
-          <div class="field">
+          <div class="field" style="margin-bottom:8px">
             <label class="label">Password</label>
             <div class="input-group">
-              <input class="input" type="password" placeholder="Password" id="lgPass">
+              <input class="input" type="password" placeholder="Enter your password" id="lgPass">
               <button class="input-icon" onclick="togglePw('lgPass',this)"><i class="fa-regular fa-eye"></i></button>
             </div>
           </div>
-          <div style="text-align:right;margin-bottom:18px">
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:18px">
+            <label style="display:flex;align-items:center;gap:8px;cursor:pointer">
+              <span class="switch" style="width:40px;height:24px"><input type="checkbox" checked><span></span></span>
+              <span class="t-sm" style="color:var(--ink-2)">Keep me signed in</span>
+            </label>
             <button onclick="App.go('scr-forgot')" style="background:none;border:none;color:var(--brand);font-weight:700;font-size:13px;cursor:pointer">Forgot Password?</button>
           </div>
           <button class="btn btn-primary" onclick="App.tab('scr-home')">Log In</button>
           <div style="display:flex;align-items:center;gap:12px;margin:22px 0">
-            <div class="divider" style="flex:1"></div><span class="t-sm">or</span><div class="divider" style="flex:1"></div>
+            <div class="divider" style="flex:1"></div><span class="t-sm">or continue with</span><div class="divider" style="flex:1"></div>
           </div>
-          <button class="btn btn-outline" onclick="App.go('scr-register')">Create Account</button>
+          <div style="display:flex;gap:10px;margin-bottom:18px">
+            <button class="btn btn-ghost" style="flex:1;gap:9px" onclick="App.toast('Connecting to Google…')"><i class="fa-brands fa-google" style="color:#DB4437"></i> Google</button>
+            <button class="btn btn-ghost" style="flex:1;gap:9px" onclick="App.toast('Connecting to Facebook…')"><i class="fa-brands fa-facebook-f" style="color:#1877F2"></i> Facebook</button>
+          </div>
+          <p class="t-sm" style="text-align:center">New to EVINIE?
+            <button onclick="App.go('scr-register')" style="background:none;border:none;color:var(--brand);font-weight:700;cursor:pointer">Create an account</button></p>
         </div>
       </section>
 
       <!-- SCREEN 06 — Register -->
       <section class="screen" id="scr-register" data-topbar="back" data-nav="hide" data-title="Create Account" style="background:#fff">
         <div class="pad" style="padding:20px 24px 32px">
-          <p class="t-body" style="margin-bottom:18px">Join EVINIE and start connecting today.</p>
-          <div style="display:flex;gap:10px">
-            <div class="field" style="flex:1"><label class="label">First Name</label><input class="input" placeholder="First name"></div>
-            <div class="field" style="flex:1"><label class="label">Last Name</label><input class="input" placeholder="Last name"></div>
+          <p class="t-body" style="margin-bottom:18px">Join EVINIE and start connecting, earning and growing today.</p>
+          <div style="display:flex;gap:10px;margin-bottom:14px">
+            <button class="btn btn-ghost" style="flex:1;gap:9px;height:46px" onclick="App.toast('Connecting to Google…')"><i class="fa-brands fa-google" style="color:#DB4437"></i> Google</button>
+            <button class="btn btn-ghost" style="flex:1;gap:9px;height:46px" onclick="App.toast('Connecting to Facebook…')"><i class="fa-brands fa-facebook-f" style="color:#1877F2"></i> Facebook</button>
           </div>
-          <div class="field"><label class="label">Username</label><input class="input" placeholder="@username"></div>
+          <div style="display:flex;align-items:center;gap:12px;margin-bottom:18px">
+            <div class="divider" style="flex:1"></div><span class="t-sm">or sign up with email</span><div class="divider" style="flex:1"></div>
+          </div>
+          <div style="display:flex;gap:10px">
+            <div class="field" style="flex:1"><label class="label">First Name</label><input class="input" placeholder="e.g. Aisha"></div>
+            <div class="field" style="flex:1"><label class="label">Last Name</label><input class="input" placeholder="e.g. Bello"></div>
+          </div>
+          <div class="field"><label class="label">Username</label><input class="input" placeholder="@username">
+            <p class="t-sm" style="margin-top:6px">This is how friends will find you. You can't change it later.</p></div>
           <div class="field"><label class="label">Email Address</label><input class="input" type="email" placeholder="you@email.com"></div>
-          <div class="field"><label class="label">Mobile Number</label><input class="input" type="tel" placeholder="+880 1XXX-XXXXXX"></div>
+          <div class="field"><label class="label">Mobile Number</label><input class="input" type="tel" placeholder="+1 (555) 000-0000"></div>
           <div style="display:flex;gap:10px">
             <div class="field" style="flex:1"><label class="label">Date of Birth</label><input class="input" type="date"></div>
             <div class="field" style="flex:1"><label class="label">Country</label>
-              <select class="input"><option>Bangladesh</option><option>Nigeria</option><option>India</option><option>USA</option></select></div>
+              <select class="input"><option>Nigeria</option><option>Bangladesh</option><option>Ghana</option><option>Kenya</option></select></div>
           </div>
           <div class="field"><label class="label">Gender</label>
-            <div class="seg"><button class="active">Male</button><button>Female</button></div>
+            <div class="seg"><button class="active">Male</button><button>Female</button><button>Prefer not to say</button></div>
           </div>
           <div class="field"><label class="label">Password</label>
-            <div class="input-group"><input class="input" type="password" id="rgPass" placeholder="Min 8 characters">
-              <button class="input-icon" onclick="togglePw('rgPass',this)"><i class="fa-regular fa-eye"></i></button></div></div>
+            <div class="input-group"><input class="input" type="password" id="rgPass" placeholder="Create a password">
+              <button class="input-icon" onclick="togglePw('rgPass',this)"><i class="fa-regular fa-eye"></i></button></div>
+            <p class="t-sm" style="margin-top:6px">Use 8+ characters with a mix of letters, numbers & symbols.</p></div>
           <div class="field"><label class="label">Confirm Password</label>
             <div class="input-group"><input class="input" type="password" id="rgPass2" placeholder="Re-enter password">
               <button class="input-icon" onclick="togglePw('rgPass2',this)"><i class="fa-regular fa-eye"></i></button></div></div>
-          <button class="btn btn-primary" style="margin-top:8px" onclick="App.go('scr-otp')">Create Account</button>
+          <label style="display:flex;align-items:flex-start;gap:10px;margin:4px 0 16px;cursor:pointer">
+            <input type="checkbox" style="width:18px;height:18px;margin-top:2px;accent-color:var(--brand);flex:none">
+            <span class="t-sm" style="color:var(--ink-2);line-height:1.5">I agree to EVINIE's <b class="text-brand" style="cursor:pointer" onclick="event.preventDefault();event.stopPropagation();App.go('scr-terms')">Terms of Service</b> and <b class="text-brand" style="cursor:pointer" onclick="event.preventDefault();event.stopPropagation();App.go('scr-privacy-policy')">Privacy Policy</b>, and confirm I'm at least 16 years old.</span>
+          </label>
+          <button class="btn btn-primary" onclick="App.go('scr-email-verify')">Create Account</button>
           <p class="t-sm" style="text-align:center;margin-top:16px">Already have an account?
             <button onclick="App.go('scr-login')" style="background:none;border:none;color:var(--brand);font-weight:700;cursor:pointer">Log In</button></p>
         </div>
       </section>
 
-      <!-- SCREEN 07 — Email Verification (OTP) -->
-      <section class="screen" id="scr-otp" data-topbar="back" data-nav="hide" data-title="Verify Email" style="background:#fff">
-        <div class="pad" style="padding:32px 24px;text-align:center">
-          <div style="width:96px;height:96px;border-radius:30px;background:var(--brand-50,#FFF3EA);display:flex;align-items:center;justify-content:center;margin:12px auto 22px">
+      <!-- SCREEN 07 — Email Verification (link-based) -->
+      <section class="screen" id="scr-email-verify" data-topbar="back" data-nav="hide" data-title="Verify Email" style="background:#fff">
+        <div class="pad" style="padding:40px 24px;text-align:center">
+          <div style="width:96px;height:96px;border-radius:30px;background:var(--brand-50,#FFF3EA);display:flex;align-items:center;justify-content:center;margin:12px auto 24px">
             <i class="fa-regular fa-envelope" style="font-size:42px;color:var(--brand)"></i>
           </div>
-          <h1 class="h1">Check your email</h1>
-          <p class="t-body" style="margin:8px 0 26px">We sent a 6-digit code to<br><b style="color:var(--ink)">sohag@email.com</b></p>
-          <div style="display:flex;gap:10px;justify-content:center;margin-bottom:26px">
-            <input class="input" maxlength="1" style="width:48px;text-align:center;font-size:20px;font-weight:700;padding:0" value="4">
-            <input class="input" maxlength="1" style="width:48px;text-align:center;font-size:20px;font-weight:700;padding:0" value="8">
-            <input class="input" maxlength="1" style="width:48px;text-align:center;font-size:20px;font-weight:700;padding:0">
-            <input class="input" maxlength="1" style="width:48px;text-align:center;font-size:20px;font-weight:700;padding:0">
-            <input class="input" maxlength="1" style="width:48px;text-align:center;font-size:20px;font-weight:700;padding:0">
-            <input class="input" maxlength="1" style="width:48px;text-align:center;font-size:20px;font-weight:700;padding:0">
+          <h1 class="h1">Check your inbox</h1>
+          <p class="t-body" style="margin:10px 0 8px">We sent a verification link to</p>
+          <p style="font-weight:700;color:var(--ink);font-size:15px;margin-bottom:28px">sohag@email.com</p>
+          <div class="card card-p" style="text-align:left;margin-bottom:22px">
+            <div style="display:flex;align-items:flex-start;gap:11px">
+              <i class="fa-solid fa-circle-info" style="color:var(--brand-2);margin-top:2px"></i>
+              <p class="t-sm" style="line-height:1.6">Click the link in your email to activate your account. The link expires in <b>30 minutes</b>. Check your spam folder if you don't see it.</p>
+            </div>
           </div>
-          <button class="btn btn-primary" onclick="App.go('scr-setup1')">Verify</button>
-          <p class="t-sm" style="margin-top:18px">Didn't get it? <b style="color:var(--brand)">Resend in 0:54</b></p>
+          <button class="btn btn-primary" onclick="App.go('scr-setup1')">I've verified my email</button>
+          <p class="t-sm" style="margin-top:18px">Didn't receive the email?
+            <button onclick="App.toast('Verification email resent — check your inbox')" style="background:none;border:none;color:var(--brand);font-weight:700;cursor:pointer">Resend link</button></p>
+          <p class="t-sm" style="margin-top:8px">
+            <button onclick="App.go('scr-login')" style="background:none;border:none;color:var(--ink-3);font-weight:600;cursor:pointer">Back to Login</button></p>
         </div>
       </section>
 
@@ -429,7 +458,7 @@
             <div style="position:relative">
               <div style="width:150px;height:150px;border-radius:50%;background:var(--bg-2);display:flex;align-items:center;justify-content:center;color:var(--ink-3)">
                 <i class="fa-solid fa-user" style="font-size:64px"></i></div>
-              <button style="position:absolute;bottom:4px;right:4px;width:46px;height:46px;border-radius:50%;background:var(--brand-grad);color:#fff;border:3px solid #fff;cursor:pointer;font-size:16px">
+              <button onclick="App.toast('Choose a photo from your gallery or camera')" style="position:absolute;bottom:4px;right:4px;width:46px;height:46px;border-radius:50%;background:var(--brand-grad);color:#fff;border:3px solid #fff;cursor:pointer;font-size:16px">
                 <i class="fa-solid fa-camera"></i></button>
             </div>
           </div>
@@ -519,7 +548,7 @@
         <div class="pad" style="padding-top:6px;padding-bottom:0">
           <div style="background:#CFF4FC;border-radius:16px;padding:14px;display:flex;gap:12px;align-items:flex-start">
             <i class="fa-solid fa-bullhorn" style="color:#0891B2;font-size:18px;margin-top:2px"></i>
-            <div style="flex:1">
+            <div style="flex:1;cursor:pointer" onclick="App.go('scr-membership')">
               <div class="h3" style="color:#0E7490">EviEarner Payments</div>
               <p class="t-sm" style="color:#155E75;margin-top:2px">Monthly payouts are now live. <b>Tap to learn more →</b></p>
             </div>
@@ -547,7 +576,7 @@
             <div class="post-actions">
               <button onclick="likeBtn(this)"><i class="fa-regular fa-heart"></i> Like</button>
               <button onclick="App.go('scr-post-detail')"><i class="fa-regular fa-comment"></i> Comment</button>
-              <button onclick="App.toast('Shared to your timeline')"><i class="fa-solid fa-share"></i> Share</button>
+              <button onclick="App.go('scr-share-post')"><i class="fa-solid fa-share"></i> Share</button>
             </div>
           </article>
           <!-- inline widget: contact suggestions -->
@@ -560,28 +589,161 @@
               <div style="flex:none;width:120px;border:1px solid var(--line);border-radius:14px;padding:12px;text-align:center">
                 <img class="ava" src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=120&q=80" style="width:54px;height:54px;margin:0 auto 8px">
                 <div style="font-weight:700;font-size:13px">Mitu R.</div><div class="t-sm" style="margin-bottom:8px">12 mutual</div>
-                <button class="btn-sm btn-soft" style="width:100%" onclick="this.textContent='Added'">Add</button>
+                <button class="btn-sm btn-soft" style="width:100%" onclick="friendToggle(this,'Mitu R.')" data-on="0"><i class="fa-solid fa-user-plus" style="font-size:12px"></i> Add</button>
               </div>
               <div style="flex:none;width:120px;border:1px solid var(--line);border-radius:14px;padding:12px;text-align:center">
                 <img class="ava" src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=120&q=80" style="width:54px;height:54px;margin:0 auto 8px">
                 <div style="font-weight:700;font-size:13px">Arif H.</div><div class="t-sm" style="margin-bottom:8px">5 mutual</div>
-                <button class="btn-sm btn-soft" style="width:100%" onclick="this.textContent='Added'">Add</button>
+                <button class="btn-sm btn-soft" style="width:100%" onclick="friendToggle(this,'Arif H.')" data-on="0"><i class="fa-solid fa-user-plus" style="font-size:12px"></i> Add</button>
               </div>
             </div>
           </div>
-          <!-- post 2 -->
+          <!-- post 2 — text only -->
           <article class="post">
             <div style="display:flex;align-items:center;gap:11px;padding:13px 14px">
-              <div class="ava" style="width:42px;height:42px;background:var(--brand-50,#FFF3EA);display:flex;align-items:center;justify-content:center;font-weight:800;color:var(--brand)">UI</div>
-              <div style="flex:1"><div style="font-weight:700;font-size:14px">UI/UX Bangladesh</div><div class="t-sm">2 hrs ago · <i class="fa-solid fa-earth-asia"></i></div></div>
+              <img class="ava" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=120&q=80" style="width:42px;height:42px">
+              <div style="flex:1;min-width:0">
+                <div style="font-weight:700;font-size:14px">Tanvir Ahmed</div>
+                <div class="t-sm">38 mins ago · <i class="fa-solid fa-earth-asia"></i></div>
+              </div>
               <button class="icon-btn" onclick="App.openSheet('sheet-post-options')"><i class="fa-solid fa-ellipsis"></i></button>
             </div>
-            <p style="padding:0 14px 12px;font-size:14px;line-height:1.55">📊 New poll: Which design tool do you use daily? Vote now in the group!</p>
+            <p style="padding:0 14px 12px;font-size:14px;line-height:1.55">Hit $42 in EviEarner payouts this month just from posting recipes 🍲 If you're sitting on the free plan, you're leaving real money on the table. Ask me anything 👇</p>
+            <div style="padding:10px 14px;display:flex;align-items:center;justify-content:space-between" class="t-sm">
+              <span><i class="fa-solid fa-heart" style="color:#EF4444"></i> 642 reactions</span><span>118 comments · 9 shares</span>
+            </div>
             <div class="divider"></div>
             <div class="post-actions">
               <button onclick="likeBtn(this)"><i class="fa-regular fa-heart"></i> Like</button>
               <button onclick="App.go('scr-post-detail')"><i class="fa-regular fa-comment"></i> Comment</button>
-              <button onclick="App.toast('Shared to your timeline')"><i class="fa-solid fa-share"></i> Share</button>
+              <button onclick="App.go('scr-share-post')"><i class="fa-solid fa-share"></i> Share</button>
+            </div>
+          </article>
+          <!-- post 3 — single photo -->
+          <article class="post">
+            <div style="display:flex;align-items:center;gap:11px;padding:13px 14px">
+              <img class="ava" src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=120&q=80" style="width:42px;height:42px">
+              <div style="flex:1;min-width:0">
+                <div style="font-weight:700;font-size:14px">Aisha Bello <i class="fa-solid fa-circle-check verified" style="font-size:12px"></i></div>
+                <div class="t-sm">1 hr ago · Lekki, Lagos · <i class="fa-solid fa-earth-asia"></i></div>
+              </div>
+              <button class="icon-btn" onclick="App.openSheet('sheet-post-options')"><i class="fa-solid fa-ellipsis"></i></button>
+            </div>
+            <p style="padding:0 14px 12px;font-size:14px;line-height:1.55">Sunset over the Lekki–Ikoyi bridge never misses 🌇 Lagos, you are beautiful when you behave. <span class="text-brand">#Lagos #NoFilter</span></p>
+            <img src="https://images.unsplash.com/photo-1449824913935-59a10b8d2000?w=800&auto=format&fit=crop&q=70" style="width:100%;height:240px;object-fit:cover">
+            <div style="padding:10px 14px;display:flex;align-items:center;justify-content:space-between" class="t-sm">
+              <span><i class="fa-solid fa-heart" style="color:#EF4444"></i> 3,021 reactions</span><span>204 comments · 58 shares</span>
+            </div>
+            <div class="divider"></div>
+            <div class="post-actions">
+              <button onclick="likeBtn(this)"><i class="fa-regular fa-heart"></i> Like</button>
+              <button onclick="App.go('scr-post-detail')"><i class="fa-regular fa-comment"></i> Comment</button>
+              <button onclick="App.go('scr-share-post')"><i class="fa-solid fa-share"></i> Share</button>
+            </div>
+          </article>
+          <!-- post 4 — multiple images -->
+          <article class="post">
+            <div style="display:flex;align-items:center;gap:11px;padding:13px 14px">
+              <img class="ava" src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=120&q=80" style="width:42px;height:42px">
+              <div style="flex:1;min-width:0">
+                <div style="font-weight:700;font-size:14px">Nusrat Jahan <i class="fa-solid fa-circle-check verified" style="font-size:12px"></i></div>
+                <div class="t-sm">3 hrs ago · Cox's Bazar · <i class="fa-solid fa-earth-asia"></i></div>
+              </div>
+              <button class="icon-btn" onclick="App.openSheet('sheet-post-options')"><i class="fa-solid fa-ellipsis"></i></button>
+            </div>
+            <p style="padding:0 14px 12px;font-size:14px;line-height:1.55">Weekend escape to the longest beach in the world 🏖️ Swipe for the highlights — tap any photo for the full album.</p>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:2px">
+              <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=500&auto=format&fit=crop&q=70" style="width:100%;height:150px;object-fit:cover">
+              <img src="https://images.unsplash.com/photo-1505228395891-9a51e7e86bf6?w=500&auto=format&fit=crop&q=70" style="width:100%;height:150px;object-fit:cover">
+              <img src="https://images.unsplash.com/photo-1473116763249-2faaef81ccda?w=500&auto=format&fit=crop&q=70" style="width:100%;height:150px;object-fit:cover">
+              <div style="position:relative;cursor:pointer" onclick="App.go('scr-post-detail')">
+                <img src="https://images.unsplash.com/photo-1519046904884-53103b34b206?w=500&auto=format&fit=crop&q=70" style="width:100%;height:150px;object-fit:cover">
+                <div style="position:absolute;inset:0;background:rgba(28,25,23,.55);display:flex;align-items:center;justify-content:center;color:#fff;font-size:20px;font-weight:800">+6</div>
+              </div>
+            </div>
+            <div style="padding:10px 14px;display:flex;align-items:center;justify-content:space-between" class="t-sm">
+              <span><i class="fa-solid fa-heart" style="color:#EF4444"></i> 1,876 reactions</span><span>97 comments · 31 shares</span>
+            </div>
+            <div class="divider"></div>
+            <div class="post-actions">
+              <button onclick="likeBtn(this)"><i class="fa-regular fa-heart"></i> Like</button>
+              <button onclick="App.go('scr-post-detail')"><i class="fa-regular fa-comment"></i> Comment</button>
+              <button onclick="App.go('scr-share-post')"><i class="fa-solid fa-share"></i> Share</button>
+            </div>
+          </article>
+          <!-- post 5 — shared link / article card -->
+          <article class="post">
+            <div style="display:flex;align-items:center;gap:11px;padding:13px 14px">
+              <img class="ava" src="https://images.unsplash.com/photo-1568602471122-7832951cc4c5?w=120&q=80" style="width:42px;height:42px">
+              <div style="flex:1;min-width:0">
+                <div style="font-weight:700;font-size:14px">Chidi Okonkwo</div>
+                <div class="t-sm">5 hrs ago · <i class="fa-solid fa-earth-asia"></i></div>
+              </div>
+              <button class="icon-btn" onclick="App.openSheet('sheet-post-options')"><i class="fa-solid fa-ellipsis"></i></button>
+            </div>
+            <p style="padding:0 14px 12px;font-size:14px;line-height:1.55">Solid read for anyone trying to turn their audience into income on EVINIE. The section on eGifts vs Cashout is gold 👇</p>
+            <a onclick="App.toast('Opening article…')" style="display:block;margin:0 14px 12px;border:1px solid var(--line);border-radius:14px;overflow:hidden;cursor:pointer;text-decoration:none;color:inherit">
+              <img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=800&auto=format&fit=crop&q=70" style="width:100%;height:160px;object-fit:cover">
+              <div style="padding:12px 14px;background:var(--bg)">
+                <div class="t-sm" style="text-transform:uppercase;letter-spacing:.06em">evinie.blog</div>
+                <div class="h3" style="margin:4px 0 4px">How Creators in Lagos & Dhaka Earn $100+ a Month</div>
+                <p class="t-sm">A practical breakdown of UserPoints, the 10% platform fee, and when to cash out vs hold.</p>
+              </div>
+            </a>
+            <div style="padding:0 14px 10px;display:flex;align-items:center;justify-content:space-between" class="t-sm">
+              <span><i class="fa-solid fa-heart" style="color:#EF4444"></i> 488 reactions</span><span>42 comments · 76 shares</span>
+            </div>
+            <div class="divider"></div>
+            <div class="post-actions">
+              <button onclick="likeBtn(this)"><i class="fa-regular fa-heart"></i> Like</button>
+              <button onclick="App.go('scr-post-detail')"><i class="fa-regular fa-comment"></i> Comment</button>
+              <button onclick="App.go('scr-share-post')"><i class="fa-solid fa-share"></i> Share</button>
+            </div>
+          </article>
+          <!-- post 6 — poll -->
+          <article class="post">
+            <div style="display:flex;align-items:center;gap:11px;padding:13px 14px">
+              <div class="ava" style="width:42px;height:42px;background:var(--brand-50,#FFF3EA);display:flex;align-items:center;justify-content:center;font-weight:800;color:var(--brand)">UI</div>
+              <div style="flex:1"><div style="font-weight:700;font-size:14px">UI/UX Bangladesh</div><div class="t-sm">6 hrs ago · <i class="fa-solid fa-earth-asia"></i></div></div>
+              <button class="icon-btn" onclick="App.openSheet('sheet-post-options')"><i class="fa-solid fa-ellipsis"></i></button>
+            </div>
+            <p style="padding:0 14px 12px;font-size:14px;line-height:1.55">📊 Poll: Which design tool do you reach for daily? Tap to vote — results update live.</p>
+            <div class="stack" style="padding:0 14px 12px">
+              <button onclick="pollVote(this)" data-pct="62" style="position:relative;width:100%;text-align:left;background:var(--bg);border:1.5px solid var(--line);border-radius:12px;padding:12px 14px;font-size:14px;font-weight:600;color:var(--ink);cursor:pointer;overflow:hidden">
+                <span style="position:absolute;inset:0;width:0;background:var(--brand-50,#FFF3EA);transition:width .4s"></span>
+                <span style="position:relative;display:flex;justify-content:space-between"><span>Figma</span><span class="pollpct t-sm" style="display:none;font-weight:700;color:var(--brand)">62%</span></span>
+              </button>
+              <button onclick="pollVote(this)" data-pct="24" style="position:relative;width:100%;text-align:left;background:var(--bg);border:1.5px solid var(--line);border-radius:12px;padding:12px 14px;font-size:14px;font-weight:600;color:var(--ink);cursor:pointer;overflow:hidden">
+                <span style="position:absolute;inset:0;width:0;background:var(--brand-50,#FFF3EA);transition:width .4s"></span>
+                <span style="position:relative;display:flex;justify-content:space-between"><span>Adobe XD</span><span class="pollpct t-sm" style="display:none;font-weight:700;color:var(--brand)">24%</span></span>
+              </button>
+              <button onclick="pollVote(this)" data-pct="14" style="position:relative;width:100%;text-align:left;background:var(--bg);border:1.5px solid var(--line);border-radius:12px;padding:12px 14px;font-size:14px;font-weight:600;color:var(--ink);cursor:pointer;overflow:hidden">
+                <span style="position:absolute;inset:0;width:0;background:var(--brand-50,#FFF3EA);transition:width .4s"></span>
+                <span style="position:relative;display:flex;justify-content:space-between"><span>Sketch</span><span class="pollpct t-sm" style="display:none;font-weight:700;color:var(--brand)">14%</span></span>
+              </button>
+            </div>
+            <div style="padding:0 14px 10px" class="t-sm">2,408 votes · 1 day left</div>
+            <div class="divider"></div>
+            <div class="post-actions">
+              <button onclick="likeBtn(this)"><i class="fa-regular fa-heart"></i> Like</button>
+              <button onclick="App.go('scr-post-detail')"><i class="fa-regular fa-comment"></i> Comment</button>
+              <button onclick="App.go('scr-share-post')"><i class="fa-solid fa-share"></i> Share</button>
+            </div>
+          </article>
+          <!-- sponsored ad (demo). In a real feed, Feed.injectAds() inserts one of these after every 10 posts -->
+          <article class="post ad">
+            <div style="display:flex;align-items:center;gap:11px;padding:13px 14px">
+              <img class="ava" src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=120&q=80" style="width:42px;height:42px">
+              <div style="flex:1;min-width:0">
+                <div style="font-weight:700;font-size:14px">Eid Fashion Sale 2026</div>
+                <div class="t-sm"><i class="fa-solid fa-bullhorn" style="font-size:10px"></i> Sponsored</div>
+              </div>
+              <button class="icon-btn" title="Hide ad" onclick="Feed.closeAd(this)"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <p style="padding:0 14px 12px;font-size:14px;line-height:1.55">Up to 50% off this Eid! Shop the freshest fits before they're gone.</p>
+            <img src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=800&auto=format&fit=crop&q=70" style="width:100%;height:220px;object-fit:cover">
+            <div style="padding:12px 14px">
+              <button class="btn btn-primary" style="width:100%" onclick="App.go('scr-marketplace')">Shop Now <i class="fa-solid fa-arrow-right" style="font-size:12px"></i></button>
             </div>
           </article>
         </div>
@@ -608,6 +770,16 @@
     <!-- Scrim + toast -->
     <div id="scrim" onclick="App.closeOverlays()"></div>
     <div id="toast"></div>
+
+    <!-- Global FB-style reaction picker (posts, comments, photos, videos) -->
+    <div id="rxBar" style="display:none;position:fixed;z-index:200;background:#fff;border:1px solid var(--line);border-radius:999px;padding:5px 8px;box-shadow:0 10px 28px rgba(0,0,0,.18);gap:4px;align-items:center">
+      <button onclick="reactPick(0)" title="Like"  style="background:none;border:none;cursor:pointer;font-size:25px;line-height:1;padding:2px;transition:transform .1s" onmouseover="this.style.transform='scale(1.3)'" onmouseout="this.style.transform='scale(1)'">👍</button>
+      <button onclick="reactPick(1)" title="Love"  style="background:none;border:none;cursor:pointer;font-size:25px;line-height:1;padding:2px;transition:transform .1s" onmouseover="this.style.transform='scale(1.3)'" onmouseout="this.style.transform='scale(1)'">❤️</button>
+      <button onclick="reactPick(2)" title="Haha"  style="background:none;border:none;cursor:pointer;font-size:25px;line-height:1;padding:2px;transition:transform .1s" onmouseover="this.style.transform='scale(1.3)'" onmouseout="this.style.transform='scale(1)'">😆</button>
+      <button onclick="reactPick(3)" title="Wow"   style="background:none;border:none;cursor:pointer;font-size:25px;line-height:1;padding:2px;transition:transform .1s" onmouseover="this.style.transform='scale(1.3)'" onmouseout="this.style.transform='scale(1)'">😮</button>
+      <button onclick="reactPick(4)" title="Sad"   style="background:none;border:none;cursor:pointer;font-size:25px;line-height:1;padding:2px;transition:transform .1s" onmouseover="this.style.transform='scale(1.3)'" onmouseout="this.style.transform='scale(1)'">😢</button>
+      <button onclick="reactPick(5)" title="Angry" style="background:none;border:none;cursor:pointer;font-size:25px;line-height:1;padding:2px;transition:transform .1s" onmouseover="this.style.transform='scale(1.3)'" onmouseout="this.style.transform='scale(1)'">😡</button>
+    </div>
   </div>
 
   <script>
@@ -625,12 +797,21 @@
           $('tbApp').style.display = tb==='app'?'flex':'none';
           $('tbBack').style.display = tb==='back'?'flex':'none';
           if(tb==='back') $('tbTitle').textContent = s.dataset.title||'';
+          // On your own profile the top-right shows Settings (gear); elsewhere search + messages
+          const acts=$('tbAppActions');
+          if(tb==='app' && acts){
+            acts.innerHTML = s.id==='scr-profile'
+              ? '<button class="icon-btn" onclick="App.go(\'scr-settings\')" aria-label="Settings"><i class="fa-solid fa-gear"></i></button>'
+              : '<button class="icon-btn" style="position:relative" onclick="App.go(\'scr-discover\')"><i class="fa-solid fa-magnifying-glass"></i></button>'
+                + '<button class="icon-btn" style="position:relative" onclick="App.go(\'scr-messages\')"><i class="fa-regular fa-comment-dots"></i><span class="dot"></span></button>';
+          }
         }
         $('bottomnav').style.display = nav==='show'?'flex':'none';
         const tab=s.dataset.tab;
         document.querySelectorAll('.nav-item').forEach(n=>n.classList.toggle('active', n.dataset.tab===tab));
       }
       function show(id, push){
+        try{ if(typeof Membership!=='undefined'){ const r=Membership.gate(id); if(r) id=r; } }catch(e){}
         const next=$(id); if(!next){ console.warn('missing screen',id); return; }
         if(current && current!==next){ current.classList.remove('active'); if(push) stack.push(current.id); }
         next.classList.add('active'); next.scrollTop=0; current=next; chrome(next); closeOverlays();
@@ -640,7 +821,7 @@
       function tab(id){ stack.length=0; show(id,false); }
 
       function openSheet(id){ const s=$(id); if(!s) return; $('scrim').classList.add('show'); s.classList.add('show'); }
-      function closeSheet(){ document.querySelectorAll('.sheet.show').forEach(s=>s.classList.remove('show')); }
+      function closeSheet(){ document.querySelectorAll('.sheet.show').forEach(s=>s.classList.remove('show')); if(!$('drawer').classList.contains('show')) $('scrim').classList.remove('show'); }
       function openDrawer(){ $('scrim').classList.add('show'); $('drawer').classList.add('show'); }
       function closeDrawer(){ $('drawer').classList.remove('show'); }
       function closeOverlays(){ closeSheet(); closeDrawer(); $('scrim').classList.remove('show'); }
@@ -648,15 +829,204 @@
       let tT;
       function toast(msg){ const t=$('toast'); t.textContent=msg; t.classList.add('show'); clearTimeout(tT); tT=setTimeout(()=>t.classList.remove('show'),2200); }
 
-      return { go, back, tab, openSheet, closeSheet, openDrawer, closeDrawer, closeOverlays, toast };
+      // Reusable confirmation dialog (prevents accidental destructive actions)
+      let pendingConfirm=null;
+      function confirm(title, msg, onYes, yesLabel){
+        pendingConfirm = onYes || null;
+        if($('cfTitle')) $('cfTitle').textContent = title || 'Are you sure?';
+        if($('cfMsg'))   $('cfMsg').textContent   = msg || '';
+        if($('cfYes'))   $('cfYes').textContent   = yesLabel || 'Confirm';
+        openSheet('sheet-confirm');
+      }
+      function confirmYes(){ const f=pendingConfirm; pendingConfirm=null; closeSheet(); if(typeof f==='function') f(); }
+
+      return { go, back, tab, openSheet, closeSheet, openDrawer, closeDrawer, closeOverlays, toast, confirm, confirmYes };
+    })();
+
+    /* ================= MEMBERSHIP (EviMember / EviEarner) ================= */
+    const Membership = (function(){
+      const KEY='evinie_tier';
+      let tier='member';
+      try{ const s=localStorage.getItem(KEY); if(s==='earner'||s==='member') tier=s; }catch(e){}
+
+      // screens gated behind EviEarner; member taps -> lock screen
+      const GATED={ 'scr-marketplace':'marketplace', 'scr-cashout':'cashout' };
+      const LOCK={
+        marketplace:{ icon:'fa-store', title:'Marketplace',
+          desc:'Buying and selling on the Evinie Marketplace is an EviEarner feature. Become an EviEarner to unlock it.' },
+        cashout:{ icon:'fa-money-bill-transfer', title:'Cashout',
+          desc:'Cashing out your User Points & eGifts is an EviEarner feature. Become an EviEarner to withdraw your earnings.' }
+      };
+
+      const $=id=>document.getElementById(id);
+      const isEarner=()=>tier==='earner';
+
+      // returns a redirect screen id (or null to proceed normally)
+      function gate(id){
+        if(GATED[id] && !isEarner()){ renderLock(GATED[id]); return 'scr-locked'; }
+        return null;
+      }
+      function renderLock(key){
+        const d=LOCK[key]||LOCK.marketplace;
+        if($('lockIcon'))  $('lockIcon').className='fa-solid '+d.icon;
+        if($('lockTitle')) $('lockTitle').textContent=d.title;
+        if($('lockDesc'))  $('lockDesc').textContent=d.desc;
+      }
+      function set(t){ tier=t; try{localStorage.setItem(KEY,t)}catch(e){} paint(); }
+      function upgrade(){
+        if(isEarner()) return;
+        App.confirm(
+          'Become an EviEarner?',
+          'Your EviEarner plan is billed yearly ($3/yr) from your wallet. Your current User Points will be reset to 0 when you upgrade — this can\'t be undone.',
+          function(){
+            set('earner');
+            // Zero out ALL User Points displays across the app (wallet, points screen, drawer, progress bars)
+            document.querySelectorAll('.js-pts').forEach(function(el){ el.textContent='0'; });
+            document.querySelectorAll('.js-pts-bar').forEach(function(el){ el.style.width='0%'; });
+            document.querySelectorAll('.js-ptsgo').forEach(function(el){ el.textContent='1,000 pts to go'; });
+            var p=document.getElementById('drawerPts'); if(p) p.textContent='0 pts';
+            App.go('scr-membership');
+            App.toast('🎉 You are now an EviEarner! User Points reset to 0');
+          },
+          'Upgrade'
+        );
+      }
+      function reset(){ 
+        set('member'); 
+        // Restore demo points to 750 when switching back
+        document.querySelectorAll('.js-pts').forEach(function(el){ el.textContent='750'; });
+        document.querySelectorAll('.js-pts-bar').forEach(function(el){ el.style.width='75%'; });
+        document.querySelectorAll('.js-ptsgo').forEach(function(el){ el.textContent='250 pts to go'; });
+        var p=document.getElementById('drawerPts'); if(p) p.textContent='750 pts';
+        App.toast('Switched to EviMember (demo)'); 
+      }
+
+      function paint(){
+        const earner=isEarner();
+        document.querySelectorAll('[data-tier-badge]').forEach(el=>{
+          el.className='badge '+(earner?'badge-ok':'badge-gray');
+          el.innerHTML=earner
+            ? '<i class="fa-solid fa-star"></i> EviEarner'
+            : '<i class="fa-regular fa-user"></i> EviMember';
+        });
+        if($('memUpgradeCard')) $('memUpgradeCard').style.display=earner?'none':'';
+        if($('memEarnerCard'))  $('memEarnerCard').style.display=earner?'':'none';
+        if($('memDemoSwitch'))  $('memDemoSwitch').style.display=earner?'':'none';
+        const hero=$('memHero');
+        if(hero){
+          hero.style.background=earner?'linear-gradient(135deg,#16A34A,#15803D)':'#1E293B';
+          hero.innerHTML=
+            '<div style="display:flex;align-items:center;gap:12px">'
+            +'<span style="width:50px;height:50px;border-radius:14px;background:rgba(255,255,255,.18);display:flex;align-items:center;justify-content:center;font-size:22px">'
+            +'<i class="fa-solid '+(earner?'fa-star':'fa-user')+'"></i></span>'
+            +'<div style="flex:1"><div style="font-size:12px;font-weight:600;opacity:.85">You are an</div>'
+            +'<div style="font-size:22px;font-weight:800;letter-spacing:-.01em">'+(earner?'EviEarner':'EviMember')+'</div></div>'
+            +(earner?'<span class="badge" style="background:rgba(255,255,255,.2);color:#fff"><i class="fa-solid fa-check"></i> Active</span>':'')
+            +'</div>'
+            +'<div style="font-size:13px;opacity:.9;margin-top:10px;line-height:1.5">'
+            +(earner
+              ? 'All earning features unlocked — Marketplace & Cashout are active.'
+              : 'Unlock Marketplace & Cashout by becoming an EviEarner.')
+            +'</div>';
+        }
+      }
+
+      return { gate, upgrade, reset, paint, isEarner, get:()=>tier };
     })();
 
     /* ================= SMALL INTERACTIONS ================= */
     function togglePw(id,btn){ const i=document.getElementById(id); const eye=btn.querySelector('i');
       if(i.type==='password'){ i.type='text'; eye.className='fa-regular fa-eye-slash'; } else { i.type='password'; eye.className='fa-regular fa-eye'; } }
-    function likeBtn(b){ const i=b.querySelector('i');
-      if(i.classList.contains('fa-regular')){ i.className='fa-solid fa-heart'; b.style.color='#EF4444'; App.toast('You reacted ❤️'); }
-      else{ i.className='fa-regular fa-heart'; b.style.color=''; } }
+    /* ===== Unified FB-style reactions (posts, comments, photos, videos) ===== */
+    const FB_RX=[['Like','👍','#3B82F6'],['Love','❤️','#EF4444'],['Haha','😆','#F59E0B'],['Wow','😮','#F59E0B'],['Sad','😢','#F59E0B'],['Angry','😡','#EF4444']];
+    let _rxBtn=null;
+    function reactOpen(b){
+      _rxBtn=b;
+      const bar=document.getElementById('rxBar'); if(!bar) return;
+      const r=b.getBoundingClientRect();
+      bar.style.display='flex';
+      const w=bar.offsetWidth||240;
+      bar.style.left=Math.min(Math.max(8,r.left),(window.innerWidth-w-8))+'px';
+      bar.style.top=Math.max(8,r.top-52)+'px';
+    }
+    function reactPick(i){
+      const bar=document.getElementById('rxBar'); if(bar) bar.style.display='none';
+      const b=_rxBtn; _rxBtn=null; if(!b) return;
+      const rx=FB_RX[i];
+      b.style.color=rx[2]; b.style.fontWeight='700';
+      if(b.classList.contains('cmt-like')){
+        b.textContent=rx[0];
+        const foot=b.closest('.cmt-foot'), chip=foot&&foot.querySelector('.cmt-rx');
+        if(chip){ let n=parseInt((chip.textContent||'').replace(/[^0-9]/g,''))||0; n++; chip.style.display='inline-flex'; chip.innerHTML='<span style="font-size:11px">'+rx[1]+'</span> '+n; }
+      } else {
+        // generic Like button — keep a trailing count if present, else show the reaction name
+        const t=(b.textContent||'').trim(), num=t.match(/[\d.,]+k?$/i);
+        b.innerHTML='<span style="font-size:1.05em">'+rx[1]+'</span> '+(num?num[0]:rx[0]);
+      }
+    }
+    // tap a Like button -> open the reaction picker
+    function likeBtn(b){ reactOpen(b); }
+    // close picker on outside click
+    document.addEventListener('click',function(e){
+      const bar=document.getElementById('rxBar');
+      if(!bar||bar.style.display==='none') return;
+      if(bar.contains(e.target)) return;
+      const t=e.target;
+      if(t.closest && (t.closest('.cmt-like')||t.getAttribute&&/reactOpen|likeBtn/.test(t.getAttribute('onclick')||''))) return;
+      bar.style.display='none';
+    },true);
+
+    /* ===== Reusable comments (screen-scoped; replies are flat) ===== */
+    function cmtAddRow(scope, text){
+      const list=scope.querySelector('.cmt-list'); if(!list) return;
+      const row=document.createElement('div'); row.style.cssText='display:flex;gap:10px';
+      row.innerHTML=
+        '<img class="ava" src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=120&q=80" style="width:36px;height:36px">'+
+        '<div style="flex:1;min-width:0">'+
+          '<div style="background:var(--bg);border-radius:14px;padding:9px 12px">'+
+            '<div style="font-weight:700;font-size:13px">Sohag Rahman</div>'+
+            '<div class="cmt-text" style="font-size:13px;line-height:1.5;margin-top:1px"></div>'+
+          '</div>'+
+          '<div class="t-sm cmt-foot" style="display:flex;gap:14px;align-items:center;padding:6px 12px 0">'+
+            '<button class="cmt-like" onclick="reactOpen(this)" style="background:none;border:none;font:inherit;color:var(--ink-2);font-weight:700;cursor:pointer">Like</button>'+
+            '<button onclick="cmtReplyTo(this,\'Sohag Rahman\')" style="background:none;border:none;font:inherit;color:var(--ink-2);font-weight:700;cursor:pointer">Reply</button>'+
+            '<span>now</span>'+
+            '<span class="cmt-rx" style="display:none;align-items:center;gap:3px"></span>'+
+          '</div>'+
+        '</div>';
+      row.querySelector('.cmt-text').textContent=text;
+      list.insertBefore(row, list.firstChild);
+    }
+    function postCmt(btn){
+      const scope=btn.closest('.screen')||document;
+      const input=scope.querySelector('.cmt-input');
+      const v=(input&&input.value||'').trim();
+      if(!v){ App.toast('Write something first'); if(input) input.focus(); return; }
+      cmtAddRow(scope, v);
+      if(input){ input.value=''; input.placeholder='Write a comment...'; }
+      App.toast(scope.__wasReply ? 'Reply posted' : 'Comment posted'); scope.__wasReply=false;
+    }
+    function cmtReplyTo(btn,name){
+      const scope=btn.closest('.screen')||document;
+      const input=scope.querySelector('.cmt-input'); if(!input) return;
+      scope.__wasReply=true;
+      input.value='@'+(name.split(' ')[0])+' ';
+      input.placeholder='Replying to '+name+'…';
+      input.focus();
+    }
+
+    /* feed poll: reveal results on vote, highlight the chosen option */
+    function pollVote(btn){
+      const poll=btn.parentElement;
+      poll.querySelectorAll('button[data-pct]').forEach(o=>{
+        const pct=o.dataset.pct||'0';
+        o.querySelector('span').style.width=pct+'%';
+        const lbl=o.querySelector('.pollpct'); if(lbl) lbl.style.display='';
+        o.disabled=true; o.style.cursor='default';
+        if(o===btn){ o.style.borderColor='var(--brand)'; o.style.fontWeight='700'; }
+      });
+      App.toast('Vote counted — thanks!');
+    }
 
     /* friends list: tab filter + unfriend/accept */
     function friendsTab(btn,which){
@@ -665,49 +1035,214 @@
       document.querySelectorAll('#scr-friends .fr-pane').forEach(p=>{ p.style.display = p.id==='fr-'+which ? '' : 'none'; });
     }
     function friendToggle(btn,name){
-      if(btn.dataset.on!=='0'){ btn.dataset.on='0'; btn.className='btn-sm btn-primary'; btn.innerHTML='<i class="fa-solid fa-user-plus" style="font-size:12px"></i> Add'; App.toast('Unfriended '+name); }
-      else{ btn.dataset.on='1'; btn.className='btn-sm btn-ghost'; btn.innerHTML='<i class="fa-solid fa-user-check" style="font-size:12px"></i> Friends'; App.toast(name+' added back'); } }
+      if(btn.dataset.on!=='0'){
+        // Currently friends -> confirm before unfriending (avoid accidental taps)
+        App.confirm('Unfriend '+name+'?', "They won't be notified. You can add them again anytime.", function(){
+          btn.dataset.on='0'; btn.className='btn-sm btn-primary'; btn.innerHTML='<i class="fa-solid fa-user-plus" style="font-size:12px"></i> Add'; App.toast('Unfriended '+name);
+        }, 'Unfriend');
+      } else { btn.dataset.on='1'; btn.className='btn-sm btn-ghost'; btn.innerHTML='<i class="fa-solid fa-user-check" style="font-size:12px"></i> Friends'; App.toast(name+' added back'); } }
     function acceptReq(btn,name){ const r=btn.closest('.req-row'); if(r){ r.innerHTML='<div style="padding:8px 2px;color:var(--ok);font-weight:600;font-size:13px"><i class="fa-solid fa-check"></i> You and '+name+' are now friends</div>'; } App.toast('Accepted '+name); }
     function declineReq(btn,name){ const r=btn.closest('.req-row'); if(r) r.remove(); App.toast('Request removed'); }
     function filterFriends(q){ q=(q||'').toLowerCase().trim(); let shown=0;
       document.querySelectorAll('#friendList .frow').forEach(r=>{ const m=(r.dataset.n||'').includes(q); r.style.display=m?'':'none'; if(m) shown++; });
       const e=document.getElementById('frEmpty'); if(e) e.style.display=shown?'none':''; }
 
+    /* ================= Post privacy (composer) ================= */
+    const PRIVACY = {
+      public:   {icon:'fa-earth-asia',  row:'Public · Anyone on EVINIE',   byline:'Sharing a public post'},
+      friends:  {icon:'fa-user-group',  row:'Friends · Your friends only', byline:'Sharing with friends'},
+      except:   {icon:'fa-user-xmark',  row:'Friends except… · Hidden from some', byline:'Sharing with friends (except some)'},
+      specific: {icon:'fa-user-check',  row:'Specific friends · Only some friends', byline:'Sharing with specific friends'},
+      onlyme:   {icon:'fa-lock',        row:'Only Me · Private to you',     byline:'Only you can see this'}
+    };
+    function setPostPrivacy(key){
+      const p = PRIVACY[key] || PRIVACY.public;
+      const ic=document.getElementById('composerPrivacyIcon'); if(ic) ic.className='fa-solid '+p.icon;
+      const rt=document.getElementById('composerPrivacyText'); if(rt) rt.textContent=p.row;
+      const bl=document.getElementById('composerPrivacyByline'); if(bl) bl.textContent=p.byline;
+      // reflect selection in the sheet (border + radio)
+      const sheet=document.getElementById('sheet-privacy');
+      if(sheet){
+        sheet.querySelectorAll('label[data-priv]').forEach(l=>{
+          const on=l.dataset.priv===key;
+          l.style.border = on ? '2px solid var(--brand)' : '1px solid var(--line)';
+          const r=l.querySelector('input[type=radio]'); if(r) r.checked=on;
+        });
+      }
+    }
+
+    /* ================= Post background colour + media (composer) ================= */
+    const POST_BG = {
+      none:null,
+      sunset:'linear-gradient(135deg,#FF8A2B,#FF6A01)',
+      ocean: 'linear-gradient(135deg,#38BDF8,#2563EB)',
+      grape: 'linear-gradient(135deg,#C084FC,#7C3AED)',
+      forest:'linear-gradient(135deg,#34D399,#15803D)',
+      rose:  'linear-gradient(135deg,#FB7185,#E11D48)',
+      night: 'linear-gradient(135deg,#475569,#0F172A)'
+    };
+    function setPostBg(key){
+      const canvas=document.getElementById('composerCanvas'), ta=document.getElementById('composerText');
+      if(!canvas||!ta) return;
+      const bg=POST_BG[key];
+      if(bg){
+        canvas.style.background=bg; canvas.style.minHeight='220px';
+        canvas.style.display='flex'; canvas.style.alignItems='center'; canvas.style.justifyContent='center'; canvas.style.padding='22px';
+        ta.classList.add('canvas-on');
+        ta.style.color='#fff'; ta.style.textAlign='center'; ta.style.fontSize='24px'; ta.style.fontWeight='700'; ta.style.lineHeight='1.3'; ta.style.minHeight='auto';
+        const media=document.getElementById('composerMedia'); if(media) media.style.display='none'; // colour bg = text-only, like FB
+      } else {
+        canvas.style.background='transparent'; canvas.style.minHeight=''; canvas.style.display='block'; canvas.style.padding='';
+        ta.classList.remove('canvas-on');
+        ta.style.color=''; ta.style.textAlign=''; ta.style.fontSize='15px'; ta.style.fontWeight=''; ta.style.lineHeight='1.55'; ta.style.minHeight='110px';
+      }
+      document.querySelectorAll('#composerBgRow [data-bg]').forEach(b=>{ b.style.outline = b.dataset.bg===key ? '3px solid var(--ink)' : 'none'; b.style.outlineOffset='1px'; });
+    }
+    function composerAddMedia(){ const m=document.getElementById('composerMedia'); if(m) m.style.display='block'; setPostBg('none'); App.toast('Photo added to your post'); }
+    function composerRemoveMedia(){ const m=document.getElementById('composerMedia'); if(m) m.style.display='none'; }
+
+    /* ================= Emoji picker (insert into a text field) ================= */
+    let emojiTarget = 'composerText';
+    function openEmoji(id){ emojiTarget = id || 'composerText'; App.openSheet('sheet-emoji'); }
+    function insertEmoji(ch){
+      const ta = document.getElementById(emojiTarget); if(!ta) return;
+      const s = ta.selectionStart!=null ? ta.selectionStart : ta.value.length;
+      const e = ta.selectionEnd!=null ? ta.selectionEnd : ta.value.length;
+      ta.value = ta.value.slice(0,s) + ch + ta.value.slice(e);
+      const pos = s + ch.length;
+      try{ ta.setSelectionRange(pos,pos); }catch(_){}
+      if(ta.tagName==='TEXTAREA'){ ta.style.height='auto'; ta.style.height=ta.scrollHeight+'px'; }
+    }
+
+    /* ================= Check in (post location) ================= */
+    let composerPlace = null;
+    function checkinSelect(name){
+      composerPlace = name;
+      renderComposerPlace();
+      App.back();
+      App.toast(name==='Current location' ? 'Checked in at your current location' : 'Checked in at '+name);
+    }
+    function checkinFilter(q){ q=(q||'').toLowerCase().trim(); let shown=0;
+      document.querySelectorAll('#checkinList .chk-row').forEach(r=>{ const m=(r.dataset.name||'').toLowerCase().includes(q); r.style.display=m?'':'none'; if(m) shown++; });
+      const e=document.getElementById('checkinEmpty'); if(e) e.style.display=shown?'none':''; }
+    function renderComposerPlace(){
+      const at=document.getElementById('composerAt');
+      const box=document.getElementById('composerLoc');
+      const hasTags = (typeof composerTagged!=='undefined') && composerTagged.length;
+      if(at) at.innerHTML = composerPlace ? (hasTags?' at ':' is at ')+'<b style="color:var(--ink)">'+composerPlace+'</b>' : '';
+      if(box){
+        if(!composerPlace){ box.style.display='none'; box.innerHTML=''; return; }
+        box.style.display='block';
+        box.innerHTML = '<span style="display:inline-flex;align-items:center;gap:7px;background:#FEE2E2;color:#B91C1C;border-radius:999px;padding:6px 12px;font-size:13px;font-weight:600">'
+          +'<i class="fa-solid fa-location-dot"></i> '+composerPlace
+          +' <i class="fa-solid fa-xmark" onclick="composerUnplace(event)" style="cursor:pointer;margin-left:2px"></i></span>';
+      }
+    }
+    function composerUnplace(e){ if(e) e.stopPropagation(); composerPlace=null; renderComposerPlace(); }
+
+    /* ================= Tag People (pick friends to tag) ================= */
+    function tagToggle(row){
+      const on = row.classList.toggle('sel');
+      const c = row.querySelector('.tag-check');
+      if(on){ c.style.background='var(--brand)'; c.style.borderColor='var(--brand)'; c.innerHTML='<i class="fa-solid fa-check"></i>'; row.style.borderColor='var(--brand)'; }
+      else  { c.style.background='transparent'; c.style.borderColor='var(--line)'; c.innerHTML=''; row.style.borderColor='var(--line)'; }
+      const n = document.querySelectorAll('#tagList .tag-row.sel').length;
+      const b = document.getElementById('tagDoneBtn');
+      if(b) b.textContent = n ? 'Tag '+n+(n===1?' person':' people') : 'Done';
+    }
+    function tagFilter(q){ q=(q||'').toLowerCase().trim(); let shown=0;
+      document.querySelectorAll('#tagList .tag-row').forEach(r=>{ const m=(r.dataset.name||'').toLowerCase().includes(q); r.style.display=m?'':'none'; if(m) shown++; });
+      const e=document.getElementById('tagEmpty'); if(e) e.style.display=shown?'none':''; }
+    let composerTagged = [];
+    function tagDone(){
+      const rows=[...document.querySelectorAll('#tagList .tag-row.sel')];
+      composerTagged = rows.map(r=>({ name:r.dataset.name, ava:(r.querySelector('img')||{}).src||'' }));
+      renderComposerTags();
+      App.back();
+      if(!composerTagged.length){ App.toast('No one tagged'); return; }
+      const n=composerTagged.length, names=composerTagged.map(p=>p.name);
+      const label = n===1 ? names[0] : n===2 ? names[0]+' and '+names[1] : names[0]+' and '+(n-1)+' others';
+      App.toast('Tagged '+label);
+    }
+    function renderComposerTags(){
+      const withEl=document.getElementById('composerWith');
+      const box=document.getElementById('composerTags');
+      const n=composerTagged.length, names=composerTagged.map(p=>p.name);
+      if(withEl){
+        withEl.innerHTML = !n ? '' :
+          n===1 ? ' is with <b style="color:var(--ink)">'+names[0]+'</b>' :
+          n===2 ? ' is with <b style="color:var(--ink)">'+names[0]+'</b> and <b style="color:var(--ink)">'+names[1]+'</b>' :
+          ' is with <b style="color:var(--ink)">'+names[0]+'</b> and <b style="color:var(--ink)">'+(n-1)+' others</b>';
+      }
+      if(box){
+        if(!n){ box.style.display='none'; box.innerHTML=''; return; }
+        box.style.display='flex';
+        box.innerHTML = composerTagged.map((p,i)=>
+          '<span style="display:inline-flex;align-items:center;gap:6px;background:var(--brand-50,#FFF3EA);color:var(--brand-700,#C24F00);border-radius:999px;padding:4px 10px 4px 4px;font-size:13px;font-weight:600">'
+          +'<img src="'+p.ava+'" style="width:22px;height:22px;border-radius:50%;object-fit:cover">'
+          + p.name
+          +' <i class="fa-solid fa-xmark" onclick="composerUntag(event,'+i+')" style="cursor:pointer;color:var(--brand);margin-left:2px"></i></span>'
+        ).join('');
+      }
+      if(typeof renderComposerPlace==='function') renderComposerPlace();
+    }
+    function composerUntag(e,i){
+      if(e) e.stopPropagation();
+      const removed=composerTagged[i];
+      composerTagged.splice(i,1);
+      // keep the Tag People picker in sync: deselect that friend's row
+      if(removed){
+        const row=[...document.querySelectorAll('#tagList .tag-row')].find(r=>r.dataset.name===removed.name);
+        if(row && row.classList.contains('sel')) tagToggle(row);
+      }
+      renderComposerTags();
+    }
+
     /* ================= eGift flow ================= */
     const Gift = (function(){
       const CATALOG = [
-        {id:'rose',    e:'🌹', n:'Rose',    v:50},
-        {id:'star',    e:'⭐', n:'Star',    v:100},
-        {id:'diamond', e:'💎', n:'Diamond', v:250},
-        {id:'trophy',  e:'🏆', n:'Trophy',  v:500},
-        {id:'crown',   e:'👑', n:'Crown',   v:1000},
-        {id:'rocket',  e:'🚀', n:'Rocket',  v:2000},
+        {id:'rose',    e:'🌹', n:'Rose',    v:0.05},
+        {id:'star',    e:'⭐', n:'Star',    v:0.10},
+        {id:'diamond', e:'💎', n:'Diamond', v:0.25},
+        {id:'trophy',  e:'🏆', n:'Trophy',  v:0.50},
+        {id:'crown',   e:'👑', n:'Crown',   v:1},
+        {id:'rocket',  e:'🚀', n:'Rocket',  v:2},
       ];
       const FEE = 0.20;
-      const DEFAULT = {name:'Nusrat Jahan', handle:'@nusrat_j', loc:'Lagos',
-        ava:'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=200&q=80', verified:true};
-      let to = Object.assign({}, DEFAULT), sel = 'trophy', source = 'wallet';
+      const BAL = { wallet: 3.20, points: 5000 };   // sender's balances
+      const POINT_RATE = 0.10 / 1000;               // $ value of 1 UserPoint (1,000 pts = $0.10)
+      // Neutral placeholder avatar — NOBODY is pre-selected; the sender chooses a recipient.
+      const PLACEHOLDER_AVA = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Crect width='48' height='48' fill='%23ECE8E2'/%3E%3Ccircle cx='24' cy='19' r='8' fill='%23BBB4AA'/%3E%3Cpath d='M8 43c1.6-9.2 9.6-13 16-13s14.4 3.8 16 13' fill='%23BBB4AA'/%3E%3C/svg%3E";
+      let to = null, sel = 'trophy', source = 'wallet';
 
       const $ = id => document.getElementById(id);
-      const money = n => '₦'+Number(n).toLocaleString('en-US');
+      const money = n => '$'+Number(n).toLocaleString('en-US',{minimumFractionDigits:Number.isInteger(n)?0:2,maximumFractionDigits:2});
+      const round2 = n => Math.round(n*100)/100;
       const gift = () => CATALOG.find(g=>g.id===sel) || CATALOG[3];
 
       function setRecipient(name, handle, loc, ava, verified){
-        to = {name:name, handle:handle||'', loc:loc||'', ava:ava||DEFAULT.ava, verified:verified!==false};
+        to = {name:name, handle:handle||'', loc:loc||'', ava:ava||PLACEHOLDER_AVA, verified:verified===true};
         paint();
       }
+      // With a name -> gift that person directly. Without -> choose a recipient first.
+      // Flow: choose gift (Step 1) -> recipient (Step 2) -> payment (Step 3) -> sent
       function start(name, handle, loc, ava, verified){
-        if(name){ setRecipient(name, handle, loc, ava, verified); } else { paint(); }
-        App.go('scr-send-gift');
+        if(name) setRecipient(name, handle, loc, ava, verified);
+        paint(); App.go('scr-send-gift');
       }
-      function compose(id){ if(id) sel=id; App.go('scr-send-gift'); paint(); }
+      // From the catalog: pick the gift, then continue to choose a recipient.
+      function compose(id){ if(id) sel=id; paint(); App.go('scr-send-gift'); }
+      function toRecipient(){ paint(); App.go(to ? 'scr-gift-pay' : 'scr-gift-recipient'); }
+      function choose(name, handle, loc, ava, verified){ setRecipient(name, handle, loc, ava, verified); App.go('scr-gift-pay'); }
       function pick(id){ sel=id; paint(); }
       function pay(src){ source=src; paint(); }
 
       function paint(){
-        if($('giftToAva'))  $('giftToAva').src = to.ava;
-        if($('giftToName')) $('giftToName').innerHTML = to.name + (to.verified?' <i class="fa-solid fa-circle-check verified" style="font-size:13px"></i>':'');
-        if($('giftToMeta')) $('giftToMeta').textContent = (to.handle||'') + (to.loc? ' · '+to.loc : '');
+        const has = !!to;
+        // recipient summary (payment screen)
+        if($('payToAva'))  $('payToAva').src = has ? to.ava : PLACEHOLDER_AVA;
+        if($('payToName')) $('payToName').innerHTML = has ? (to.name + (to.verified?' <i class="fa-solid fa-circle-check verified" style="font-size:12px"></i>':'')) : 'Select a recipient';
+        if($('payToMeta')) $('payToMeta').textContent = has ? ((to.handle||'') + (to.loc? ' · '+to.loc : '')) : '';
         const grid = $('giftGrid');
         if(grid){
           grid.innerHTML = CATALOG.map(g=>{
@@ -720,30 +1255,44 @@
               + '</button>';
           }).join('');
         }
-        const g = gift(), fee = Math.round(g.v*FEE), receives = g.v-fee;
+        const g = gift(), fee = round2(g.v*FEE), receives = round2(g.v-fee);
         if($('bdEmoji')) $('bdEmoji').textContent = g.e;
         if($('bdTitle')) $('bdTitle').textContent = g.n+' · breakdown';
         if($('bdValue')) $('bdValue').textContent = money(g.v);
         if($('bdFee'))   $('bdFee').textContent = '−'+money(fee);
         if($('bdPay'))   $('bdPay').textContent = money(g.v);
         if($('bdRecv'))  $('bdRecv').textContent = money(receives);
+        // gift + cost summary (payment screen)
+        if($('payEmoji')) $('payEmoji').textContent = g.e;
+        if($('payName'))  $('payName').textContent = g.n;
+        if($('payValue')) $('payValue').textContent = money(g.v);
+        if($('payFee'))   $('payFee').textContent = '−'+money(fee);
+        if($('payRecv'))  $('payRecv').textContent = money(receives);
+        if($('payPay'))   $('payPay').textContent = money(g.v);
         if($('paySeg'))  $('paySeg').querySelectorAll('button').forEach(b=>b.classList.toggle('active', b.dataset.src===source));
       }
 
       function send(){
-        const g = gift(), receives = g.v-Math.round(g.v*FEE);
+        if(!to){ App.toast('Choose a recipient first'); App.go('scr-gift-recipient'); return; }
+        const g = gift();
+        // Affordability guard — can't send more than your balance
+        const costPts = Math.round(g.v / POINT_RATE);
+        if(source==='wallet' && g.v > BAL.wallet){ App.toast('Not enough Wallet balance for this gift'); return; }
+        if(source==='points' && costPts > BAL.points){ App.toast('Not enough UserPoints — top up or pick a smaller gift'); return; }
+        const receives = round2(g.v-round2(g.v*FEE));
         if($('gsEmoji')) $('gsEmoji').textContent = g.e;
         if($('gsLine'))  $('gsLine').innerHTML = '<b>'+to.name+'</b> received your <b>'+g.n+'</b>';
         if($('gsRecv'))  $('gsRecv').textContent = money(receives);
-        if($('gsPaid'))  $('gsPaid').textContent = money(g.v)+' · '+(source==='wallet'?'Wallet':'UserPoints');
+        if($('gsPaid'))  $('gsPaid').textContent = source==='wallet' ? (money(g.v)+' · Wallet') : (costPts.toLocaleString('en-US')+' pts · UserPoints');
         const msg = $('giftMsg') ? $('giftMsg').value.trim() : '';
         if($('gsMsgWrap')) $('gsMsgWrap').style.display = msg ? '' : 'none';
         if($('gsMsg'))  $('gsMsg').textContent = msg ? '“'+msg+'”' : '';
         App.go('scr-gift-sent');
         if($('giftMsg')) $('giftMsg').value='';
+        to = null;   // reset so the next gift starts with a fresh recipient choice
       }
 
-      return { CATALOG, setRecipient, start, compose, pick, pay, send, paint };
+      return { CATALOG, setRecipient, start, compose, toRecipient, choose, pick, pay, send, paint };
     })();
 
     /* eGifts hub tabs */
@@ -753,24 +1302,26 @@
       document.querySelectorAll('#scr-egifts .eg-pane').forEach(p=>{ p.style.display = p.id==='eg-'+which ? '' : 'none'; });
     }
 
-    /* ================= report post ================= */
+    /* ================= report (posts & chats — scoped per screen) ================= */
     function reportPick(el){
-      document.querySelectorAll('#reportReasons .rep-opt').forEach(o=>{
+      const scope = el.closest('.screen') || document;
+      scope.querySelectorAll('.rep-opt').forEach(o=>{
         o.classList.remove('sel'); o.style.borderColor='var(--line)';
         const r=o.querySelector('.rep-radio'); if(r){ r.style.borderColor='var(--ink-3)'; r.style.background='none'; r.innerHTML=''; }
       });
       el.classList.add('sel'); el.style.borderColor='var(--brand)';
       const r=el.querySelector('.rep-radio'); if(r){ r.style.borderColor='var(--brand)'; r.style.background='var(--brand)'; r.innerHTML='<i class="fa-solid fa-check" style="color:#fff;font-size:10px"></i>'; }
-      const btn=document.getElementById('reportSubmit'); if(btn){ btn.disabled=false; btn.style.opacity='1'; }
+      const btn=scope.querySelector('.rep-submit'); if(btn){ btn.disabled=false; btn.style.opacity='1'; }
     }
-    function submitReport(){
-      const sel=document.querySelector('#reportReasons .rep-opt.sel');
+    function submitReport(btn){
+      const scope = (btn && btn.closest('.screen')) || document;
+      const sel=scope.querySelector('.rep-opt.sel');
       if(!sel){ App.toast('Please choose a reason first'); return; }
       App.back();
       App.toast('Report submitted — thanks for keeping EVINIE safe');
-      document.querySelectorAll('#reportReasons .rep-opt').forEach(o=>{ o.classList.remove('sel'); o.style.borderColor='var(--line)'; const r=o.querySelector('.rep-radio'); if(r){ r.style.borderColor='var(--ink-3)'; r.style.background='none'; r.innerHTML=''; } });
-      const d=document.getElementById('reportDetails'); if(d) d.value='';
-      const b=document.getElementById('reportSubmit'); if(b){ b.disabled=true; b.style.opacity='.5'; }
+      scope.querySelectorAll('.rep-opt').forEach(o=>{ o.classList.remove('sel'); o.style.borderColor='var(--line)'; const r=o.querySelector('.rep-radio'); if(r){ r.style.borderColor='var(--ink-3)'; r.style.background='none'; r.innerHTML=''; } });
+      const d=scope.querySelector('.rep-details'); if(d) d.value='';
+      const b=scope.querySelector('.rep-submit'); if(b){ b.disabled=true; b.style.opacity='.5'; }
     }
 
     /* onboarding slides */
@@ -787,9 +1338,64 @@
       document.getElementById('onbNext').textContent = onbI===ONB.length-1?'Get Started':'Next';
     }
 
+    /* ================= FEED ADS (sponsored post after every N posts) ================= */
+    const Feed = (function(){
+      const AD_EVERY = 10;   // inject a sponsored ad after every N posts in the feed
+      const ADS = [
+        { brand:'Eid Fashion Sale 2026', logo:'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=120&q=80',
+          img:'https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=800&auto=format&fit=crop&q=70',
+          copy:"Up to 50% off this Eid! Shop the freshest fits before they're gone.",
+          cta:'Shop Now', go:"App.go('scr-marketplace')" },
+        { brand:'Adidas Sneaker Drop', logo:'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=120&q=80',
+          img:'https://images.unsplash.com/photo-1460353581641-37baddab0fa2?w=800&auto=format&fit=crop&q=70',
+          copy:'The new season just dropped. Limited stock — grab yours before it sells out.',
+          cta:'Learn More', go:"App.go('scr-marketplace')" },
+        { brand:"Tariq's Tech Gadgets", logo:'https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?w=120&q=80',
+          img:'https://images.unsplash.com/photo-1498049794561-7780e7231661?w=800&auto=format&fit=crop&q=70',
+          copy:'Upgrade your setup. Premium gadgets at prices you will love.',
+          cta:'Shop Now', go:"App.go('scr-marketplace')" },
+      ];
+      function adCard(a){
+        return ''
+          +'<article class="post ad" data-ad="1">'
+          +  '<div style="display:flex;align-items:center;gap:11px;padding:13px 14px">'
+          +    '<img class="ava" src="'+a.logo+'" style="width:42px;height:42px">'
+          +    '<div style="flex:1;min-width:0">'
+          +      '<div style="font-weight:700;font-size:14px">'+a.brand+'</div>'
+          +      '<div class="t-sm"><i class="fa-solid fa-bullhorn" style="font-size:10px"></i> Sponsored</div>'
+          +    '</div>'
+          +    '<button class="icon-btn" title="Hide ad" onclick="Feed.closeAd(this)"><i class="fa-solid fa-xmark"></i></button>'
+          +  '</div>'
+          +  '<p style="padding:0 14px 12px;font-size:14px;line-height:1.55">'+a.copy+'</p>'
+          +  '<img src="'+a.img+'" style="width:100%;height:220px;object-fit:cover">'
+          +  '<div style="padding:12px 14px">'
+          +    '<button class="btn btn-primary" style="width:100%" onclick="'+a.go+'">'+a.cta+' <i class="fa-solid fa-arrow-right" style="font-size:12px"></i></button>'
+          +  '</div>'
+          +'</article>';
+      }
+      // Insert a sponsored ad after every AD_EVERY real posts. Idempotent: clears previously injected ads first.
+      function injectAds(){
+        const feed=document.querySelector('#scr-home .pad.stack');
+        if(!feed) return;
+        feed.querySelectorAll('article.post.ad[data-ad]').forEach(a=>a.remove());
+        const posts=[...feed.querySelectorAll('article.post:not(.ad)')];
+        let ai=0;
+        posts.forEach((p,i)=>{
+          if((i+1)%AD_EVERY===0){
+            p.insertAdjacentHTML('afterend', adCard(ADS[ai%ADS.length]));
+            ai++;
+          }
+        });
+      }
+      function closeAd(btn){ const c=btn.closest('article.post.ad'); if(c){ c.remove(); App.toast('Ad hidden'); } }
+      return { injectAds, closeAd, AD_EVERY };
+    })();
+
     /* deep-link + splash auto-advance */
     window.addEventListener('load',()=>{
       Gift.paint();
+      Membership.paint();
+      Feed.injectAds();
       const raw=(location.hash||'').replace('#','');
       const [scr,overlay]=raw.split('~');
       if(scr && document.getElementById(scr)){

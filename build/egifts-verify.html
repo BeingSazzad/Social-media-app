@@ -1,25 +1,16 @@
 <!-- eGifts & Verification module -->
 
 <section class="screen" id="scr-send-gift"
-         data-topbar="back" data-nav="hide" data-title="Send a Gift">
+         data-topbar="back" data-nav="hide" data-title="Choose a Gift">
   <div class="pad stack">
 
-    <!-- Recipient header line (filled by Gift.paint) -->
-    <div class="card card-p" style="display:flex;align-items:center;gap:12px">
-      <img id="giftToAva" class="ava" src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=200&q=80" style="width:48px;height:48px">
-      <div style="flex:1;min-width:0">
-        <div class="section-title" style="margin-bottom:2px">Sending to</div>
-        <div id="giftToName" class="h3" style="font-size:16px">Nusrat Jahan</div>
-        <div id="giftToMeta" class="t-sm">@nusrat_j · Lagos</div>
-      </div>
-      <button class="btn-sm btn-soft" onclick="App.go('scr-gift-recipient')">Change</button>
-    </div>
+    <div class="t-sm" style="color:var(--ink-3);font-weight:600">Step 1 of 3 · Choose a gift</div>
 
     <!-- Catalog grid (rendered by Gift.paint) -->
-    <div class="section-title">Choose a gift</div>
+    <div class="section-title">Pick a gift</div>
     <div id="giftGrid" style="display:grid;grid-template-columns:1fr 1fr;gap:12px"></div>
 
-    <!-- Live fee breakdown (filled by Gift.paint) -->
+    <!-- Live fee breakdown — confirms your selection (filled by Gift.paint) -->
     <div class="card card-p stack" style="gap:10px">
       <div style="display:flex;align-items:center;gap:8px;margin-bottom:2px">
         <span id="bdEmoji" style="font-size:20px">🏆</span>
@@ -28,20 +19,20 @@
       <div class="divider"></div>
       <div style="display:flex;justify-content:space-between;font-size:14px">
         <span class="t-sm" style="font-size:14px">Gift Value</span>
-        <span id="bdValue" style="font-weight:600">₦500</span>
+        <span id="bdValue" style="font-weight:600">$0.50</span>
       </div>
       <div style="display:flex;justify-content:space-between;font-size:14px">
         <span class="t-sm" style="font-size:14px">Platform Fee (20%)</span>
-        <span id="bdFee" style="font-weight:600;color:var(--danger)">−₦100</span>
+        <span id="bdFee" style="font-weight:600;color:var(--danger)">−$0.10</span>
       </div>
       <div class="divider"></div>
       <div style="display:flex;justify-content:space-between;align-items:center">
         <span style="font-weight:700;font-size:15px">You Pay</span>
-        <span id="bdPay" style="font-weight:700;font-size:18px;color:var(--brand)">₦500</span>
+        <span id="bdPay" style="font-weight:700;font-size:18px;color:var(--brand)">$0.50</span>
       </div>
       <div style="display:flex;justify-content:space-between;font-size:13px">
         <span class="t-sm">Recipient receives</span>
-        <span id="bdRecv" style="font-weight:700;color:var(--ok)">₦400</span>
+        <span id="bdRecv" style="font-weight:700;color:var(--ok)">$0.40</span>
       </div>
     </div>
 
@@ -51,20 +42,13 @@
       <textarea id="giftMsg" class="input" rows="2" maxlength="120" placeholder="Happy birthday! 🎉"></textarea>
     </div>
 
-    <!-- Payment source segmented toggle -->
-    <div class="section-title">Pay with</div>
-    <div id="paySeg" class="seg">
-      <button class="active" data-src="wallet" onclick="Gift.pay('wallet')">Wallet · ₦3,200</button>
-      <button data-src="points" onclick="Gift.pay('points')">UserPoints · 750</button>
-    </div>
-
     <div style="height:8px"></div>
 
   </div>
 
-  <!-- Thumb-first primary CTA -->
+  <!-- Next step: choose recipient -->
   <div class="pad" style="position:sticky;bottom:0;background:linear-gradient(to top,var(--bg) 88%,transparent);padding-top:14px">
-    <button class="btn btn-primary" onclick="Gift.send()">Send Gift 🎁</button>
+    <button class="btn btn-primary" onclick="Gift.toRecipient()">Continue <i class="fa-solid fa-arrow-right" style="margin-left:6px;font-size:13px"></i></button>
   </div>
 </section>
 
@@ -72,6 +56,7 @@
 <section class="screen" id="scr-gift-recipient"
          data-topbar="back" data-nav="hide" data-title="Send to">
   <div class="pad stack">
+    <div class="t-sm" style="color:var(--ink-3);font-weight:600">Step 2 of 3 · Choose recipient</div>
     <div class="input-group">
       <input class="input" placeholder="Search friends" onkeyup="filterFriends(this.value)">
       <span class="input-icon" style="pointer-events:none"><i class="fa-solid fa-magnifying-glass"></i></span>
@@ -80,7 +65,7 @@
 
     <div class="stack" id="friendList">
       <div class="card card-p frow" data-n="nusrat jahan" style="display:flex;align-items:center;gap:11px;cursor:pointer"
-           onclick="Gift.setRecipient('Nusrat Jahan','@nusrat_j','Lagos','https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=200&q=80',true);App.back()">
+           onclick="Gift.choose('Nusrat Jahan','@nusrat_j','Lagos','https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=200&q=80',true)">
         <img class="ava" src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=120&q=80" style="width:46px;height:46px;flex:none">
         <div style="flex:1;min-width:0">
           <div style="font-weight:700;font-size:14px">Nusrat Jahan <i class="fa-solid fa-circle-check verified" style="font-size:11px"></i></div>
@@ -90,7 +75,7 @@
       </div>
 
       <div class="card card-p frow" data-n="rakib hasan" style="display:flex;align-items:center;gap:11px;cursor:pointer"
-           onclick="Gift.setRecipient('Rakib Hasan','@rakib_h','Dhaka','https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=200&q=80',true);App.back()">
+           onclick="Gift.choose('Rakib Hasan','@rakib_h','Dhaka','https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=200&q=80',true)">
         <img class="ava" src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=120&q=80" style="width:46px;height:46px;flex:none">
         <div style="flex:1;min-width:0">
           <div style="font-weight:700;font-size:14px">Rakib Hasan <i class="fa-solid fa-circle-check verified" style="font-size:11px"></i></div>
@@ -100,7 +85,7 @@
       </div>
 
       <div class="card card-p frow" data-n="tanvir ahmed" style="display:flex;align-items:center;gap:11px;cursor:pointer"
-           onclick="Gift.setRecipient('Tanvir Ahmed','@tanvir','Dhaka','https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&q=80',false);App.back()">
+           onclick="Gift.choose('Tanvir Ahmed','@tanvir','Dhaka','https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&q=80',false)">
         <img class="ava" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=120&q=80" style="width:46px;height:46px;flex:none">
         <div style="flex:1;min-width:0">
           <div style="font-weight:700;font-size:14px">Tanvir Ahmed</div>
@@ -110,7 +95,7 @@
       </div>
 
       <div class="card card-p frow" data-n="mitu rahman" style="display:flex;align-items:center;gap:11px;cursor:pointer"
-           onclick="Gift.setRecipient('Mitu Rahman','@mitu_r','Chattogram','https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=200&q=80',false);App.back()">
+           onclick="Gift.choose('Mitu Rahman','@mitu_r','Chattogram','https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=200&q=80',false)">
         <img class="ava" src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=120&q=80" style="width:46px;height:46px;flex:none">
         <div style="flex:1;min-width:0">
           <div style="font-weight:700;font-size:14px">Mitu Rahman</div>
@@ -120,7 +105,7 @@
       </div>
 
       <div class="card card-p frow" data-n="aisha bello" style="display:flex;align-items:center;gap:11px;cursor:pointer"
-           onclick="Gift.setRecipient('Aisha Bello','@aisha_b','Abuja','https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=200&q=80',false);App.back()">
+           onclick="Gift.choose('Aisha Bello','@aisha_b','Abuja','https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=200&q=80',false)">
         <img class="ava" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=120&q=80" style="width:46px;height:46px;flex:none">
         <div style="flex:1;min-width:0">
           <div style="font-weight:700;font-size:14px">Aisha Bello</div>
@@ -130,7 +115,7 @@
       </div>
 
       <div class="card card-p frow" data-n="chidi okafor" style="display:flex;align-items:center;gap:11px;cursor:pointer"
-           onclick="Gift.setRecipient('Chidi Okafor','@chidi','Lagos','https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?w=200&q=80',false);App.back()">
+           onclick="Gift.choose('Chidi Okafor','@chidi','Lagos','https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?w=200&q=80',false)">
         <img class="ava" src="https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?w=120&q=80" style="width:46px;height:46px;flex:none">
         <div style="flex:1;min-width:0">
           <div style="font-weight:700;font-size:14px">Chidi Okafor</div>
@@ -140,6 +125,55 @@
       </div>
     </div>
     <div class="empty" id="frEmpty" style="display:none"><i class="fa-regular fa-face-frown"></i><div class="h3" style="color:var(--ink-2)">No friends found</div></div>
+  </div>
+</section>
+
+
+<section class="screen" id="scr-gift-pay"
+         data-topbar="back" data-nav="hide" data-title="Payment">
+  <div class="pad stack">
+
+    <div class="t-sm" style="color:var(--ink-3);font-weight:600">Step 3 of 3 · Payment</div>
+
+    <!-- Recipient summary -->
+    <div class="card card-p" style="display:flex;align-items:center;gap:12px">
+      <img id="payToAva" class="ava" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Crect width='48' height='48' fill='%23ECE8E2'/%3E%3Ccircle cx='24' cy='19' r='8' fill='%23BBB4AA'/%3E%3Cpath d='M8 43c1.6-9.2 9.6-13 16-13s14.4 3.8 16 13' fill='%23BBB4AA'/%3E%3C/svg%3E" style="width:46px;height:46px">
+      <div style="flex:1;min-width:0">
+        <div class="section-title" style="margin-bottom:2px">Sending to</div>
+        <div id="payToName" class="h3" style="font-size:15px">Select a recipient</div>
+        <div id="payToMeta" class="t-sm"></div>
+      </div>
+      <button class="btn-sm btn-soft" onclick="App.go('scr-gift-recipient')">Change</button>
+    </div>
+
+    <!-- Gift + cost summary -->
+    <div class="card card-p stack" style="gap:10px">
+      <div style="display:flex;align-items:center;gap:10px">
+        <span id="payEmoji" style="font-size:26px">🏆</span>
+        <div style="flex:1"><div id="payName" class="h3" style="font-size:15px">Trophy</div><div class="t-sm">eGift</div></div>
+        <span id="payValue" style="font-weight:700">$0.50</span>
+      </div>
+      <div class="divider"></div>
+      <div style="display:flex;justify-content:space-between;font-size:13px"><span class="t-sm" style="font-size:13px">Platform fee (20%)</span><span id="payFee" style="color:var(--danger);font-weight:600">−$0.10</span></div>
+      <div style="display:flex;justify-content:space-between;font-size:13px"><span class="t-sm" style="font-size:13px">Recipient receives</span><span id="payRecv" style="color:var(--ok);font-weight:700">$0.40</span></div>
+      <div class="divider"></div>
+      <div style="display:flex;justify-content:space-between;align-items:center"><span style="font-weight:700;font-size:15px">You pay</span><span id="payPay" style="font-weight:800;font-size:18px;color:var(--brand)">$0.50</span></div>
+    </div>
+
+    <!-- Payment source -->
+    <div class="section-title">Pay with</div>
+    <div id="paySeg" class="seg">
+      <button class="active" data-src="wallet" onclick="Gift.pay('wallet')">Wallet · $3.20</button>
+      <button data-src="points" onclick="Gift.pay('points')">UserPoints · 5,000</button>
+    </div>
+
+    <div style="height:8px"></div>
+
+  </div>
+
+  <!-- Final action -->
+  <div class="pad" style="position:sticky;bottom:0;background:linear-gradient(to top,var(--bg) 88%,transparent);padding-top:14px">
+    <button class="btn btn-primary" onclick="Gift.send()">Send Gift 🎁</button>
   </div>
 </section>
 
@@ -166,12 +200,12 @@
     <div class="card card-p stack" style="gap:10px;text-align:left">
       <div style="display:flex;justify-content:space-between;align-items:center">
         <span class="t-sm" style="font-size:14px">Recipient receives</span>
-        <span id="gsRecv" style="font-weight:700;font-size:18px;color:var(--ok)">₦400</span>
+        <span id="gsRecv" style="font-weight:700;font-size:18px;color:var(--ok)">$0.40</span>
       </div>
       <div class="divider"></div>
       <div style="display:flex;justify-content:space-between;align-items:center">
         <span class="t-sm" style="font-size:14px">You paid</span>
-        <span id="gsPaid" style="font-weight:700;font-size:14px">₦500 · Wallet</span>
+        <span id="gsPaid" style="font-weight:700;font-size:14px">$0.50 · Wallet</span>
       </div>
     </div>
 
@@ -199,7 +233,7 @@
       <div class="navy" style="border-radius:16px;padding:16px;display:flex;align-items:center;justify-content:space-between">
         <div>
           <div style="font-size:12px;opacity:.7;text-transform:uppercase;letter-spacing:.05em">Received this month</div>
-          <div style="font-weight:700;font-size:22px;margin-top:2px">₦1,150</div>
+          <div style="font-weight:700;font-size:22px;margin-top:2px">$1.15</div>
         </div>
         <span style="font-size:30px">🎁</span>
       </div>
@@ -209,26 +243,31 @@
         <div class="list-row">
           <span style="font-size:24px;width:32px;text-align:center">👑</span>
           <div style="flex:1;min-width:0"><div class="h3">Tanvir Ahmed</div><div class="t-sm">Crown · 24 Jun 2026</div></div>
-          <div style="text-align:right"><div style="font-weight:700;color:var(--ok)">+₦800</div><div class="t-sm">received</div></div>
+          <div style="text-align:right"><div style="font-weight:700;color:var(--ok)">+$0.80</div><div class="t-sm">received</div></div>
         </div>
         <div class="divider"></div>
         <div class="list-row">
           <span style="font-size:24px;width:32px;text-align:center">💎</span>
           <div style="flex:1;min-width:0"><div class="h3">Aisha Bello</div><div class="t-sm">Diamond · 22 Jun 2026</div></div>
-          <div style="text-align:right"><div style="font-weight:700;color:var(--ok)">+₦200</div><div class="t-sm">received</div></div>
+          <div style="text-align:right"><div style="font-weight:700;color:var(--ok)">+$0.20</div><div class="t-sm">received</div></div>
         </div>
         <div class="divider"></div>
         <div class="list-row">
           <span style="font-size:24px;width:32px;text-align:center">🏆</span>
           <div style="flex:1;min-width:0"><div class="h3">Sadia Islam</div><div class="t-sm">Trophy · 19 Jun 2026</div></div>
-          <div style="text-align:right"><div style="font-weight:700;color:var(--ok)">+₦400</div><div class="t-sm">received</div></div>
+          <div style="text-align:right"><div style="font-weight:700;color:var(--ok)">+$0.40</div><div class="t-sm">received</div></div>
         </div>
         <div class="divider"></div>
         <div class="list-row">
           <span style="font-size:24px;width:32px;text-align:center">⭐</span>
           <div style="flex:1;min-width:0"><div class="h3">Chidi Okafor</div><div class="t-sm">Star · 15 Jun 2026</div></div>
-          <div style="text-align:right"><div style="font-weight:700;color:var(--ok)">+₦80</div><div class="t-sm">received</div></div>
+          <div style="text-align:right"><div style="font-weight:700;color:var(--ok)">+$0.08</div><div class="t-sm">received</div></div>
         </div>
+      </div>
+
+      <div class="card card-p" style="display:flex;align-items:center;gap:10px;background:var(--brand-50,#FFF3EA);border-color:transparent">
+        <i class="fa-solid fa-circle-info" style="color:var(--brand-2)"></i>
+        <div class="t-sm" style="color:var(--ink-2)">Amounts shown are what you received after the 20% platform fee. eGift earnings can be cashed out as an EviEarner.</div>
       </div>
 
       <button class="btn btn-outline" onclick="Gift.start()">Send a Gift 🎁</button>
@@ -239,7 +278,7 @@
       <div class="navy" style="border-radius:16px;padding:16px;display:flex;align-items:center;justify-content:space-between">
         <div>
           <div style="font-size:12px;opacity:.7;text-transform:uppercase;letter-spacing:.05em">Sent this month</div>
-          <div style="font-weight:700;font-size:22px;margin-top:2px">₦1,600</div>
+          <div style="font-weight:700;font-size:22px;margin-top:2px">$1.60</div>
         </div>
         <span style="font-size:30px">🎁</span>
       </div>
@@ -249,20 +288,25 @@
         <div class="list-row">
           <span style="font-size:24px;width:32px;text-align:center">👑</span>
           <div style="flex:1;min-width:0"><div class="h3">Tasnim Rahman</div><div class="t-sm">Crown · 22 Jun 2026 · <span style="color:var(--ok)">Delivered</span></div></div>
-          <div style="text-align:right"><div style="font-weight:700;color:var(--danger)">−₦1,000</div><div class="t-sm">sent</div></div>
+          <div style="text-align:right"><div style="font-weight:700;color:var(--danger)">−$1</div><div class="t-sm">sent</div></div>
         </div>
         <div class="divider"></div>
         <div class="list-row">
           <span style="font-size:24px;width:32px;text-align:center">🏆</span>
           <div style="flex:1;min-width:0"><div class="h3">Habiba Sani</div><div class="t-sm">Trophy · 18 Jun 2026 · <span style="color:var(--ok)">Delivered</span></div></div>
-          <div style="text-align:right"><div style="font-weight:700;color:var(--danger)">−₦500</div><div class="t-sm">sent</div></div>
+          <div style="text-align:right"><div style="font-weight:700;color:var(--danger)">−$0.50</div><div class="t-sm">sent</div></div>
         </div>
         <div class="divider"></div>
         <div class="list-row">
           <span style="font-size:24px;width:32px;text-align:center">⭐</span>
           <div style="flex:1;min-width:0"><div class="h3">Emeka Obi</div><div class="t-sm">Star · 12 Jun 2026 · <span style="color:var(--ok)">Delivered</span></div></div>
-          <div style="text-align:right"><div style="font-weight:700;color:var(--danger)">−₦100</div><div class="t-sm">sent</div></div>
+          <div style="text-align:right"><div style="font-weight:700;color:var(--danger)">−$0.10</div><div class="t-sm">sent</div></div>
         </div>
+      </div>
+
+      <div class="card card-p" style="display:flex;align-items:center;gap:10px;background:var(--brand-50,#FFF3EA);border-color:transparent">
+        <i class="fa-solid fa-circle-info" style="color:var(--brand-2)"></i>
+        <div class="t-sm" style="color:var(--ink-2)">A 20% platform fee applies to every gift sent — the recipient receives 80% of the gift value.</div>
       </div>
 
       <button class="btn btn-outline" onclick="Gift.start()">Send another 🎁</button>
@@ -276,32 +320,32 @@
         <button type="button" onclick="Gift.compose('rose')" style="background:var(--surface);border:1.5px solid var(--line);border-radius:16px;padding:18px 12px;display:flex;flex-direction:column;align-items:center;gap:6px;cursor:pointer">
           <span style="font-size:34px;line-height:1">🌹</span>
           <span style="font-weight:700;font-size:14px;color:var(--ink)">Rose</span>
-          <span class="t-sm" style="font-weight:700">₦50</span>
+          <span class="t-sm" style="font-weight:700">$0.05</span>
         </button>
         <button type="button" onclick="Gift.compose('star')" style="background:var(--surface);border:1.5px solid var(--line);border-radius:16px;padding:18px 12px;display:flex;flex-direction:column;align-items:center;gap:6px;cursor:pointer">
           <span style="font-size:34px;line-height:1">⭐</span>
           <span style="font-weight:700;font-size:14px;color:var(--ink)">Star</span>
-          <span class="t-sm" style="font-weight:700">₦100</span>
+          <span class="t-sm" style="font-weight:700">$0.10</span>
         </button>
         <button type="button" onclick="Gift.compose('diamond')" style="background:var(--surface);border:1.5px solid var(--line);border-radius:16px;padding:18px 12px;display:flex;flex-direction:column;align-items:center;gap:6px;cursor:pointer">
           <span style="font-size:34px;line-height:1">💎</span>
           <span style="font-weight:700;font-size:14px;color:var(--ink)">Diamond</span>
-          <span class="t-sm" style="font-weight:700">₦250</span>
+          <span class="t-sm" style="font-weight:700">$0.25</span>
         </button>
         <button type="button" onclick="Gift.compose('trophy')" style="background:var(--surface);border:1.5px solid var(--line);border-radius:16px;padding:18px 12px;display:flex;flex-direction:column;align-items:center;gap:6px;cursor:pointer">
           <span style="font-size:34px;line-height:1">🏆</span>
           <span style="font-weight:700;font-size:14px;color:var(--ink)">Trophy</span>
-          <span class="t-sm" style="font-weight:700">₦500</span>
+          <span class="t-sm" style="font-weight:700">$0.50</span>
         </button>
         <button type="button" onclick="Gift.compose('crown')" style="background:var(--surface);border:1.5px solid var(--line);border-radius:16px;padding:18px 12px;display:flex;flex-direction:column;align-items:center;gap:6px;cursor:pointer">
           <span style="font-size:34px;line-height:1">👑</span>
           <span style="font-weight:700;font-size:14px;color:var(--ink)">Crown</span>
-          <span class="t-sm" style="font-weight:700">₦1,000</span>
+          <span class="t-sm" style="font-weight:700">$1</span>
         </button>
         <button type="button" onclick="Gift.compose('rocket')" style="background:var(--surface);border:1.5px solid var(--line);border-radius:16px;padding:18px 12px;display:flex;flex-direction:column;align-items:center;gap:6px;cursor:pointer">
           <span style="font-size:34px;line-height:1">🚀</span>
           <span style="font-weight:700;font-size:14px;color:var(--ink)">Rocket</span>
-          <span class="t-sm" style="font-weight:700">₦2,000</span>
+          <span class="t-sm" style="font-weight:700">$2</span>
         </button>
 
       </div>
@@ -355,21 +399,46 @@
         <span style="font-size:14px">Account active for 30+ days</span>
       </div>
       <div style="display:flex;align-items:center;gap:12px">
-        <i class="fa-regular fa-square" style="color:var(--ink-3);font-size:18px;width:22px;text-align:center"></i>
+        <i class="fa-solid fa-square-check" style="color:var(--ok);font-size:18px;width:22px;text-align:center"></i>
         <span style="font-size:14px">Valid government ID for review</span>
       </div>
+    </div>
+
+    <!-- ID upload -->
+    <div class="card card-p stack" style="gap:12px">
+      <div class="section-title">Upload your ID</div>
+      <p class="t-sm" style="line-height:1.5">Add a clear photo of a valid government ID (NIN slip, Voter's Card, Driver's License or International Passport).</p>
+      <div style="display:flex;gap:10px">
+        <button class="btn btn-soft btn-sm" style="flex:1" onclick="App.toast('Camera opened')"><i class="fa-solid fa-camera"></i> Take photo</button>
+        <button class="btn btn-soft btn-sm" style="flex:1" onclick="App.toast('ID uploaded — NIN_slip.jpg')"><i class="fa-solid fa-arrow-up-from-bracket"></i> Upload file</button>
+      </div>
+      <div class="list-row" style="background:#DCFCE7;border-radius:12px;padding:10px 12px">
+        <i class="fa-solid fa-file-circle-check" style="color:var(--ok)"></i>
+        <div style="flex:1;min-width:0"><div class="h3" style="font-size:14px">NIN_slip.jpg</div><div class="t-sm">Uploaded · ready for review</div></div>
+        <i class="fa-solid fa-circle-check" style="color:var(--ok)"></i>
+      </div>
+    </div>
+
+    <!-- Plan / price -->
+    <div class="card card-p stack" style="gap:10px">
+      <div class="section-title">Plan</div>
+      <label style="display:flex;align-items:center;gap:12px;border:2px solid var(--brand);border-radius:14px;padding:12px">
+        <i class="fa-solid fa-circle-check" style="color:var(--brand);font-size:18px"></i>
+        <div style="flex:1"><div class="h3" style="font-size:14px">One-time verification fee</div><div class="t-sm">Paid once · no recurring charges</div></div>
+        <span style="font-weight:700;color:var(--brand)">$2</span>
+      </label>
     </div>
 
     <!-- Verification Fee card -->
     <div class="card card-p stack" style="gap:10px">
       <div style="display:flex;justify-content:space-between;align-items:center">
         <span class="h3" style="font-size:15px">Verification Fee</span>
-        <span style="font-weight:700;font-size:22px;color:var(--brand)">₦2,500</span>
+        <span style="font-weight:700;font-size:22px;color:var(--brand)">$2</span>
       </div>
       <div class="divider"></div>
       <div style="display:flex;justify-content:space-between;align-items:center">
         <span class="t-sm" style="font-size:14px">Your wallet balance</span>
-        <span style="font-weight:700;font-size:14px">₦3,200</span>
+        <span style="font-weight:700;font-size:14px">$3.20</span>
       </div>
       <button class="btn-sm btn-soft" style="align-self:flex-start" onclick="App.go('scr-fund-wallet')">Top up wallet</button>
     </div>
